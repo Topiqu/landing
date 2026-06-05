@@ -63,8 +63,6 @@ useSeoMeta({
   title: () => `${t('legal.privacy.title')} — Topiqu`,
 })
 
-defineOgImage({ alt: t('legal.privacy.title') })
-
 const sections = computed(() =>
   (tm('legal.privacy.sections') as any[]).map((s) => ({
     icon: rt(s.icon),

@@ -241,8 +241,6 @@ useSeoMeta({
   ogType: 'website',
 })
 
-defineOgImage({ alt: 'Topiqu AI Blog Platform' })
-
 useSchemaOrg([
   defineWebSite({ name: 'Topiqu', description: () => t('landing.hero.subtitle') }),
   defineWebPage({ name: 'Topiqu — AI Blog Platform' }),

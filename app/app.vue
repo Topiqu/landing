@@ -11,6 +11,9 @@
 </template>
 
 <script setup lang="ts">
+const { cdnUrl } = useRuntimeConfig().public
+const ogImageUrl = `${cdnUrl}/app-logo.png`
+
 useSeoMeta({
   title: () => 'Topiqu',
   description: () => 'Moderní blogovací platforma',
@@ -19,10 +22,12 @@ useSeoMeta({
   ogTitle: () => 'Topiqu',
   ogDescription: () => 'Moderní blogovací platforma',
   ogLocale: () => 'cs',
-  ogImageWidth: 1200,
-  ogImageHeight: 600,
-  twitterImageWidth: 1200,
-  twitterImageHeight: 600,
+  ogImage: ogImageUrl,
+  ogImageWidth: 1024,
+  ogImageHeight: 1024,
+  twitterImage: ogImageUrl,
+  twitterImageWidth: 1024,
+  twitterImageHeight: 1024,
   twitterCard: 'summary_large_image',
 })
 

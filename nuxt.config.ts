@@ -165,6 +165,14 @@ export default defineNuxtConfig({
     indexable: true,
   },
 
+  // Dynamické (island) OG obrázky nejsou na Nuxt 4.4 (unhead v2) funkční:
+  // og-image 5.x padá na "Invalid island request hash", 6.x vyžaduje unhead v3.
+  // Místo toho používáme statický og:image (viz app.vue). Až Nuxt přejde na
+  // unhead v3, lze modul znovu zapnout a vrátit defineOgImage().
+  ogImage: {
+    enabled: false,
+  },
+
   experimental: {
     renderJsonPayloads: true,
     headNext: true,
