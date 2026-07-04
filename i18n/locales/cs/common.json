@@ -20,7 +20,10 @@
       "status": "Status systému"
     },
     "status": {
-      "operational": "Systémy fungují"
+      "operational": "Systémy fungují",
+      "degraded": "Snížený výkon",
+      "maintenance": "Probíhá údržba",
+      "down": "Výpadek systému"
     },
     "search": "Hledat...",
     "yes": "Ano",

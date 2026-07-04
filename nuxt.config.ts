@@ -12,6 +12,10 @@ export default defineNuxtConfig({
     public: {
       appVersion: '1.0.0 beta',
       cdnUrl: process.env.CDN_URL || 'https://cdn.topiqu.com',
+      // Public URL of the main platform (existing-client login lives there)
+      platformUrl: process.env.PLATFORM_URL || 'https://app.topiqu.com',
+      // Better Stack status page — powers the header "Systems operational" pill
+      statusUrl: process.env.STATUS_URL || 'https://status.topiqu.com',
       turnstileSiteKey: process.env.TURNSTILE_SITE_KEY || '',
     },
   },

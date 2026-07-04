@@ -19,7 +19,10 @@
       "status": "System Status"
     },
     "status": {
-      "operational": "Systems operational"
+      "operational": "Systems operational",
+      "degraded": "Degraded performance",
+      "maintenance": "Under maintenance",
+      "down": "Systems down"
     },
     "search": "Search...",
     "yes": "Yes",

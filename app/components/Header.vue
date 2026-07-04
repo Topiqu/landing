@@ -4,6 +4,64 @@ const route = useRoute()
 const localePath = useLocalePath()
 const mobileMenuOpen = shallowRef(false)
 
+const { platformUrl, statusUrl } = useRuntimeConfig().public
+
+// Reflect Better Stack's live aggregate state in the header pill. Defaults to
+// operational so the pill renders instantly during SSR / before the fetch lands.
+const { data: system } = await useFetch('/api/status', {
+  default: () => ({ status: 'operational' as const }),
+})
+const status = computed(() => system.value.status)
+const statusStyle = computed(() => STATUS_STYLES[status.value])
+
+const STATUS_STYLES = {
+  operational: {
+    dot: 'bg-green-500',
+    ping: 'bg-green-400',
+    border: 'hover:border-green-400 dark:hover:border-green-600',
+    text: 'text-slate-600 dark:text-slate-300 group-hover:text-green-700 dark:group-hover:text-green-400',
+    mobileBg: 'bg-green-50 dark:bg-green-500/10',
+    mobileText: 'text-green-700 dark:text-green-400',
+  },
+  degraded: {
+    dot: 'bg-amber-500',
+    ping: 'bg-amber-400',
+    border: 'hover:border-amber-400 dark:hover:border-amber-600',
+    text: 'text-slate-600 dark:text-slate-300 group-hover:text-amber-700 dark:group-hover:text-amber-400',
+    mobileBg: 'bg-amber-50 dark:bg-amber-500/10',
+    mobileText: 'text-amber-700 dark:text-amber-400',
+  },
+  maintenance: {
+    dot: 'bg-blue-500',
+    ping: 'bg-blue-400',
+    border: 'hover:border-blue-400 dark:hover:border-blue-600',
+    text: 'text-slate-600 dark:text-slate-300 group-hover:text-blue-700 dark:group-hover:text-blue-400',
+    mobileBg: 'bg-blue-50 dark:bg-blue-500/10',
+    mobileText: 'text-blue-700 dark:text-blue-400',
+  },
+  down: {
+    dot: 'bg-red-500',
+    ping: 'bg-red-400',
+    border: 'hover:border-red-400 dark:hover:border-red-600',
+    text: 'text-slate-600 dark:text-slate-300 group-hover:text-red-700 dark:group-hover:text-red-400',
+    mobileBg: 'bg-red-50 dark:bg-red-500/10',
+    mobileText: 'text-red-700 dark:text-red-400',
+  },
+} as const
+
+// Existing clients log in on the platform. We hand off the current landing URL
+// as `return` so the platform can send the user back here if they choose to
+// continue where they left off instead of going to their ClientSite domain.
+const goToLogin = () => {
+  const url = `${platformUrl}/login?return=${encodeURIComponent(window.location.href)}`
+  navigateTo(url, { external: true })
+}
+
+const handleMobileLogin = () => {
+  mobileMenuOpen.value = false
+  goToLogin()
+}
+
 const scrollTo = (id: string) => {
   const home = localePath('/')
   if (route.path !== home) {
@@ -48,20 +106,24 @@ watch(
       </NuxtLinkLocale>
 
       <div class="hidden md:flex gap-3 items-center">
-        <NuxtLinkLocale
-          to="/onboarding"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm hover:border-green-400 dark:hover:border-green-600 transition-colors group"
+        <a
+          :href="statusUrl"
+          target="_blank"
+          rel="noopener"
+          class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm transition-colors group"
+          :class="statusStyle.border"
         >
           <span class="relative flex h-2 w-2 shrink-0">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+              :class="statusStyle.ping"
+            ></span>
+            <span class="relative inline-flex rounded-full h-2 w-2" :class="statusStyle.dot"></span>
           </span>
-          <span
-            class="text-xs font-bold text-slate-600 dark:text-slate-300 group-hover:text-green-700 dark:group-hover:text-green-400 transition-colors whitespace-nowrap"
-          >
-            {{ $t('common.status.operational') }}
+          <span class="text-xs font-bold transition-colors whitespace-nowrap" :class="statusStyle.text">
+            {{ $t(`common.status.${status}`) }}
           </span>
-        </NuxtLinkLocale>
+        </a>
 
         <Button variant="transparent" borderless @click="scrollTo('specs')">
           {{ $t('common.actions.learn_more') }}
@@ -72,6 +134,10 @@ watch(
         </Button>
 
         <Button variant="transparent" borderless @click="scrollTo('faq')"> FAQ </Button>
+
+        <Button variant="transparent" icon="mdi:login" class="rounded-full" @click="goToLogin">
+          {{ $t('common.auth.login') }}
+        </Button>
 
         <Button
           variant="primary"
@@ -138,19 +204,25 @@ watch(
 
       <!-- Status pill -->
       <div class="relative z-10 px-5 pt-7 pb-3">
-        <NuxtLinkLocale
-          to="/onboarding"
-          class="flex items-center gap-3 px-4 py-3 rounded-2xl bg-green-50 dark:bg-green-500/10 w-fit"
+        <a
+          :href="statusUrl"
+          target="_blank"
+          rel="noopener"
+          class="flex items-center gap-3 px-4 py-3 rounded-2xl w-fit"
+          :class="statusStyle.mobileBg"
           @click="mobileMenuOpen = false"
         >
           <span class="relative flex h-2 w-2 shrink-0">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+              :class="statusStyle.ping"
+            ></span>
+            <span class="relative inline-flex rounded-full h-2 w-2" :class="statusStyle.dot"></span>
           </span>
-          <span class="text-xs font-bold text-green-700 dark:text-green-400 tracking-wide">{{
-            $t('common.status.operational')
+          <span class="text-xs font-bold tracking-wide" :class="statusStyle.mobileText">{{
+            $t(`common.status.${status}`)
           }}</span>
-        </NuxtLinkLocale>
+        </a>
       </div>
 
       <!-- Nav items -->
@@ -228,6 +300,16 @@ watch(
           {{ $t('common.actions.get_started') }}
           <Icon name="mdi:arrow-right" size="18" />
         </NuxtLinkLocale>
+
+        <button
+          type="button"
+          class="flex items-center justify-center gap-2 w-full mt-3 py-4 rounded-2xl font-semibold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-white/10 hover:bg-white dark:hover:bg-white/5 active:scale-[0.98] transition-all duration-200"
+          @click="handleMobileLogin"
+        >
+          <Icon name="mdi:login" size="18" />
+          {{ $t('common.auth.login') }}
+        </button>
+
         <p class="text-center text-xs text-slate-400 dark:text-slate-500 mt-4">No credit card required</p>
       </div>
     </div>
