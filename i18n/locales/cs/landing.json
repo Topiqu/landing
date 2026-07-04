@@ -10,6 +10,13 @@
         "ads": "Revenue Share",
         "billing": "Hybridní model",
         "api": "Plná integrace"
+      },
+      "card": {
+        "writing": "AI píše",
+        "score": "SEO skóre",
+        "draft": "Koncept",
+        "read": "4 min čtení",
+        "headline": "5 nápadů na obsah, které zvýší váš organický dosah"
       }
     },
     "specs": {

@@ -10,6 +10,13 @@
         "ads": "Revenue Share",
         "billing": "Hybrid Model",
         "api": "Full Integration"
+      },
+      "card": {
+        "writing": "AI is writing",
+        "score": "SEO score",
+        "draft": "Draft",
+        "read": "4 min read",
+        "headline": "5 content ideas that grow your organic reach"
       }
     },
     "specs": {

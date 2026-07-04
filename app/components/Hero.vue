@@ -88,74 +88,103 @@
               class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[28rem] h-[28rem] bg-gradient-to-tr from-indigo-500 to-emerald-400 rounded-full blur-[80px] opacity-30 dark:opacity-20 animate-pulse-slow pointer-events-none"
             ></div>
 
-            <!-- Card-sized wrapper — badges position relative to this, not the column -->
+            <!-- Card-sized wrapper — floating chips position relative to this, not the column -->
             <div class="relative w-[260px] sm:w-[320px] lg:w-[400px]">
-              <!-- Revenue — left side, near top -->
+              <!-- Floating chip: AI writing — refined glass, product-specific -->
               <div
-                class="absolute top-6 -left-12 lg:-left-16 bg-white dark:bg-[#151515] px-3 py-2.5 lg:px-4 lg:py-3 rounded-xl shadow-xl border border-slate-200 dark:border-white/10 flex items-center gap-2.5 lg:gap-3 animate-float-slow z-20"
+                class="absolute -top-4 -left-8 lg:-left-14 z-30 flex items-center gap-2.5 px-3 py-2 rounded-2xl bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-lg animate-float-slow"
               >
-                <div
-                  class="w-9 h-9 lg:w-12 lg:h-12 flex items-center justify-center bg-green-100 dark:bg-green-900/30 rounded-lg text-green-600 dark:text-green-400 shrink-0"
+                <span
+                  class="flex items-center justify-center w-7 h-7 rounded-xl bg-indigo-500/15 text-indigo-600 dark:text-indigo-400 shrink-0"
                 >
-                  <Icon name="mdi:chart-line-variant" class="text-[18px] lg:text-[22px]" />
-                </div>
-                <div>
-                  <div
-                    class="text-[10px] lg:text-xs text-slate-400 uppercase font-bold tracking-wider leading-none mb-0.5"
-                  >
-                    Revenue
+                  <Icon name="mdi:auto-fix" class="text-[15px]" />
+                </span>
+                <div class="leading-tight">
+                  <div class="text-[11px] font-bold text-slate-900 dark:text-white">
+                    {{ $t('landing.hero.card.writing') }}
                   </div>
-                  <div class="text-sm lg:text-base font-bold text-slate-900 dark:text-white leading-none">+ 124%</div>
+                  <div class="flex items-center gap-0.5 mt-1">
+                    <span class="w-1 h-1 rounded-full bg-indigo-400 animate-typing-dot"></span>
+                    <span class="w-1 h-1 rounded-full bg-indigo-400 animate-typing-dot [animation-delay:.16s]"></span>
+                    <span class="w-1 h-1 rounded-full bg-indigo-400 animate-typing-dot [animation-delay:.32s]"></span>
+                  </div>
                 </div>
               </div>
 
-              <!-- SEO — right side, a bit lower than Revenue -->
+              <!-- Floating chip: SEO score — calm, single accent -->
               <div
-                class="absolute top-20 -right-16 lg:-right-20 bg-white dark:bg-[#151515] px-3 py-2.5 lg:px-4 lg:py-3 rounded-xl shadow-xl border border-slate-200 dark:border-white/10 flex items-center gap-2.5 lg:gap-3 animate-float-delayed z-20"
+                class="absolute top-28 -right-6 lg:-right-12 z-30 flex items-center gap-2.5 px-3 py-2 rounded-2xl bg-white/70 dark:bg-slate-900/60 backdrop-blur-xl border border-white/60 dark:border-white/10 shadow-lg animate-float-delayed"
               >
-                <div
-                  class="w-9 h-9 lg:w-12 lg:h-12 flex items-center justify-center bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400 shrink-0"
+                <span
+                  class="flex items-center justify-center w-7 h-7 rounded-xl bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 shrink-0"
                 >
-                  <Icon name="mdi:google" class="text-[18px] lg:text-[22px]" />
-                </div>
-                <div>
-                  <div
-                    class="text-[10px] lg:text-xs text-slate-400 uppercase font-bold tracking-wider leading-none mb-0.5"
-                  >
-                    SEO Index
-                  </div>
-                  <div class="text-sm lg:text-base font-bold text-slate-900 dark:text-white leading-none">
-                    Optimized
+                  <Icon name="mdi:speedometer" class="text-[15px]" />
+                </span>
+                <div class="leading-tight">
+                  <div class="text-[11px] font-bold text-slate-900 dark:text-white leading-none mb-0.5">100/100</div>
+                  <div class="text-[9px] font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400">
+                    {{ $t('landing.hero.card.score') }}
                   </div>
                 </div>
               </div>
 
               <!-- Card -->
               <div
-                class="w-full h-[320px] sm:h-[400px] lg:h-[500px] bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-white/50 dark:border-white/10 rounded-[2rem] shadow-2xl flex flex-col items-center justify-end overflow-hidden lg:transform lg:rotate-y-6 lg:hover:rotate-y-0 transition-transform duration-700 ease-out group"
+                class="w-full h-[320px] sm:h-[400px] lg:h-[500px] bg-white/60 dark:bg-slate-900/60 backdrop-blur-xl border border-white/50 dark:border-white/10 rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden lg:transform lg:rotate-y-6 lg:hover:rotate-y-0 transition-transform duration-700 ease-out group"
               >
-                <NuxtImg
-                  src="/topik_normal_rm.png"
-                  width="320"
-                  height="380"
-                  :preload="true"
-                  fetchpriority="high"
-                  loading="eager"
-                  decoding="sync"
-                  alt="Topiqu mascot"
-                  class="w-[210px] sm:w-[260px] lg:w-[320px] relative z-10 -bottom-4 drop-shadow-2xl transition-transform group-hover:scale-105 duration-300"
-                />
-
-                <div class="w-full bg-slate-900 p-3 lg:p-4 border-t border-slate-700">
-                  <div class="flex gap-1.5 mb-1.5 lg:mb-2">
-                    <div class="w-2 h-2 rounded-full bg-red-500"></div>
-                    <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
-                    <div class="w-2 h-2 rounded-full bg-green-500"></div>
+                <!-- Minimal browser bar — product context, not a hacker terminal -->
+                <div class="flex items-center px-4 lg:px-5 pt-4 lg:pt-5">
+                  <div
+                    class="flex-1 flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100/80 dark:bg-white/5 border border-slate-200/70 dark:border-white/10"
+                  >
+                    <Icon name="mdi:lock" class="text-[11px] text-emerald-500 shrink-0" />
+                    <span class="font-mono text-[10px] lg:text-[11px] text-slate-500 dark:text-slate-400 truncate"
+                      >topiqu.com/blog</span
+                    >
                   </div>
-                  <div class="font-mono text-[9px] lg:text-[10px] text-slate-300">
-                    <span class="text-purple-400">ai</span>.generate(<span class="text-green-400">'viral_post'</span>)
-                    <br />
-                    <span class="text-blue-400">>></span> Processing... Done.
+                </div>
+
+                <!-- Mascot — the star -->
+                <div class="relative flex-1 flex items-end justify-center min-h-0">
+                  <NuxtImg
+                    src="/topik_normal_rm.png"
+                    width="320"
+                    height="380"
+                    :preload="true"
+                    fetchpriority="high"
+                    loading="eager"
+                    decoding="sync"
+                    alt="Topiqu mascot"
+                    class="w-[190px] sm:w-[240px] lg:w-[290px] relative z-10 drop-shadow-2xl transition-transform group-hover:scale-105 duration-300"
+                  />
+                </div>
+
+                <!-- Editor panel — a post writing itself, framed as real product UI -->
+                <div
+                  class="relative z-20 m-3 lg:m-4 rounded-2xl bg-white/80 dark:bg-slate-950/70 backdrop-blur border border-slate-200/70 dark:border-white/10 px-4 py-3 shadow-lg"
+                >
+                  <div class="flex items-center gap-2 mb-2">
+                    <span
+                      class="flex items-center justify-center w-5 h-5 rounded-lg bg-gradient-to-tr from-indigo-500 to-violet-500 text-white shrink-0"
+                    >
+                      <Icon name="mdi:star-four-points" class="text-[11px]" />
+                    </span>
+                    <span
+                      class="text-[9px] font-bold uppercase tracking-widest text-indigo-500 dark:text-indigo-400"
+                      >{{ $t('landing.hero.card.draft') }}</span
+                    >
+                    <span class="ml-auto text-[9px] font-mono text-slate-400 dark:text-slate-500">{{
+                      $t('landing.hero.card.read')
+                    }}</span>
+                  </div>
+                  <p class="text-[13px] lg:text-sm font-bold text-slate-900 dark:text-white leading-snug">
+                    {{ $t('landing.hero.card.headline')
+                    }}<span class="inline-block w-px h-[0.9em] align-[-0.1em] bg-indigo-500 ml-0.5 animate-caret"></span>
+                  </p>
+                  <div class="mt-2.5 h-1 rounded-full bg-slate-200/70 dark:bg-white/5 overflow-hidden">
+                    <div
+                      class="h-full w-2/5 rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 animate-shimmer-bar"
+                    ></div>
                   </div>
                 </div>
               </div>
@@ -203,5 +232,60 @@ defineEmits<{
 
 .perspective-1000 {
   perspective: 1000px;
+}
+
+/* Typing dots — the "AI is writing" chip */
+@keyframes typing-dot {
+  0%,
+  60%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+.animate-typing-dot {
+  animation: typing-dot 1.4s ease-in-out infinite;
+}
+
+/* Blinking caret at the end of the generated headline */
+@keyframes caret {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+.animate-caret {
+  animation: caret 1s steps(1) infinite;
+}
+
+/* Indeterminate progress — "generating" */
+@keyframes shimmer-bar {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(320%);
+  }
+}
+.animate-shimmer-bar {
+  animation: shimmer-bar 2.2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-typing-dot,
+  .animate-caret,
+  .animate-shimmer-bar,
+  .animate-float-slow,
+  .animate-float-delayed {
+    animation: none;
+  }
 }
 </style>

@@ -71,102 +71,87 @@
               </div>
             </div>
 
-            <!-- Monetization card — banknote style -->
+            <!-- Monetization card — revenue growth, clarity-led -->
             <div
-              class="md:row-span-2 rounded-3xl relative overflow-hidden flex flex-col group transition-all duration-300 bg-[#1b3a2a] border-2 border-emerald-700/50 shadow-2xl hover:shadow-emerald-950/60 hover:border-emerald-600/60 text-white"
+              class="md:row-span-2 group relative rounded-3xl overflow-hidden flex flex-col text-white bg-gradient-to-b from-emerald-950 to-[#04140c] border border-emerald-500/15 shadow-2xl hover:border-emerald-400/30 transition-colors duration-300"
             >
-              <!-- Fine grid background (guilloche effect) -->
+              <!-- Soft corner glow -->
               <div
-                class="absolute inset-0 opacity-[0.07] [background-image:repeating-linear-gradient(0deg,#4ade80_0,#4ade80_1px,transparent_1px,transparent_8px),repeating-linear-gradient(90deg,#4ade80_0,#4ade80_1px,transparent_1px,transparent_8px)]"
-              ></div>
-              <!-- Diagonal hatch overlay for texture depth -->
-              <div
-                class="absolute inset-0 opacity-[0.04] [background-image:repeating-linear-gradient(45deg,#86efac_0,#86efac_1px,transparent_1px,transparent_12px)]"
-              ></div>
-              <!-- Inner inset border (banknote frame) -->
-              <div class="absolute inset-3 rounded-2xl border border-emerald-600/25 pointer-events-none"></div>
-              <!-- Ghosted watermark — bottom-right corner, away from text -->
-              <div class="absolute bottom-16 right-6 pointer-events-none select-none opacity-[0.06]">
-                <span class="text-[8rem] font-black text-emerald-200 leading-none">$</span>
-              </div>
-              <!-- Vertical security thread -->
-              <div
-                class="absolute top-0 bottom-0 left-[38%] w-px bg-gradient-to-b from-transparent via-emerald-400/30 to-transparent pointer-events-none"
+                class="absolute -top-24 -right-16 w-64 h-64 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none group-hover:bg-emerald-400/25 transition-colors duration-500"
               ></div>
 
-              <!-- Top: serial + denomination -->
-              <div class="relative z-10 px-7 pt-7 flex justify-between items-start">
-                <div class="font-mono text-[9px] text-emerald-400/50 leading-relaxed tracking-widest">
-                  <div class="text-emerald-400/30 mb-0.5 text-[8px]">SERIAL NO.</div>
-                  TPQ‑2026‑00124A
-                </div>
-                <div class="text-right">
-                  <div class="text-4xl font-black text-emerald-300 leading-none tracking-tight">$$$</div>
-                  <div class="text-[8px] font-mono text-emerald-400/40 mt-0.5 tracking-widest uppercase">Revenue</div>
-                </div>
-              </div>
-
-              <!-- Middle: icon + content -->
-              <div class="relative z-10 px-7 pt-5">
-                <div class="flex items-center gap-3 mb-4">
-                  <div
-                    class="w-10 h-10 flex items-center justify-center bg-emerald-500/20 rounded-xl text-emerald-300 border border-emerald-500/20 shrink-0"
-                  >
-                    <Icon name="mdi:currency-usd" size="20" />
+              <div class="relative z-10 flex flex-col h-full p-8">
+                <!-- Header: label + live pill -->
+                <div class="flex items-center justify-between mb-6">
+                  <div class="flex items-center gap-3">
+                    <div
+                      class="w-11 h-11 flex items-center justify-center rounded-2xl bg-emerald-400/10 border border-emerald-400/20 text-emerald-300 shrink-0"
+                    >
+                      <Icon name="mdi:cash-multiple" size="22" />
+                    </div>
+                    <span class="text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-300/70"
+                      >Topiqu GAM</span
+                    >
                   </div>
-                  <div class="h-px flex-1 bg-emerald-700/50"></div>
-                  <span class="font-mono text-[9px] text-emerald-400/50 tracking-widest uppercase">Topiqu GAM</span>
+                  <div
+                    class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/20"
+                  >
+                    <span class="relative flex h-1.5 w-1.5">
+                      <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"
+                      ></span>
+                      <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
+                    </span>
+                    <span class="text-[10px] font-medium tracking-wide text-emerald-300/80">live</span>
+                  </div>
                 </div>
 
-                <h3 class="text-xl font-bold text-white mb-3 leading-snug">
-                  {{ $t('landing.specs.monetization.title') }}
-                </h3>
-                <p class="text-emerald-100/70 leading-relaxed text-sm mb-4">
+                <h3 class="text-xl font-bold mb-3 leading-snug">{{ $t('landing.specs.monetization.title') }}</h3>
+                <p class="text-emerald-100/60 leading-relaxed text-sm mb-6">
                   {{ $t('landing.specs.monetization.desc') }}
                 </p>
 
-                <!-- Revenue stat pill -->
-                <div
-                  class="inline-flex items-center gap-2 px-3 py-1.5 bg-emerald-500/20 border border-emerald-400/30 rounded-full"
-                >
-                  <Icon name="mdi:trending-up" size="12" class="text-emerald-300" />
-                  <span class="text-[11px] font-bold text-emerald-200 tracking-wide">+124% avg. revenue growth</span>
-                </div>
-              </div>
+                <!-- Headline number + minimal area trend, pinned to bottom -->
+                <div class="mt-auto">
+                  <div class="flex items-baseline gap-2">
+                    <span class="text-4xl font-black tracking-tight text-white">+124%</span>
+                    <Icon name="mdi:trending-up" size="20" class="text-emerald-400" />
+                  </div>
+                  <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300/50 font-medium mt-1 mb-5">
+                    avg. revenue growth
+                  </p>
 
-              <!-- Bottom: bar chart — mt-auto pushes it to bottom regardless of content height -->
-              <div class="relative z-10 mx-5 mb-6 mt-auto pt-5">
-                <div class="rounded-xl bg-black/30 border border-emerald-800/50 px-5 pt-4 pb-3">
-                  <p class="text-[9px] text-emerald-400/50 font-mono uppercase tracking-widest mb-3">Monthly Revenue</p>
-                  <div class="flex items-end justify-between gap-1.5 h-20">
-                    <div class="flex flex-col items-center gap-1 flex-1">
-                      <span class="text-[8px] font-mono text-emerald-400/60">$1.2k</span>
-                      <div class="w-full rounded-t bg-emerald-600/50" style="height: 38%"></div>
-                      <span class="text-[8px] text-emerald-400/50 font-mono">Jan</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-1 flex-1">
-                      <span class="text-[8px] font-mono text-emerald-400/60">$1.8k</span>
-                      <div class="w-full rounded-t bg-emerald-500/60" style="height: 55%"></div>
-                      <span class="text-[8px] text-emerald-400/50 font-mono">Feb</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-1 flex-1">
-                      <span class="text-[8px] font-mono text-emerald-400/60">$1.5k</span>
-                      <div class="w-full rounded-t bg-emerald-500/70" style="height: 48%"></div>
-                      <span class="text-[8px] text-emerald-400/50 font-mono">Mar</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-1 flex-1">
-                      <span class="text-[8px] font-mono text-emerald-300/70">$2.4k</span>
-                      <div class="w-full rounded-t bg-emerald-400/80" style="height: 75%"></div>
-                      <span class="text-[8px] text-emerald-400/60 font-mono">Apr</span>
-                    </div>
-                    <div class="flex flex-col items-center gap-1 flex-1">
-                      <span class="text-[8px] font-mono font-bold text-emerald-300">$3.1k</span>
-                      <div
-                        class="w-full rounded-t bg-emerald-300 shadow-[0_0_10px_rgba(110,231,183,0.5)]"
-                        style="height: 96%"
-                      ></div>
-                      <span class="text-[8px] font-bold text-emerald-300 font-mono">May</span>
-                    </div>
+                  <div class="relative h-16">
+                    <svg viewBox="0 0 100 40" preserveAspectRatio="none" class="w-full h-full">
+                      <defs>
+                        <linearGradient id="revFill" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="0%" stop-color="#34d399" stop-opacity="0.35" />
+                          <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+                        </linearGradient>
+                      </defs>
+                      <path
+                        d="M0,34 C14,31 22,25 33,25 C46,25 52,15 66,12 C80,9 88,5 100,3 L100,40 L0,40 Z"
+                        fill="url(#revFill)"
+                      />
+                      <path
+                        d="M0,34 C14,31 22,25 33,25 C46,25 52,15 66,12 C80,9 88,5 100,3"
+                        fill="none"
+                        stroke="#6ee7b7"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        vector-effect="non-scaling-stroke"
+                      />
+                    </svg>
+                    <span
+                      class="absolute right-0 top-0.5 flex h-2.5 w-2.5 -translate-x-1/2"
+                      style="filter: drop-shadow(0 0 6px rgba(110, 231, 183, 0.7))"
+                    >
+                      <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-60"
+                      ></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-300"></span>
+                    </span>
                   </div>
                 </div>
               </div>
