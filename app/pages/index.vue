@@ -73,51 +73,52 @@
 
             <!-- Monetization card — revenue growth, clarity-led -->
             <div
-              class="md:row-span-2 group relative rounded-3xl overflow-hidden flex flex-col text-white bg-gradient-to-b from-emerald-950 to-[#04140c] border border-emerald-500/15 shadow-2xl hover:border-emerald-400/30 transition-colors duration-300"
+              class="md:row-span-2 group relative p-8 rounded-3xl bg-white dark:bg-[#0E0E0E] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-emerald-500/30 transition-all duration-300 overflow-hidden flex flex-col"
             >
               <!-- Soft corner glow -->
               <div
-                class="absolute -top-24 -right-16 w-64 h-64 bg-emerald-500/20 blur-[80px] rounded-full pointer-events-none group-hover:bg-emerald-400/25 transition-colors duration-500"
+                class="absolute top-0 right-0 p-32 bg-emerald-500/5 rounded-full blur-3xl group-hover:bg-emerald-500/10 transition-colors pointer-events-none"
               ></div>
 
-              <div class="relative z-10 flex flex-col h-full p-8">
-                <!-- Header: label + live pill -->
+              <div class="relative z-10 flex flex-col h-full">
+                <!-- Header: icon + label + live pill -->
                 <div class="flex items-center justify-between mb-6">
                   <div class="flex items-center gap-3">
-                    <div
-                      class="w-11 h-11 flex items-center justify-center rounded-2xl bg-emerald-400/10 border border-emerald-400/20 text-emerald-300 shrink-0"
-                    >
-                      <Icon name="mdi:cash-multiple" size="22" />
+                    <div class="p-2.5 bg-emerald-50 dark:bg-emerald-500/10 rounded-xl text-emerald-600 dark:text-emerald-400">
+                      <Icon name="mdi:cash-multiple" size="28" />
                     </div>
-                    <span class="text-[11px] font-semibold uppercase tracking-[0.2em] text-emerald-300/70"
+                    <span
+                      class="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400"
                       >Topiqu GAM</span
                     >
                   </div>
                   <div
-                    class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-400/10 border border-emerald-400/20"
+                    class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20"
                   >
                     <span class="relative flex h-1.5 w-1.5">
                       <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-60"
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60"
                       ></span>
-                      <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-400"></span>
+                      <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
                     </span>
-                    <span class="text-[10px] font-medium tracking-wide text-emerald-300/80">live</span>
+                    <span class="text-[10px] font-semibold tracking-wide text-emerald-700 dark:text-emerald-400">live</span>
                   </div>
                 </div>
 
-                <h3 class="text-xl font-bold mb-3 leading-snug">{{ $t('landing.specs.monetization.title') }}</h3>
-                <p class="text-emerald-100/60 leading-relaxed text-sm mb-6">
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 leading-snug">
+                  {{ $t('landing.specs.monetization.title') }}
+                </h3>
+                <p class="text-slate-700 dark:text-slate-300 leading-relaxed text-sm mb-6">
                   {{ $t('landing.specs.monetization.desc') }}
                 </p>
 
                 <!-- Headline number + minimal area trend, pinned to bottom -->
                 <div class="mt-auto">
                   <div class="flex items-baseline gap-2">
-                    <span class="text-4xl font-black tracking-tight text-white">+124%</span>
-                    <Icon name="mdi:trending-up" size="20" class="text-emerald-400" />
+                    <span class="text-4xl font-black tracking-tight text-slate-900 dark:text-white">+124%</span>
+                    <Icon name="mdi:trending-up" size="20" class="text-emerald-600 dark:text-emerald-400" />
                   </div>
-                  <p class="text-[11px] uppercase tracking-[0.2em] text-emerald-300/50 font-medium mt-1 mb-5">
+                  <p class="text-[11px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 font-semibold mt-1 mb-5">
                     avg. revenue growth
                   </p>
 
@@ -125,8 +126,8 @@
                     <svg viewBox="0 0 100 40" preserveAspectRatio="none" class="w-full h-full">
                       <defs>
                         <linearGradient id="revFill" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stop-color="#34d399" stop-opacity="0.35" />
-                          <stop offset="100%" stop-color="#34d399" stop-opacity="0" />
+                          <stop offset="0%" stop-color="#10b981" stop-opacity="0.25" />
+                          <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
                         </linearGradient>
                       </defs>
                       <path
@@ -136,7 +137,7 @@
                       <path
                         d="M0,34 C14,31 22,25 33,25 C46,25 52,15 66,12 C80,9 88,5 100,3"
                         fill="none"
-                        stroke="#6ee7b7"
+                        stroke="#10b981"
                         stroke-width="1.5"
                         stroke-linecap="round"
                         stroke-linejoin="round"
@@ -145,12 +146,12 @@
                     </svg>
                     <span
                       class="absolute right-0 top-0.5 flex h-2.5 w-2.5 -translate-x-1/2"
-                      style="filter: drop-shadow(0 0 6px rgba(110, 231, 183, 0.7))"
+                      style="filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.6))"
                     >
                       <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-60"
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60"
                       ></span>
-                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-300"></span>
+                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
                     </span>
                   </div>
                 </div>

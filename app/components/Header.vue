@@ -2,6 +2,7 @@
 const { y } = useWindowScroll()
 const route = useRoute()
 const localePath = useLocalePath()
+const { locale } = useI18n()
 const mobileMenuOpen = shallowRef(false)
 
 const { platformUrl, statusUrl } = useRuntimeConfig().public
@@ -49,11 +50,10 @@ const STATUS_STYLES = {
   },
 } as const
 
-// Existing clients log in on the platform. We hand off the current landing URL
-// as `return` so the platform can send the user back here if they choose to
-// continue where they left off instead of going to their ClientSite domain.
+// Existing clients log in on the platform's auth page. It lives under the
+// locale prefix (e.g. /en/auth), so mirror the landing locale in the hand-off.
 const goToLogin = () => {
-  const url = `${platformUrl}/login?return=${encodeURIComponent(window.location.href)}`
+  const url = `${platformUrl}/${locale.value}/auth`
   navigateTo(url, { external: true })
 }
 
