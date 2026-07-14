@@ -1,3 +1,5 @@
+import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2'
+
 interface SendVerificationCodeOptions {
   to: string
   code: string
@@ -5,12 +7,26 @@ interface SendVerificationCodeOptions {
   language?: string
 }
 
+let sesClient: SESv2Client | undefined
+
+function getSesClient(): SESv2Client | undefined {
+  const { region, accessKeyId, secretAccessKey } = (useRuntimeConfig() as any).aws ?? {}
+  if (!accessKeyId || !secretAccessKey) return undefined
+  if (!sesClient) {
+    sesClient = new SESv2Client({
+      region,
+      credentials: { accessKeyId, secretAccessKey },
+    })
+  }
+  return sesClient
+}
+
 export async function sendVerificationCode({ to, code, name }: SendVerificationCodeOptions) {
   const config = useRuntimeConfig() as any
-  const apiKey = config.resendApiKey
   const from = config.emailFrom || 'Topiqu <noreply@topiqu.com>'
+  const client = getSesClient()
 
-  if (!apiKey) {
+  if (!client) {
     if (import.meta.dev) {
       console.log(`[DEV EMAIL] Verification code for ${to}: ${code}`)
       return
@@ -18,14 +34,17 @@ export async function sendVerificationCode({ to, code, name }: SendVerificationC
     throw createError({ statusCode: 500, message: 'Email service not configured' })
   }
 
-  await $fetch<unknown>('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: {
-      from,
-      to: [to],
-      subject: `${code} is your Topiqu verification code`,
-      html: `
+  await client.send(
+    new SendEmailCommand({
+      FromEmailAddress: from,
+      Destination: { ToAddresses: [to] },
+      Content: {
+        Simple: {
+          Subject: { Data: `${code} is your Topiqu verification code`, Charset: 'UTF-8' },
+          Body: {
+            Html: {
+              Charset: 'UTF-8',
+              Data: `
         <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px">
           <h2 style="margin-bottom:8px">Hello${name ? ` ${name}` : ''},</h2>
           <p style="color:#555">Your Topiqu verification code is:</p>
@@ -33,6 +52,10 @@ export async function sendVerificationCode({ to, code, name }: SendVerificationC
           <p style="color:#888;font-size:13px">This code expires in 15 minutes. If you didn't request this, you can safely ignore this email.</p>
         </div>
       `,
-    },
-  })
+            },
+          },
+        },
+      },
+    }),
+  )
 }

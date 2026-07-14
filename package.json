@@ -16,6 +16,7 @@
     "fmt": "bun lint:fix && bun prettier:fix"
   },
   "dependencies": {
+    "@aws-sdk/client-sesv2": "^3.1086.0",
     "@iconify-json/mdi": "^1.2.3",
     "@nuxt/eslint": "1.15.2",
     "@nuxt/fonts": "^0.14.0",
@@ -24,8 +25,8 @@
     "@nuxtjs/i18n": "^10.4.0",
     "@nuxtjs/seo": "^3.2.2",
     "@pinia/nuxt": "^0.11.3",
-    "@unocss/nuxt": "^66.7.0",
     "@unhead/vue": "^2.0.19",
+    "@unocss/nuxt": "^66.7.0",
     "@vite-pwa/nuxt": "^1.1.1",
     "@vueuse/nuxt": "^14.3.0",
     "@zxcvbn-ts/core": "^3.0.4",

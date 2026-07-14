@@ -6,8 +6,12 @@ export default defineNuxtConfig({
   runtimeConfig: {
     authSecret: process.env.AUTH_SECRET || '',
     platformApiUrl: process.env.PLATFORM_API_URL || '',
-    resendApiKey: process.env.RESEND_API_KEY || '',
     emailFrom: process.env.EMAIL_FROM || 'Topiqu <noreply@topiqu.com>',
+    aws: {
+      region: process.env.AWS_REGION || 'eu-central-1',
+      accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
+      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+    },
     turnstile: { secretKey: process.env.TURNSTILE_SECRET_KEY || '' },
     public: {
       appVersion: '1.0.0 beta',
