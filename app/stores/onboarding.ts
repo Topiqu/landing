@@ -263,6 +263,7 @@ export const useOnboardingStore = defineStore(
     }
 
     const submit = async () => {
+      if (loading.value) return
       const { $t, toast } = captureI18nToast()
       if (!form.acceptTos) {
         toast.error({ message: $t('landing.onboarding.tosRequired') })
