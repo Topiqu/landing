@@ -7,8 +7,21 @@ import type { DomainStatus, OnboardingForm } from '~/composables/useOnboarding'
 export const useOnboardingStore = defineStore(
   'onboarding',
   () => {
-    const { t: $t } = useI18n()
-    const toast = useToast()
+    // i18n and toast are resolved lazily instead of at store-setup time: a
+    // top-level useI18n()/useToast() throws "Must be called at the top of a
+    // setup function" when this store is first instantiated from route
+    // middleware (onboarding-guard) during SSR. Consumers resolve them where a
+    // valid Nuxt context exists — inside computeds (component render) and at the
+    // very top of each action (before any await, so the context isn't lost).
+    const $t = (key: string, named?: Record<string, unknown>): string =>
+      (useNuxtApp().$i18n as { t: (k: string, n?: Record<string, unknown>) => string }).t(key, named)
+
+    // For async actions: capture i18n/toast synchronously (before the first
+    // await) so they can be used after awaits without losing the Nuxt context.
+    const captureI18nToast = () => {
+      const i18n = useNuxtApp().$i18n as { t: (k: string, n?: Record<string, unknown>) => string }
+      return { $t: (k: string, n?: Record<string, unknown>) => i18n.t(k, n), toast: useToast() }
+    }
 
     const loading = shallowRef(false)
     const userEditedDomain = shallowRef(false)
@@ -193,6 +206,7 @@ export const useOnboardingStore = defineStore(
     const sendCode = async () => {
       if (codeSending.value || resendCooldown.value > 0) return
       if (!form.email) return
+      const { $t, toast } = captureI18nToast()
       codeSending.value = true
       codeError.value = ''
       try {
@@ -221,6 +235,7 @@ export const useOnboardingStore = defineStore(
     const verifyCode = async (): Promise<boolean> => {
       if (codeVerifying.value) return false
       if (!challenge.value || code.value.length !== 6) return false
+      const { $t } = captureI18nToast()
       codeVerifying.value = true
       codeError.value = ''
       try {
@@ -247,6 +262,7 @@ export const useOnboardingStore = defineStore(
     }
 
     const submit = async () => {
+      const { $t, toast } = captureI18nToast()
       if (!form.acceptTos) {
         toast.error({ message: $t('landing.onboarding.tosRequired') })
         return

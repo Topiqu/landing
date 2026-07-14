@@ -8,9 +8,11 @@ export default defineNuxtConfig({
     platformApiUrl: process.env.PLATFORM_API_URL || '',
     emailFrom: process.env.EMAIL_FROM || 'Topiqu <noreply@topiqu.com>',
     aws: {
-      region: process.env.AWS_REGION || 'eu-central-1',
-      accessKeyId: process.env.AWS_ACCESS_KEY_ID || '',
-      secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY || '',
+      // SES_-prefixed (not AWS_*): on Vercel/Lambda the AWS_* names are reserved
+      // and overwritten by the runtime — see server/utils/email.ts.
+      region: process.env.SES_REGION || 'eu-central-1',
+      accessKeyId: process.env.SES_ACCESS_KEY_ID || '',
+      secretAccessKey: process.env.SES_SECRET_ACCESS_KEY || '',
     },
     turnstile: { secretKey: process.env.TURNSTILE_SECRET_KEY || '' },
     public: {
