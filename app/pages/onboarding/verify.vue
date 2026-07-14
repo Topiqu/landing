@@ -111,30 +111,44 @@ const {
 const localePath = useLocalePath()
 
 // verify.vue owns the Turnstile widget. Tokens are single-use and expire, so we
-// pass a fresh one into sendCode and reset the widget afterwards. `pendingSend`
-// bridges the mount race: if we want to send before the token has arrived, the
-// watcher flushes the request as soon as the token becomes available.
+// pass a fresh one into sendCode and reset the widget afterwards. sendCode is
+// only ever triggered from an explicit requestCode() (mount + resend) — there is
+// deliberately NO standing watcher on the token, so a background token refresh
+// can never fire a stray sendCode (which would wipe verifiedToken mid-verify).
 const turnstileToken = ref<string>()
 const turnstile = useTemplateRef<{ reset: () => void }>('turnstile')
-let pendingSend = false
 
-const flushSend = async () => {
-  if (!pendingSend || !turnstileToken.value) return
-  pendingSend = false
-  await sendCode(turnstileToken.value)
+// Resolve with the current token, or wait (scoped) for the next one if the
+// widget hasn't produced it yet (mount race).
+const nextToken = (): Promise<string> => {
+  if (turnstileToken.value) return Promise.resolve(turnstileToken.value)
+  return new Promise((resolve, reject) => {
+    const stop = watch(turnstileToken, (t) => {
+      if (t) {
+        stop()
+        resolve(t)
+      }
+    })
+    setTimeout(() => {
+      stop()
+      reject(new Error('turnstile-timeout'))
+    }, 20_000)
+  })
+}
+
+const requestCode = async () => {
+  if (codeSending.value || resendCooldown.value > 0) return
+  let token: string
+  try {
+    token = await nextToken()
+  } catch {
+    return // no token yet; the user can retry with the resend button
+  }
+  await sendCode(token)
+  // Invalidate the used token so the next request waits for a fresh one.
   turnstile.value?.reset()
   turnstileToken.value = undefined
 }
-
-const requestCode = () => {
-  if (codeSending.value || resendCooldown.value > 0) return
-  pendingSend = true
-  flushSend()
-}
-
-watch(turnstileToken, (t) => {
-  if (t) flushSend()
-})
 
 onMounted(() => {
   if (!store.challenge && !store.verifiedToken) requestCode()
