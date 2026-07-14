@@ -5,6 +5,7 @@ interface SendVerificationCodeOptions {
   code: string
   name: string
   language?: string
+  link?: string
 }
 
 let sesClient: SESv2Client | undefined
@@ -30,14 +31,14 @@ function getSesClient(): SESv2Client | undefined {
   return sesClient
 }
 
-export async function sendVerificationCode({ to, code, name }: SendVerificationCodeOptions) {
+export async function sendVerificationCode({ to, code, name, link }: SendVerificationCodeOptions) {
   const config = useRuntimeConfig() as any
   const from = config.emailFrom || 'Topiqu <noreply@topiqu.com>'
   const client = getSesClient()
 
   if (!client) {
     if (import.meta.dev) {
-      console.log(`[DEV EMAIL] Verification code for ${to}: ${code}`)
+      console.log(`[DEV EMAIL] Verification code for ${to}: ${code}${link ? ` | link: ${link}` : ''}`)
       return
     }
     throw createError({ statusCode: 500, message: 'Email service not configured' })
@@ -59,6 +60,14 @@ export async function sendVerificationCode({ to, code, name }: SendVerificationC
           <h2 style="margin-bottom:8px">Hello${name ? ` ${name}` : ''},</h2>
           <p style="color:#555">Your Topiqu verification code is:</p>
           <div style="font-size:36px;font-weight:900;letter-spacing:0.5em;background:#f4f4f5;padding:24px;border-radius:12px;text-align:center;margin:24px 0">${code}</div>
+          ${
+            link
+              ? `<p style="text-align:center;margin:24px 0">
+          <a href="${link}" style="display:inline-block;background:#111;color:#fff;text-decoration:none;font-weight:700;padding:14px 28px;border-radius:12px">Verify automatically &rarr;</a>
+        </p>
+        <p style="color:#888;font-size:13px;text-align:center">or enter the code above manually.</p>`
+              : ''
+          }
           <p style="color:#888;font-size:13px">This code expires in 15 minutes. If you didn't request this, you can safely ignore this email.</p>
         </div>
       `,

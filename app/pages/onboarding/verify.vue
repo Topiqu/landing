@@ -109,6 +109,8 @@ const {
 } = useOnboarding()
 
 const localePath = useLocalePath()
+const route = useRoute()
+const router = useRouter()
 
 // verify.vue owns the Turnstile widget. Tokens are single-use and expire, so we
 // pass a fresh one into sendCode and reset the widget afterwards. sendCode is
@@ -151,6 +153,17 @@ const requestCode = async () => {
 }
 
 onMounted(() => {
+  // Magic link from the email: /onboarding/verify?code=…&token=<challenge>.
+  // Seed the store and let the auto-submit watcher verify it, then strip the
+  // sensitive params from the address bar.
+  const qCode = String(route.query.code ?? '')
+  const qToken = String(route.query.token ?? '')
+  if (/^\d{6}$/.test(qCode) && qToken) {
+    challenge.value = qToken
+    code.value = qCode
+    router.replace({ query: {} })
+    return
+  }
   if (!store.challenge && !store.verifiedToken) requestCode()
 })
 
@@ -159,6 +172,12 @@ const handleSubmit = async () => {
   const ok = await verifyCode()
   if (ok) navigateTo(localePath({ name: 'onboarding-summary' }))
 }
+
+// Auto-submit as soon as a full 6-digit code is present — covers paste, OS
+// one-time-code autofill, and the emailed magic link. handleSubmit self-guards.
+watch(code, () => {
+  if (canAdvanceStep4.value && !codeVerifying.value) handleSubmit()
+})
 
 const inputRef = useTemplateRef<HTMLInputElement>('inputRef')
 

@@ -11,7 +11,7 @@ const schema = z.object({
 })
 
 export default defineEventHandler(async (event) => {
-  const { email, website, turnstileToken } = await readValidatedBody(event, schema.parse)
+  const { email, language, website, turnstileToken } = await readValidatedBody(event, schema.parse)
 
   if (website && website.trim() !== '') {
     return { challenge: 'ok' }
@@ -35,7 +35,13 @@ export default defineEventHandler(async (event) => {
   const challenge = issueChallenge(email, code)
   const name = email.split('@')[0] ?? ''
 
-  await sendVerificationCode({ to: email, code, name })
+  // One-click magic link: opens the verify step pre-filled and auto-submits.
+  // Carries the challenge because it isn't shared across tabs/persisted.
+  const origin = getRequestURL(event).origin
+  const verifyPath = language === 'cs' ? '/cs/onboarding/overeni' : '/en/onboarding/verify'
+  const link = `${origin}${verifyPath}?code=${code}&token=${encodeURIComponent(challenge)}`
+
+  await sendVerificationCode({ to: email, code, name, language, link })
 
   return { challenge }
 })
