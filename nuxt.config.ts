@@ -22,8 +22,13 @@ export default defineNuxtConfig({
       platformUrl: process.env.PLATFORM_URL || 'https://app.topiqu.com',
       // Better Stack status page — powers the header "Systems operational" pill
       statusUrl: process.env.STATUS_URL || 'https://status.topiqu.com',
-      turnstileSiteKey: process.env.TURNSTILE_SITE_KEY || '',
     },
+  },
+
+  // Cloudflare Turnstile (@nuxtjs/turnstile). Secret is read from
+  // runtimeConfig.turnstile.secretKey above (baked from TURNSTILE_SECRET_KEY).
+  turnstile: {
+    siteKey: process.env.TURNSTILE_SITE_KEY || '',
   },
 
   nitro: {
@@ -42,6 +47,7 @@ export default defineNuxtConfig({
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxtjs/seo',
+    '@nuxtjs/turnstile',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
     '@unocss/nuxt',

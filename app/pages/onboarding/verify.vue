@@ -36,6 +36,8 @@
           </p>
         </div>
 
+        <NuxtTurnstile ref="turnstile" v-model="turnstileToken" :options="{ appearance: 'interaction-only' }" />
+
         <div class="flex items-center justify-between text-sm">
           <span class="text-[#888] dark:text-[#71717A] font-bold">
             {{ $t('landing.onboarding.codeNotReceived') }}
@@ -44,7 +46,7 @@
             type="button"
             :disabled="codeSending || resendCooldown > 0"
             class="font-black uppercase tracking-wide text-[#7E22CE] dark:text-[#D8B4FE] hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center gap-2"
-            @click="sendCode()"
+            @click="requestCode()"
           >
             <Icon
               :name="codeSending ? 'mdi:loading' : 'mdi:email-sync-outline'"
@@ -108,8 +110,34 @@ const {
 
 const localePath = useLocalePath()
 
+// verify.vue owns the Turnstile widget. Tokens are single-use and expire, so we
+// pass a fresh one into sendCode and reset the widget afterwards. `pendingSend`
+// bridges the mount race: if we want to send before the token has arrived, the
+// watcher flushes the request as soon as the token becomes available.
+const turnstileToken = ref<string>()
+const turnstile = useTemplateRef<{ reset: () => void }>('turnstile')
+let pendingSend = false
+
+const flushSend = async () => {
+  if (!pendingSend || !turnstileToken.value) return
+  pendingSend = false
+  await sendCode(turnstileToken.value)
+  turnstile.value?.reset()
+  turnstileToken.value = undefined
+}
+
+const requestCode = () => {
+  if (codeSending.value || resendCooldown.value > 0) return
+  pendingSend = true
+  flushSend()
+}
+
+watch(turnstileToken, (t) => {
+  if (t) flushSend()
+})
+
 onMounted(() => {
-  if (!store.challenge && !store.verifiedToken) store.sendCode()
+  if (!store.challenge && !store.verifiedToken) requestCode()
 })
 
 const handleSubmit = async () => {

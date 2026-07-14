@@ -29,7 +29,6 @@ export const useOnboardingStore = defineStore(
 
     const challenge = shallowRef<string | null>(null)
     const verifiedToken = shallowRef<string | null>(null)
-    const turnstileToken = shallowRef('')
     const code = shallowRef('')
     const codeSending = shallowRef(false)
     const codeVerifying = shallowRef(false)
@@ -203,7 +202,9 @@ export const useOnboardingStore = defineStore(
       codeInputEl = el
     }
 
-    const sendCode = async () => {
+    // `turnstileToken` is supplied by the caller (verify.vue owns the
+    // <NuxtTurnstile> widget) — it must be a fresh, single-use token.
+    const sendCode = async (turnstileToken = '') => {
       if (codeSending.value || resendCooldown.value > 0) return
       if (!form.email) return
       const { $t, toast } = captureI18nToast()
@@ -216,7 +217,7 @@ export const useOnboardingStore = defineStore(
             email: form.email,
             language: form.language,
             website: form.website,
-            turnstileToken: turnstileToken.value,
+            turnstileToken,
           },
         })
         challenge.value = res.challenge
@@ -309,7 +310,6 @@ export const useOnboardingStore = defineStore(
       form,
       loading,
       userEditedDomain,
-      turnstileToken,
       domainStatus,
       domainStatusIcon,
       domainStatusColor,

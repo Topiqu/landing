@@ -1,7 +1,6 @@
 import { z } from 'zod'
 import { randomInt } from 'crypto'
 import { sendVerificationCode } from '~~/server/utils/email'
-import { verifyTurnstileToken } from '~~/server/utils/turnstile'
 import { issueChallenge } from '~~/server/utils/onboardingTokens'
 
 const schema = z.object({
@@ -18,8 +17,14 @@ export default defineEventHandler(async (event) => {
     return { challenge: 'ok' }
   }
 
-  if (!(await verifyTurnstileToken(turnstileToken ?? '', event as any))) {
-    throw createError({ statusCode: 400, message: 'Verification failed. Please try again.' })
+  // verifyTurnstileToken is auto-imported by @nuxtjs/turnstile. Skip only in
+  // local dev when no secret is configured, so onboarding works without keys.
+  const secretKey = (useRuntimeConfig(event) as any).turnstile?.secretKey
+  if (!(import.meta.dev && !secretKey)) {
+    const verification = await verifyTurnstileToken(turnstileToken ?? '', event)
+    if (!verification.success) {
+      throw createError({ statusCode: 400, message: 'Verification failed. Please try again.' })
+    }
   }
 
   if (await isEmailRegistered(email)) {

@@ -70,8 +70,6 @@
             autocomplete="off"
             class="absolute -left-[9999px] top-auto w-px h-px overflow-hidden"
           />
-          <TurnstileWidget v-model="turnstileToken" />
-
           <slot />
         </div>
       </div>
@@ -86,7 +84,6 @@ useSeoMeta({ robots: 'noindex, nofollow' })
 
 const store = useOnboardingStore()
 const { form } = store
-const { turnstileToken } = storeToRefs(store)
 const localePath = useLocalePath()
 const route = useRoute()
 
