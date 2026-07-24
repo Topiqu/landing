@@ -62,7 +62,7 @@
           "badge": "Start",
           "name": "Free",
           "desc": "Ideální pro začátečníky a hobby projekty.",
-          "price": "0 Kč",
+          "price": "$0",
           "features": {
             "manual_writing": "Manuální psaní článků",
             "subdomain": "Subdoména zdarma",
@@ -75,7 +75,7 @@
           "badge": "Creator",
           "name": "Pro",
           "desc": "Pro tvůrce, kteří chtějí růst s AI.",
-          "price": "490 Kč",
+          "price": "$39",
           "features": {
             "ai_tokens": "AI Generování + Tokeny",
             "seo": "Pokročilá SEO optimalizace",
@@ -88,7 +88,7 @@
           "badge": "Most Popular",
           "name": "Premium",
           "desc": "Maximální výkon a kompletní automatizace.",
-          "price": "990 Kč",
+          "price": "$79",
           "features": {
             "sentiment": "AI Sentiment & Obrázky",
             "indexing": "Prioritní indexace & Zdrojování",
