@@ -32,12 +32,7 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    $development: {
-      preset: 'bun',
-    },
-    $production: {
-      preset: 'vercel',
-    },
+    preset: 'bun',
   },
 
   modules: [
