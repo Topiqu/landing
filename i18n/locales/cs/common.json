@@ -411,6 +411,14 @@
       "pack50k": "Balíček 50k tokenů",
       "bestValue": "Nejvýhodnější",
       "upgradeToPremium": "Povýšit na PREMIUM"
+    },
+    "cookies": {
+      "title": "Používáme cookies",
+      "body": "Nezbytné cookies potřebujeme k provozu webu. Analytické a reklamní načteme jen s vaším souhlasem — pokud je odmítnete, nenačtou se vůbec. Volbu můžete kdykoli změnit.",
+      "more": "Více v zásadách ochrany osobních údajů.",
+      "accept": "Přijmout vše",
+      "reject": "Jen nezbytné",
+      "settings": "Nastavení cookies"
     }
   }
 }

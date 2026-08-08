@@ -20,8 +20,19 @@
       <NuxtLinkLocale to="privacy" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{
         $t('common.links.privacy')
       }}</NuxtLinkLocale>
+      <button
+        type="button"
+        class="font-bold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+        @click="reopen"
+      >
+        {{ $t('common.cookies.settings') }}
+      </button>
     </div>
 
     <p class="text-xs text-slate-400">&copy; {{ new Date().getFullYear() }} Topiqu {{ $t('landing.footer.rights') }}</p>
   </footer>
 </template>
+
+<script setup lang="ts">
+const { reopen } = useCookieConsent()
+</script>

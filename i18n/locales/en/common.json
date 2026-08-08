@@ -410,6 +410,14 @@
       "pack50k": "Token Pack 50k",
       "bestValue": "Best value",
       "upgradeToPremium": "Upgrade to PREMIUM"
+    },
+    "cookies": {
+      "title": "We use cookies",
+      "body": "Strictly necessary cookies keep the site running. Analytics and advertising load only with your consent — decline and they are never fetched. You can change this at any time.",
+      "more": "Read the privacy policy.",
+      "accept": "Accept all",
+      "reject": "Necessary only",
+      "settings": "Cookie settings"
     }
   }
 }

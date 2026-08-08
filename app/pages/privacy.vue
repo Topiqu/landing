@@ -20,7 +20,7 @@
             </span>
           </h1>
           <p class="text-gray-500 dark:text-gray-400">
-            {{ $t('legal.lastUpdated', { date: '1. 1. 2026' }) }}
+            {{ $t('legal.lastUpdated', { date: $t('legal.updatedAt') }) }}
           </p>
         </div>
 

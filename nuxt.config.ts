@@ -22,6 +22,8 @@ export default defineNuxtConfig({
       platformUrl: process.env.PLATFORM_URL || 'https://app.topiqu.com',
       // Better Stack status page — powers the header "Systems operational" pill
       statusUrl: process.env.STATUS_URL || 'https://status.topiqu.com',
+      // Read by useCookieConsent; gtag itself stays in manual init mode.
+      gtagId: process.env.GTAG_ID || '',
     },
   },
 
@@ -174,7 +176,23 @@ export default defineNuxtConfig({
   },
 
   gtag: {
-    id: process.env.GTAG_ID || '',
+    // No script until the visitor accepts — `useCookieConsent` initializes it.
+    initMode: 'manual',
+    initCommands: [
+      [
+        'consent',
+        'default',
+        {
+          ad_storage: 'denied',
+          ad_user_data: 'denied',
+          ad_personalization: 'denied',
+          analytics_storage: 'denied',
+          functionality_storage: 'granted',
+          security_storage: 'granted',
+          wait_for_update: 500,
+        },
+      ],
+    ],
   },
 
   site: {
