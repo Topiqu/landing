@@ -244,7 +244,7 @@ const plans = computed<PlanCard[]>(() => [
       { icon: 'mdi:auto-awesome', label: $t('landing.onboarding.plans.pro.features.tokens') },
       { icon: 'mdi:magnify-scan', label: $t('landing.onboarding.plans.pro.features.seo') },
       { icon: 'mdi:database-import-outline', label: $t('landing.onboarding.plans.pro.features.import') },
-      { icon: 'mdi:cash-multiple', label: $t('landing.onboarding.plans.pro.features.revenue') },
+      { icon: 'mdi:publish', label: $t('landing.onboarding.plans.pro.features.publishing') },
       { icon: 'mdi:lifebuoy', label: $t('landing.onboarding.plans.pro.features.support') },
     ],
     cardClass: 'bg-white dark:bg-[#0E0E0E] border-[3px] border-indigo-200 dark:border-indigo-500/40',

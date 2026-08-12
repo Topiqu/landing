@@ -109,6 +109,8 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    // Keep the language-neutral developer URL useful.
+    '/docs': { redirect: '/en/docs' },
     // Landing pages — prerender for instant TTFB
     '/': { prerender: true },
     '/en': { prerender: true },

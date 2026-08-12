@@ -1,13 +1,13 @@
 {
   "landing": {
     "hero": {
-      "badge": "Content Marketing 2.0",
-      "title_prefix": "Váš firemní blog",
-      "title_suffix": "na autopilota",
-      "subtitle": "Zvyšte organický traffic a budujte brand bez nutnosti najímat armádu copywriterů. Kompletní publikační platforma, která se sama zaplatí z reklamních výnosů.",
+      "badge": "AI content operations",
+      "title_prefix": "Od rešerše k publikaci",
+      "title_suffix": "v jednom systému",
+      "subtitle": "Topiqu propojuje zdrojované AI články, schvalování, překlady, vlastní web a distribuci. Pro týmy, které nechtějí skládat pět samostatných nástrojů.",
       "stats": {
         "score": "SEO Performance",
-        "ads": "Revenue Share",
+        "ads": "Vlastní web",
         "billing": "Hybridní model",
         "api": "Plná integrace"
       },
@@ -21,7 +21,7 @@
     },
     "specs": {
       "title": "Méně starostí, více výsledků",
-      "subtitle": "Topiqu není jen editor. Je to kompletní ekosystém, který řeší tvorbu, distribuci i monetizaci obsahu za vás.",
+      "subtitle": "Topiqu není jen editor. Propojuje tvorbu, redakční workflow, publikaci a distribuci obsahu.",
       "ai": {
         "badge": "Smart Content",
         "title": "AI, která chápe váš byznys",
@@ -32,9 +32,15 @@
           "helpfulness": "Hodnota pro čtenáře"
         }
       },
-      "monetization": {
-        "title": "Náklad, který se vrátí",
-        "desc": "Unikátní model sdílených příjmů z reklamy (GAM). Čím kvalitnější obsah a vyšší návštěvnost, tím více se vám vrací zpět. Váš blog se stává profitabilním kanálem."
+      "publishing": {
+        "title": "Od konceptu na vlastní web",
+        "desc": "Řiďte přípravu, kontrolu, překlady i publikaci z jednoho místa. Obsah můžete provozovat v Topiqu nebo jej napojit na svůj existující web.",
+        "list": {
+          "review": "Redakční kontrola a schvalování",
+          "locales": "Vícejazyčné verze článků",
+          "domain": "Vlastní doména a vzhled",
+          "distribution": "WordPress, API a sociální sítě"
+        }
       },
       "security": {
         "title": "Enterprise standardy",
@@ -52,10 +58,16 @@
         "type": "JSON/REST"
       }
     },
+    "purpose": {
+      "title": "Co je Topiqu",
+      "description": "Topiqu je platforma pro řízení obsahového provozu s AI. Firmám pomáhá dělat rešerši, vytvářet a kontrolovat články, překládat je, publikovat na vlastním webu a průběžně zlepšovat jejich výkon.",
+      "gscTitle": "Propojení s Google Search Console",
+      "gscDescription": "Pokud tuto volitelnou integraci připojíte, Topiqu získá přístup pouze pro čtení k údajům o kliknutích, zobrazeních, CTR a průměrných pozicích. Použije je k reportování výkonu a označení možných příležitostí; nezaručuje výsledky vyhledávání a nemůže měnit nastavení vašeho webu v Google.",
+      "privacyLink": "Jak s daty pracujeme"
+    },
     "pricing": {
       "title": "Ceník",
       "subtitle": "Transparentní ceny. Žádné skryté poplatky. Vyberte si úroveň, která odpovídá vaší ambici.",
-      "revenue_share": "Revenue Share",
       "month": "/měs",
       "plans": {
         "free": {
@@ -105,7 +117,7 @@
           "features": {
             "domain": "Vlastní doména (Apex)",
             "whitelabel": "Plný White-Label (bez brandingu)",
-            "banners": "Vlastní reklamní bannery",
+            "banners": "Integrace a workflow na míru",
             "unlimited_ai": "Neomezené AI tokeny"
           },
           "cta": "Kontaktovat"
@@ -255,7 +267,7 @@
             "tokens": "25 000 AI tokenů měsíčně",
             "seo": "Pokročilá SEO optimalizace",
             "import": "Import existujících článků",
-            "revenue": "Revenue share 70/30 ve tvůj prospěch",
+            "publishing": "Plánování a automatická publikace",
             "support": "E-mailová podpora do 24 h"
           }
         },
@@ -268,7 +280,7 @@
             "sentiment": "AI Sentiment a generování obrázků",
             "indexing": "Prioritní indexace na Google",
             "branding": "Vlastní emoji a branding",
-            "support": "Revenue share 90/10 + podpora 24/7"
+            "support": "Prioritní podpora 24/7"
           }
         }
       },
@@ -288,7 +300,7 @@
       "codeNotReceived": "Nedorazil kód?"
     },
     "footer": {
-      "desc": "Platforma pro automatizaci a monetizaci firemního obsahu.",
+      "desc": "Od rešerše a zdrojovaného článku přes schválení až po publikaci na vlastním webu a distribuci.",
       "rights": "Všechna práva vyhrazena."
     }
   }

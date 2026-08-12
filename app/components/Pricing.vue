@@ -59,18 +59,6 @@
           </ul>
 
           <div class="mt-auto">
-            <div class="mb-6 pt-6 border-t border-slate-100 dark:border-white/5">
-              <div
-                class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2"
-              >
-                <span>{{ $t('landing.pricing.revenue_share') }}</span>
-                <span>0%</span>
-              </div>
-              <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                <div class="h-full bg-slate-300 w-0"></div>
-              </div>
-            </div>
-
             <Button
               variant="neutral"
               class="w-full !border-slate-200 dark:!border-white/10 hover:!bg-slate-50 dark:hover:!bg-white/5 !text-slate-900 dark:!text-white font-semibold py-6 rounded-xl"
@@ -123,18 +111,6 @@
           </ul>
 
           <div class="mt-auto">
-            <div class="mb-6 pt-6 border-t border-indigo-50 dark:border-white/5">
-              <div
-                class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2"
-              >
-                <span>{{ $t('landing.pricing.revenue_share') }}</span>
-                <span class="text-indigo-600 dark:text-indigo-400">70%</span>
-              </div>
-              <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                <div class="h-full bg-indigo-500 w-[70%]"></div>
-              </div>
-            </div>
-
             <Button
               variant="primary"
               class="w-full !bg-indigo-600 hover:!bg-indigo-500 !shadow-lg !shadow-indigo-500/20 py-6 rounded-xl"
@@ -189,18 +165,6 @@
           </ul>
 
           <div class="mt-auto relative z-10">
-            <div class="mb-6 pt-6 border-t border-violet-100 dark:border-white/5">
-              <div
-                class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2"
-              >
-                <span>{{ $t('landing.pricing.revenue_share') }}</span>
-                <span class="text-violet-600 dark:text-violet-400">90%</span>
-              </div>
-              <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                <div class="h-full bg-violet-500 w-[90%] shadow-[0_0_10px_rgba(139,92,246,0.5)]"></div>
-              </div>
-            </div>
-
             <Button
               variant="primary"
               animation="softpop"
@@ -254,18 +218,6 @@
           </ul>
 
           <div class="mt-auto">
-            <div class="mb-6 pt-6 border-t border-amber-50 dark:border-white/5">
-              <div
-                class="flex justify-between items-center text-[10px] font-bold uppercase tracking-wider text-slate-500 mb-2"
-              >
-                <span>{{ $t('landing.pricing.revenue_share') }}</span>
-                <span class="text-amber-600 dark:text-amber-400">100%</span>
-              </div>
-              <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
-                <div class="h-full bg-amber-500 w-full"></div>
-              </div>
-            </div>
-
             <Button
               variant="neutral"
               class="w-full !bg-slate-900 dark:!bg-white !text-white dark:!text-slate-900 hover:!bg-slate-800 dark:hover:!bg-slate-200 py-6 rounded-xl"

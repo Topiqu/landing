@@ -71,90 +71,26 @@
               </div>
             </div>
 
-            <!-- Monetization card — revenue growth, clarity-led -->
+            <!-- Publishing workflow card -->
             <div
-              class="md:row-span-2 group relative p-8 rounded-3xl bg-white dark:bg-[#0E0E0E] border border-slate-200 dark:border-slate-800 shadow-sm hover:shadow-xl hover:border-emerald-500/30 transition-all duration-300 overflow-hidden flex flex-col"
+              class="md:row-span-2 group relative flex flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition-all duration-300 hover:border-emerald-500/30 hover:shadow-xl dark:border-slate-800 dark:bg-[#0E0E0E]"
             >
-              <!-- Soft corner glow -->
-              <div
-                class="absolute top-0 right-0 p-32 bg-emerald-500/5 rounded-full blur-3xl group-hover:bg-emerald-500/10 transition-colors pointer-events-none"
-              ></div>
-
-              <div class="relative z-10 flex flex-col h-full">
-                <!-- Header: icon + label + live pill -->
-                <div class="flex items-center justify-between mb-6">
-                  <div class="flex items-center gap-3">
-                    <div class="p-2.5 bg-emerald-50 dark:bg-emerald-500/10 rounded-xl text-emerald-600 dark:text-emerald-400">
-                      <Icon name="mdi:cash-multiple" size="28" />
-                    </div>
-                    <span
-                      class="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400"
-                      >Topiqu GAM</span
-                    >
+              <div class="absolute right-0 top-0 p-32 bg-emerald-500/5 blur-3xl transition-colors group-hover:bg-emerald-500/10" />
+              <div class="relative z-10 flex h-full flex-col">
+                <div class="mb-6 flex items-center gap-3">
+                  <div class="rounded-xl bg-emerald-50 p-2.5 text-emerald-600 dark:bg-emerald-500/10 dark:text-emerald-400">
+                    <Icon name="mdi:publish" size="28" />
                   </div>
-                  <div
-                    class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20"
-                  >
-                    <span class="relative flex h-1.5 w-1.5">
-                      <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60"
-                      ></span>
-                      <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500"></span>
-                    </span>
-                    <span class="text-[10px] font-semibold tracking-wide text-emerald-700 dark:text-emerald-400">live</span>
-                  </div>
+                  <span class="text-[11px] font-bold uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400">Content operations</span>
                 </div>
-
-                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3 leading-snug">
-                  {{ $t('landing.specs.monetization.title') }}
-                </h3>
-                <p class="text-slate-700 dark:text-slate-300 leading-relaxed text-sm mb-6">
-                  {{ $t('landing.specs.monetization.desc') }}
-                </p>
-
-                <!-- Headline number + minimal area trend, pinned to bottom -->
-                <div class="mt-auto">
-                  <div class="flex items-baseline gap-2">
-                    <span class="text-4xl font-black tracking-tight text-slate-900 dark:text-white">+124%</span>
-                    <Icon name="mdi:trending-up" size="20" class="text-emerald-600 dark:text-emerald-400" />
-                  </div>
-                  <p class="text-[11px] uppercase tracking-[0.18em] text-slate-500 dark:text-slate-400 font-semibold mt-1 mb-5">
-                    avg. revenue growth
-                  </p>
-
-                  <div class="relative h-16">
-                    <svg viewBox="0 0 100 40" preserveAspectRatio="none" class="w-full h-full">
-                      <defs>
-                        <linearGradient id="revFill" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stop-color="#10b981" stop-opacity="0.25" />
-                          <stop offset="100%" stop-color="#10b981" stop-opacity="0" />
-                        </linearGradient>
-                      </defs>
-                      <path
-                        d="M0,34 C14,31 22,25 33,25 C46,25 52,15 66,12 C80,9 88,5 100,3 L100,40 L0,40 Z"
-                        fill="url(#revFill)"
-                      />
-                      <path
-                        d="M0,34 C14,31 22,25 33,25 C46,25 52,15 66,12 C80,9 88,5 100,3"
-                        fill="none"
-                        stroke="#10b981"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        vector-effect="non-scaling-stroke"
-                      />
-                    </svg>
-                    <span
-                      class="absolute right-0 top-0.5 flex h-2.5 w-2.5 -translate-x-1/2"
-                      style="filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.6))"
-                    >
-                      <span
-                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-60"
-                      ></span>
-                      <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
-                    </span>
-                  </div>
-                </div>
+                <h3 class="mb-3 text-xl font-bold leading-snug text-slate-900 dark:text-white">{{ $t('landing.specs.publishing.title') }}</h3>
+                <p class="mb-8 text-sm leading-relaxed text-slate-700 dark:text-slate-300">{{ $t('landing.specs.publishing.desc') }}</p>
+                <ul class="mt-auto space-y-4">
+                  <li v-for="item in ['review', 'locales', 'domain', 'distribution']" :key="item" class="flex items-center gap-3 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                    <Icon name="mdi:check-circle" class="shrink-0 text-emerald-500" />
+                    {{ $t(`landing.specs.publishing.list.${item}`) }}
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -209,6 +145,28 @@
         </div>
       </section>
 
+      <section class="border-t border-slate-200 px-6 py-20 dark:border-white/5" aria-labelledby="about-topiqu">
+        <div class="mx-auto grid max-w-6xl gap-8 md:grid-cols-2">
+          <div class="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm dark:border-slate-800 dark:bg-[#0e0e0e]">
+            <p class="mb-3 text-sm font-bold uppercase tracking-[0.18em] text-indigo-600 dark:text-indigo-400">Topiqu</p>
+            <h2 id="about-topiqu" class="mb-4 text-2xl font-black text-slate-900 dark:text-white">{{ $t('landing.purpose.title') }}</h2>
+            <p class="m-0 leading-7 text-slate-700 dark:text-slate-300">{{ $t('landing.purpose.description') }}</p>
+          </div>
+          <div class="rounded-3xl border border-blue-200 bg-blue-50 p-8 dark:border-blue-500/20 dark:bg-blue-500/10">
+            <div class="mb-4 flex items-center gap-3">
+              <Icon name="mdi:google" size="26" class="text-blue-600 dark:text-blue-400" />
+              <h2 class="m-0 text-2xl font-black text-slate-900 dark:text-white">{{ $t('landing.purpose.gscTitle') }}</h2>
+            </div>
+            <p class="m-0 leading-7 text-slate-700 dark:text-slate-300">{{ $t('landing.purpose.gscDescription') }}</p>
+            <NuxtLinkLocale to="/privacy-policy" class="mt-5 inline-flex font-semibold text-blue-700 underline decoration-blue-300 underline-offset-4 dark:text-blue-300">
+              {{ $t('landing.purpose.privacyLink') }}
+            </NuxtLinkLocale>
+          </div>
+        </div>
+      </section>
+
+      <LazyComparison />
+
       <LazyPricing />
 
       <LazyFaq />
@@ -220,16 +178,16 @@
 const { t } = useI18n()
 
 useSeoMeta({
-  title: 'Topiqu — AI Blog Platform',
+  title: 'Topiqu — AI Content Operations',
   description: () => t('landing.hero.subtitle'),
-  ogTitle: 'Topiqu — AI Blog Platform',
+  ogTitle: 'Topiqu — AI Content Operations',
   ogDescription: () => t('landing.hero.subtitle'),
   ogType: 'website',
 })
 
 useSchemaOrg([
   defineWebSite({ name: 'Topiqu', description: () => t('landing.hero.subtitle') }),
-  defineWebPage({ name: 'Topiqu — AI Blog Platform' }),
+  defineWebPage({ name: 'Topiqu — AI Content Operations' }),
 ])
 
 const scrollToSection = (id: string) => {
