@@ -1,9 +1,9 @@
 <template>
   <Transition
-    enter-active-class="transition duration-300 ease-out"
-    enter-from-class="translate-y-4 opacity-0"
-    leave-active-class="transition duration-200 ease-in"
-    leave-to-class="translate-y-4 opacity-0"
+    enterActiveClass="transition duration-300 ease-out"
+    enterFromClass="translate-y-4 opacity-0"
+    leaveActiveClass="transition duration-200 ease-in"
+    leaveToClass="translate-y-4 opacity-0"
   >
     <div
       v-if="banner"

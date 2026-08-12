@@ -115,30 +115,30 @@
     "faq": {
       "badge": "Support & Help",
       "title": "Frequently Asked Questions",
-      "subtitle": "Everything you need to know about the Topiqu platform. From domain setup to AI generation and monetization.",
+      "subtitle": "Straight answers about creating, translating and publishing content with Topiqu.",
       "cta_title": "Still have questions?",
-      "cta_desc": "Our support team is here for you 24/7.",
+      "cta_desc": "Write to us and we will help.",
       "cta_button": "Contact Support",
       "items": [
         {
-          "q": "How does the revenue share model work?",
-          "a": "Topiqu rewards creators based on their plan. With the FREE tier, 100% of ad revenue goes to platform operations. The PRO plan offers a 70/30 split in your favor, and PREMIUM increases this share to 90/10."
+          "q": "What can I create with Topiqu?",
+          "a": "You can write and edit articles yourself, generate drafts with AI, add media, tables and polls, and manage multiple language versions from one workspace."
         },
         {
           "q": "Can I use Topiqu on my own domain?",
-          "a": "Yes. Starting from the PRO plan, you can use your own subdomain (e.g., blog.yourcompany.com) via CNAME record. The CUSTOM plan unlocks deployment on an apex domain."
+          "a": "Yes. Eligible plans can connect a verified custom domain. Topiqu guides you through the required DNS record and verifies ownership before activating it."
         },
         {
-          "q": "Is AI-generated content safe for SEO?",
-          "a": "Absolutely. We use advanced Grok 4.1 Fast Reasoning models to generate content that is strictly optimized for search engines. Algorithms automatically structure articles and monitor keywords."
+          "q": "Does AI publish content automatically?",
+          "a": "Only when you configure automatic publishing. You can otherwise review and edit every AI-generated draft before it goes live, and you can display an AI-content disclosure."
         },
         {
-          "q": "What analytics tools does the platform offer?",
-          "a": "Besides GA4 integration, we provide our own detailed metrics for B2B blogging. We track engagement rate, community sentiment in comments, and author activity."
+          "q": "How can I publish Topiqu content on my website?",
+          "a": "You can use a hosted Topiqu site, connect a custom domain, synchronize articles with the Topiqu Sync plugin for WordPress, or consume them through the External API."
         },
         {
-          "q": "Can I upgrade my plan at any time?",
-          "a": "Of course. Plan upgrades are instant, and AI tokens or new features (like custom domains) become available immediately upon confirmation."
+          "q": "Can Topiqu translate articles?",
+          "a": "Yes. Topiqu supports multiple language versions, AI-assisted translation and a review workflow. Readers are directed to the correct translated article URL when one is available."
         }
       ]
     },

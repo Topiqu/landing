@@ -71,15 +71,13 @@
       </div>
 
       <div class="mt-16 flex justify-center">
-        <Button
-          variant="primary"
-          size="lg"
-          animation="softpop"
-          icon="mdi:lifebuoy"
-          class="!bg-[rgb(93,66,232)] hover:!bg-[rgb(79,56,199)] shadow-lg shadow-[rgb(93,66,232)]/20 text-white"
+        <a
+          href="mailto:support@topiqu.com"
+          class="inline-flex items-center gap-2 rounded-xl bg-[rgb(93,66,232)] px-6 py-3 font-semibold text-white no-underline shadow-lg shadow-[rgb(93,66,232)]/20 transition-colors hover:bg-[rgb(79,56,199)]"
         >
+          <Icon name="mdi:lifebuoy" size="20" />
           {{ $t('landing.faq.cta_button') }}
-        </Button>
+        </a>
       </div>
     </div>
   </section>
@@ -112,6 +110,10 @@ const faqItems = [
   {
     question: 'landing.faq.items.3.q',
     answer: 'landing.faq.items.3.a',
+  },
+  {
+    question: 'landing.faq.items.4.q',
+    answer: 'landing.faq.items.4.a',
   },
 ]
 </script>

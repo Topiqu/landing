@@ -13,7 +13,7 @@
       </p>
     </div>
 
-    <div class="flex justify-center gap-8 text-sm font-bold text-slate-700 dark:text-slate-300 mb-8">
+    <div class="flex flex-wrap justify-center gap-x-8 gap-y-4 text-sm font-bold text-slate-700 dark:text-slate-300 mb-8">
       <NuxtLinkLocale to="/docs" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Docs</NuxtLinkLocale>
       <NuxtLinkLocale to="/changelog" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">Changelog</NuxtLinkLocale>
       <NuxtLinkLocale to="tos" class="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{{
@@ -24,7 +24,7 @@
       }}</NuxtLinkLocale>
       <button
         type="button"
-        class="font-bold hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+        class="m-0 appearance-none border-0 bg-transparent p-0 font-bold text-inherit hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
         @click="reopen"
       >
         {{ $t('common.cookies.settings') }}

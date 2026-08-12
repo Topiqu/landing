@@ -1,7 +1,9 @@
+import { queryCollection } from '@nuxt/content/server'
+
 const escapeXml = (value: string) => value.replace(/[<>&'"]/g, (character) => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;', "'": '&apos;', '"': '&quot;' })[character]!)
 
 export default defineEventHandler(async (event) => {
-  const entries = await queryCollection('changelog').where('path', 'LIKE', '/changelog/en/%').order('date', 'DESC').all()
+  const entries = await queryCollection(event, 'changelog').where('path', 'LIKE', '/changelog/en/%').order('date', 'DESC').all()
   const items = entries.map((entry) => {
     const url = `https://topiqu.com/en/changelog/${entry.stem.split('/').at(-1)}`
     return `<item><title>${escapeXml(entry.title)}</title><link>${url}</link><guid>${url}</guid><pubDate>${new Date(`${entry.date}T12:00:00Z`).toUTCString()}</pubDate><description>${escapeXml(entry.description)}</description></item>`

@@ -115,30 +115,30 @@
     "faq": {
       "badge": "Podpora & Nápověda",
       "title": "Často kladené otázky",
-      "subtitle": "Vše co potřebujete vědět o platformě Topiqu. Od nastavení domény, přes AI generování, až po monetizaci.",
+      "subtitle": "Jasné odpovědi k tvorbě, překladům a publikování obsahu s Topiqu.",
       "cta_title": "Stále máte otázky?",
-      "cta_desc": "Náš tým podpory je tu pro vás 24/7.",
+      "cta_desc": "Napište nám a rádi vám pomůžeme.",
       "cta_button": "Kontaktovat podporu",
       "items": [
         {
-          "q": "Jak funguje revenue share model?",
-          "a": "Topiqu odměňuje tvůrce na základě zvoleného plánu. U tarifu FREE jde 100% příjmů z reklamy na provoz platformy. Plán PRO nabízí dělení příjmů 70/30 ve váš prospěch a PREMIUM zvyšuje tento podíl na 90/10."
+          "q": "Co mohu v Topiqu vytvářet?",
+          "a": "Články můžete psát a upravovat ručně, nechat si připravit koncept pomocí AI, přidávat média, tabulky a ankety a spravovat více jazykových verzí v jednom prostředí."
         },
         {
           "q": "Mohu využívat Topiqu na vlastní doméně?",
-          "a": "Ano. Již od tarifu PRO můžete využívat vlastní subdoménu (např. blog.vasefirma.cz) pomocí CNAME záznamu. Tarif CUSTOM navíc odemyká možnost nasazení na apex doménu."
+          "a": "Ano. Podporované tarify umožňují připojit ověřenou vlastní doménu. Topiqu vás provede nastavením DNS záznamu a před aktivací ověří její vlastnictví."
         },
         {
-          "q": "Je obsah generovaný AI bezpečný pro SEO?",
-          "a": "Rozhodně. Využíváme pokročilé modely Grok 4.1 Fast Reasoning pro generování obsahu, který je přísně optimalizován pro vyhledávače. Algoritmy automaticky strukturují články a hlídají klíčová slova."
+          "q": "Publikuje AI obsah automaticky?",
+          "a": "Pouze pokud automatické publikování sami nastavíte. Jinak můžete každý koncept vytvořený AI před zveřejněním zkontrolovat a upravit a zapnout označení AI obsahu."
         },
         {
-          "q": "Jaké analytické nástroje platforma nabízí?",
-          "a": "Kromě integrace GA4 poskytujeme vlastní detailní metriky pro B2B blogování. Sledujeme engagement rate, sentiment komunity v komentářích či aktivitu autorů."
+          "q": "Jak dostanu obsah z Topiqu na svůj web?",
+          "a": "Můžete použít web hostovaný v Topiqu, připojit vlastní doménu, synchronizovat články pluginem Topiqu Sync pro WordPress nebo je načítat přes External API."
         },
         {
-          "q": "Mohu přejít na vyšší tarif kdykoliv?",
-          "a": "Samozřejmě. Upgrade plánu je okamžitý a AI tokeny či nové funkce (jako vlastní doména) se vám zpřístupní ihned po potvrzení."
+          "q": "Umí Topiqu překládat články?",
+          "a": "Ano. Topiqu podporuje více jazykových verzí, překlady s pomocí AI a jejich kontrolu. Pokud překlad existuje, čtenáře nasměruje na správnou URL dané jazykové verze."
         }
       ]
     },

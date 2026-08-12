@@ -70,12 +70,6 @@ export default defineNuxtConfig({
     },
   },
 
-  content: {
-    experimental: {
-      sqliteConnector: 'native',
-    },
-  },
-
   image: {
     quality: 80,
     format: ['avif', 'webp'],
