@@ -186,6 +186,7 @@ useSeoMeta({
 })
 
 useSchemaOrg([
+  defineOrganization({ name: 'Topiqu', url: 'https://topiqu.com' }),
   defineWebSite({ name: 'Topiqu', description: () => t('landing.hero.subtitle') }),
   defineWebPage({ name: 'Topiqu — AI Content Operations' }),
 ])

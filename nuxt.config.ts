@@ -215,8 +215,8 @@ export default defineNuxtConfig({
   },
 
   site: {
-    name: 'Topiqu AI Blog',
-    description: 'Moderní blogovací platforma poháněná AI',
+    name: 'Topiqu',
+    description: 'AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
     defaultLocale: 'en',
     indexable: true,
   },
@@ -261,9 +261,9 @@ export default defineNuxtConfig({
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
-      name: 'Topiqu AI Blog',
+      name: 'Topiqu',
       short_name: 'Topiqu',
-      description: 'Moderní blogovací platforma poháněná AI',
+      description: 'AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
       theme_color: '#2d5ebc',
       background_color: '#020408',
       display: 'standalone',

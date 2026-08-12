@@ -18,11 +18,11 @@ const ogImageUrl = `${cdnUrl}/app-logo.png`
 
 useSeoMeta({
   title: () => 'Topiqu',
-  description: () => 'Moderní blogovací platforma',
-  keywords: () => 'blog, ai, platforma',
+  description: () => 'Topiqu is an AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
+  keywords: () => 'Topiqu, AI content operations, content platform, SEO, AEO, GEO',
   author: () => 'Topiqu',
   ogTitle: () => 'Topiqu',
-  ogDescription: () => 'Moderní blogovací platforma',
+  ogDescription: () => 'Topiqu is an AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
   ogLocale: () => 'cs',
   ogImage: ogImageUrl,
   ogImageWidth: 1024,
