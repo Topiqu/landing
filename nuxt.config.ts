@@ -43,6 +43,7 @@ export default defineNuxtConfig({
     '@nuxt/fonts',
     '@nuxt/icon',
     '@nuxt/image',
+    '@nuxt/content',
     '@nuxtjs/seo',
     '@nuxtjs/turnstile',
     '@pinia/nuxt',
@@ -53,7 +54,27 @@ export default defineNuxtConfig({
     'nuxt-security',
     'nuxt-toast',
     'nuxt-gtag',
+    '@scalar/nuxt',
   ],
+
+  scalar: {
+    url: '/openapi/v1.json',
+    pathRouting: { basePath: '/api-reference' },
+    layout: 'docs',
+    darkMode: true,
+    showSidebar: true,
+    hideClientButton: true,
+    metaData: {
+      title: 'Topiqu External API Reference',
+      description: 'Interactive reference for the Topiqu External API v1.',
+    },
+  },
+
+  content: {
+    experimental: {
+      sqliteConnector: 'native',
+    },
+  },
 
   image: {
     quality: 80,

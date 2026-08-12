@@ -135,6 +135,10 @@ watch(
 
         <Button variant="transparent" borderless @click="scrollTo('faq')"> FAQ </Button>
 
+        <NuxtLinkLocale to="/docs" class="px-3 py-2 text-sm font-semibold text-slate-700 no-underline hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400">
+          Docs
+        </NuxtLinkLocale>
+
         <Button variant="transparent" icon="mdi:login" class="rounded-full" @click="goToLogin">
           {{ $t('common.auth.login') }}
         </Button>
@@ -227,6 +231,19 @@ watch(
 
       <!-- Nav items -->
       <nav class="relative z-10 flex flex-col px-4 gap-1.5">
+        <NuxtLinkLocale
+          to="/docs"
+          class="group flex items-center gap-4 rounded-2xl px-4 py-3.5 no-underline hover:bg-white dark:hover:bg-white/5"
+          @click="mobileMenuOpen = false"
+        >
+          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600 dark:bg-cyan-500/10 dark:text-cyan-400">
+            <Icon name="mdi:code-tags" size="20" />
+          </div>
+          <div class="flex-1">
+            <div class="text-sm font-semibold text-slate-900 dark:text-white">Developer docs</div>
+            <div class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">API guides & reference</div>
+          </div>
+        </NuxtLinkLocale>
         <button
           class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl border-0 text-left hover:bg-white dark:hover:bg-white/5 transition-colors"
           @click="handleMobileLink('specs')"
