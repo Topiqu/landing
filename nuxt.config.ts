@@ -112,7 +112,9 @@ export default defineNuxtConfig({
     // Keep the language-neutral developer URL useful.
     '/docs': { redirect: '/en/docs' },
     // Landing pages — prerender for instant TTFB
-    '/': { prerender: true },
+    // OAuth reviewers and crawlers must receive an HTTP redirect, not i18n's tiny
+    // meta-refresh shell, otherwise they never inspect the actual public homepage.
+    '/': { redirect: '/en' },
     '/en': { prerender: true },
     '/cs': { prerender: true },
     '/en/terms-of-service': { prerender: true },
