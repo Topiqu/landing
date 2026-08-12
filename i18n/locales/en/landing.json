@@ -79,7 +79,10 @@
             "manual_writing": "Manual Article Writing",
             "subdomain": "Free Subdomain",
             "no_ai": "No AI Generation",
-            "basic_analytics": "Basic Analytics"
+            "basic_analytics": "Basic Analytics",
+            "editor": "Editor with media, tables, and polls",
+            "community": "Comments and reader engagement",
+            "no_card": "No commitment or payment card"
           },
           "cta": "Start for Free"
         },
@@ -92,7 +95,10 @@
             "ai_tokens": "AI Generation + Tokens",
             "seo": "Advanced SEO Optimization",
             "import": "Import Existing Articles",
-            "everything_free": "Everything in Free"
+            "everything_free": "Everything in Free",
+            "sources": "Source-backed articles and citations",
+            "scheduling": "Scheduling and automated publishing",
+            "translations": "Multilingual article versions"
           },
           "cta": "Select Pro"
         },
@@ -105,7 +111,10 @@
             "sentiment": "AI Sentiment & Images",
             "indexing": "Priority Indexing & Sourcing",
             "branding": "Custom Emojis & Branding",
-            "support": "Priority 24/7 Support"
+            "support": "Priority 24/7 Support",
+            "gsc": "Google Search Console Intelligence",
+            "workflow": "Editorial workflow and approvals",
+            "distribution": "API, WordPress, and social distribution"
           },
           "cta": "Select Premium"
         },
@@ -118,7 +127,10 @@
             "domain": "Custom Domain (Apex)",
             "whitelabel": "Full White-Label (No Branding)",
             "banners": "Custom integrations and workflows",
-            "unlimited_ai": "Unlimited AI Tokens"
+            "unlimited_ai": "Unlimited AI Tokens",
+            "multisite": "Multiple websites, brands, and teams",
+            "onboarding": "Tailored onboarding and migration",
+            "sla": "SLA and priority technical support"
           },
           "cta": "Contact Us"
         }

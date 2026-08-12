@@ -41,10 +41,6 @@
         <p class="m-0 max-w-3xl md:text-right">{{ copy.methodology }}</p>
       </div>
 
-      <div class="mt-8 rounded-2xl border border-indigo-200 bg-indigo-50 p-6 dark:border-indigo-500/20 dark:bg-indigo-500/10">
-        <h3 class="mb-2 text-lg font-bold text-slate-900 dark:text-white">{{ copy.verdictTitle }}</h3>
-        <p class="m-0 leading-7 text-slate-700 dark:text-slate-300">{{ copy.verdict }}</p>
-      </div>
     </div>
   </section>
 </template>
@@ -56,14 +52,12 @@ const copy = computed(() => isCs.value ? {
   eyebrow: 'Srovnání bez marketingové mlhy', title: 'Topiqu vs. specializované AI nástroje',
   subtitle: 'Nejsme nejlepší v každé izolované disciplíně. Vyhráváme tam, kde tým potřebuje dostat kvalitní obsah od rešerše až na živý a měřitelný web.',
   capability: 'Schopnost', bestFit: 'Nejlepší all-in-one fit', bestFor: 'Nejlepší volba pro', scale: '1 = minimální · 3 = dobré · 5 = špičkové',
-  methodology: 'Stav k srpnu 2026. Dostupnost funkcí konkurentů se může lišit podle tarifu.',
-  verdictTitle: 'Kde Topiqu objektivně vyhrává', verdict: 'V šíři jednoho provozního řešení pro menší a střední tým: zdrojovaný AI obsah, redakční workflow, překlady, CMS a vlastní doména, API/WordPress i komunita. EdgeBlog je silnější v měření GEO, Contentbase v čistě autonomním SEO provozu, BlendScribe v technických výstupech pro answer engines, Jasper v enterprise brand governance a HubSpot v CRM a kampaních.'
+  methodology: 'Stav k srpnu 2026. Dostupnost funkcí konkurentů se může lišit podle tarifu.'
 } : {
   eyebrow: 'A comparison without the marketing fog', title: 'Topiqu vs. specialized AI tools',
   subtitle: 'We are not the best at every isolated discipline. We win when a team needs to move quality content from research to a live, measurable website.',
   capability: 'Capability', bestFit: 'Best all-in-one fit', bestFor: 'Best choice for', scale: '1 = minimal · 3 = good · 5 = leading',
-  methodology: 'As of August 2026. Competitor feature availability may vary by plan.',
-  verdictTitle: 'Where Topiqu objectively wins', verdict: 'In the breadth of one operational system for a lean team: source-backed AI content, editorial workflow, translations, CMS and custom domain, API/WordPress, and community. EdgeBlog is stronger at GEO measurement, Contentbase at autonomous SEO operations, BlendScribe at technical answer-engine outputs, Jasper at enterprise brand governance, and HubSpot at CRM and campaigns.'
+  methodology: 'As of August 2026. Competitor feature availability may vary by plan.'
 })
 
 const products = computed(() => [

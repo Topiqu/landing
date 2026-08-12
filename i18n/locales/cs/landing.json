@@ -79,7 +79,10 @@
             "manual_writing": "Manuální psaní článků",
             "subdomain": "Subdoména zdarma",
             "no_ai": "Bez AI generování",
-            "basic_analytics": "Základní analytika"
+            "basic_analytics": "Základní analytika",
+            "editor": "Editor s médii, tabulkami a anketami",
+            "community": "Komentáře a čtenářský engagement",
+            "no_card": "Bez závazku a platební karty"
           },
           "cta": "Začít zdarma"
         },
@@ -92,7 +95,10 @@
             "ai_tokens": "AI Generování + Tokeny",
             "seo": "Pokročilá SEO optimalizace",
             "import": "Import existujících článků",
-            "everything_free": "Vše z Free plánu"
+            "everything_free": "Vše z Free plánu",
+            "sources": "Zdrojované články a citace",
+            "scheduling": "Plánování a automatická publikace",
+            "translations": "Vícejazyčné verze článků"
           },
           "cta": "Vybrat Pro"
         },
@@ -105,7 +111,10 @@
             "sentiment": "AI Sentiment & Obrázky",
             "indexing": "Prioritní indexace & Zdrojování",
             "branding": "Vlastní Emojis & Branding",
-            "support": "Prioritní podpora 24/7"
+            "support": "Prioritní podpora 24/7",
+            "gsc": "Google Search Console Intelligence",
+            "workflow": "Redakční workflow a schvalování",
+            "distribution": "API, WordPress a sociální distribuce"
           },
           "cta": "Vybrat Premium"
         },
@@ -118,7 +127,10 @@
             "domain": "Vlastní doména (Apex)",
             "whitelabel": "Plný White-Label (bez brandingu)",
             "banners": "Integrace a workflow na míru",
-            "unlimited_ai": "Neomezené AI tokeny"
+            "unlimited_ai": "Neomezené AI tokeny",
+            "multisite": "Více webů, značek a týmů",
+            "onboarding": "Individuální onboarding a migrace",
+            "sla": "SLA a prioritní technická podpora"
           },
           "cta": "Kontaktovat"
         }

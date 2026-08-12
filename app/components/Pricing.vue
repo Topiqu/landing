@@ -52,9 +52,13 @@
               <Icon name="mdi:minus-circle-outline" class="mt-0.5 shrink-0" />
               <span>{{ $t('landing.pricing.plans.free.features.no_ai') }}</span>
             </li>
-            <li class="flex items-start gap-3 text-sm text-slate-400 dark:text-slate-600">
-              <Icon name="mdi:minus-circle-outline" class="mt-0.5 shrink-0" />
+            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
+              <Icon name="mdi:check-circle" class="text-slate-400 mt-0.5 shrink-0" />
               <span>{{ $t('landing.pricing.plans.free.features.basic_analytics') }}</span>
+            </li>
+            <li v-for="feature in ['editor', 'community', 'no_card']" :key="feature" class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
+              <Icon name="mdi:check-circle" class="text-slate-400 mt-0.5 shrink-0" />
+              <span>{{ $t(`landing.pricing.plans.free.features.${feature}`) }}</span>
             </li>
           </ul>
 
@@ -107,6 +111,10 @@
             <li class="flex items-start gap-3 text-sm text-slate-500">
               <Icon name="mdi:plus" class="text-slate-400 mt-0.5 shrink-0" />
               <span>{{ $t('landing.pricing.plans.pro.features.everything_free') }}</span>
+            </li>
+            <li v-for="feature in ['sources', 'scheduling', 'translations']" :key="feature" class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
+              <Icon name="mdi:check-circle" class="text-indigo-500 mt-0.5 shrink-0" />
+              <span>{{ $t(`landing.pricing.plans.pro.features.${feature}`) }}</span>
             </li>
           </ul>
 
@@ -162,6 +170,10 @@
               <Icon name="mdi:check-circle" class="text-violet-500 mt-0.5 shrink-0" />
               <span>{{ $t('landing.pricing.plans.premium.features.support') }}</span>
             </li>
+            <li v-for="feature in ['gsc', 'workflow', 'distribution']" :key="feature" class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
+              <Icon name="mdi:check-circle" class="text-violet-500 mt-0.5 shrink-0" />
+              <span>{{ $t(`landing.pricing.plans.premium.features.${feature}`) }}</span>
+            </li>
           </ul>
 
           <div class="mt-auto relative z-10">
@@ -214,6 +226,10 @@
             <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
               <Icon name="mdi:check-circle" class="text-amber-500 mt-0.5 shrink-0" />
               <span>{{ $t('landing.pricing.plans.custom.features.unlimited_ai') }}</span>
+            </li>
+            <li v-for="feature in ['multisite', 'onboarding', 'sla']" :key="feature" class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
+              <Icon name="mdi:check-circle" class="text-amber-500 mt-0.5 shrink-0" />
+              <span>{{ $t(`landing.pricing.plans.custom.features.${feature}`) }}</span>
             </li>
           </ul>
 
