@@ -14,6 +14,9 @@ node_modules
 logs
 *.log
 
+# Local visual QA output
+screenshots/
+
 # Misc
 .DS_Store
 .fleet
