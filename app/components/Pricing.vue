@@ -1,252 +1,92 @@
 <template>
-  <section id="pricing" class="custom-ui relative py-32 px-6 overflow-hidden bg-slate-50 dark:bg-[#020408]">
-    <div class="absolute inset-0 pointer-events-none overflow-hidden">
-      <div class="absolute top-0 left-1/4 w-[500px] h-[500px] bg-indigo-500/5 rounded-full blur-[100px]"></div>
-      <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-violet-500/5 rounded-full blur-[100px]"></div>
-    </div>
-
-    <div class="relative max-w-[90rem] mx-auto z-10">
-      <div class="text-center max-w-3xl mx-auto mb-20">
-        <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-6">
-          {{ $t('landing.pricing.title') }}
-        </h2>
-        <p class="text-xl text-slate-600 dark:text-slate-400 font-medium leading-relaxed">
-          {{ $t('landing.pricing.subtitle') }}
-        </p>
+  <section id="pricing" class="scroll-mt-20 border-b border-brand-line px-6 py-24 dark:border-white/10 md:py-32">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-16 grid gap-6 md:grid-cols-[0.9fr_1.1fr] md:items-end">
+        <div>
+          <p class="eyebrow">{{ $t('landing.pricing.eyebrow') }}</p>
+          <h2 class="section-title">{{ $t('landing.pricing.title') }}</h2>
+        </div>
+        <p class="section-lede max-w-xl md:justify-self-end">{{ $t('landing.pricing.subtitle') }}</p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8 items-stretch">
-        <div
-          class="group relative flex flex-col h-full bg-white dark:bg-[#0E0E0E] rounded-3xl border border-slate-200 dark:border-white/5 p-8 transition-all duration-300 hover:border-slate-400 dark:hover:border-slate-500 hover:shadow-lg hover:-translate-y-1"
+      <div
+        class="grid gap-px overflow-hidden rounded-xl border border-brand-line bg-brand-line dark:border-slate-700 dark:bg-slate-700 md:grid-cols-2 lg:grid-cols-4"
+      >
+        <article
+          v-for="plan in plans"
+          :key="plan.key"
+          class="relative flex min-h-[620px] flex-col bg-brand-surface p-7 dark:bg-[#111418]"
+          :class="plan.recommended ? 'ring-2 ring-inset ring-brand-accent' : ''"
         >
-          <div class="mb-8">
-            <div
-              class="inline-flex items-center px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider mb-4"
-            >
-              {{ $t('landing.pricing.plans.free.badge') }}
-            </div>
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-              {{ $t('landing.pricing.plans.free.name') }}
-            </h3>
-            <p class="text-slate-500 text-sm h-10">{{ $t('landing.pricing.plans.free.desc') }}</p>
-            <div class="mt-6 flex items-baseline gap-1">
-              <span class="text-4xl font-black text-slate-900 dark:text-white tracking-tight">{{
-                $t('landing.pricing.plans.free.price')
-              }}</span>
-              <span class="text-slate-500 font-medium">{{ $t('landing.pricing.month') }}</span>
-            </div>
+          <span
+            v-if="plan.recommended"
+            class="absolute right-4 top-4 rounded-md bg-brand-accent px-2 py-1 text-[10px] font-semibold text-white"
+            >{{ $t('landing.pricing.recommended') }}</span
+          >
+          <p class="mb-4 text-xs font-semibold text-brand-accent">{{ plan.audience }}</p>
+          <h3 class="text-2xl font-semibold text-brand-ink dark:text-white">{{ plan.name }}</h3>
+          <p class="mt-2 min-h-12 text-sm leading-6 text-brand-muted dark:text-slate-400">{{ plan.desc }}</p>
+          <div class="mb-7 mt-6 flex items-baseline gap-1 border-b border-brand-line pb-7 dark:border-slate-700">
+            <span class="text-4xl font-semibold tracking-tight text-brand-ink dark:text-white">{{ plan.price }}</span>
+            <span v-if="plan.key !== 'custom'" class="text-sm text-brand-muted">{{ $t('landing.pricing.month') }}</span>
           </div>
-
-          <div class="w-full h-px bg-slate-100 dark:bg-white/5 mb-8"></div>
-
-          <ul class="space-y-4 mb-8 flex-1">
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-slate-400 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.free.features.manual_writing') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-slate-400 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.free.features.subdomain') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-400 dark:text-slate-600">
-              <Icon name="mdi:minus-circle-outline" class="mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.free.features.no_ai') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-slate-400 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.free.features.basic_analytics') }}</span>
-            </li>
-            <li v-for="feature in ['editor', 'community', 'no_card']" :key="feature" class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-slate-400 mt-0.5 shrink-0" />
-              <span>{{ $t(`landing.pricing.plans.free.features.${feature}`) }}</span>
+          <ul class="mb-8 flex-1 space-y-4">
+            <li
+              v-for="feature in plan.features"
+              :key="feature"
+              class="flex items-start gap-2.5 text-sm leading-5 text-[#4f4e48] dark:text-slate-300"
+            >
+              <Icon name="mdi:check" class="mt-0.5 shrink-0 text-brand-accent" />{{ feature }}
             </li>
           </ul>
-
-          <div class="mt-auto">
-            <Button
-              variant="neutral"
-              class="w-full !border-slate-200 dark:!border-white/10 hover:!bg-slate-50 dark:hover:!bg-white/5 !text-slate-900 dark:!text-white font-semibold py-6 rounded-xl"
-            >
-              {{ $t('landing.pricing.plans.free.cta') }}
-            </Button>
-          </div>
-        </div>
-
-        <div
-          class="group relative flex flex-col h-full bg-white dark:bg-[#0E0E0E] rounded-3xl border border-indigo-100 dark:border-indigo-500/20 p-8 transition-all duration-300 hover:border-indigo-500 hover:shadow-xl hover:shadow-indigo-500/10 hover:-translate-y-1"
-        >
-          <div class="mb-8">
-            <div
-              class="inline-flex items-center px-3 py-1 rounded-full bg-indigo-50 dark:bg-indigo-500/10 text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-4"
-            >
-              {{ $t('landing.pricing.plans.pro.badge') }}
-            </div>
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-              {{ $t('landing.pricing.plans.pro.name') }}
-            </h3>
-            <p class="text-slate-500 text-sm h-10">{{ $t('landing.pricing.plans.pro.desc') }}</p>
-            <div class="mt-6 flex items-baseline gap-1">
-              <span class="text-4xl font-black text-slate-900 dark:text-white tracking-tight">{{
-                $t('landing.pricing.plans.pro.price')
-              }}</span>
-              <span class="text-slate-500 font-medium">{{ $t('landing.pricing.month') }}</span>
-            </div>
-          </div>
-
-          <div class="w-full h-px bg-indigo-50 dark:bg-white/5 mb-8"></div>
-
-          <ul class="space-y-4 mb-8 flex-1">
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
-              <Icon name="mdi:check-circle" class="text-indigo-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.pro.features.ai_tokens') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-indigo-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.pro.features.seo') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-indigo-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.pro.features.import') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-500">
-              <Icon name="mdi:plus" class="text-slate-400 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.pro.features.everything_free') }}</span>
-            </li>
-            <li v-for="feature in ['sources', 'scheduling', 'translations']" :key="feature" class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-indigo-500 mt-0.5 shrink-0" />
-              <span>{{ $t(`landing.pricing.plans.pro.features.${feature}`) }}</span>
-            </li>
-          </ul>
-
-          <div class="mt-auto">
-            <Button
-              variant="primary"
-              class="w-full !bg-indigo-600 hover:!bg-indigo-500 !shadow-lg !shadow-indigo-500/20 py-6 rounded-xl"
-            >
-              {{ $t('landing.pricing.plans.pro.cta') }}
-            </Button>
-          </div>
-        </div>
-
-        <div
-          class="group relative flex flex-col h-full bg-white dark:bg-[#0E0E0E] rounded-3xl border-2 border-violet-500 p-8 transition-all duration-300 shadow-2xl shadow-violet-500/10 hover:shadow-violet-500/20 hover:-translate-y-2 z-10"
-        >
-          <div class="mb-8 relative z-10">
-            <div class="flex justify-between items-center mb-4">
-              <div
-                class="inline-flex items-center px-3 py-1 rounded-full bg-violet-100 dark:bg-violet-500/10 text-xs font-bold text-violet-600 dark:text-violet-300 uppercase tracking-wider"
-              >
-                {{ $t('landing.pricing.plans.premium.badge') }}
-              </div>
-            </div>
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-              {{ $t('landing.pricing.plans.premium.name') }}
-            </h3>
-            <p class="text-slate-500 text-sm h-10">{{ $t('landing.pricing.plans.premium.desc') }}</p>
-            <div class="mt-6 flex items-baseline gap-1">
-              <span class="text-4xl font-black text-slate-900 dark:text-white tracking-tight">{{
-                $t('landing.pricing.plans.premium.price')
-              }}</span>
-              <span class="text-slate-500 font-medium">{{ $t('landing.pricing.month') }}</span>
-            </div>
-          </div>
-
-          <div class="w-full h-px bg-violet-100 dark:bg-white/5 mb-8"></div>
-
-          <ul class="space-y-4 mb-8 flex-1 relative z-10">
-            <li class="flex items-start gap-3 text-sm text-slate-900 dark:text-white font-bold">
-              <Icon name="mdi:star" class="text-violet-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.premium.features.sentiment') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
-              <Icon name="mdi:check-circle" class="text-violet-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.premium.features.indexing') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
-              <Icon name="mdi:check-circle" class="text-violet-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.premium.features.branding') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
-              <Icon name="mdi:check-circle" class="text-violet-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.premium.features.support') }}</span>
-            </li>
-            <li v-for="feature in ['gsc', 'workflow', 'distribution']" :key="feature" class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 font-medium">
-              <Icon name="mdi:check-circle" class="text-violet-500 mt-0.5 shrink-0" />
-              <span>{{ $t(`landing.pricing.plans.premium.features.${feature}`) }}</span>
-            </li>
-          </ul>
-
-          <div class="mt-auto relative z-10">
-            <Button
-              variant="primary"
-              animation="softpop"
-              class="w-full !bg-gradient-to-r !from-violet-600 !to-indigo-600 hover:!from-violet-500 hover:!to-indigo-500 !shadow-lg !shadow-violet-500/30 !border-0 text-white py-6 rounded-xl"
-              @click="navigateTo(localePath('/onboarding'))"
-            >
-              {{ $t('landing.pricing.plans.premium.cta') }}
-            </Button>
-          </div>
-        </div>
-
-        <div
-          class="group relative flex flex-col h-full bg-white dark:bg-[#0E0E0E] rounded-3xl border border-amber-200 dark:border-amber-500/20 p-8 transition-all duration-300 hover:border-amber-500 hover:shadow-xl hover:shadow-amber-500/10 hover:-translate-y-1"
-        >
-          <div class="mb-8">
-            <div
-              class="inline-flex items-center px-3 py-1 rounded-full bg-amber-50 dark:bg-amber-900/20 text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider mb-4"
-            >
-              {{ $t('landing.pricing.plans.custom.badge') }}
-            </div>
-            <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-2">
-              {{ $t('landing.pricing.plans.custom.name') }}
-            </h3>
-            <p class="text-slate-500 text-sm h-10">{{ $t('landing.pricing.plans.custom.desc') }}</p>
-            <div class="mt-6 flex items-baseline gap-1">
-              <span class="text-4xl font-black text-slate-900 dark:text-white tracking-tight">{{
-                $t('landing.pricing.plans.custom.price')
-              }}</span>
-            </div>
-          </div>
-
-          <div class="w-full h-px bg-amber-100 dark:bg-white/5 mb-8"></div>
-
-          <ul class="space-y-4 mb-8 flex-1">
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300 font-bold">
-              <Icon name="mdi:crown" class="text-amber-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.custom.features.domain') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-amber-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.custom.features.whitelabel') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-amber-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.custom.features.banners') }}</span>
-            </li>
-            <li class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-amber-500 mt-0.5 shrink-0" />
-              <span>{{ $t('landing.pricing.plans.custom.features.unlimited_ai') }}</span>
-            </li>
-            <li v-for="feature in ['multisite', 'onboarding', 'sla']" :key="feature" class="flex items-start gap-3 text-sm text-slate-700 dark:text-slate-300">
-              <Icon name="mdi:check-circle" class="text-amber-500 mt-0.5 shrink-0" />
-              <span>{{ $t(`landing.pricing.plans.custom.features.${feature}`) }}</span>
-            </li>
-          </ul>
-
-          <div class="mt-auto">
-            <Button
-              variant="neutral"
-              class="w-full !bg-slate-900 dark:!bg-white !text-white dark:!text-slate-900 hover:!bg-slate-800 dark:hover:!bg-slate-200 py-6 rounded-xl"
-            >
-              {{ $t('landing.pricing.plans.custom.cta') }}
-            </Button>
-          </div>
-        </div>
+          <Button
+            :variant="plan.recommended ? 'primary' : 'neutral'"
+            class="w-full !rounded-lg shadow-none"
+            :class="
+              plan.recommended
+                ? '!border-brand-accent !bg-brand-accent hover:!bg-[#4035ad]'
+                : '!border-brand-line !bg-transparent !text-brand-ink hover:!border-[#99958b] dark:!border-slate-600 dark:!text-white'
+            "
+            @click="choosePlan(plan.key)"
+          >
+            {{ plan.cta }}
+          </Button>
+        </article>
       </div>
+      <p class="mt-6 text-center text-xs text-brand-muted">{{ $t('landing.pricing.note') }}</p>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+const { t } = useI18n()
 const localePath = useLocalePath()
+
+const planConfig = [
+  { key: 'free', features: ['manual_writing', 'subdomain', 'basic_analytics', 'editor', 'community', 'no_card'] },
+  { key: 'pro', features: ['ai_tokens', 'seo', 'sources', 'scheduling', 'translations', 'import'] },
+  {
+    key: 'premium',
+    recommended: true,
+    features: ['sentiment', 'indexing', 'gsc', 'workflow', 'distribution', 'support'],
+  },
+  { key: 'custom', features: ['domain', 'whitelabel', 'banners', 'multisite', 'onboarding', 'sla'] },
+]
+
+const plans = computed(() =>
+  planConfig.map((plan) => ({
+    ...plan,
+    name: t(`landing.pricing.plans.${plan.key}.name`),
+    desc: t(`landing.pricing.plans.${plan.key}.desc`),
+    price: t(`landing.pricing.plans.${plan.key}.price`),
+    audience: t(`landing.pricing.plans.${plan.key}.audience`),
+    cta: t(`landing.pricing.plans.${plan.key}.cta`),
+    features: plan.features.map((feature) => t(`landing.pricing.plans.${plan.key}.features.${feature}`)),
+  })),
+)
+
+const choosePlan = (key: string) =>
+  key === 'custom'
+    ? navigateTo('mailto:support@topiqu.com', { external: true })
+    : navigateTo({ path: localePath('/onboarding'), query: { plan: key } })
 </script>

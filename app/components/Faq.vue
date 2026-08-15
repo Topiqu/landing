@@ -1,83 +1,39 @@
 <template>
-  <section id="faq" class="custom-ui relative py-32 px-6 overflow-hidden bg-slate-50 dark:bg-[#020408]">
-    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
-      <div
-        class="absolute top-24 left-24 w-96 h-96 bg-[rgb(93,66,232)]/10 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-screen animate-blob"
-      ></div>
-      <div
-        class="absolute top-48 right-24 w-96 h-96 bg-[rgb(30,64,175)]/10 rounded-full blur-3xl mix-blend-multiply dark:mix-blend-screen animate-blob animation-delay-2000"
-      ></div>
-    </div>
-
-    <div class="relative max-w-3xl mx-auto z-10">
-      <div class="text-center mb-16">
-        <span
-          class="inline-flex items-center justify-center px-4 py-1.5 mb-6 text-sm font-medium text-[rgb(93,66,232)] bg-[rgb(93,66,232)]/5 rounded-full border border-[rgb(93,66,232)]/20 shadow-sm backdrop-blur-sm"
+  <section
+    id="faq"
+    class="scroll-mt-20 border-b border-brand-line bg-brand-surface px-6 py-24 dark:border-white/10 dark:bg-[#111418] md:py-32"
+  >
+    <div class="mx-auto grid max-w-6xl gap-14 md:grid-cols-[0.7fr_1.3fr]">
+      <div>
+        <p class="eyebrow">FAQ</p>
+        <h2 class="section-title">{{ $t('landing.faq.title') }}</h2>
+        <p class="section-lede mt-5">{{ $t('landing.faq.subtitle') }}</p>
+        <a
+          href="mailto:support@topiqu.com"
+          class="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-brand-accent underline underline-offset-4 dark:text-indigo-300"
+          ><Icon name="mdi:arrow-right" />{{ $t('landing.faq.cta_button') }}</a
         >
-          {{ $t('landing.faq.badge') }}
-        </span>
-        <h2 class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight mb-6">
-          {{ $t('landing.faq.title') }}
-        </h2>
-        <p class="text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
-          {{ $t('landing.faq.subtitle') }}
-        </p>
       </div>
 
-      <div class="space-y-4">
-        <div
-          v-for="(item, index) in faqItems"
-          :key="index"
-          class="group border-b border-slate-200 dark:border-white/10 last:border-0"
-        >
-          <div
-            role="button"
-            tabindex="0"
-            class="flex items-center justify-between py-6 cursor-pointer select-none outline-none"
+      <div class="border-t border-brand-line dark:border-slate-700">
+        <div v-for="(item, index) in faqItems" :key="index" class="border-b border-brand-line dark:border-slate-700">
+          <button
+            class="flex w-full items-center justify-between gap-6 border-0 bg-transparent py-6 text-left"
+            :aria-expanded="activeItem === index"
             @click="toggleItem(index)"
-            @keydown.enter.prevent="toggleItem(index)"
           >
-            <span
-              class="font-bold text-lg text-slate-900 dark:text-white transition-colors duration-300 pr-8 group-hover:text-[rgb(93,66,232)]"
-              :class="{ 'text-[rgb(93,66,232)]': activeItem === index }"
-            >
-              {{ $t(item.question) }}
-            </span>
-
-            <div
-              class="flex-shrink-0 relative w-8 h-8 flex items-center justify-center rounded-full transition-all duration-300"
-              :class="
-                activeItem === index
-                  ? 'bg-[rgb(93,66,232)] text-white rotate-180'
-                  : 'bg-transparent text-slate-400 group-hover:text-[rgb(93,66,232)]'
-              "
-            >
-              <Icon v-if="activeItem !== index" name="mdi:plus" size="24" class="transition-transform duration-300" />
-              <Icon v-else name="mdi:minus" size="24" class="transition-transform duration-300" />
-            </div>
-          </div>
-
+            <span class="text-lg font-semibold text-brand-ink dark:text-white">{{ $t(item.question) }}</span>
+            <Icon :name="activeItem === index ? 'mdi:minus' : 'mdi:plus'" class="shrink-0 text-brand-accent" />
+          </button>
           <div
-            class="grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
-            :class="activeItem === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
+            class="grid transition-[grid-template-rows] duration-200"
+            :class="activeItem === index ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'"
           >
             <div class="overflow-hidden">
-              <div class="pb-6 text-base text-slate-600 dark:text-slate-400 leading-relaxed max-w-[95%]">
-                {{ $t(item.answer) }}
-              </div>
+              <p class="max-w-2xl pb-6 leading-7 text-brand-muted dark:text-slate-300">{{ $t(item.answer) }}</p>
             </div>
           </div>
         </div>
-      </div>
-
-      <div class="mt-16 flex justify-center">
-        <a
-          href="mailto:support@topiqu.com"
-          class="inline-flex items-center gap-2 rounded-xl bg-[rgb(93,66,232)] px-6 py-3 font-semibold text-white no-underline shadow-lg shadow-[rgb(93,66,232)]/20 transition-colors hover:bg-[rgb(79,56,199)]"
-        >
-          <Icon name="mdi:lifebuoy" size="20" />
-          {{ $t('landing.faq.cta_button') }}
-        </a>
       </div>
     </div>
   </section>
@@ -85,35 +41,11 @@
 
 <script setup lang="ts">
 const activeItem = shallowRef<number | null>(0)
-
 const toggleItem = (index: number) => {
-  if (activeItem.value === index) {
-    activeItem.value = null
-  } else {
-    activeItem.value = index
-  }
+  activeItem.value = activeItem.value === index ? null : index
 }
-
-const faqItems = [
-  {
-    question: 'landing.faq.items.0.q',
-    answer: 'landing.faq.items.0.a',
-  },
-  {
-    question: 'landing.faq.items.1.q',
-    answer: 'landing.faq.items.1.a',
-  },
-  {
-    question: 'landing.faq.items.2.q',
-    answer: 'landing.faq.items.2.a',
-  },
-  {
-    question: 'landing.faq.items.3.q',
-    answer: 'landing.faq.items.3.a',
-  },
-  {
-    question: 'landing.faq.items.4.q',
-    answer: 'landing.faq.items.4.a',
-  },
-]
+const faqItems = Array.from({ length: 5 }, (_, index) => ({
+  question: `landing.faq.items.${index}.q`,
+  answer: `landing.faq.items.${index}.a`,
+}))
 </script>

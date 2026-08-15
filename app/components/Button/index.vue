@@ -6,7 +6,7 @@
     :class="[
       'flex items-center justify-center',
       'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2',
-      { ' transition-all hover:scale-105 active:scale-[0.95]': animation !== 'explode' },
+      'transition-colors duration-150',
       borderless
         ? 'border-none shadow-none'
         : 'border border-gray-200/50 dark:border-neutral-700/50 shadow-[0_2px_6px_rgba(0,0,0,0.05),0_1px_1px_rgba(0,0,0,0.03)] hover:shadow-[0_4px_14px_rgba(0,0,0,0.08)]',
@@ -20,13 +20,13 @@
         : !$slots.default
           ? {
               'w-8 h-8 gap-1 rounded-lg': size === 'sm',
-              'w-10 h-10 gap-1.5 rounded-xl': size === 'md',
-              'w-12 h-12 gap-2 rounded-2xl': size === 'lg',
+              'w-10 h-10 gap-1.5 rounded-lg': size === 'md',
+              'w-12 h-12 gap-2 rounded-lg': size === 'lg',
             }
           : {
               'h-8 px-2 py-1 gap-1 rounded-lg': size === 'sm',
-              'h-10 px-4 py-2 gap-1.5 rounded-xl': size === 'md',
-              'h-12 px-6 py-3 gap-2 rounded-2xl': size === 'lg',
+              'h-10 px-4 py-2 gap-1.5 rounded-lg': size === 'md',
+              'h-12 px-6 py-3 gap-2 rounded-lg': size === 'lg',
             },
       variantClass,
       animation !== 'none' && animating && animationClass(animation),

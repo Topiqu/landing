@@ -1,10 +1,12 @@
 {
   "landing": {
+    "workflow_nav": "How it works",
     "hero": {
-      "badge": "AI content operations",
-      "title_prefix": "Topiqu: from research to publishing",
-      "title_suffix": "in one system",
-      "subtitle": "Topiqu connects source-backed AI articles, approvals, translations, your own website, and distribution. Built for teams that do not want to stitch five separate tools together.",
+      "mascotAlt": "Topik with an article draft",
+      "badge": "Editorial workflow, website, and distribution",
+      "title_prefix": "Turn a good idea into an article",
+      "title_suffix": "people will want to read.",
+      "subtitle": "Turn a topic into a sourced draft, edit it, and publish it on your own domain. No copying between an AI chat, a document, and your CMS.",
       "stats": {
         "score": "SEO Performance",
         "ads": "Your own website",
@@ -16,25 +18,67 @@
         "score": "SEO score",
         "draft": "Draft",
         "read": "4 min read",
-        "headline": "5 content ideas that grow your organic reach"
-      }
+        "headline": "5 content ideas that grow your organic reach",
+        "excerpt": "A working draft built from your brief, brand voice, and verified sources — ready for an editor to shape.",
+        "source_note": "Sources checked",
+        "source_desc": "Claims are linked to their original sources before the draft moves to review.",
+        "caption": "A real workflow, not a magic black box.",
+        "outline": "Outline",
+        "sources": "Sources",
+        "review": "Review"
+      },
+      "proof": "Sources, translations, your website, and results in one place"
     },
     "specs": {
-      "title": "Less Hassle, More Results",
-      "subtitle": "Topiqu is not just an editor. It connects creation, editorial workflow, publishing, and distribution.",
+      "eyebrow": "What Topiqu does",
+      "title": "From an idea to your own website.",
+      "subtitle": "Write the article yourself or start with a generated draft. Edit, translate, schedule, and publish it from one place.",
+      "workflow": {
+        "eyebrow": "How the work flows",
+        "sectionTitle": "How an article gets published",
+        "subtitle": "Start with a topic or your own material. Topiqu prepares the draft; you finish and publish it.",
+        "research": {
+          "title": "Start with a topic, not a blank page",
+          "desc": "Describe the article, add your own links, and choose a format. Topiqu prepares a draft and keeps its sources attached.",
+          "uiTitle": "Research brief",
+          "sources": "verified sources"
+        },
+        "review": {
+          "title": "Edit and approve the article",
+          "desc": "Add text, media, tables, or a poll in the editor. Save a draft, schedule it, or publish it immediately.",
+          "uiTitle": "Why editorial review still matters",
+          "comment": "This example is useful — move it higher and support it with the customer data.",
+          "editor": "Editorial note",
+          "approved": "Ready to publish"
+        },
+        "publish": {
+          "title": "Publish it on your own domain",
+          "desc": "Use a Topiqu website, your own domain, WordPress, or the API. Traffic and Search Console data are available in the admin.",
+          "live": "Published",
+          "score": "SEO score",
+          "locales": "languages",
+          "channels": "channels"
+        }
+      },
+      "foundation": "The less visible parts are already covered:",
+      "foundations": {
+        "security": "Team access and MFA",
+        "locales": "Translations and approvals",
+        "api": "WordPress and REST API"
+      },
       "ai": {
         "badge": "Smart Content",
-        "title": "AI That Understands Your Business",
-        "desc": "Our engine learns your tone-of-voice and brand identity. It generates relevant articles that actually attract customers, not just generic text. Automatically monitors discussion quality and community sentiment.",
+        "title": "A draft based on your material",
+        "desc": "Set the topic, format, audience, and tone of voice. Topiqu prepares a sourced article that you can change freely in the editor.",
         "tags": {
-          "enhance": "Brand Voice",
-          "vibe": "Sentiment Analysis",
-          "helpfulness": "Reader Value"
+          "enhance": "Your own material",
+          "vibe": "Sources attached",
+          "helpfulness": "Tone of voice"
         }
       },
       "publishing": {
-        "title": "From draft to your own website",
-        "desc": "Manage creation, review, translations, and publishing in one place. Run the site with Topiqu or connect the content to your existing website.",
+        "title": "One editor, several outputs",
+        "desc": "Edit, schedule, and translate an article, then publish it to your site, send it to WordPress, or expose it through the API.",
         "list": {
           "review": "Editorial review and approval",
           "locales": "Multilingual article versions",
@@ -43,7 +87,8 @@
         }
       },
       "security": {
-        "title": "Enterprise Standards",
+        "title": "A team without shared passwords",
+        "desc": "Invite colleagues and control who can write, edit, publish, manage integrations, or view analytics.",
         "list": {
           "rbac": "Team Access Control",
           "mfa": "Two-Factor Auth",
@@ -53,27 +98,32 @@
       },
       "api": {
         "badge": "Plug & Play",
-        "title": "Deploy in Minutes",
-        "desc": "No complex development. Embed a link on your site, use our plugin, or fetch data via API to display it your way. Fully customizable design, colors, and domain.",
-        "type": "JSON/REST"
+        "title": "Publish on your platform, not someone else’s",
+        "desc": "Topiqu can run the entire blog on your domain. If you already have a website, connect it through WordPress or the REST API.",
+        "type": "JSON/REST",
+        "domain": "Custom domain"
       }
     },
     "purpose": {
-      "title": "What Topiqu does",
-      "description": "Topiqu is an AI content operations platform. It helps businesses research, create, review, translate, publish, and continuously improve articles on their own websites.",
+      "title": "Topiqu is more than another text generator",
+      "description": "It is an editorial workspace and publishing system. Sources, drafts, language versions, publication dates, and results stay with the article. Write it yourself, use AI only for the first draft, or automate regular publishing. You still decide what goes live.",
       "gscTitle": "Google Search Console integration",
       "gscDescription": "If you connect this optional integration, Topiqu receives read-only access to clicks, impressions, CTR, and average-position data. It uses the data for performance reporting and to flag possible opportunities; it does not guarantee search results and cannot change your website settings in Google.",
       "privacyLink": "How we use your data"
     },
     "pricing": {
+      "eyebrow": "Choose by the way you work",
       "title": "Plans & Pricing",
-      "subtitle": "Transparent pricing. No hidden fees. Choose the level that matches your ambition.",
+      "subtitle": "Start with a simple publishing setup and add research, automation, and team workflows when you need them.",
+      "recommended": "Recommended",
+      "note": "Prices exclude applicable taxes. You can change or cancel your plan at any time.",
       "month": "/mo",
       "plans": {
         "free": {
           "badge": "Start",
           "name": "Free",
-          "desc": "Perfect for beginners and hobby projects.",
+          "desc": "Publish manually and learn whether Topiqu fits your project.",
+          "audience": "For personal projects",
           "price": "$0",
           "features": {
             "manual_writing": "Manual Article Writing",
@@ -89,7 +139,8 @@
         "pro": {
           "badge": "Creator",
           "name": "Pro",
-          "desc": "For creators who want to grow with AI.",
+          "desc": "Research and publish regularly with AI assistance.",
+          "audience": "For regular publishing",
           "price": "$39",
           "features": {
             "ai_tokens": "AI Generation + Tokens",
@@ -105,7 +156,8 @@
         "premium": {
           "badge": "Most Popular",
           "name": "Premium",
-          "desc": "Maximum performance and complete automation.",
+          "desc": "Add approvals, performance data, and distribution for a growing team.",
+          "audience": "For content teams",
           "price": "$79",
           "features": {
             "sentiment": "AI Sentiment & Images",
@@ -121,7 +173,8 @@
         "custom": {
           "badge": "Enterprise",
           "name": "Custom",
-          "desc": "White-label solution without any limits.",
+          "desc": "A tailored setup for several brands, teams, or publishing properties.",
+          "audience": "For multi-brand operations",
           "price": "Custom",
           "features": {
             "domain": "Custom Domain (Apex)",

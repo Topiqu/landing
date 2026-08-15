@@ -2,161 +2,139 @@
 const { y } = useWindowScroll()
 const route = useRoute()
 const localePath = useLocalePath()
-const { locale } = useI18n()
+const switchLocalePath = useSwitchLocalePath()
+const { locale, t } = useI18n()
 const mobileMenuOpen = shallowRef(false)
-
+const desktopLanguageOpen = shallowRef(false)
+const mobileLanguageOpen = shallowRef(false)
+const desktopLanguagePicker = ref<HTMLElement | null>(null)
 const { platformUrl, statusUrl } = useRuntimeConfig().public
-
-// Reflect Better Stack's live aggregate state in the header pill. Defaults to
-// operational so the pill renders instantly during SSR / before the fetch lands.
-const { data: system } = await useFetch('/api/status', {
-  default: () => ({ status: 'operational' as const }),
+const localeOptions = [
+  { code: 'cs' as const, short: 'CS', label: 'Čeština', flag: '🇨🇿' },
+  { code: 'en' as const, short: 'EN', label: 'English', flag: '🇬🇧' },
+]
+const activeLocale = computed(() => localeOptions.find(option => option.code === locale.value) ?? localeOptions[0])
+onClickOutside(desktopLanguagePicker, () => {
+  desktopLanguageOpen.value = false
 })
+onKeyStroke('Escape', () => {
+  desktopLanguageOpen.value = false
+  mobileLanguageOpen.value = false
+})
+
+const { data: system } = await useFetch('/api/status', { default: () => ({ status: 'operational' as const }) })
 const status = computed(() => system.value.status)
-const statusStyle = computed(() => STATUS_STYLES[status.value])
+const statusDot = computed(
+  () =>
+    ({ operational: 'bg-emerald-600', degraded: 'bg-amber-500', maintenance: 'bg-blue-500', down: 'bg-red-600' })[
+      status.value
+    ],
+)
+const mobileLinks = computed(() => [
+  { id: 'specs', label: t('common.actions.learn_more') },
+  { id: 'workflow', label: t('landing.workflow_nav') },
+  { id: 'pricing', label: t('landing.pricing.title') },
+  { id: 'faq', label: 'FAQ' },
+])
 
-const STATUS_STYLES = {
-  operational: {
-    dot: 'bg-green-500',
-    ping: 'bg-green-400',
-    border: 'hover:border-green-400 dark:hover:border-green-600',
-    text: 'text-slate-600 dark:text-slate-300 group-hover:text-green-700 dark:group-hover:text-green-400',
-    mobileBg: 'bg-green-50 dark:bg-green-500/10',
-    mobileText: 'text-green-700 dark:text-green-400',
-  },
-  degraded: {
-    dot: 'bg-amber-500',
-    ping: 'bg-amber-400',
-    border: 'hover:border-amber-400 dark:hover:border-amber-600',
-    text: 'text-slate-600 dark:text-slate-300 group-hover:text-amber-700 dark:group-hover:text-amber-400',
-    mobileBg: 'bg-amber-50 dark:bg-amber-500/10',
-    mobileText: 'text-amber-700 dark:text-amber-400',
-  },
-  maintenance: {
-    dot: 'bg-blue-500',
-    ping: 'bg-blue-400',
-    border: 'hover:border-blue-400 dark:hover:border-blue-600',
-    text: 'text-slate-600 dark:text-slate-300 group-hover:text-blue-700 dark:group-hover:text-blue-400',
-    mobileBg: 'bg-blue-50 dark:bg-blue-500/10',
-    mobileText: 'text-blue-700 dark:text-blue-400',
-  },
-  down: {
-    dot: 'bg-red-500',
-    ping: 'bg-red-400',
-    border: 'hover:border-red-400 dark:hover:border-red-600',
-    text: 'text-slate-600 dark:text-slate-300 group-hover:text-red-700 dark:group-hover:text-red-400',
-    mobileBg: 'bg-red-50 dark:bg-red-500/10',
-    mobileText: 'text-red-700 dark:text-red-400',
-  },
-} as const
-
-// Existing clients log in on the platform's auth page. It lives under the
-// locale prefix (e.g. /en/auth), so mirror the landing locale in the hand-off.
-const goToLogin = () => {
-  const url = `${platformUrl}/${locale.value}/auth`
-  navigateTo(url, { external: true })
-}
-
-const handleMobileLogin = () => {
-  mobileMenuOpen.value = false
-  goToLogin()
-}
-
+const goToLogin = () => navigateTo(`${platformUrl}/${locale.value}/auth`, { external: true })
 const scrollTo = (id: string) => {
   const home = localePath('/')
-  if (route.path !== home) {
-    navigateTo({ path: home, hash: `#${id}` })
-    return
-  }
-  const el = document.getElementById(id)
-  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  if (route.path !== home) return navigateTo({ path: home, hash: `#${id}` })
+  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
-
 const handleMobileLink = (id: string) => {
   mobileMenuOpen.value = false
   nextTick(() => scrollTo(id))
 }
-
 watch(
   () => route.path,
   () => {
     mobileMenuOpen.value = false
+    desktopLanguageOpen.value = false
+    mobileLanguageOpen.value = false
   },
 )
 </script>
 
 <template>
   <header
-    class="fixed w-full top-0 z-50 transition-colors dark:border-b dark:border-white/5"
-    :class="y > 100 ? 'bg-white/80 dark:bg-[#020408]/80 backdrop-blur shadow-sm' : ''"
+    class="fixed top-0 z-50 w-full border-b transition-colors"
+    :class="
+      y > 40
+        ? 'border-brand-line bg-[#f4f1e9]/95 dark:border-white/10 dark:bg-[#080a0d]/95'
+        : 'border-transparent bg-transparent'
+    "
   >
-    <nav class="flex items-center justify-between px-6 py-6 max-w-[90rem] mx-auto">
-      <NuxtLinkLocale to="/" class="group flex items-center gap-2 underline-none decoration-none">
-        <NuxtImg
-          src="/logo.png"
-          width="40"
-          height="40"
-          loading="eager"
-          fetchpriority="high"
-          decoding="sync"
-          alt="Topiqu"
-          class="grayscale group-hover:grayscale-0 transition-all duration-300"
-        />
-        <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">Topiqu</span>
+    <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <NuxtLinkLocale to="/" class="flex items-center gap-2.5 no-underline">
+        <NuxtImg src="/logo.png" width="36" height="36" loading="eager" alt="Topiqu" />
+        <span class="text-lg font-semibold tracking-tight text-brand-ink dark:text-white">Topiqu</span>
       </NuxtLinkLocale>
 
-      <div class="hidden md:flex gap-3 items-center">
+      <div class="hidden items-center gap-1 md:flex">
+        <button class="nav-link" @click="scrollTo('specs')">{{ $t('common.actions.learn_more') }}</button>
+        <button class="nav-link" @click="scrollTo('workflow')">{{ $t('landing.workflow_nav') }}</button>
+        <button class="nav-link" @click="scrollTo('pricing')">{{ $t('landing.pricing.title') }}</button>
+        <NuxtLinkLocale to="/docs" class="nav-link no-underline">Docs</NuxtLinkLocale>
         <a
           :href="statusUrl"
           target="_blank"
           rel="noopener"
-          class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm transition-colors group"
-          :class="statusStyle.border"
+          class="ml-3 flex items-center gap-2 px-3 py-2 text-xs text-brand-muted no-underline dark:text-slate-400"
         >
-          <span class="relative flex h-2 w-2 shrink-0">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-              :class="statusStyle.ping"
-            ></span>
-            <span class="relative inline-flex rounded-full h-2 w-2" :class="statusStyle.dot"></span>
-          </span>
-          <span class="text-xs font-bold transition-colors whitespace-nowrap" :class="statusStyle.text">
-            {{ $t(`common.status.${status}`) }}
-          </span>
+          <span class="h-1.5 w-1.5 rounded-full" :class="statusDot" />{{ $t(`common.status.${status}`) }}
         </a>
-
-        <Button variant="transparent" borderless @click="scrollTo('specs')">
-          {{ $t('common.actions.learn_more') }}
-        </Button>
-
-        <Button variant="transparent" borderless @click="scrollTo('pricing')">
-          {{ $t('landing.pricing.title') }}
-        </Button>
-
-        <Button variant="transparent" borderless @click="scrollTo('faq')"> FAQ </Button>
-
-        <NuxtLinkLocale to="/docs" class="px-3 py-2 text-sm font-semibold text-slate-700 no-underline hover:text-indigo-600 dark:text-slate-300 dark:hover:text-indigo-400">
-          Docs
-        </NuxtLinkLocale>
-
-        <Button variant="transparent" icon="mdi:login" class="rounded-full" @click="goToLogin">
-          {{ $t('common.auth.login') }}
-        </Button>
-
+        <div ref="desktopLanguagePicker" class="relative ml-1">
+          <button
+            type="button"
+            class="flex cursor-pointer items-center gap-2 rounded-lg border border-brand-line bg-white/55 px-2.5 py-2 text-xs font-bold text-brand-ink dark:border-white/15 dark:bg-white/5 dark:text-white"
+            :aria-label="locale === 'cs' ? 'Změnit jazyk' : 'Change language'"
+            aria-haspopup="menu"
+            :aria-expanded="desktopLanguageOpen"
+            @click="desktopLanguageOpen = !desktopLanguageOpen"
+          >
+            <span aria-hidden="true">{{ activeLocale.flag }}</span>
+            <span>{{ activeLocale.short }}</span>
+            <Icon
+              name="mdi:chevron-down"
+              size="15"
+              class="text-brand-muted transition-transform"
+              :class="desktopLanguageOpen ? 'rotate-180' : ''"
+            />
+          </button>
+          <div
+            v-if="desktopLanguageOpen"
+            role="menu"
+            class="absolute right-0 top-[calc(100%+0.5rem)] min-w-40 overflow-hidden rounded-xl border border-brand-line bg-[#faf8f2] p-1.5 shadow-xl dark:border-white/15 dark:bg-[#111318]"
+          >
+            <NuxtLink
+              v-for="option in localeOptions"
+              :key="option.code"
+              :to="switchLocalePath(option.code)"
+              role="menuitem"
+              class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-semibold text-brand-ink no-underline hover:bg-black/5 dark:text-white dark:hover:bg-white/10"
+              :aria-current="locale === option.code ? 'page' : undefined"
+            >
+              <span class="text-base" aria-hidden="true">{{ option.flag }}</span>
+              <span class="flex-1">{{ option.label }}</span>
+              <Icon v-if="locale === option.code" name="mdi:check" size="16" class="text-brand-accent" />
+            </NuxtLink>
+          </div>
+        </div>
+        <button class="nav-link ml-1" @click="goToLogin">{{ $t('common.auth.login') }}</button>
         <Button
           variant="primary"
-          class="shadow-md shadow-indigo-500/20 hover:shadow-lg hover:shadow-indigo-500/30 transition-all duration-300 rounded-full px-6 bg-gradient-to-r from-indigo-600 to-violet-600 hover:from-indigo-500 hover:to-violet-500"
+          class="ml-2 !rounded-lg !border-brand-accent !bg-brand-accent px-5 shadow-none hover:!bg-[#4035ad]"
           @click="navigateTo(localePath('/onboarding'))"
         >
           {{ $t('common.actions.get_started') }}
         </Button>
       </div>
 
-      <!-- Mobile hamburger -->
       <button
-        class="md:hidden flex items-center justify-center p-2 rounded-xl border-0 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/60 dark:hover:bg-white/5 transition-colors"
+        class="flex h-10 w-10 items-center justify-center rounded-lg border border-brand-line bg-transparent text-brand-ink dark:border-slate-700 dark:text-white md:hidden"
         :aria-label="$t('common.actions.openMenu')"
-        type="button"
         @click="mobileMenuOpen = true"
       >
         <Icon name="mdi:menu" size="22" />
@@ -164,201 +142,121 @@ watch(
     </nav>
   </header>
 
-  <!-- Mobile menu overlay -->
   <Transition name="mobile-menu">
     <div
       v-if="mobileMenuOpen"
-      class="fixed inset-0 z-[100] flex flex-col md:hidden bg-[#F8FAFC] dark:bg-[#060c14] overflow-hidden"
+      class="fixed inset-0 z-[100] flex flex-col bg-brand-page px-6 dark:bg-[#080a0d] md:hidden"
     >
-      <!-- Background decoration -->
-      <div
-        class="absolute -top-20 -right-20 w-80 h-80 bg-indigo-500/10 dark:bg-indigo-500/10 rounded-full blur-[80px] pointer-events-none"
-      ></div>
-      <div
-        class="absolute -bottom-20 -left-20 w-72 h-72 bg-emerald-500/8 dark:bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none"
-      ></div>
-      <div
-        class="absolute inset-0 bg-[linear-gradient(to_right,#80808006_1px,transparent_1px),linear-gradient(to_bottom,#80808006_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none"
-      ></div>
-
-      <!-- Header bar -->
-      <div
-        class="relative z-10 flex items-center justify-between px-6 py-5 border-b border-slate-200 dark:border-white/5"
-      >
-        <NuxtLinkLocale to="/" class="group flex items-center gap-2" @click="mobileMenuOpen = false">
-          <NuxtImg
-            src="/logo.png"
-            width="34"
-            height="34"
-            loading="eager"
-            decoding="async"
-            alt="Topiqu"
-            class="grayscale group-hover:grayscale-0 transition-all duration-300"
-          />
-          <span class="font-bold text-xl tracking-tight text-slate-900 dark:text-white">Topiqu</span>
-        </NuxtLinkLocale>
+      <div class="flex items-center justify-between border-b border-brand-line py-5 dark:border-white/10">
+        <span class="text-lg font-semibold">Topiqu</span>
         <button
-          class="flex items-center justify-center p-2 rounded-xl border-0 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100/60 dark:hover:bg-white/5 transition-colors"
+          class="flex h-10 w-10 items-center justify-center rounded-lg border border-brand-line bg-transparent dark:border-slate-700"
           :aria-label="$t('common.actions.close')"
           @click="mobileMenuOpen = false"
         >
-          <Icon name="mdi:close" size="20" />
+          <Icon name="mdi:close" />
         </button>
       </div>
-
-      <!-- Status pill -->
-      <div class="relative z-10 px-5 pt-7 pb-3">
-        <a
-          :href="statusUrl"
-          target="_blank"
-          rel="noopener"
-          class="flex items-center gap-3 px-4 py-3 rounded-2xl w-fit"
-          :class="statusStyle.mobileBg"
-          @click="mobileMenuOpen = false"
+      <nav class="flex flex-col py-8">
+        <button
+          v-for="item in mobileLinks"
+          :key="item.id"
+          class="flex items-center justify-between border-b border-brand-line bg-transparent py-5 text-left text-xl font-semibold dark:border-white/10"
+          @click="handleMobileLink(item.id)"
         >
-          <span class="relative flex h-2 w-2 shrink-0">
-            <span
-              class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
-              :class="statusStyle.ping"
-            ></span>
-            <span class="relative inline-flex rounded-full h-2 w-2" :class="statusStyle.dot"></span>
-          </span>
-          <span class="text-xs font-bold tracking-wide" :class="statusStyle.mobileText">{{
-            $t(`common.status.${status}`)
-          }}</span>
-        </a>
-      </div>
-
-      <!-- Nav items -->
-      <nav class="relative z-10 flex flex-col px-4 gap-1.5">
+          {{ item.label }}<Icon name="mdi:arrow-right" class="text-brand-accent" />
+        </button>
         <NuxtLinkLocale
           to="/docs"
-          class="group flex items-center gap-4 rounded-2xl px-4 py-3.5 no-underline hover:bg-white dark:hover:bg-white/5"
-          @click="mobileMenuOpen = false"
-        >
-          <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-cyan-50 text-cyan-600 dark:bg-cyan-500/10 dark:text-cyan-400">
-            <Icon name="mdi:code-tags" size="20" />
-          </div>
-          <div class="flex-1">
-            <div class="text-sm font-semibold text-slate-900 dark:text-white">Developer docs</div>
-            <div class="mt-0.5 text-xs text-slate-500 dark:text-slate-400">API guides & reference</div>
-          </div>
-        </NuxtLinkLocale>
-        <button
-          class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl border-0 text-left hover:bg-white dark:hover:bg-white/5 transition-colors"
-          @click="handleMobileLink('specs')"
-        >
-          <div
-            class="w-10 h-10 flex items-center justify-center rounded-xl bg-indigo-50 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 shrink-0"
+          class="flex items-center justify-between border-b border-brand-line py-5 text-xl font-semibold text-brand-ink no-underline dark:border-white/10 dark:text-white"
+          >Docs<Icon name="mdi:arrow-right" class="text-brand-accent"
+        /></NuxtLinkLocale>
+        <div class="border-b border-brand-line py-5 dark:border-white/10">
+          <button
+            type="button"
+            class="flex w-full cursor-pointer items-center justify-between rounded-lg border border-brand-line bg-transparent px-4 py-3 font-semibold dark:border-white/15"
+            aria-haspopup="menu"
+            :aria-expanded="mobileLanguageOpen"
+            @click="mobileLanguageOpen = !mobileLanguageOpen"
           >
-            <Icon name="mdi:robot-happy-outline" size="20" />
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="text-sm font-semibold text-slate-900 dark:text-white">
-              {{ $t('common.actions.learn_more') }}
-            </div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Platform features & specs</div>
-          </div>
-          <Icon
-            name="mdi:chevron-right"
-            size="18"
-            class="text-slate-300 dark:text-slate-600 group-hover:text-slate-500 dark:group-hover:text-slate-400 transition-colors shrink-0"
-          />
-        </button>
-
-        <button
-          class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl border-0 text-left hover:bg-white dark:hover:bg-white/5 transition-colors"
-          @click="handleMobileLink('pricing')"
-        >
+            <span class="flex items-center gap-3">
+              <span aria-hidden="true">{{ activeLocale.flag }}</span>
+              {{ activeLocale.label }}
+            </span>
+            <Icon
+              name="mdi:chevron-down"
+              class="text-brand-muted transition-transform"
+              :class="mobileLanguageOpen ? 'rotate-180' : ''"
+            />
+          </button>
           <div
-            class="w-10 h-10 flex items-center justify-center rounded-xl bg-emerald-50 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 shrink-0"
+            v-if="mobileLanguageOpen"
+            role="menu"
+            class="mt-2 overflow-hidden rounded-lg border border-brand-line p-1 dark:border-white/15"
           >
-            <Icon name="mdi:tag-outline" size="20" />
+            <NuxtLink
+              v-for="option in localeOptions"
+              :key="option.code"
+              :to="switchLocalePath(option.code)"
+              role="menuitem"
+              class="flex items-center gap-3 rounded-md px-3 py-3 font-semibold text-brand-ink no-underline hover:bg-black/5 dark:text-white dark:hover:bg-white/10"
+              :aria-current="locale === option.code ? 'page' : undefined"
+              @click="mobileMenuOpen = false"
+            >
+              <span aria-hidden="true">{{ option.flag }}</span>
+              <span class="flex-1">{{ option.label }}</span>
+              <Icon v-if="locale === option.code" name="mdi:check" class="text-brand-accent" />
+            </NuxtLink>
           </div>
-          <div class="flex-1 min-w-0">
-            <div class="text-sm font-semibold text-slate-900 dark:text-white">{{ $t('landing.pricing.title') }}</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Find the right plan for you</div>
-          </div>
-          <Icon
-            name="mdi:chevron-right"
-            size="18"
-            class="text-slate-300 dark:text-slate-600 group-hover:text-slate-500 dark:group-hover:text-slate-400 transition-colors shrink-0"
-          />
-        </button>
-
-        <button
-          class="group flex items-center gap-4 px-4 py-3.5 rounded-2xl border-0 text-left hover:bg-white dark:hover:bg-white/5 transition-colors"
-          @click="handleMobileLink('faq')"
-        >
-          <div
-            class="w-10 h-10 flex items-center justify-center rounded-xl bg-violet-50 dark:bg-violet-500/10 text-violet-600 dark:text-violet-400 shrink-0"
-          >
-            <Icon name="mdi:help-circle-outline" size="20" />
-          </div>
-          <div class="flex-1 min-w-0">
-            <div class="text-sm font-semibold text-slate-900 dark:text-white">FAQ</div>
-            <div class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Common questions answered</div>
-          </div>
-          <Icon
-            name="mdi:chevron-right"
-            size="18"
-            class="text-slate-300 dark:text-slate-600 group-hover:text-slate-500 dark:group-hover:text-slate-400 transition-colors shrink-0"
-          />
-        </button>
+        </div>
       </nav>
-
-      <!-- CTA -->
-      <div class="relative z-10 mt-auto px-5 pb-12 pt-6">
-        <NuxtLinkLocale
-          to="/onboarding"
-          class="flex items-center justify-center gap-2.5 w-full py-4 rounded-2xl font-bold text-white bg-gradient-to-r from-indigo-600 to-violet-600 shadow-xl shadow-indigo-500/25 hover:shadow-indigo-500/35 active:scale-[0.98] transition-all duration-200"
-          @click="mobileMenuOpen = false"
+      <div class="mt-auto pb-10">
+        <Button
+          variant="primary"
+          size="lg"
+          class="w-full !rounded-lg !border-brand-accent !bg-brand-accent shadow-none"
+          @click="navigateTo(localePath('/onboarding'))"
+          >{{ $t('common.actions.get_started') }}</Button
         >
-          {{ $t('common.actions.get_started') }}
-          <Icon name="mdi:arrow-right" size="18" />
-        </NuxtLinkLocale>
-
         <button
-          type="button"
-          class="flex items-center justify-center gap-2 w-full mt-3 py-4 rounded-2xl font-semibold text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-white/10 hover:bg-white dark:hover:bg-white/5 active:scale-[0.98] transition-all duration-200"
-          @click="handleMobileLogin"
+          class="mt-3 w-full border-0 bg-transparent py-3 font-semibold text-brand-muted dark:text-slate-300"
+          @click="goToLogin"
         >
-          <Icon name="mdi:login" size="18" />
           {{ $t('common.auth.login') }}
         </button>
-
-        <p class="text-center text-xs text-slate-400 dark:text-slate-500 mt-4">No credit card required</p>
       </div>
     </div>
   </Transition>
 </template>
 
 <style scoped>
-a {
-  text-decoration: none;
-}
-
-button {
-  border: none;
+.nav-link {
+  border: 0;
+  background: transparent;
+  padding: 0.65rem 0.75rem;
+  color: #5f5e57;
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
 }
-
-.mobile-menu-enter-active {
-  transition:
-    opacity 0.25s ease,
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.nav-link:hover {
+  color: #171714;
 }
+:global(html.dark) .nav-link {
+  color: #cbd5e1;
+}
+:global(html.dark) .nav-link:hover {
+  color: #fff;
+}
+.mobile-menu-enter-active,
 .mobile-menu-leave-active {
   transition:
     opacity 0.2s ease,
-    transform 0.2s ease;
+    transform 0.25s ease;
 }
-.mobile-menu-enter-from {
-  opacity: 0;
-  transform: translateX(100%);
-}
+.mobile-menu-enter-from,
 .mobile-menu-leave-to {
   opacity: 0;
-  transform: translateX(100%);
+  transform: translateX(2rem);
 }
 </style>

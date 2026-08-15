@@ -8,6 +8,62 @@
   scroll-behavior: smooth;
 }
 
+:root {
+  --brand-page: #f4f1e9;
+  --brand-surface: #fbfaf6;
+  --brand-ink: #171714;
+  --brand-muted: #68675f;
+  --brand-line: #d8d4c9;
+  --brand-accent: #5145cd;
+}
+
+body {
+  background: var(--brand-page);
+}
+
+.font-serif {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  color: var(--brand-accent);
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.eyebrow::before {
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  content: '';
+}
+
+.section-title {
+  color: var(--brand-ink);
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 600;
+  letter-spacing: -0.035em;
+  line-height: 1.08;
+}
+
+.section-lede {
+  color: var(--brand-muted);
+  font-size: 1.125rem;
+  line-height: 2rem;
+}
+
+html.dark .section-title {
+  color: #ffffff;
+}
+
+html.dark .section-lede {
+  color: #cbd5e1;
+}
+
 blockquote {
   margin: revert;
   padding: revert;
@@ -53,22 +109,6 @@ select,
   color: $input-text !important;
   border: 1px solid $border-color !important;
   border-radius: 6px !important;
-}
-
-html.dark
-  div:not(
-    .iziToast,
-    .iziToast-capsule,
-    .iziToast-wrapper *,
-    [role='dialog'],
-    [role='dialog'] *,
-    [data-youtube-video],
-    [data-youtube-video] *,
-    .pointer-events-none,
-    .custom-ui,
-    .custom-ui *
-  ) {
-  background-color: #1f2937;
 }
 
 .iziToast-wrapper {
@@ -134,19 +174,6 @@ html.dark .swal2-popup button.swal2-cancel.swal2-styled {
 
 .swal2-container {
   background-color: transparent !important;
-}
-
-html.dark button {
-  background-color: #374151;
-  color: $dialog-text;
-}
-
-button:hover {
-  background-color: #d4d5d6;
-}
-
-html.dark button:hover {
-  background-color: #2f3b4c;
 }
 
 .tippy-box {
