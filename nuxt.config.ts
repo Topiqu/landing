@@ -109,14 +109,20 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    // Keep the language-neutral developer URL useful.
-    '/docs': { redirect: '/en/docs' },
     // Landing pages — prerender for instant TTFB
     // OAuth reviewers and crawlers must receive an HTTP redirect, not i18n's tiny
     // meta-refresh shell, otherwise they never inspect the actual public homepage.
     '/': { redirect: '/en' },
     '/en': { prerender: true },
     '/cs': { prerender: true },
+    '/en/comparison': { prerender: true },
+    '/cs/comparison': { prerender: true },
+    '/en/docs': { prerender: true },
+    '/cs/docs': { prerender: true },
+    '/en/docs/**': { prerender: true },
+    '/cs/docs/**': { prerender: true },
+    '/en/changelog/**': { prerender: true },
+    '/cs/changelog/**': { prerender: true },
     '/en/terms-of-service': { prerender: true },
     '/en/privacy-policy': { prerender: true },
     '/cs/obchodni-podminky': { prerender: true },
@@ -145,16 +151,19 @@ export default defineNuxtConfig({
   },
 
   i18n: {
+    baseUrl: 'https://topiqu.com',
     locales: [
       {
         code: 'en',
         iso: 'en-US',
+        language: 'en-US',
         name: 'EN',
         files: ['en/common.json', 'en/landing.json', 'en/legal.json', 'en/languages.json'],
       },
       {
         code: 'cs',
         iso: 'cs-CZ',
+        language: 'cs-CZ',
         name: 'CZ',
         files: ['cs/common.json', 'cs/landing.json', 'cs/legal.json', 'cs/languages.json'],
       },
@@ -216,9 +225,52 @@ export default defineNuxtConfig({
 
   site: {
     name: 'Topiqu',
+    url: 'https://topiqu.com',
     description: 'AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
     defaultLocale: 'en',
     indexable: true,
+  },
+
+  sitemap: {
+    cacheMaxAgeSeconds: 60,
+    exclude: ['/en/onboarding/**', '/cs/onboarding/**'],
+    urls: [
+      '/en/comparison',
+      '/cs/comparison',
+      '/en/docs',
+      '/cs/docs',
+      '/en/api-reference',
+      '/cs/api-reference',
+      '/en/docs/authentication',
+      '/cs/docs/authentication',
+      '/en/docs/pagination',
+      '/cs/docs/pagination',
+      '/en/docs/errors',
+      '/cs/docs/errors',
+      '/en/changelog',
+      '/cs/changelog',
+      '/en/changelog/2026-08-11-external-api-v1',
+      '/cs/changelog/2026-08-11-external-api-v1',
+    ],
+  },
+
+  robots: {
+    groups: [
+      { userAgent: ['*'], allow: ['/'] },
+      { userAgent: ['OAI-SearchBot'], allow: ['/'] },
+      { userAgent: ['GPTBot'], disallow: ['/'] },
+    ],
+  },
+
+  schemaOrg: {
+    identity: {
+      '@type': 'Organization',
+      name: 'Topiqu',
+      url: 'https://topiqu.com',
+      logo: 'https://cdn.topiqu.com/app-logo.png',
+      image: 'https://cdn.topiqu.com/app-logo.png',
+      email: 'support@topiqu.com',
+    },
   },
 
   // Dynamické (island) OG obrázky nejsou na Nuxt 4.4 (unhead v2) funkční:
@@ -236,7 +288,6 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
       link: [
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
         { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },

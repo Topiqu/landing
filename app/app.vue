@@ -14,16 +14,27 @@
 
 <script setup lang="ts">
 const { cdnUrl } = useRuntimeConfig().public
+const { locale } = useI18n()
 const ogImageUrl = `${cdnUrl}/app-logo.png`
+const localeHead = useLocaleHead()
+
+useHead(() => ({
+  htmlAttrs: localeHead.value.htmlAttrs,
+  link: [...(localeHead.value.link || [])],
+  meta: [...(localeHead.value.meta || [])],
+}))
 
 useSeoMeta({
-  title: () => 'Topiqu',
-  description: () => 'Topiqu is an AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
-  keywords: () => 'Topiqu, AI content operations, content platform, SEO, AEO, GEO',
+  description: () =>
+    locale.value === 'cs'
+      ? 'Topiqu propojuje rešerši, psaní, redakční kontrolu, překlady a publikaci obsahu.'
+      : 'Topiqu connects research, writing, editorial review, translations, and content publishing.',
   author: () => 'Topiqu',
   ogTitle: () => 'Topiqu',
-  ogDescription: () => 'Topiqu is an AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
-  ogLocale: () => 'cs',
+  ogDescription: () =>
+    locale.value === 'cs'
+      ? 'Od podkladů k publikovanému článku na vlastním webu.'
+      : 'From research to a published article on your own website.',
   ogImage: ogImageUrl,
   ogImageWidth: 1024,
   ogImageHeight: 1024,

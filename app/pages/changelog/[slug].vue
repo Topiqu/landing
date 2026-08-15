@@ -20,5 +20,25 @@ const { locale } = useI18n()
 const path = computed(() => `/changelog/${locale.value}/${route.params.slug}`)
 const { data: entry } = await useAsyncData(`changelog-entry-${path.value}`, () => queryCollection('changelog').path(path.value).first(), { watch: [path] })
 const formatDate = (date: string) => new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(new Date(`${date}T12:00:00Z`))
-useSeoMeta({ title: () => entry.value ? `${entry.value.title} · Topiqu Changelog` : 'Topiqu Changelog', description: () => entry.value?.description })
+useSeoMeta({
+  title: () => entry.value ? `${entry.value.title} | Changelog` : 'Changelog',
+  description: () => entry.value?.description,
+  ogTitle: () => entry.value ? `${entry.value.title} | Topiqu Changelog` : 'Topiqu Changelog',
+  ogDescription: () => entry.value?.description,
+  ogType: 'article',
+})
+useSchemaOrg([
+  defineWebPage({
+    name: () => entry.value?.title || 'Changelog',
+    description: () => entry.value?.description,
+    url: () => `https://topiqu.com/${locale.value}/changelog/${route.params.slug}`,
+  }),
+  defineBreadcrumb({
+    itemListElement: () => [
+      { name: 'Topiqu', item: `https://topiqu.com/${locale.value}` },
+      { name: 'Changelog', item: `https://topiqu.com/${locale.value}/changelog` },
+      { name: entry.value?.title || 'Changelog' },
+    ],
+  }),
+])
 </script>

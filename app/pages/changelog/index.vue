@@ -55,5 +55,19 @@ const filters = computed(() => ['all', ...new Set((entries.value || []).flatMap(
 const filteredEntries = computed(() => activeFilter.value === 'all' ? entries.value : entries.value?.filter((entry) => entry.areas.includes(activeFilter.value)))
 const copy = computed(() => locale.value === 'cs' ? { title: 'Co je nového', description: 'Nové funkce, vylepšení, opravy a všechny změny veřejného API na jednom místě.', filter: 'Filtrovat změny', all: 'vše' } : { title: 'What’s new', description: 'New features, improvements, fixes, and every public API change in one place.', filter: 'Filter changes', all: 'all' })
 const formatDate = (date: string) => new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(new Date(`${date}T12:00:00Z`))
-useSeoMeta({ title: () => `${copy.value.title} · Topiqu`, description: () => copy.value.description })
+useSeoMeta({
+  title: () => copy.value.title,
+  description: () => copy.value.description,
+  ogTitle: () => `${copy.value.title} | Topiqu`,
+  ogDescription: () => copy.value.description,
+})
+useSchemaOrg([
+  defineWebPage({ name: () => copy.value.title, description: () => copy.value.description, url: () => `https://topiqu.com/${locale.value}/changelog` }),
+  defineBreadcrumb({
+    itemListElement: () => [
+      { name: 'Topiqu', item: `https://topiqu.com/${locale.value}` },
+      { name: copy.value.title },
+    ],
+  }),
+])
 </script>

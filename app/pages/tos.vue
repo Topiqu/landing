@@ -57,11 +57,7 @@
 </template>
 
 <script setup lang="ts">
-const { t, tm, rt } = useI18n()
-
-useSeoMeta({
-  title: () => `${t('legal.tos.title')} — Topiqu`,
-})
+const { t, tm, rt, locale } = useI18n()
 
 const sections = computed(() =>
   (tm('legal.tos.sections') as any[]).map((s) => ({
@@ -75,5 +71,20 @@ const sections = computed(() =>
 useSeoMeta({
   title: () => t('legal.tos.title'),
   description: () => t('legal.tos.description'),
+  ogTitle: () => `${t('legal.tos.title')} | Topiqu`,
+  ogDescription: () => t('legal.tos.description'),
 })
+
+const termsUrl = computed(() =>
+  locale.value === 'cs' ? 'https://topiqu.com/cs/obchodni-podminky' : 'https://topiqu.com/en/terms-of-service',
+)
+useSchemaOrg([
+  defineWebPage({ name: () => t('legal.tos.title'), description: () => t('legal.tos.description'), url: () => termsUrl.value }),
+  defineBreadcrumb({
+    itemListElement: () => [
+      { name: 'Topiqu', item: `https://topiqu.com/${locale.value}` },
+      { name: t('legal.tos.title') },
+    ],
+  }),
+])
 </script>
