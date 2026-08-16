@@ -17,6 +17,9 @@ logs
 # Local visual QA output
 screenshots/
 
+# Local dependency verification workspaces
+.tmp-*/
+
 # Misc
 .DS_Store
 .fleet

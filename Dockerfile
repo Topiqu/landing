@@ -28,6 +28,6 @@ FROM base AS release
 
 COPY --from=prerelease /usr/src/app/.output .
 
-EXPOSE 3000:3000
+EXPOSE 3000
 
 ENTRYPOINT [ "bun", "--bun", "server/index.mjs" ]

@@ -1,0 +1,6 @@
+.tmp-*/
+screenshots/
+.git/
+.nuxt/
+.output/
+node_modules/
