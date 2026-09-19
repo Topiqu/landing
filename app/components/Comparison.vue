@@ -74,7 +74,7 @@ const labels = computed(() => isCs.value
   : ['AI research and long-form articles','Sources and citations','SEO optimization','AEO/GEO-ready publishing','AI visibility monitoring','Brand voice and brand knowledge','Native CMS, website, and domain','Scheduling and automated publishing','Translations and editorial approval','API / WordPress integrations','Reader engagement and community'])
 const matrix: number[][] = [
   [5,5,4,5,4,4,4],[5,5,3,5,4,4,3],[4,5,5,5,4,3,4],[4,4,5,5,5,3,4],
-  [1,2,2,5,1,1,4],[5,5,3,4,5,5,5],[5,5,4,5,5,1,5],[5,5,5,5,3,4,5],
+  [3,2,2,5,1,1,4],[5,5,3,4,5,5,5],[5,5,4,5,5,1,5],[5,5,5,5,3,4,5],
   [5,5,3,2,3,5,5],[5,5,4,4,3,5,5],[5,1,1,1,1,1,3],
 ]
 const rows = computed(() => labels.value.map((label, index) => ({ label, values: matrix[index]! })))
