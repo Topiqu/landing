@@ -10,11 +10,13 @@
 Landing page and onboarding flow for **Topiqu - Your AI Blog Platform**.
 
 **Includes:**
-- Marketing landing page - Hero, Specs bento grid, Pricing, FAQ
+- Marketing landing page - workspace preview, editorial workflow, comparison, pricing and FAQ
 - 6-step onboarding - site setup, design, account, plan, email verification, summary
 - Legal pages - Terms of Service, Privacy Policy
 - PWA support, SEO/OG meta, structured data (schema.org)
 - i18n - Multi-language localization
+
+The landing shares Nuxt UI primitives and the visual language of the app. See [the design system notes](docs/design-system.md) for component reuse, CSS conventions and logo synchronization.
 
 ## 🛠️ Installation
 

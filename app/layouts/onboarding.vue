@@ -3,10 +3,7 @@
     <StatusBar />
 
     <header class="flex items-center justify-between px-6 py-5 max-w-2xl mx-auto w-full">
-      <NuxtLinkLocale to="/" class="flex items-center gap-2 group">
-        <NuxtImg src="/logo.png" width="32" class="grayscale group-hover:grayscale-0 transition-all duration-300" />
-        <span class="font-bold text-lg tracking-tight text-slate-900 dark:text-white">Topiqu</span>
-      </NuxtLinkLocale>
+      <BrandLogo />
 
       <div class="flex items-center gap-4">
         <span class="text-xs font-black uppercase tracking-widest text-[#888] dark:text-[#71717A]">

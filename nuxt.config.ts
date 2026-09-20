@@ -1,5 +1,12 @@
+import { fileURLToPath } from 'node:url'
+
+import { topiquIcons } from './shared/brand'
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-05-21',
+  alias: {
+    '@unhead/schema-org/vue': fileURLToPath(new URL('./shared/schema-org-vue.ts', import.meta.url)),
+  },
 
   devtools: { enabled: true },
 
@@ -40,7 +47,6 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxtjs/i18n',
-    '@nuxt/fonts',
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/content',
@@ -49,6 +55,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
     '@unocss/nuxt',
+    '@nuxt/ui',
     '@vueuse/nuxt',
     '@vite-pwa/nuxt',
     'nuxt-security',
@@ -59,15 +66,12 @@ export default defineNuxtConfig({
 
   scalar: {
     url: '/openapi/v1.json',
-    pathRouting: { basePath: '/api-reference' },
-    layout: 'docs',
-    darkMode: true,
-    showSidebar: true,
-    hideClientButton: true,
-    metaData: {
-      title: 'Topiqu External API Reference',
-      description: 'Interactive reference for the Topiqu External API v1.',
-    },
+    // The public, localized reference is rendered by app/pages/api-reference.
+    // Keep the module-generated route out of the public URL space; the page
+    // still reuses ScalarApiReference from the module.
+    pathRouting: { basePath: '/_scalar' },
+    layout: false,
+    devtools: false,
   },
 
   image: {
@@ -85,7 +89,12 @@ export default defineNuxtConfig({
 
   eslint: { config: { typescript: true } },
 
-  css: ['~/assets/styles/base.scss'],
+  appConfig: { ui: { icons: topiquIcons } },
+
+  ui: { colorMode: false, fonts: false, theme: { prefix: 'tw' } },
+  toast: { composableName: 'useLegacyToast' },
+
+  css: ['~/assets/styles/main.css', '~/assets/styles/base.scss'],
 
   security: {
     rateLimiter: {
@@ -109,6 +118,15 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
+    // Scalar's interactive UI uses browser workers; keep it out of server rendering.
+    '/en/api-reference': { ssr: false },
+    '/en/api-reference/**': { ssr: false },
+    '/cs/api-reference': { ssr: false },
+    '/cs/api-reference/**': { ssr: false },
+    '/api-reference': { redirect: '/en/api-reference' },
+    '/api-reference/**': { ssr: false },
+    '/_scalar': { redirect: '/en/api-reference' },
+    '/_scalar/**': { redirect: '/en/api-reference' },
     // Keep the language-neutral developer URL useful.
     '/docs': { redirect: '/en/docs' },
     // Landing pages — prerender for instant TTFB
@@ -216,7 +234,8 @@ export default defineNuxtConfig({
 
   site: {
     name: 'Topiqu',
-    description: 'AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
+    description:
+      'AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
     defaultLocale: 'en',
     indexable: true,
   },
@@ -238,8 +257,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: 'en' },
       link: [
-        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
-        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png?v=20260910' },
         { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' },
       ],
     },
@@ -248,7 +266,6 @@ export default defineNuxtConfig({
   vite: {
     optimizeDeps: {
       include: [
-        '@unhead/schema-org/vue',
         '@vue/devtools-core',
         '@vue/devtools-kit',
         '@zxcvbn-ts/core',
@@ -263,14 +280,15 @@ export default defineNuxtConfig({
     manifest: {
       name: 'Topiqu',
       short_name: 'Topiqu',
-      description: 'AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
+      description:
+        'AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
       theme_color: '#2d5ebc',
       background_color: '#020408',
       display: 'standalone',
       icons: [
-        { src: 'icon-192x192.png', sizes: '192x192', type: 'image/png' },
-        { src: 'icon-512x512.png', sizes: '512x512', type: 'image/png' },
-        { src: 'icon-512x512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
+        { src: 'icon-192x192.png?v=20260909', sizes: '192x192', type: 'image/png' },
+        { src: 'icon-512x512.png?v=20260909', sizes: '512x512', type: 'image/png' },
+        { src: 'icon-512x512.png?v=20260909', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
       ],
     },
     workbox: {

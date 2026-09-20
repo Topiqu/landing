@@ -20,7 +20,7 @@ export const useOnboardingStore = defineStore(
     // await) so they can be used after awaits without losing the Nuxt context.
     const captureI18nToast = () => {
       const i18n = useNuxtApp().$i18n as { t: (k: string, n?: Record<string, unknown>) => string }
-      return { $t: (k: string, n?: Record<string, unknown>) => i18n.t(k, n), toast: useToast() }
+      return { $t: (k: string, n?: Record<string, unknown>) => i18n.t(k, n), toast: useLegacyToast() }
     }
 
     const loading = shallowRef(false)

@@ -1,63 +1,5 @@
 {
   "landing": {
-    "hero": {
-      "badge": "AI content operations",
-      "title_prefix": "Topiqu: from research to publishing",
-      "title_suffix": "in one system",
-      "subtitle": "Topiqu connects source-backed AI articles, approvals, translations, your own website, and distribution. Built for teams that do not want to stitch five separate tools together.",
-      "stats": {
-        "score": "SEO Performance",
-        "ads": "Your own website",
-        "billing": "Hybrid Model",
-        "api": "Full Integration"
-      },
-      "card": {
-        "writing": "AI is writing",
-        "score": "SEO score",
-        "draft": "Draft",
-        "read": "4 min read",
-        "headline": "5 content ideas that grow your organic reach"
-      }
-    },
-    "specs": {
-      "title": "Less Hassle, More Results",
-      "subtitle": "Topiqu is not just an editor. It connects creation, editorial workflow, publishing, and distribution.",
-      "ai": {
-        "badge": "Smart Content",
-        "title": "AI That Understands Your Business",
-        "desc": "Our engine learns your tone-of-voice and brand identity. It generates relevant articles that actually attract customers, not just generic text. Automatically monitors discussion quality and community sentiment.",
-        "tags": {
-          "enhance": "Brand Voice",
-          "vibe": "Sentiment Analysis",
-          "helpfulness": "Reader Value"
-        }
-      },
-      "publishing": {
-        "title": "From draft to your own website",
-        "desc": "Manage creation, review, translations, and publishing in one place. Run the site with Topiqu or connect the content to your existing website.",
-        "list": {
-          "review": "Editorial review and approval",
-          "locales": "Multilingual article versions",
-          "domain": "Custom domain and design",
-          "distribution": "WordPress, API, and social channels"
-        }
-      },
-      "security": {
-        "title": "Enterprise Standards",
-        "list": {
-          "rbac": "Team Access Control",
-          "mfa": "Two-Factor Auth",
-          "hashing": "Client Data Encryption",
-          "antibot": "Spam Protection"
-        }
-      },
-      "api": {
-        "badge": "Plug & Play",
-        "title": "Deploy in Minutes",
-        "desc": "No complex development. Embed a link on your site, use our plugin, or fetch data via API to display it your way. Fully customizable design, colors, and domain.",
-        "type": "JSON/REST"
-      }
-    },
     "purpose": {
       "title": "What Topiqu does",
       "description": "Topiqu is an AI content operations platform. It helps businesses research, create, review, translate, publish, and continuously improve articles on their own websites.",
@@ -92,7 +34,7 @@
           "desc": "For creators who want to grow with AI.",
           "price": "$39",
           "features": {
-            "ai_tokens": "AI Generation + Tokens",
+            "ai_tokens": "20 AI articles every month",
             "seo": "Advanced SEO Optimization",
             "import": "Import Existing Articles",
             "everything_free": "Everything in Free",
@@ -108,6 +50,7 @@
           "desc": "Maximum performance and complete automation.",
           "price": "$79",
           "features": {
+            "articles": "30 AI articles every month",
             "sentiment": "AI Sentiment & Images",
             "indexing": "Priority Indexing & Sourcing",
             "branding": "Custom Emojis & Branding",
@@ -127,7 +70,7 @@
             "domain": "Custom Domain (Apex)",
             "whitelabel": "Full White-Label (No Branding)",
             "banners": "Custom integrations and workflows",
-            "unlimited_ai": "Unlimited AI Tokens",
+            "unlimited_ai": "Custom AI article allowance",
             "multisite": "Multiple websites, brands, and teams",
             "onboarding": "Tailored onboarding and migration",
             "sla": "SLA and priority technical support"
@@ -166,33 +109,6 @@
         }
       ]
     },
-    "performance": {
-      "title": "Speed That\nGoogle Loves.",
-      "subtitle": "Technology fades into the background. What matters is the reader experience and search engine ranking. We guarantee both.",
-      "stack": {
-        "title": "Maximum Performance",
-        "desc": "Optimized for Core Web Vitals. Your articles load instantly, improving conversion rates and reducing bounce rates."
-      },
-      "analytics": {
-        "title": "Data for Decisions",
-        "desc": "Clear reports on what your readers actually engage with. Engagement rate, shares, and business impact in one dashboard."
-      },
-      "pricing": {
-        "title": "Fair Pricing",
-        "desc": "Base platform fee + flexible add-ons based on your usage. You don't pay for features you don't need."
-      }
-    },
-    "terminal": {
-      "assistant_name": "Topik AI Assistant",
-      "status": "Ready for Action",
-      "line1": "Analyzing keywords...",
-      "line2": "Target Audience: B2B Decision Makers",
-      "line3": "Tone of Voice: Professional",
-      "line4": "Generating content...",
-      "line5": "Checking SEO parameters...",
-      "line6": "Status: Optimized",
-      "line7": "Publication: Scheduled"
-    },
     "onboarding": {
       "title": "Create your own blog",
       "siteInfo": "Site Information",
@@ -226,8 +142,8 @@
       "usernamePlaceholder": "admin",
       "emailPlaceholder": "admin{'@'}example.com",
       "startTrial": "Start With Full Access",
-      "trialHint": "You'll instantly receive 25,000 free tokens. You will be redirected to completion.",
-      "trialHintToken": "You'll instantly receive 25,000 free AI tokens!",
+      "trialHint": "You'll instantly receive 5 free AI articles. You will be redirected to completion.",
+      "trialHintToken": "You'll instantly receive 5 free AI articles!",
       "stepLabel": "Step {current} of {total}",
       "domainStatus": {
         "checking": "Checking availability…",
@@ -276,7 +192,7 @@
           "tagline": "Grow with AI & built-in SEO",
           "description": "For creators who want to publish consistently and climb the rankings. AI writes, you decide.",
           "features": {
-            "tokens": "25,000 AI tokens per month",
+            "tokens": "20 AI articles per month, with optional add-ons",
             "seo": "Advanced SEO optimization",
             "import": "Import existing articles",
             "publishing": "Scheduling and automated publishing",
@@ -288,7 +204,7 @@
           "description": "Fully automated content on autopilot. Sentiment, image generation, priority indexing.",
           "highlight": "14 days free · no commitment",
           "features": {
-            "unlimited": "Unlimited article generation",
+            "unlimited": "30 AI articles per month, with optional add-ons",
             "sentiment": "AI Sentiment & image generation",
             "indexing": "Priority Google indexing",
             "branding": "Custom emoji & branding",
@@ -312,8 +228,113 @@
       "codeNotReceived": "Didn't get the code?"
     },
     "footer": {
-      "desc": "From research and source-backed articles through approval to publishing on your own site and distribution.",
       "rights": "All rights reserved."
+    },
+    "design": {
+      "nav": {
+        "features": "How it works",
+        "docs": "Documentation",
+        "theme": "Toggle light and dark mode",
+        "menu": "Open navigation",
+        "navigation": "Main navigation",
+        "skip": "Skip to content"
+      },
+      "hero": {
+        "title": "From a first idea",
+        "accent": "to a published story.",
+        "description": "Research, writing, review and publishing. Give your content one home, and your team more room for the work that matters.",
+        "cta": "Start for free",
+        "secondary": "Explore the platform",
+        "note": "No credit card. Your own space for content."
+      },
+      "preview": {
+        "label": "Workspace preview",
+        "workspace": "Your editorial workspace",
+        "research": "Research",
+        "write": "Article",
+        "publish": "Publish",
+        "saved": "Draft",
+        "category": "CONTENT STRATEGY",
+        "title": "Good content starts with the right question.",
+        "excerpt": "What do your readers really want to know? Start with their questions. Create a useful article that helps them find an answer.",
+        "paragraph": "Combine your experience with reliable sources. A clear structure and a thoughtful edit give every idea room to grow.",
+        "section": "From a question to a useful answer",
+        "sources": "Sources & context",
+        "source1": "Questions from your customers",
+        "source2": "Brand knowledge and voice",
+        "source3": "References to verify your facts",
+        "researchTitle": "Context first. Words second.",
+        "researchText": "Gather your sources, define your audience and give the article a clear direction.",
+        "publishTitle": "Ready for your readers.",
+        "publishText": "Review the language, pick a time and publish where your readers can find you.",
+        "review": "Editorial review",
+        "language": "Article language",
+        "languageValue": "English",
+        "channel": "Publishing channel",
+        "channelValue": "Your website",
+        "date": "Publication date",
+        "dateValue": "On your schedule",
+        "caption": "Illustrative workspace preview",
+        "flow": "Idea → draft → review → publish"
+      },
+      "workflow": {
+        "eyebrow": "ONE CONNECTED WORKFLOW",
+        "title": "More room for ideas. Less switching tools.",
+        "steps": [
+          {
+            "title": "Give your idea direction",
+            "text": "Build a brief, add your sources and use AI to help shape the first draft."
+          },
+          {
+            "title": "Make every detail count",
+            "text": "Refine the text in your editor, bring your team into the review and prepare translations."
+          },
+          {
+            "title": "Put your content out there",
+            "text": "Schedule a story on your own website or connect your publishing channels."
+          }
+        ]
+      },
+      "features": {
+        "eyebrow": "YOUR WORKSPACE. YOUR WAY.",
+        "title": "From the first draft to your own audience.",
+        "text": "Tools that work with your team. Together in one place, with your brand at the centre.",
+        "items": [
+          {
+            "title": "AI with context",
+            "text": "Work from sources and brand knowledge. Stay in control of the finished article.",
+            "icon": "mdi:creation-outline"
+          },
+          {
+            "title": "Room for the whole team",
+            "text": "Editorial approval, roles and translations keep collaboration clear.",
+            "icon": "mdi:account-group-outline"
+          },
+          {
+            "title": "Publish on your terms",
+            "text": "Your own website and domain, WordPress or an API. Reach your readers your way.",
+            "icon": "mdi:web"
+          }
+        ]
+      },
+      "publication": {
+        "eyebrow": "MAKE YOUR CONTENT FEEL AT HOME",
+        "brand": "Your journal",
+        "issue": "IDEAS & PERSPECTIVES",
+        "title": "Stories your readers come back to.",
+        "text": "Your experience. Your perspective. A place of your own, where good ideas become stories worth reading.",
+        "byline": "Your editorial team · 4 min read",
+        "note": "Your domain. Your identity."
+      },
+      "closing": {
+        "eyebrow": "START WITH ONE IDEA",
+        "title": "Your next story starts here.",
+        "text": "Create a home for your content. Build everything else as you grow."
+      },
+      "pricingEyebrow": "FOR INDIVIDUALS AND EDITORIAL TEAMS",
+      "compareEyebrow": "THE BIGGER PICTURE",
+      "footerLabel": "A home for your content.",
+      "allFeatures": "Included in this plan"
     }
   }
 }
