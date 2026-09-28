@@ -1,93 +1,3 @@
-<template>
-  <form @submit.prevent="handleSubmit">
-    <div class="space-y-8">
-      <div class="space-y-3">
-        <h3 class="text-2xl font-extrabold text-[#111] dark:text-white tracking-tight flex items-center gap-3">
-          <Icon name="mdi:email-check-outline" class="w-7 h-7 text-[#7E22CE] dark:text-[#D8B4FE]" />
-          {{ $t('landing.onboarding.verifyTitle') }}
-        </h3>
-        <p class="text-[1.05rem] text-[#555] dark:text-[#A1A1AA] font-medium leading-relaxed">
-          <i18n-t keypath="landing.onboarding.verifyDesc" tag="span">
-            <template #email>
-              <span class="font-black text-[#111] dark:text-white">{{ form.email }}</span>
-            </template>
-          </i18n-t>
-        </p>
-      </div>
-
-      <div class="space-y-6">
-        <div class="space-y-3">
-          <FormLabel :text="$t('common.auth.verificationCode')" class="font-bold text-[#111] dark:text-white" />
-          <input
-            ref="inputRef"
-            v-model="code"
-            inputmode="numeric"
-            autocomplete="one-time-code"
-            maxlength="6"
-            placeholder="······"
-            :aria-label="$t('common.auth.verificationCode')"
-            :disabled="codeVerifying || !challenge"
-            class="w-full bg-[#F0F0F0] dark:bg-[#27272A] border-transparent focus:bg-white dark:focus:bg-[#18181B] focus:ring-4 focus:ring-[#111] dark:focus:ring-white transition-all text-center text-3xl md:text-4xl font-black tracking-[0.5em] rounded-2xl py-5 disabled:opacity-60"
-            @input="onCodeInput"
-          />
-          <p v-if="codeError" class="text-sm font-bold text-[#DC2626] dark:text-[#FCA5A5] flex items-center gap-2">
-            <Icon name="mdi:alert-circle" class="w-4 h-4 shrink-0" />
-            {{ codeError }}
-          </p>
-        </div>
-
-        <NuxtTurnstile ref="turnstile" v-model="turnstileToken" :options="{ appearance: 'interaction-only' }" />
-
-        <div class="flex items-center justify-between text-sm">
-          <span class="text-[#888] dark:text-[#71717A] font-bold">
-            {{ $t('landing.onboarding.codeNotReceived') }}
-          </span>
-          <button
-            type="button"
-            :disabled="codeSending || resendCooldown > 0"
-            class="font-black uppercase tracking-wide text-[#7E22CE] dark:text-[#D8B4FE] hover:opacity-80 disabled:opacity-50 disabled:cursor-not-allowed transition-opacity flex items-center gap-2"
-            @click="requestCode()"
-          >
-            <Icon
-              :name="codeSending ? 'mdi:loading' : 'mdi:email-sync-outline'"
-              :class="['w-4 h-4', codeSending ? 'animate-rotate' : '']"
-            />
-            {{
-              resendCooldown > 0
-                ? $t('landing.onboarding.resendCodeIn', { seconds: resendCooldown })
-                : $t('landing.onboarding.resendCode')
-            }}
-          </button>
-        </div>
-      </div>
-
-      <div class="flex gap-4 mt-10">
-        <Button
-          type="button"
-          variant="neutral"
-          size="lg"
-          class="w-1/3 bg-[#F0F0F0] hover:bg-[#E5E5E5] dark:bg-[#27272A] dark:hover:bg-[#3F3F46] text-[#111] dark:text-white border-none rounded-2xl py-5 text-lg font-black transition-colors"
-          @click="goBack(4)"
-        >
-          {{ $t('common.actions.back') }}
-        </Button>
-        <Button
-          type="submit"
-          variant="primary"
-          size="lg"
-          :loading="codeVerifying"
-          :disabled="!canAdvanceStep4 || codeVerifying"
-          class="w-2/3 bg-[#111] hover:bg-[#222] dark:bg-white dark:hover:bg-[#F0F0F0] text-white dark:text-[#111] border-none rounded-2xl py-5 text-lg shadow-[0_6px_0_0_#F9A8D4] active:shadow-none active:translate-y-[6px] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-          icon="mdi:check-bold"
-          iconPosition="right"
-        >
-          <span class="font-black tracking-wide">{{ $t('landing.onboarding.verifyAndContinue') }}</span>
-        </Button>
-      </div>
-    </div>
-  </form>
-</template>
-
 <script setup lang="ts">
 definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
 
@@ -100,17 +10,25 @@ const {
   codeVerifying,
   resendCooldown,
   challenge,
-  canAdvanceStep4,
-  onCodeInput,
+  canVerify,
   sendCode,
-  goBack,
   verifyCode,
-  registerCodeInput,
+  goTo,
 } = useOnboarding()
 
-const localePath = useLocalePath()
 const route = useRoute()
 const router = useRouter()
+
+const digits = computed({
+  get: () => code.value.split('').map(Number),
+  set: (value: number[]) => {
+    code.value = value
+      .filter((digit) => Number.isInteger(digit))
+      .join('')
+      .slice(0, 6)
+    if (codeError.value) codeError.value = ''
+  },
+})
 
 // verify.vue owns the Turnstile widget. Tokens are single-use and expire, so we
 // pass a fresh one into sendCode and reset the widget afterwards. sendCode is
@@ -168,19 +86,80 @@ onMounted(() => {
 })
 
 const handleSubmit = async () => {
-  if (!canAdvanceStep4.value || codeVerifying.value) return
-  const ok = await verifyCode()
-  if (ok) navigateTo(localePath({ name: 'onboarding-summary' }))
+  if (store.verifiedToken) return goTo('summary')
+  if (!canVerify.value || codeVerifying.value) return
+  if (await verifyCode()) goTo('summary')
 }
 
 // Auto-submit as soon as a full 6-digit code is present — covers paste, OS
 // one-time-code autofill, and the emailed magic link. handleSubmit self-guards.
 watch(code, () => {
-  if (canAdvanceStep4.value && !codeVerifying.value) handleSubmit()
+  if (canVerify.value && !codeVerifying.value) handleSubmit()
 })
-
-const inputRef = useTemplateRef<HTMLInputElement>('inputRef')
-
-onMounted(() => registerCodeInput(inputRef.value))
-onBeforeUnmount(() => registerCodeInput(null))
 </script>
+<template>
+  <form class="onb-form" @submit.prevent="handleSubmit">
+    <div class="onb-heading">
+      <h1 id="onboarding-title">{{ $t('landing.onboarding.verify.title') }}</h1>
+      <i18n-t keypath="landing.onboarding.verify.description" tag="p">
+        <template #email>
+          <strong>{{ form.email }}</strong>
+        </template>
+      </i18n-t>
+    </div>
+
+    <UFormField :label="$t('landing.onboarding.verify.code')" :error="codeError || undefined">
+      <UPinInput
+        v-model="digits"
+        :length="6"
+        type="number"
+        otp
+        size="xl"
+        autofocus
+        :disabled="codeVerifying || !challenge"
+        :ui="{ root: 'tw:gap-2', base: 'tw:text-xl tw:font-bold' }"
+        :aria-label="$t('landing.onboarding.verify.code')"
+      />
+    </UFormField>
+
+    <NuxtTurnstile ref="turnstile" v-model="turnstileToken" :options="{ appearance: 'interaction-only' }" />
+
+    <div class="verify-resend">
+      <span>{{ $t('landing.onboarding.verify.notReceived') }}</span>
+      <UButton
+        type="button"
+        color="neutral"
+        variant="link"
+        :loading="codeSending"
+        :disabled="codeSending || resendCooldown > 0"
+        icon="mdi:email-sync-outline"
+        @click="requestCode()"
+      >
+        {{
+          resendCooldown > 0
+            ? $t('landing.onboarding.verify.resendIn', { seconds: resendCooldown })
+            : $t('landing.onboarding.verify.resend')
+        }}
+      </UButton>
+    </div>
+
+    <OnboardingActions
+      back="plan"
+      icon="mdi:check"
+      :label="$t('landing.onboarding.verify.submit')"
+      :disabled="!canVerify && !store.verifiedToken"
+      :loading="codeVerifying"
+    />
+  </form>
+</template>
+<style scoped>
+.verify-resend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  color: var(--landing-muted);
+  font-size: 13px;
+}
+</style>

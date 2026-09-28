@@ -1,44 +1,72 @@
+<script setup lang="ts">
+const { label } = defineProps<{ label: string }>()
+const modelValue = defineModel<ThemeKey>({ required: true })
+const colors = Object.entries(THEME_COLORS) as [ThemeKey, string][]
+</script>
 <template>
-  <div>
-    <FormLabel v-if="label" :text="label" />
-    <div class="flex flex-wrap gap-3">
-      <label v-for="color in colors || defaultColors" :key="color" class="relative cursor-pointer group">
-        <input v-model="modelValue" type="radio" :value="color" class="sr-only" />
-        <div
-          class="w-10 h-10 rounded-full border-2 transition-all duration-300 relative overflow-hidden"
-          :class="[
-            modelValue === color
-              ? 'border-white dark:border-slate-900 ring-2 ring-offset-2 ring-offset-white dark:ring-offset-slate-900 ring-indigo-500 scale-110 shadow-md'
-              : 'border-transparent hover:scale-110',
-          ]"
-          :style="{ backgroundColor: getHexColor(color) }"
-        ></div>
+  <fieldset class="onb-fieldset">
+    <legend class="onb-legend">{{ label }}</legend>
+    <div class="color-grid">
+      <label
+        v-for="[name, hex] in colors"
+        :key="name"
+        class="color-swatch"
+        :title="$t('landing.onboarding.colors.' + name)"
+        :style="{ '--swatch': hex }"
+      >
+        <input
+          v-model="modelValue"
+          type="radio"
+          name="brand-color"
+          :value="name"
+          :aria-label="$t('landing.onboarding.colors.' + name)"
+        />
+        <Icon name="mdi:check-bold" aria-hidden="true" />
       </label>
     </div>
-  </div>
+  </fieldset>
 </template>
-
-<script setup lang="ts">
-const { colors, label } = defineProps<{
-  label?: string
-  colors?: string[]
-}>()
-
-const modelValue = defineModel<string>()
-
-const defaultColors = ['blue', 'indigo', 'purple', 'pink', 'red', 'orange', 'green', 'teal']
-
-const getHexColor = (colorName: string) => {
-  const map: Record<string, string> = {
-    blue: '#3b82f6',
-    indigo: '#6366f1',
-    purple: '#a855f7',
-    pink: '#ec4899',
-    red: '#ef4444',
-    orange: '#f97316',
-    green: '#22c55e',
-    teal: '#14b8a6',
-  }
-  return map[colorName] || colorName
+<style scoped>
+.color-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(44px, 1fr));
+  gap: 10px;
 }
-</script>
+.color-swatch {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  min-height: 44px;
+  border-radius: var(--ui-radius);
+  background: var(--swatch);
+  color: #fff;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 1px rgb(15 23 42 / 12%);
+  transition: transform 0.15s;
+}
+.color-swatch:hover {
+  transform: scale(1.05);
+}
+.color-swatch input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+.color-swatch .iconify {
+  font-size: 20px;
+  visibility: hidden;
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 35%));
+}
+.color-swatch:has(input:checked) {
+  outline: 3px solid var(--landing-accent);
+  outline-offset: 2px;
+}
+.color-swatch:has(input:checked) .iconify {
+  visibility: visible;
+}
+.color-swatch:has(input:focus-visible) {
+  outline: 3px solid var(--landing-ink);
+  outline-offset: 2px;
+}
+</style>

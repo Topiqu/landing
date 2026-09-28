@@ -1,94 +1,94 @@
+<script setup lang="ts">
+definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
+
+const { form, fullDomainPreview, goTo } = useOnboarding()
+const brandColor = computed(() => THEME_COLORS[form.theme])
+const languageOptions = computed(() =>
+  CONTENT_LANGUAGES.map((value) => ({ value, label: $t('languages.' + value), code: value.toUpperCase() })),
+)
+</script>
 <template>
-  <form @submit.prevent="handleSubmit">
-    <div class="space-y-8">
-      <div class="space-y-3">
-        <h3 class="text-2xl font-extrabold text-[#111] dark:text-white tracking-tight">
-          {{ $t('landing.onboarding.designFocus') }}
-        </h3>
-        <p class="text-[1.05rem] text-[#555] dark:text-[#A1A1AA] font-medium leading-relaxed">
-          {{ $t('landing.onboarding.designFocusDesc') }}
-        </p>
-      </div>
-
-      <div class="space-y-8">
-        <div>
-          <FormLabel
-            :text="$t('landing.onboarding.mainLanguage')"
-            class="font-bold text-[#111] dark:text-white mb-3 block"
-          />
-          <div class="grid grid-cols-2 gap-4" role="radiogroup" :aria-label="$t('landing.onboarding.mainLanguage')">
-            <label
-              v-for="opt in languageOptions"
-              :key="opt.value"
-              class="relative flex items-center p-5 cursor-pointer rounded-2xl border-[3px] transition-all duration-200"
-              :class="
-                form.language === opt.value
-                  ? 'border-[#111] bg-[#111] text-white dark:border-white dark:bg-white dark:text-[#111] shadow-[4px_4px_0_0_#F9A8D4] -translate-y-1'
-                  : 'border-[#E5E5E5] dark:border-[#3F3F46] bg-transparent text-[#555] dark:text-[#A1A1AA] hover:border-[#CCC] dark:hover:border-[#52525B]'
-              "
-            >
-              <input v-model="form.language" type="radio" :value="opt.value" class="sr-only" />
-              <span
-                class="text-4xl mr-4"
-                :class="{ 'grayscale-0': form.language === opt.value, grayscale: form.language !== opt.value }"
-                >{{ opt.flag }}</span
-              >
-              <span class="font-black text-lg text-current">{{ opt.label }}</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="pt-2">
-          <FormColorPicker v-model="form.theme" :label="$t('landing.onboarding.mainColor')" class="font-bold" />
-        </div>
-
-        <FormField
-          v-model="form.focus"
-          icon="mdi:target"
-          :label="$t('landing.onboarding.siteFocus')"
-          :placeholder="$t('landing.onboarding.siteFocusPlaceholder')"
-          inputClass="w-full !bg-[#F0F0F0] dark:!bg-[#27272A] !border-transparent focus:!bg-white dark:focus:!bg-[#18181B] focus:!ring-4 focus:!ring-[#111] dark:focus:!ring-white transition-all text-lg font-bold rounded-2xl py-4"
-        />
-      </div>
-
-      <div class="flex gap-4 mt-10">
-        <Button
-          type="button"
-          variant="neutral"
-          size="lg"
-          class="w-1/3 bg-[#F0F0F0] hover:bg-[#E5E5E5] dark:bg-[#27272A] dark:hover:bg-[#3F3F46] text-[#111] dark:text-white border-none rounded-2xl py-5 text-lg font-black transition-colors"
-          @click="goBack(1)"
-        >
-          {{ $t('common.actions.back') }}
-        </Button>
-        <Button
-          type="submit"
-          variant="primary"
-          size="lg"
-          class="w-2/3 bg-[#111] hover:bg-[#222] dark:bg-white dark:hover:bg-[#F0F0F0] text-white dark:text-[#111] border-none rounded-2xl py-5 text-lg shadow-[0_6px_0_0_#F9A8D4] active:shadow-none active:translate-y-[6px] transition-all"
-          icon="mdi:arrow-right"
-          iconPosition="right"
-        >
-          <span class="font-black tracking-wide">{{ $t('landing.onboarding.continueToAccount') }}</span>
-        </Button>
-      </div>
+  <form class="onb-form" @submit.prevent="goTo('account')">
+    <div class="onb-heading">
+      <h1 id="onboarding-title">{{ $t('landing.onboarding.design.title') }}</h1>
+      <p>{{ $t('landing.onboarding.design.description') }}</p>
     </div>
+
+    <fieldset class="onb-fieldset">
+      <legend class="onb-legend">{{ $t('landing.onboarding.design.language') }}</legend>
+      <div class="onb-choice-grid">
+        <label v-for="option in languageOptions" :key="option.value" class="onb-choice">
+          <input v-model="form.language" type="radio" name="language" :value="option.value" />
+          <span class="onb-language-code" aria-hidden="true">{{ option.code }}</span>
+          <span class="onb-choice-text">
+            <strong>{{ option.label }}</strong>
+          </span>
+          <Icon name="mdi:check-circle" class="onb-choice-check" aria-hidden="true" />
+        </label>
+      </div>
+    </fieldset>
+
+    <FormColorPicker v-model="form.theme" :label="$t('landing.onboarding.design.color')" />
+
+    <div class="onb-brand-preview" :style="{ '--brand': brandColor }">
+      <span class="onb-brand-swatch" aria-hidden="true">{{ (form.siteName || 'T').charAt(0).toUpperCase() }}</span>
+      <span class="onb-choice-text">
+        <strong>{{ form.siteName }}</strong>
+        <small>{{ fullDomainPreview }} · {{ $t('languages.' + form.language) }}</small>
+      </span>
+      <span class="onb-brand-cta">{{ $t('landing.onboarding.design.preview') }}</span>
+    </div>
+
+    <OnboardingActions back="site" />
   </form>
 </template>
-
-<script setup lang="ts">
-definePageMeta({ layout: 'onboarding' })
-
-const localePath = useLocalePath()
-
-const handleSubmit = () => {
-  navigateTo(localePath({ name: 'onboarding-account' }))
+<style scoped>
+.onb-language-code {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 34px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--landing-bg);
+  border: 1px solid var(--landing-line);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
 }
-
-const { form, goBack } = useOnboarding()
-
-const languageOptions = computed(() => [
-  { value: 'cs', flag: '🇨🇿', label: $t('landing.onboarding.langCz') },
-  { value: 'en', flag: '🇬🇧', label: $t('landing.onboarding.langEn') },
-])
-</script>
+.onb-choice:has(input:checked) .onb-language-code {
+  border-color: var(--landing-accent);
+  color: var(--landing-accent);
+}
+.onb-brand-preview {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border: 1px solid var(--landing-line);
+  border-top: 4px solid var(--brand);
+  border-radius: var(--ui-radius);
+  background: var(--landing-bg);
+}
+.onb-brand-swatch {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--ui-radius);
+  background: var(--brand);
+  color: #fff;
+  font-weight: 750;
+}
+.onb-brand-cta {
+  margin-left: auto;
+  flex-shrink: 0;
+  padding: 6px 12px;
+  border-radius: var(--ui-radius);
+  background: var(--brand);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+}
+</style>

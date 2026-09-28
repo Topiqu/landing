@@ -2,23 +2,32 @@ import { z } from 'zod'
 import { signLandingRequest } from '~~/server/utils/landingAuth'
 import { verifyVerifiedToken } from '~~/server/utils/onboardingTokens'
 
-const schema = z.object({
-  siteName: z.string().min(1).max(255),
-  domain: z
-    .string()
-    .min(1)
-    .max(255)
-    .regex(/^[a-z0-9-]+$/),
-  domainType: z.enum(['SUBDOMAIN', 'CUSTOM']).default('SUBDOMAIN'),
-  theme: z.string().optional(),
-  focus: z.string().optional(),
-  language: z.enum(['cs', 'en']),
-  username: z.string().min(3).max(50),
-  email: z.string().email(),
-  password: z.string().min(8).max(124),
-  verifiedToken: z.string().min(1),
-  selectedPlan: z.enum(['PRO', 'PREMIUM']).nullable().optional(),
-})
+const SUBDOMAIN_RE = /^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?$/
+const CUSTOM_DOMAIN_RE = /^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/
+
+// Mirrors the platform's POST /api/onboarding/checkout body. `language` follows its
+// LANGUAGE_OPTIONS and `theme` its THEME_OPTIONS.
+const schema = z
+  .object({
+    siteName: z.string().trim().min(1).max(255),
+    domain: z.string().trim().toLowerCase().min(1).max(253),
+    domainType: z.enum(['SUBDOMAIN', 'CUSTOM']).default('SUBDOMAIN'),
+    theme: z.enum(Object.keys(THEME_COLORS) as [ThemeKey, ...ThemeKey[]]).optional(),
+    language: z.enum(CONTENT_LANGUAGES),
+    username: z.string().trim().min(3).max(50),
+    email: z.string().email(),
+    password: z.string().min(8).max(124),
+    verifiedToken: z.string().min(1),
+    selectedPlan: z.enum(['PRO', 'PREMIUM']).nullable().optional(),
+    billingInterval: z.enum(['month', 'year']).default('month'),
+  })
+  .refine(
+    ({ domain, domainType }) =>
+      domainType === 'SUBDOMAIN'
+        ? SUBDOMAIN_RE.test(domain)
+        : CUSTOM_DOMAIN_RE.test(domain) && !domain.endsWith('.topiqu.com'),
+    { path: ['domain'], message: 'Invalid domain' },
+  )
 
 export default defineEventHandler(async (event) => {
   const body = await readValidatedBody(event, schema.parse)

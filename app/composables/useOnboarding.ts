@@ -1,50 +1,42 @@
 export type DomainStatus = 'idle' | 'checking' | 'available' | 'taken' | 'invalid' | 'tooShort' | 'reserved' | 'empty'
+export type DomainType = 'SUBDOMAIN' | 'CUSTOM'
+export type SelectedPlan = 'PRO' | 'PREMIUM' | null
+export type SelectedBillingInterval = 'month' | 'year'
 
 export interface OnboardingForm {
   siteName: string
   domain: string
-  domainType: string
-  language: string
-  theme: string
-  focus: string
+  domainType: DomainType
+  language: ContentLanguage
+  theme: ThemeKey
   username: string
   email: string
   password: string
   passwordConfirm: string
   acceptTos: boolean
   website: string
-  selectedPlan: 'PRO' | 'PREMIUM' | null
+  selectedPlan: SelectedPlan
+  billingInterval: SelectedBillingInterval
 }
 
-export const TOTAL_STEPS = 6
+export const ONBOARDING_STEPS = ['site', 'design', 'account', 'plan', 'verify', 'summary'] as const
+export type OnboardingStep = (typeof ONBOARDING_STEPS)[number]
+export const TOTAL_STEPS = ONBOARDING_STEPS.length
 
-const STEP_ROUTE_NAMES = {
-  1: 'onboarding-site',
-  2: 'onboarding-design',
-  3: 'onboarding-account',
-  4: 'onboarding-plan',
-  5: 'onboarding-verify',
-  6: 'onboarding-summary',
-} as const
+export const stepRouteName = (step: OnboardingStep) => `onboarding-${step}` as const
 
 export const useOnboarding = () => {
   const store = useOnboardingStore()
   const localePath = useLocalePath()
   const refs = storeToRefs(store)
 
-  const close = () => navigateTo(localePath('/'))
-  const goBack = (to: number) => {
-    const name = STEP_ROUTE_NAMES[to as keyof typeof STEP_ROUTE_NAMES]
-    if (name) navigateTo(localePath({ name }))
-  }
+  const goTo = (step: OnboardingStep) => navigateTo(localePath({ name: stepRouteName(step) }))
 
   return {
     form: store.form,
     loading: refs.loading,
     userEditedDomain: refs.userEditedDomain,
     domainStatus: refs.domainStatus,
-    domainStatusIcon: refs.domainStatusIcon,
-    domainStatusColor: refs.domainStatusColor,
     fullDomainPreview: refs.fullDomainPreview,
     challenge: refs.challenge,
     verifiedToken: refs.verifiedToken,
@@ -53,17 +45,15 @@ export const useOnboarding = () => {
     codeVerifying: refs.codeVerifying,
     codeError: refs.codeError,
     resendCooldown: refs.resendCooldown,
-    canAdvanceStep1: refs.canAdvanceStep1,
-    canAdvanceStep3: refs.canAdvanceStep3,
-    canAdvanceStep4: refs.canAdvanceStep4,
-    summaryRows: refs.summaryRows,
-    totalSteps: TOTAL_STEPS,
+    passwordStrong: refs.passwordStrong,
+    canAdvanceSite: refs.canAdvanceSite,
+    canAdvanceAccount: refs.canAdvanceAccount,
+    canVerify: refs.canVerify,
+    trialEndsOn: refs.trialEndsOn,
+    setDomainType: store.setDomainType,
     sendCode: store.sendCode,
     verifyCode: store.verifyCode,
     submit: store.submit,
-    onCodeInput: store.onCodeInput,
-    registerCodeInput: store.registerCodeInput,
-    close,
-    goBack,
+    goTo,
   }
 }

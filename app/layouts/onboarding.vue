@@ -1,102 +1,83 @@
-<template>
-  <div class="min-h-screen bg-[#EBE9E4] dark:bg-[#0C0C0C] flex flex-col">
-    <StatusBar />
-
-    <header class="flex items-center justify-between px-6 py-5 max-w-2xl mx-auto w-full">
-      <BrandLogo />
-
-      <div class="flex items-center gap-4">
-        <span class="text-xs font-black uppercase tracking-widest text-[#888] dark:text-[#71717A]">
-          {{ $t('landing.onboarding.stepLabel', { current: currentStep, total: TOTAL_STEPS }) }}
-        </span>
-        <Button
-          square
-          borderless
-          size="sm"
-          variant="transparent"
-          icon="mdi:close"
-          :aria="$t('common.actions.close')"
-          :title="$t('common.actions.close')"
-          class="text-[#888] hover:text-[#111] dark:hover:text-white"
-          @click="navigateTo(localePath('/'))"
-        />
-      </div>
-    </header>
-
-    <div
-      class="flex gap-1.5 px-6 mb-8 max-w-2xl mx-auto w-full"
-      role="progressbar"
-      :aria-valuenow="currentStep"
-      :aria-valuemin="1"
-      :aria-valuemax="TOTAL_STEPS"
-    >
-      <div
-        v-for="s in TOTAL_STEPS"
-        :key="s"
-        class="h-1.5 flex-1 rounded-full transition-colors duration-500"
-        :class="currentStep >= s ? 'bg-[#111] dark:bg-white' : 'bg-[#D4D4D8] dark:bg-[#27272A]'"
-      ></div>
-    </div>
-
-    <main class="flex-1 flex flex-col items-center px-4 pb-12">
-      <div
-        class="bg-[#FAFAFA] dark:bg-[#18181B] rounded-[2.5rem] w-full max-w-2xl shadow-[0_24px_48px_-12px_rgba(0,0,0,0.15)] dark:shadow-[0_24px_48px_-12px_rgba(0,0,0,0.8)] overflow-hidden"
-      >
-        <div class="p-8 md:p-12">
-          <div class="flex items-center gap-4 mb-8">
-            <div
-              class="w-12 h-12 bg-[#D8B4FE] text-[#111] rounded-2xl flex items-center justify-center shrink-0 shadow-[4px_4px_0_0_rgba(17,17,17,1)] dark:shadow-[4px_4px_0_0_rgba(255,255,255,1)] transform -rotate-3"
-            >
-              <Icon name="mdi:rocket-launch" class="w-6 h-6" />
-            </div>
-            <h1
-              id="onboarding-title"
-              class="text-3xl md:text-4xl font-black text-[#111] dark:text-white tracking-tighter leading-tight"
-            >
-              {{ $t('landing.onboarding.title') }}
-            </h1>
-          </div>
-
-          <FormField
-            v-model="form.website"
-            label="Website"
-            type="text"
-            name="website"
-            aria-hidden="true"
-            tabindex="-1"
-            autocomplete="off"
-            class="absolute -left-[9999px] top-auto w-px h-px overflow-hidden"
-          />
-          <slot />
-        </div>
-      </div>
-    </main>
-  </div>
-</template>
-
 <script setup lang="ts">
-import { TOTAL_STEPS } from '~/composables/useOnboarding'
-
 useSeoMeta({ robots: 'noindex, nofollow' })
 
 const store = useOnboardingStore()
-const { form } = store
 const localePath = useLocalePath()
 const route = useRoute()
+const { t } = useI18n()
 
-const ROUTE_NAME_TO_STEP: Record<string, number> = {
-  'onboarding-site': 1,
-  'onboarding-design': 2,
-  'onboarding-account': 3,
-  'onboarding-plan': 4,
-  'onboarding-verify': 5,
-  'onboarding-summary': 6,
-}
-
-const currentStep = computed(() => {
+const totalSteps = TOTAL_STEPS
+const stepPath = (step: OnboardingStep) => localePath({ name: stepRouteName(step) })
+const currentIndex = computed(() => {
   const name = String(route.name ?? '').split('___')[0] ?? ''
-  return ROUTE_NAME_TO_STEP[name] ?? 1
+  return Math.max(
+    0,
+    ONBOARDING_STEPS.findIndex((step) => stepRouteName(step) === name),
+  )
 })
+const steps = computed(() =>
+  ONBOARDING_STEPS.map((step, index) => ({
+    step,
+    index,
+    label: t('landing.onboarding.steps.' + step),
+    state: index < currentIndex.value ? 'done' : index === currentIndex.value ? 'current' : 'upcoming',
+  })),
+)
 
+useHead({ title: () => `${steps.value[currentIndex.value]?.label} · ${t('landing.onboarding.title')} · Topiqu` })
 onKeyStroke('Escape', () => navigateTo(localePath('/')))
 </script>
+<template>
+  <div class="onb-shell">
+    <header class="onb-header">
+      <div class="onb-header-inner">
+        <BrandLogo />
+        <UButton
+          :to="localePath('/')"
+          color="neutral"
+          variant="ghost"
+          icon="mdi:close"
+          square
+          :aria-label="$t('landing.onboarding.close')"
+        />
+      </div>
+    </header>
+    <main class="onb-main" aria-labelledby="onboarding-title">
+      <div class="onb-frame">
+        <nav class="onb-steps" :aria-label="$t('landing.onboarding.stepsLabel')">
+          <p class="onb-step-count">
+            <span>{{ $t('landing.onboarding.title') }}</span>
+            <span>{{ $t('landing.onboarding.stepLabel', { current: currentIndex + 1, total: totalSteps }) }}</span>
+          </p>
+          <div class="onb-progress" aria-hidden="true">
+            <span :style="{ width: ((currentIndex + 1) / totalSteps) * 100 + '%' }" />
+          </div>
+          <ol>
+            <li v-for="item in steps" :key="item.step" :data-state="item.state">
+              <NuxtLink v-if="item.state === 'done'" :to="stepPath(item.step)" class="onb-step">
+                <span class="onb-step-dot"><Icon name="mdi:check" aria-hidden="true" /></span>
+                <span class="onb-step-label">{{ item.label }}</span>
+              </NuxtLink>
+              <span v-else class="onb-step" :aria-current="item.state === 'current' ? 'step' : undefined">
+                <span class="onb-step-dot">{{ item.index + 1 }}</span>
+                <span class="onb-step-label">{{ item.label }}</span>
+              </span>
+            </li>
+          </ol>
+        </nav>
+        <section class="onb-card">
+          <slot />
+        </section>
+      </div>
+    </main>
+    <input
+      v-model="store.form.website"
+      class="onb-honeypot"
+      type="text"
+      name="website"
+      tabindex="-1"
+      autocomplete="off"
+      aria-hidden="true"
+    />
+  </div>
+</template>

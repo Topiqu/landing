@@ -5,13 +5,14 @@ import { issueChallenge } from '~~/server/utils/onboardingTokens'
 
 const schema = z.object({
   email: z.string().email(),
-  language: z.enum(['cs', 'en']).optional(),
+  // Interface locale of the landing: picks the email copy and the magic-link route.
+  locale: z.enum(['cs', 'en']).default('en'),
   website: z.string().optional(),
   turnstileToken: z.string().optional(),
 })
 
 export default defineEventHandler(async (event) => {
-  const { email, language, website, turnstileToken } = await readValidatedBody(event, schema.parse)
+  const { email, locale, website, turnstileToken } = await readValidatedBody(event, schema.parse)
 
   if (website && website.trim() !== '') {
     return { challenge: 'ok' }
@@ -27,6 +28,8 @@ export default defineEventHandler(async (event) => {
     }
   }
 
+  // TODO(platform): there is no read-only email check on the platform yet (`/api/users/check-email`
+  // never existed), so this fails open and a registered email is only rejected at checkout.
   if (await isEmailRegistered(email)) {
     throw createError({ statusCode: 400, message: 'This email is already registered.' })
   }
@@ -38,10 +41,10 @@ export default defineEventHandler(async (event) => {
   // One-click magic link: opens the verify step pre-filled and auto-submits.
   // Carries the challenge because it isn't shared across tabs/persisted.
   const origin = getRequestURL(event).origin
-  const verifyPath = language === 'cs' ? '/cs/onboarding/overeni' : '/en/onboarding/verify'
+  const verifyPath = locale === 'cs' ? '/cs/onboarding/overeni' : '/en/onboarding/verify'
   const link = `${origin}${verifyPath}?code=${code}&token=${encodeURIComponent(challenge)}`
 
-  await sendVerificationCode({ to: email, code, name, language, link })
+  await sendVerificationCode({ to: email, code, name, locale, link })
 
   return { challenge }
 })
@@ -52,6 +55,7 @@ async function isEmailRegistered(email: string): Promise<boolean> {
   try {
     const res = await $fetch<{ exists: boolean }>(`${platformUrl}/api/users/check-email`, {
       query: { email },
+      timeout: 5000,
     })
     return res.exists === true
   } catch {

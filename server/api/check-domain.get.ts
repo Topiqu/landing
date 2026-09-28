@@ -24,40 +24,49 @@ const SUBDOMAIN_RE = /^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?$/
 const CUSTOM_DOMAIN_RE = /^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/
 
 type Reason = 'empty' | 'tooShort' | 'invalid' | 'reserved' | 'taken'
+type Result = { ok: true; fullDomain: string } | { ok: false; reason: Reason }
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (event): Promise<Result> => {
   const query = getQuery(event)
   const raw = String(query.domain ?? '')
     .trim()
     .toLowerCase()
+    .replace(/^https?:\/\//, '')
+    .replace(/\/.*$/, '')
+    .replace(/\.$/, '')
   const type = query.type === 'CUSTOM' ? 'CUSTOM' : 'SUBDOMAIN'
 
-  if (!raw) return { ok: false as const, reason: 'empty' as Reason }
+  if (!raw) return { ok: false, reason: 'empty' }
 
+  // Format is checked here so typing gets instant feedback; availability is the platform's call.
   if (type === 'SUBDOMAIN') {
-    if (raw.length < 3) return { ok: false as const, reason: 'tooShort' as Reason }
-    if (!SUBDOMAIN_RE.test(raw)) return { ok: false as const, reason: 'invalid' as Reason }
-    if (RESERVED.has(raw)) return { ok: false as const, reason: 'reserved' as Reason }
-    const fullDomain = `${raw}.topiqu.com`
-    if (await isDomainTaken(fullDomain)) return { ok: false as const, reason: 'taken' as Reason }
-    return { ok: true as const, fullDomain }
+    if (raw.length < 3) return { ok: false, reason: 'tooShort' }
+    if (!SUBDOMAIN_RE.test(raw)) return { ok: false, reason: 'invalid' }
+    if (RESERVED.has(raw)) return { ok: false, reason: 'reserved' }
+  } else {
+    if (raw.length > 253 || !CUSTOM_DOMAIN_RE.test(raw)) return { ok: false, reason: 'invalid' }
+    if (raw === 'topiqu.com' || raw.endsWith('.topiqu.com')) return { ok: false, reason: 'reserved' }
   }
 
-  if (!CUSTOM_DOMAIN_RE.test(raw)) return { ok: false as const, reason: 'invalid' as Reason }
-  if (raw.endsWith('.topiqu.com')) return { ok: false as const, reason: 'reserved' as Reason }
-  if (await isDomainTaken(raw)) return { ok: false as const, reason: 'taken' as Reason }
-  return { ok: true as const, fullDomain: raw }
+  return (
+    (await platformDomainCheck(raw, type)) ?? {
+      ok: true,
+      fullDomain: type === 'SUBDOMAIN' ? `${raw}.topiqu.com` : raw,
+    }
+  )
 })
 
-async function isDomainTaken(domain: string): Promise<boolean> {
+// Same contract as the platform's GET /api/onboarding/check-domain. Fails open: the platform
+// re-checks availability when the account is created, so an outage only delays the error.
+async function platformDomainCheck(domain: string, type: 'SUBDOMAIN' | 'CUSTOM'): Promise<Result | null> {
   const platformUrl = (useRuntimeConfig() as any).platformApiUrl
-  if (!platformUrl) return false
+  if (!platformUrl) return null
   try {
-    const res = await $fetch<{ taken: boolean }>(`${platformUrl}/api/domains/check`, {
-      query: { domain },
+    return await $fetch<Result>(`${platformUrl}/api/onboarding/check-domain`, {
+      query: { domain, type },
+      timeout: 5000,
     })
-    return res.taken === true
   } catch {
-    return false
+    return null
   }
 }

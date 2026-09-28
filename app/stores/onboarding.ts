@@ -4,28 +4,38 @@ import { zxcvbn } from '@zxcvbn-ts/core'
 
 import type { DomainStatus, OnboardingForm } from '~/composables/useOnboarding'
 
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+
+export const normalizeDomain = (value: string) =>
+  value
+    .trim()
+    .toLowerCase()
+    .replace(/^https?:\/\//, '')
+    .replace(/\/.*$/, '')
+    .replace(/\.$/, '')
+
 export const useOnboardingStore = defineStore(
   'onboarding',
   () => {
     // i18n and toast are resolved lazily instead of at store-setup time: a
     // top-level useI18n()/useToast() throws "Must be called at the top of a
     // setup function" when this store is first instantiated from route
-    // middleware (onboarding-guard) during SSR. Consumers resolve them where a
-    // valid Nuxt context exists — inside computeds (component render) and at the
-    // very top of each action (before any await, so the context isn't lost).
-    const $t = (key: string, named?: Record<string, unknown>): string =>
-      (useNuxtApp().$i18n as { t: (k: string, n?: Record<string, unknown>) => string }).t(key, named)
-
-    // For async actions: capture i18n/toast synchronously (before the first
-    // await) so they can be used after awaits without losing the Nuxt context.
+    // middleware (onboarding-guard) during SSR. Async actions capture them
+    // before their first await so the Nuxt context is not lost.
     const captureI18nToast = () => {
-      const i18n = useNuxtApp().$i18n as { t: (k: string, n?: Record<string, unknown>) => string }
-      return { $t: (k: string, n?: Record<string, unknown>) => i18n.t(k, n), toast: useLegacyToast() }
+      const i18n = useNuxtApp().$i18n as {
+        t: (k: string, n?: Record<string, unknown>) => string
+        locale: { value: string }
+      }
+      return {
+        $t: (k: string, n?: Record<string, unknown>) => i18n.t(k, n),
+        locale: i18n.locale.value,
+        toast: useLegacyToast(),
+      }
     }
 
     const loading = shallowRef(false)
     const userEditedDomain = shallowRef(false)
-    let codeInputEl: HTMLInputElement | null = null
 
     const challenge = shallowRef<string | null>(null)
     const verifiedToken = shallowRef<string | null>(null)
@@ -41,8 +51,7 @@ export const useOnboardingStore = defineStore(
       domain: '',
       domainType: 'SUBDOMAIN',
       language: 'en',
-      theme: 'blue',
-      focus: '',
+      theme: 'indigo',
       username: '',
       email: '',
       password: '',
@@ -50,12 +59,13 @@ export const useOnboardingStore = defineStore(
       acceptTos: false,
       website: '',
       selectedPlan: null,
+      billingInterval: 'month',
     })
 
     const domainStatus = shallowRef<DomainStatus>('idle')
 
     const fullDomainPreview = computed(() =>
-      form.domainType === 'SUBDOMAIN' ? `${form.domain}.topiqu.com` : form.domain,
+      form.domainType === 'SUBDOMAIN' ? `${form.domain}.topiqu.com` : normalizeDomain(form.domain),
     )
 
     watch(
@@ -67,30 +77,23 @@ export const useOnboardingStore = defineStore(
       },
     )
 
-    watch(
-      () => form.domainType,
-      (newType) => {
-        if (newType === 'SUBDOMAIN') {
-          userEditedDomain.value = false
-          form.domain = form.siteName ? slugify(form.siteName, { lower: true, strict: true }) : ''
-        } else {
-          form.domain = ''
-        }
-      },
-    )
+    // An action rather than a watcher: restoring persisted state also changes domainType and
+    // must not wipe the restored domain.
+    const setDomainType = (type: OnboardingForm['domainType']) => {
+      if (type === form.domainType) return
+      form.domainType = type
+      userEditedDomain.value = false
+      form.domain = type === 'SUBDOMAIN' && form.siteName ? slugify(form.siteName, { lower: true, strict: true }) : ''
+    }
 
     const runDomainCheck = useDebounceFn(async (domain: string, type: string) => {
       if (form.domain !== domain || form.domainType !== type) return
-      if (!domain) {
-        domainStatus.value = 'idle'
-        return
-      }
       try {
         const res = await $fetch<{ ok: boolean; reason?: DomainStatus }>('/api/check-domain', {
-          query: { domain, type },
+          query: { domain: type === 'CUSTOM' ? normalizeDomain(domain) : domain, type },
         })
         if (form.domain !== domain || form.domainType !== type) return
-        domainStatus.value = res.ok ? 'available' : ((res.reason as DomainStatus) ?? 'invalid')
+        domainStatus.value = res.ok ? 'available' : (res.reason ?? 'invalid')
       } catch {
         domainStatus.value = 'idle'
       }
@@ -98,71 +101,29 @@ export const useOnboardingStore = defineStore(
 
     watch(
       () => [form.domain, form.domainType] as const,
-      ([d, type]) => {
-        if (!d) {
+      ([domain, type]) => {
+        if (!domain) {
           domainStatus.value = 'idle'
           return
         }
         domainStatus.value = 'checking'
-        runDomainCheck(d, type)
+        runDomainCheck(domain, type)
       },
     )
 
-    const DOMAIN_STATUS_ICON: Record<DomainStatus, string> = {
-      idle: 'mdi:alert-circle',
-      checking: 'mdi:loading',
-      available: 'mdi:check-circle',
-      taken: 'mdi:alert-circle',
-      invalid: 'mdi:alert-circle',
-      tooShort: 'mdi:alert-circle',
-      reserved: 'mdi:alert-circle',
-      empty: 'mdi:alert-circle',
-    }
+    const passwordStrong = computed(() => !!form.password && zxcvbn(form.password).score >= 3)
 
-    const DOMAIN_STATUS_COLOR = {
-      available: 'text-[#16A34A] dark:text-[#86EFAC]',
-      checking: 'text-[#888] dark:text-[#71717A]',
-      error: 'text-[#DC2626] dark:text-[#FCA5A5]',
-    }
-
-    const domainStatusIcon = computed(() => DOMAIN_STATUS_ICON[domainStatus.value])
-    const domainStatusColor = computed(() => {
-      if (domainStatus.value === 'available') return DOMAIN_STATUS_COLOR.available
-      if (domainStatus.value === 'checking') return DOMAIN_STATUS_COLOR.checking
-      return DOMAIN_STATUS_COLOR.error
-    })
-
-    const summaryRows = computed(() => [
-      { label: $t('landing.onboarding.summarySite'), value: form.siteName, icon: 'mdi:web' },
-      { label: $t('landing.onboarding.summaryDomain'), value: fullDomainPreview.value, icon: 'mdi:link' },
-      {
-        label: $t('landing.onboarding.summaryLanguage'),
-        value:
-          form.language === 'cs' ? `🇨🇿 ${$t('landing.onboarding.langCz')}` : `🇬🇧 ${$t('landing.onboarding.langEn')}`,
-        icon: 'mdi:translate',
-      },
-      { label: $t('landing.onboarding.summaryColor'), value: form.theme, icon: 'mdi:palette', swatch: form.theme },
-      {
-        label: $t('landing.onboarding.summaryFocus'),
-        value: form.focus || $t('landing.onboarding.focusNotSet'),
-        icon: 'mdi:target',
-      },
-      { label: $t('landing.onboarding.summaryAdmin'), value: form.username, icon: 'mdi:account' },
-      { label: $t('landing.onboarding.summaryEmail'), value: form.email, icon: 'mdi:email' },
-      {
-        label: $t('landing.onboarding.summaryPlan'),
-        value: form.selectedPlan
-          ? $t(`landing.pricing.plans.${form.selectedPlan.toLowerCase()}.name`)
-          : $t('landing.onboarding.planFreeAfterTrial'),
-        icon: 'mdi:crown-outline',
-      },
-    ])
-
-    const canAdvanceStep1 = computed(() => !!form.siteName && !!form.domain && domainStatus.value === 'available')
-    const canAdvanceStep3 = computed(
-      () => !!form.username && !!form.email && !!form.password && form.password === form.passwordConfirm,
+    const canAdvanceSite = computed(() => !!form.siteName.trim() && domainStatus.value === 'available')
+    const canAdvanceAccount = computed(
+      () =>
+        form.username.trim().length >= 3 &&
+        EMAIL_RE.test(form.email) &&
+        passwordStrong.value &&
+        form.password === form.passwordConfirm,
     )
-    const canAdvanceStep4 = computed(() => !!challenge.value && code.value.length === 6)
+    const canVerify = computed(() => !!challenge.value && code.value.length === 6)
+
+    const trialEndsOn = computed(() => new Date(Date.now() + TRIAL_DAYS * 86_400_000))
 
     watch(
       () => form.email,
@@ -190,42 +151,24 @@ export const useOnboardingStore = defineStore(
       if (cooldownTimer) clearInterval(cooldownTimer)
     })
 
-    const onCodeInput = (ev: Event) => {
-      const target = ev.target as HTMLInputElement
-      const digitsOnly = target.value.replace(/\D/g, '').slice(0, 6)
-      if (digitsOnly !== target.value) target.value = digitsOnly
-      code.value = digitsOnly
-      if (codeError.value) codeError.value = ''
-    }
-
-    const registerCodeInput = (el: HTMLInputElement | null) => {
-      codeInputEl = el
-    }
-
     // `turnstileToken` is supplied by the caller (verify.vue owns the
     // <NuxtTurnstile> widget) — it must be a fresh, single-use token.
     const sendCode = async (turnstileToken = '') => {
       if (codeSending.value || resendCooldown.value > 0) return
       if (!form.email) return
-      const { $t, toast } = captureI18nToast()
+      const { $t, locale, toast } = captureI18nToast()
       codeSending.value = true
       codeError.value = ''
       try {
         const res = await $fetch<{ challenge: string }>('/api/send-code', {
           method: 'POST',
-          body: {
-            email: form.email,
-            language: form.language,
-            website: form.website,
-            turnstileToken,
-          },
+          body: { email: form.email, locale, website: form.website, turnstileToken },
         })
         challenge.value = res.challenge
         code.value = ''
         verifiedToken.value = null
         startResendCooldown(60)
         toast.success({ message: $t('common.auth.verificationCodeSent') })
-        nextTick(() => codeInputEl?.focus())
       } catch (error: any) {
         toast.error({ message: error.data?.message || $t('common.auth.sendCodeFailed') })
       } finally {
@@ -234,8 +177,7 @@ export const useOnboardingStore = defineStore(
     }
 
     const verifyCode = async (): Promise<boolean> => {
-      if (codeVerifying.value) return false
-      if (!challenge.value || code.value.length !== 6) return false
+      if (codeVerifying.value || !canVerify.value) return false
       const { $t } = captureI18nToast()
       codeVerifying.value = true
       codeError.value = ''
@@ -266,14 +208,10 @@ export const useOnboardingStore = defineStore(
       if (loading.value) return
       const { $t, toast } = captureI18nToast()
       if (!form.acceptTos) {
-        toast.error({ message: $t('landing.onboarding.tosRequired') })
+        toast.error({ message: $t('landing.onboarding.summary.tosRequired') })
         return
       }
-      if (!form.username || !form.email || !form.password || form.password !== form.passwordConfirm) {
-        toast.error({ message: $t('common.auth.passwordsMismatch') })
-        return
-      }
-      if (zxcvbn(form.password).score < 3) {
+      if (!canAdvanceAccount.value) {
         toast.error({ message: $t('common.passwordSuggestions.weak') })
         return
       }
@@ -286,22 +224,30 @@ export const useOnboardingStore = defineStore(
         const res = await $fetch<{ url?: string }>('/api/checkout', {
           method: 'POST',
           body: {
-            siteName: form.siteName,
-            domain: form.domain,
+            siteName: form.siteName.trim(),
+            domain: form.domainType === 'CUSTOM' ? normalizeDomain(form.domain) : form.domain,
             domainType: form.domainType,
             language: form.language,
             theme: form.theme,
-            focus: form.focus,
-            username: form.username,
+            username: form.username.trim(),
             email: form.email,
             password: form.password,
             verifiedToken: verifiedToken.value,
             selectedPlan: form.selectedPlan,
+            billingInterval: form.billingInterval,
           },
         })
         if (res.url) window.location.href = res.url
       } catch (error: any) {
-        toast.error({ message: error.data?.message || $t('common.errors.general') })
+        const annualUnavailable =
+          form.selectedPlan &&
+          form.billingInterval === 'year' &&
+          (error.statusCode === 503 || error.data?.statusCode === 503)
+        toast.error({
+          message: annualUnavailable
+            ? $t('landing.onboarding.plan.annualUnavailable')
+            : error.data?.message || $t('common.errors.general'),
+        })
       } finally {
         loading.value = false
       }
@@ -312,8 +258,6 @@ export const useOnboardingStore = defineStore(
       loading,
       userEditedDomain,
       domainStatus,
-      domainStatusIcon,
-      domainStatusColor,
       fullDomainPreview,
       challenge,
       verifiedToken,
@@ -322,16 +266,32 @@ export const useOnboardingStore = defineStore(
       codeVerifying,
       codeError,
       resendCooldown,
-      canAdvanceStep1,
-      canAdvanceStep3,
-      canAdvanceStep4,
-      summaryRows,
+      passwordStrong,
+      canAdvanceSite,
+      canAdvanceAccount,
+      canVerify,
+      trialEndsOn,
+      setDomainType,
       sendCode,
       verifyCode,
       submit,
-      onCodeInput,
-      registerCodeInput,
     }
   },
-  { persist: { pick: ['form'] } },
+  {
+    // Passwords never touch localStorage; a reload sends the visitor back to the account step.
+    persist: {
+      pick: [
+        'form.siteName',
+        'form.domain',
+        'form.domainType',
+        'form.language',
+        'form.theme',
+        'form.username',
+        'form.email',
+        'form.selectedPlan',
+        'form.billingInterval',
+        'userEditedDomain',
+      ],
+    },
+  },
 )

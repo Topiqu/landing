@@ -4,7 +4,7 @@ interface SendVerificationCodeOptions {
   to: string
   code: string
   name: string
-  language?: string
+  locale?: 'cs' | 'en'
   link?: string
 }
 
@@ -31,10 +31,33 @@ function getSesClient(): SESv2Client | undefined {
   return sesClient
 }
 
-export async function sendVerificationCode({ to, code, name, link }: SendVerificationCodeOptions) {
+const COPY = {
+  en: {
+    subject: (code: string) => `${code} is your Topiqu verification code`,
+    greeting: (name: string) => `Hello${name ? ` ${name}` : ''},`,
+    intro: 'Your Topiqu verification code is:',
+    button: 'Verify automatically',
+    manual: 'or enter the code above manually.',
+    footer: 'This code expires in 15 minutes. If you did not request it, you can safely ignore this email.',
+  },
+  cs: {
+    subject: (code: string) => `${code} je váš ověřovací kód pro Topiqu`,
+    greeting: (name: string) => `Dobrý den${name ? `, ${name}` : ''},`,
+    intro: 'Váš ověřovací kód pro Topiqu:',
+    button: 'Ověřit automaticky',
+    manual: 'nebo kód výše zadejte ručně.',
+    footer: 'Kód platí 15 minut. Pokud jste o něj nežádali, můžete tento e-mail ignorovat.',
+  },
+} as const
+
+const escapeHtml = (value: string) =>
+  value.replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!)
+
+export async function sendVerificationCode({ to, code, name, locale = 'en', link }: SendVerificationCodeOptions) {
   const config = useRuntimeConfig() as any
   const from = config.emailFrom || 'Topiqu <noreply@topiqu.com>'
   const client = getSesClient()
+  const copy = COPY[locale]
 
   if (!client) {
     if (import.meta.dev) {
@@ -51,24 +74,24 @@ export async function sendVerificationCode({ to, code, name, link }: SendVerific
         Destination: { ToAddresses: [to] },
         Content: {
           Simple: {
-            Subject: { Data: `${code} is your Topiqu verification code`, Charset: 'UTF-8' },
+            Subject: { Data: copy.subject(code), Charset: 'UTF-8' },
             Body: {
               Html: {
                 Charset: 'UTF-8',
                 Data: `
-        <div style="font-family:sans-serif;max-width:480px;margin:0 auto;padding:32px">
-          <h2 style="margin-bottom:8px">Hello${name ? ` ${name}` : ''},</h2>
-          <p style="color:#555">Your Topiqu verification code is:</p>
-          <div style="font-size:36px;font-weight:900;letter-spacing:0.5em;background:#f4f4f5;padding:24px;border-radius:12px;text-align:center;margin:24px 0">${code}</div>
+        <div style="font-family:Manrope,'Segoe UI',Arial,sans-serif;max-width:480px;margin:0 auto;padding:32px;color:#0f172a">
+          <h2 style="margin:0 0 8px;font-size:22px">${escapeHtml(copy.greeting(name))}</h2>
+          <p style="color:#475569;margin:0">${copy.intro}</p>
+          <div style="font-size:34px;font-weight:800;letter-spacing:0.4em;background:#eef2ff;color:#312e81;padding:22px;border-radius:14px;text-align:center;margin:24px 0">${code}</div>
           ${
             link
               ? `<p style="text-align:center;margin:24px 0">
-          <a href="${link}" style="display:inline-block;background:#111;color:#fff;text-decoration:none;font-weight:700;padding:14px 28px;border-radius:12px">Verify automatically &rarr;</a>
+          <a href="${escapeHtml(link)}" style="display:inline-block;background:#4338ca;color:#fff;text-decoration:none;font-weight:700;padding:13px 26px;border-radius:10px">${copy.button} &rarr;</a>
         </p>
-        <p style="color:#888;font-size:13px;text-align:center">or enter the code above manually.</p>`
+        <p style="color:#64748b;font-size:13px;text-align:center">${copy.manual}</p>`
               : ''
           }
-          <p style="color:#888;font-size:13px">This code expires in 15 minutes. If you didn't request this, you can safely ignore this email.</p>
+          <p style="color:#64748b;font-size:13px">${copy.footer}</p>
         </div>
       `,
               },
