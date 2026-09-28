@@ -3,6 +3,18 @@ import presetWind3 from '@unocss/preset-wind3'
 
 export default defineConfig({
   presets: [presetWind3()],
+  theme: {
+    colors: {
+      brand: {
+        page: '#f4f1e9',
+        surface: '#fbfaf6',
+        ink: '#171714',
+        muted: '#68675f',
+        line: '#d8d4c9',
+        accent: '#5145cd',
+      },
+    },
+  },
   safelist: [
     'from-blue-600',
     'to-indigo-900',

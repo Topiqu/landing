@@ -22,12 +22,16 @@ const ogImageUrl = 'https://topiqu.com/brand/topiqu-mark.png?v=20260910'
 useSeoMeta({
   title: () => 'Topiqu',
   description: () =>
-    'Topiqu is an AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
+    locale.value === 'cs'
+      ? 'Topiqu propojuje firemní znalosti, rešerši, tvorbu, kontrolu, publikaci a měření obsahu v jednom workflow.'
+      : 'Topiqu connects company knowledge, research, writing, review, publishing, and measurement in one workflow.',
   keywords: () => 'Topiqu, AI content operations, content platform, SEO, AEO, GEO',
   author: () => 'Topiqu',
   ogTitle: () => 'Topiqu',
   ogDescription: () =>
-    'Topiqu is an AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
+    locale.value === 'cs'
+      ? 'Od vašich znalostí k obsahu, který je vidět.'
+      : 'From your knowledge to content people find.',
   ogLocale: () => (locale.value === 'cs' ? 'cs_CZ' : 'en_US'),
   ogImage: ogImageUrl,
   ogImageWidth: 271,
