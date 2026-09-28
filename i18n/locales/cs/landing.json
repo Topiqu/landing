@@ -1,231 +1,253 @@
 {
   "landing": {
-    "purpose": {
-      "title": "Co je Topiqu",
-      "description": "Topiqu je platforma pro řízení obsahového provozu s AI. Firmám pomáhá dělat rešerši, vytvářet a kontrolovat články, překládat je, publikovat na vlastním webu a průběžně zlepšovat jejich výkon.",
-      "gscTitle": "Propojení s Google Search Console",
-      "gscDescription": "Pokud tuto volitelnou integraci připojíte, Topiqu získá přístup pouze pro čtení k údajům o kliknutích, zobrazeních, CTR a průměrných pozicích. Použije je k reportování výkonu a označení možných příležitostí; nezaručuje výsledky vyhledávání a nemůže měnit nastavení vašeho webu v Google.",
-      "privacyLink": "Jak s daty pracujeme"
-    },
     "pricing": {
       "title": "Ceník",
-      "subtitle": "Transparentní ceny. Žádné skryté poplatky. Vyberte si úroveň, která odpovídá vaší ambici.",
-      "month": "/měs",
+      "subtitle": "Každý nový blog začíná {days}denní zkušební verzí a {articles} AI články. Při volbě Free nepotřebujete kartu.",
+      "month": "/měs.",
+      "year": "/rok",
+      "intervalLabel": "Frekvence platby",
+      "interval": {
+        "month": "Měsíčně",
+        "year": "Ročně"
+      },
+      "billedYearly": "Účtováno {price} jednou ročně",
+      "articlePacks": {
+        "title": "Další články podle potřeby",
+        "description": "Balíčky můžete dokoupit v aplikaci. Dokoupené články nepropadají.",
+        "articles": "{count} článků",
+        "unitPrice": "{price} za článek"
+      },
       "plans": {
         "free": {
           "badge": "Start",
           "name": "Free",
-          "desc": "Ideální pro začátečníky a hobby projekty.",
-          "price": "$0",
+          "desc": "Pište a publikujte na vlastním blogu, bez závazků.",
           "features": {
-            "manual_writing": "Manuální psaní článků",
-            "subdomain": "Subdoména zdarma",
-            "no_ai": "Bez AI generování",
-            "basic_analytics": "Základní analytika",
             "editor": "Editor s médii, tabulkami a anketami",
-            "community": "Komentáře a čtenářský engagement",
-            "no_card": "Bez závazku a platební karty"
+            "subdomain": "Adresa .topiqu.com zdarma, až 3 blogy",
+            "optimization": "Skóre optimalizace článků",
+            "library": "Knihovna médií s evidencí práv",
+            "community": "Komentáře, reakce a základní analytika",
+            "no_ai": "Bez psaní pomocí AI",
+            "ads": "Na blogu se zobrazuje reklama Topiqu"
           },
           "cta": "Začít zdarma"
         },
         "pro": {
           "badge": "Creator",
           "name": "Pro",
-          "desc": "Pro tvůrce, kteří chtějí růst s AI.",
-          "price": "$39",
+          "desc": "Psaní s AI z vašich vlastních znalostí, na vlastní doméně.",
           "features": {
-            "ai_tokens": "20 AI článků každý měsíc",
-            "seo": "Pokročilá SEO optimalizace",
-            "import": "Import existujících článků",
-            "everything_free": "Vše z Free plánu",
-            "sources": "Zdrojované články a citace",
-            "scheduling": "Plánování a automatická publikace",
-            "translations": "Vícejazyčné verze článků"
+            "no_ads": "Vše z Free, bez reklam",
+            "articles": "{count} AI článků každý měsíc",
+            "knowledge": "Znalostní báze až s {count} zdroji",
+            "review": "Kontrola faktů a redakční revize",
+            "translations": "Překlady do EN, CS, DE a FR",
+            "scheduling": "Plánování, série a automatická publikace",
+            "domain": "Vlastní doména, písma a přechody",
+            "integrations": "WordPress plugin, API a import"
           },
           "cta": "Vybrat Pro"
         },
         "premium": {
-          "badge": "Most Popular",
+          "badge": "Nejoblíbenější",
           "name": "Premium",
-          "desc": "Maximální výkon a kompletní automatizace.",
-          "price": "$79",
+          "desc": "Víte, kde jste v Googlu a zda vás citují odpovědi OpenAI — a umíte s tím pracovat.",
           "features": {
-            "articles": "30 AI článků každý měsíc",
-            "sentiment": "AI Sentiment & Obrázky",
-            "indexing": "Prioritní indexace & Zdrojování",
-            "branding": "Vlastní Emojis & Branding",
-            "support": "Prioritní podpora 24/7",
-            "gsc": "Google Search Console Intelligence",
-            "workflow": "Redakční workflow a schvalování",
-            "distribution": "API, WordPress a sociální distribuce"
+            "everything": "Vše z Pro",
+            "articles": "{count} AI článků každý měsíc",
+            "visibility": "Sledování citací v odpovědích OpenAI",
+            "gsc": "Přehledy ze Search Console a SEO autopilot",
+            "knowledge": "Znalostní báze až s {count} zdroji",
+            "sentiment": "Analýza nálady čtenářů",
+            "indexing": "Prioritní indexace a zdrojování",
+            "emoji": "Vlastní emoji reakce",
+            "support": "Prioritní podpora 24/7"
           },
           "cta": "Vybrat Premium"
         },
         "custom": {
           "badge": "Enterprise",
           "name": "Custom",
-          "desc": "White-label řešení bez jakýchkoliv limitů.",
-          "price": "Na míru",
+          "desc": "Pro vydavatele s více značkami, týmy nebo specifickými procesy.",
+          "price": "Na vyžádání",
           "features": {
-            "domain": "Vlastní doména (Apex)",
-            "whitelabel": "Plný White-Label (bez brandingu)",
-            "banners": "Integrace a workflow na míru",
-            "unlimited_ai": "Individuální počet AI článků",
+            "everything": "Vše z Premium",
+            "whitelabel": "White-label bez značky Topiqu",
+            "articles": "Individuální počet AI článků",
+            "knowledge": "Znalostní báze až s {count} zdroji",
             "multisite": "Více webů, značek a týmů",
-            "onboarding": "Individuální onboarding a migrace",
-            "sla": "SLA a prioritní technická podpora"
+            "domain": "Nastavení hlavní domény",
+            "onboarding": "Onboarding a migrace na míru",
+            "sla": "SLA a dedikovaná podpora"
           },
           "cta": "Kontaktovat"
         }
       }
     },
     "faq": {
-      "badge": "Podpora & Nápověda",
-      "title": "Často kladené otázky",
-      "subtitle": "Jasné odpovědi k tvorbě, překladům a publikování obsahu s Topiqu.",
-      "cta_title": "Stále máte otázky?",
-      "cta_desc": "Napište nám a rádi vám pomůžeme.",
+      "badge": "Podpora a nápověda",
+      "title": "Časté otázky",
+      "subtitle": "Jasné odpovědi ke zkušební verzi, AI článkům, zdrojům a publikování s Topiqu.",
       "cta_button": "Kontaktovat podporu",
       "items": [
         {
-          "q": "Co mohu v Topiqu vytvářet?",
-          "a": "Články můžete psát a upravovat ručně, nechat si připravit koncept pomocí AI, přidávat média, tabulky a ankety a spravovat více jazykových verzí v jednom prostředí."
+          "q": "Jak funguje zkušební verze?",
+          "a": "Každý nový blog začíná 14denní zkušební verzí a 5 AI články. Když budete pokračovat ve Free, vyzkoušíte si funkce Premium bez karty. Pokud při registraci zvolíte Pro nebo Premium, Stripe si vyžádá kartu, ale první platbu strhne až po 14 dnech — do té doby můžete kdykoli zrušit."
         },
         {
-          "q": "Mohu využívat Topiqu na vlastní doméně?",
-          "a": "Ano. Podporované tarify umožňují připojit ověřenou vlastní doménu. Topiqu vás provede nastavením DNS záznamu a před aktivací ověří její vlastnictví."
+          "q": "Co se počítá jako AI článek?",
+          "a": "Každý článek, který za vás napíše AI, spotřebuje jeden článek z vašeho limitu: 20 měsíčně v Pro a 30 v Premium. Překlady, kontrola faktů, vylepšení zadání, analýza nálady ani návrhy ze Search Console články nespotřebovávají. Dokoupené články nepropadají; ceny balíčků najdete v ceníku."
+        },
+        {
+          "q": "Odkud AI bere fakta?",
+          "a": "Topiqu kombinuje živou rešerši na webu s vaší znalostní bází — poznámkami, soubory PDF a Word, webovými stránkami nebo celým sitemapem. Soukromé zdroje ovlivní text, ale nikdy se veřejně necitují; citovat lze jen zdroje, které označíte jako veřejné. Před publikací revize ověří tvrzení proti zdrojům a panel kontroly faktů umožní kterýkoli článek zkontrolovat znovu."
         },
         {
           "q": "Publikuje AI obsah automaticky?",
-          "a": "Pouze pokud automatické publikování sami nastavíte. Jinak můžete každý koncept vytvořený AI před zveřejněním zkontrolovat a upravit a zapnout označení AI obsahu."
+          "a": "Pouze pokud automatické publikování sami zapnete. Jinak každý koncept od AI počká, až ho zkontrolujete a upravíte, a u článku můžete zobrazit označení AI obsahu."
         },
         {
-          "q": "Jak dostanu obsah z Topiqu na svůj web?",
-          "a": "Můžete použít web hostovaný v Topiqu, připojit vlastní doménu, synchronizovat články pluginem Topiqu Sync pro WordPress nebo je načítat přes External API."
+          "q": "Jak zjistím, jestli mě odpovědi citují?",
+          "a": "V Premium sestaví Topiqu otázky z vašich dotazů ve Search Console, článků a komentářů. Pravidelně kontroluje, zda vás odpovědi OpenAI citují a kde se objevuje konkurence. Z otázek bez vaší citace vzniknou náměty na články. Jde o vzorek vybraných otázek, ne o záznam soukromých konverzací."
         },
         {
-          "q": "Umí Topiqu překládat články?",
-          "a": "Ano. Topiqu podporuje více jazykových verzí, překlady s pomocí AI a jejich kontrolu. Pokud překlad existuje, čtenáře nasměruje na správnou URL dané jazykové verze."
+          "q": "Mohu články z Topiqu publikovat na svém stávajícím webu?",
+          "a": "Ano. Použijte publikaci hostovanou v Topiqu, připojte vlastní doménu, synchronizujte články do WordPressu pluginem Topiqu Sync nebo je načítejte přes External API."
         }
       ]
     },
     "onboarding": {
-      "title": "Vytvořte si vlastní blog",
-      "siteInfo": "Informace o webu",
-      "siteInfoDesc": "Začněme tím nejdůležitějším – jak se bude váš projekt jmenovat a kde ho najdeme.",
-      "siteName": "Název webu",
-      "siteNamePlaceholder": "Můj skvělý blog",
-      "subdomain": "Subdoména",
-      "subdomainPlaceholder": "muj-blog",
-      "subdomainHint": "Pouze malá písmena, čísla a pomlčky.",
-      "domainPlaceholder": "my-awesome-site",
-      "customDomain": "Vlastní doména",
-      "customDomainHint": "Zadejte vaši vlastní doménu. Následně si do DNS vaší domény přidejte CNAME záznam směrující na app.topiqu.com",
-      "customDomainExample": "vlastni.cz",
-      "domainType": "Typ domény",
-      "domainTypeOptions": {
-        "SUBDOMAIN": "Subdoména (.topiqu.com)",
-        "CUSTOM": "Vlastní doména / CNAME"
-      },
-      "designFocus": "Design & Zaměření",
-      "designFocusDesc": "Přizpůsobte si platformu svému brandu a definujte hlavní téma.",
-      "mainLanguage": "Hlavní jazyk obsahu",
-      "langCz": "Čeština",
-      "langEn": "English",
-      "mainColor": "Hlavní barva brandu",
-      "siteFocus": "Hlavní zaměření webu (volitelné)",
-      "siteFocusPlaceholder": "např. Technologie, Životní styl...",
-      "continueToAccount": "Pokračovat",
-      "language": "Jazyk webu",
-      "adminInfo": "Účet správce",
-      "adminInfoDesc": "Už jsme skoro u konce. Vytvořte si přístupové údaje do administrace.",
-      "usernamePlaceholder": "admin",
-      "emailPlaceholder": "admin{'@'}example.com",
-      "startTrial": "Začít s plným přístupem",
-      "trialHint": "Získáte 5 AI článků zdarma. Budete přesměrováni k dokončení.",
-      "trialHintToken": "Získáte 5 AI článků zdarma!",
+      "title": "Vytvořte si blog",
+      "close": "Zavřít a vrátit se na úvodní stránku",
       "stepLabel": "Krok {current} z {total}",
+      "stepsLabel": "Kroky registrace",
+      "steps": {
+        "site": "Blog",
+        "design": "Vzhled",
+        "account": "Účet",
+        "plan": "Tarif",
+        "verify": "Ověření",
+        "summary": "Přehled"
+      },
+      "site": {
+        "title": "Pojmenujte svůj blog",
+        "description": "Vyberte název a adresu. Vlastní doménu můžete připojit i později.",
+        "name": "Název blogu",
+        "namePlaceholder": "Firemní magazín",
+        "domainType": "Adresa",
+        "subdomainTitle": "Subdoména Topiqu",
+        "subdomainText": "Adresa zdarma na topiqu.com",
+        "customTitle": "Vlastní doména",
+        "customText": "Součást tarifů Pro a Premium",
+        "subdomain": "Subdoména",
+        "subdomainPlaceholder": "firemni-magazin",
+        "customDomain": "Doména",
+        "customDomainPlaceholder": "blog.mojefirma.cz",
+        "dnsTitle": "Doménu připojíte po registraci",
+        "dnsText": "Topiqu vám ukáže DNS záznam, který je potřeba přidat, a před aktivací ověří, že doména patří vám."
+      },
       "domainStatus": {
-        "checking": "Ověřuji dostupnost…",
-        "available": "Doména je volná",
-        "taken": "Tato doména je již obsazená",
-        "invalid": "Neplatný formát. Pouze a-z, 0-9 a pomlčky.",
-        "tooShort": "Minimálně 3 znaky",
+        "checking": "Ověřujeme dostupnost…",
+        "available": "Adresa je volná",
+        "taken": "Tato adresa je už obsazená",
+        "invalid": "Použijte jen a–z, 0–9 a pomlčky.",
+        "invalidCustom": "Zadejte doménu, například blog.mojefirma.cz.",
+        "tooShort": "Použijte alespoň 3 znaky",
         "reserved": "Tento název je rezervovaný",
         "empty": ""
       },
-      "summary": "Skoro hotovo!",
-      "summaryDesc": "Zkontrolujte si vše, než vám vytvoříme účet.",
-      "summarySite": "Název webu",
-      "summaryDomain": "Doména",
-      "summaryLanguage": "Jazyk obsahu",
-      "summaryColor": "Barva značky",
-      "summaryFocus": "Zaměření",
-      "summaryAdmin": "Uživatelské jméno správce",
-      "summaryEmail": "Email správce",
-      "summaryPlan": "Tarif po triálu",
-      "choosePlan": "Vyber si plán",
-      "choosePlanDesc": "14 dní máš PREMIUM zdarma. Po triálu pokračuješ na vybraném plánu – přepnout můžeš kdykoli.",
-      "planSelected": "Vybráno",
-      "planFreeAfterTrial": "Free (po triálu)",
-      "continueWithFree": "Pokračovat s Free",
-      "continueWithPlan": "Pokračovat s {plan}",
-      "planTrialBanner": "14 dní PREMIUM zdarma · bez karty · zrušíš kdykoli",
-      "planNavPrev": "Předchozí plán",
-      "planNavNext": "Další plán",
-      "planNavLabel": "Procházet plány",
-      "planActiveAnnounce": "Vybraný plán: {plan}",
-      "planGoTo": "Přejít na plán {plan}",
-      "plans": {
+      "design": {
+        "title": "Jazyk a barva",
+        "description": "Vyberte jazyk, ve kterém budete psát, a barvu své značky. Články můžete později přeložit i do dalších jazyků.",
+        "language": "Jazyk psaní",
+        "color": "Barva značky",
+        "preview": "Náhled"
+      },
+      "account": {
+        "title": "Váš administrátorský účet",
+        "description": "Těmito údaji se budete přihlašovat do administrace blogu.",
+        "username": "Uživatelské jméno",
+        "usernamePlaceholder": "jana",
+        "email": "Pracovní e-mail",
+        "emailPlaceholder": "jana{'@'}firma.cz",
+        "password": "Heslo",
+        "passwordConfirm": "Heslo znovu",
+        "passwordMismatch": "Hesla se neshodují",
+        "usernameHint": "3 až 50 znaků"
+      },
+      "plan": {
+        "title": "Vyberte, co bude po zkušební verzi",
+        "description": "Váš blog začíná {days}denní zkušební verzí a {articles} AI články. Tarif můžete kdykoli změnit v nastavení.",
+        "trialBadge": "{days} dní zdarma",
+        "selected": "Vybráno",
+        "freeNote": "{days} dní si vyzkoušíte Premium a pak budete pokračovat ve Free. Karta není potřeba.",
+        "paidNote": "Po registraci si Stripe vyžádá kartu. První platba proběhne {date} a do té doby můžete kdykoli zrušit.",
+        "annualUnavailable": "Roční platba je momentálně nedostupná. Zkuste to později nebo zvolte měsíční tarif.",
         "free": {
-          "tagline": "Pro hobby a první kroky",
-          "description": "Publikuj manuálně, bez závazku. Ideální způsob, jak si platformu osahat.",
-          "features": {
-            "editor": "Manuální editor článků",
-            "subdomain": "Subdoména zdarma (.topiqu.com)",
-            "analytics": "Základní analytika a komentáře",
-            "community": "Přístup ke komunitním tématům",
-            "noCard": "Bez platby a bez karty"
-          }
+          "tagline": "Ruční psaní a publikace",
+          "features": ["Editor, knihovna médií a ankety", "Adresa .topiqu.com zdarma", "Skóre optimalizace a analytika"]
         },
         "pro": {
-          "tagline": "Růst s AI a vlastním SEO",
-          "description": "Pro tvůrce, kteří chtějí pravidelně publikovat a stoupat ve vyhledávači. AI píše, ty rozhoduješ.",
-          "features": {
-            "tokens": "20 AI článků měsíčně, další lze dokoupit",
-            "seo": "Pokročilá SEO optimalizace",
-            "import": "Import existujících článků",
-            "publishing": "Plánování a automatická publikace",
-            "support": "E-mailová podpora do 24 h"
-          }
+          "tagline": "Psaní s AI z vašich znalostí",
+          "features": ["{articles} AI článků měsíčně", "Znalostní báze a kontrola faktů", "Překlady a vlastní doména"]
         },
         "premium": {
-          "tagline": "Maximum AI a automatizace",
-          "description": "Plně automatizovaný obsah na autopilotu. Sentiment, generování obrázků i prioritní indexace.",
-          "highlight": "14 dní zdarma · bez závazku",
-          "features": {
-            "unlimited": "30 AI článků měsíčně, další lze dokoupit",
-            "sentiment": "AI Sentiment a generování obrázků",
-            "indexing": "Prioritní indexace na Google",
-            "branding": "Vlastní emoji a branding",
-            "support": "Prioritní podpora 24/7"
-          }
+          "tagline": "Růst v Googlu a viditelnost v odpovědích",
+          "features": [
+            "{articles} AI článků měsíčně",
+            "Viditelnost a přehled citací v OpenAI",
+            "SEO autopilot se Search Console"
+          ]
         }
       },
-      "focusNotSet": "—",
-      "acceptTos": "Souhlasím s {tos} a {privacy}.",
-      "acceptTosLabel": "obchodními podmínkami",
-      "acceptPrivacyLabel": "zásadami ochrany osobních údajů",
-      "tosRequired": "Pro pokračování musíte souhlasit s podmínkami",
-      "continueToSummary": "Pokračovat ke shrnutí",
-      "createAccount": "Vytvořit účet a pokračovat k platbě",
-      "continueToVerification": "Pokračovat k ověření",
-      "verifyTitle": "Ověření e-mailu",
-      "verifyDesc": "Poslali jsme 6místný kód na {email}. Zadej ho níže pro potvrzení.",
-      "verifyAndContinue": "Ověřit a pokračovat",
-      "resendCode": "Poslat nový kód",
-      "resendCodeIn": "Nový kód za {seconds}s",
-      "codeNotReceived": "Nedorazil kód?"
+      "verify": {
+        "title": "Ověřte svůj e-mail",
+        "description": "Na {email} jsme poslali šestimístný kód. Zadejte ho níže, nebo použijte odkaz v e-mailu.",
+        "code": "Ověřovací kód",
+        "notReceived": "Kód nedorazil?",
+        "resend": "Poslat nový kód",
+        "resendIn": "Nový kód za {seconds} s",
+        "submit": "Ověřit a pokračovat"
+      },
+      "summary": {
+        "title": "Zkontrolujte a vytvořte",
+        "description": "Projděte si údaje. Kromě e-mailu můžete vše později změnit v nastavení.",
+        "site": "Blog",
+        "domain": "Adresa",
+        "language": "Jazyk",
+        "color": "Barva",
+        "admin": "Administrátor",
+        "email": "E-mail",
+        "plan": "Po zkušební verzi",
+        "edit": "Upravit",
+        "acceptTos": "Souhlasím s {tos} a {privacy}.",
+        "tos": "obchodními podmínkami",
+        "privacy": "zásadami ochrany soukromí",
+        "tosRequired": "Pro pokračování přijměte podmínky",
+        "createFree": "Vytvořit blog",
+        "createPaid": "Vytvořit blog a přidat kartu",
+        "trialHint": "Hned po vytvoření dostanete {articles} AI článků."
+      },
+      "back": "Zpět",
+      "continue": "Pokračovat",
+      "colors": {
+        "indigo": "Indigová",
+        "blue": "Modrá",
+        "sky": "Nebeská",
+        "cyan": "Azurová",
+        "teal": "Petrolejová",
+        "green": "Zelená",
+        "lime": "Limetková",
+        "yellow": "Žlutá",
+        "amber": "Jantarová",
+        "orange": "Oranžová",
+        "red": "Červená",
+        "pink": "Růžová",
+        "purple": "Purpurová",
+        "violet": "Fialová",
+        "gray": "Šedá"
+      }
     },
     "footer": {
       "rights": "Všechna práva vyhrazena."
@@ -233,108 +255,213 @@
     "design": {
       "nav": {
         "features": "Jak to funguje",
+        "capabilities": "Proč Topiqu",
         "docs": "Dokumentace",
-        "theme": "Přepnout světlý a tmavý vzhled",
+        "changelog": "Novinky",
+        "theme": "Přepnout světlý a tmavý režim",
         "menu": "Otevřít navigaci",
         "navigation": "Hlavní navigace",
         "skip": "Přejít na obsah"
       },
       "hero": {
-        "title": "Od nápadu",
-        "accent": "k publikovanému článku.",
-        "description": "Rešerše, psaní, schvalování i publikace. Dejte svému obsahu jedno místo a svému týmu víc prostoru pro to podstatné.",
+        "kicker": "AI redakce, která nekončí publikací",
+        "title": "Od vašich znalostí",
+        "accent": "k obsahu, který je vidět.",
+        "description": "Topiqu zjistí, o čem má smysl psát. Z vašich podkladů a aktuálních zdrojů připraví článek, ověří jeho tvrzení a publikuje ho. Pak sleduje výsledky v Googlu a citace v OpenAI a ukáže, co zlepšit dál.",
         "cta": "Začít zdarma",
-        "secondary": "Prozkoumat platformu",
-        "note": "Bez platební karty. S vlastním prostorem pro obsah."
+        "secondary": "Jak to funguje",
+        "note": "{days} dní zdarma a {articles} AI článků. Bez platební karty."
       },
       "preview": {
         "label": "Ukázka pracovního prostředí",
         "workspace": "Vaše redakce",
-        "research": "Rešerše",
-        "write": "Článek",
-        "publish": "Publikace",
-        "saved": "Koncept",
-        "category": "OBSAHOVÁ STRATEGIE",
-        "title": "Dobrý obsah začíná správnou otázkou.",
-        "excerpt": "Co vaše čtenáře skutečně zajímá? Začněte jejich otázkami. Vytvořte užitečný článek, který jim pomůže najít odpověď.",
-        "paragraph": "Spojte vlastní zkušenost s ověřenými zdroji. Jasná struktura a pečlivá redakce dají každému nápadu prostor vyniknout.",
-        "section": "Od otázky k užitečné odpovědi",
-        "sources": "Zdroje a podklady",
-        "source1": "Otázky vašich zákazníků",
-        "source2": "Znalosti a hlas značky",
-        "source3": "Odkazy pro ověření informací",
-        "researchTitle": "Nejdřív kontext. Potom slova.",
-        "researchText": "Shromážděte podklady, určete publikum a dejte článku jasný směr.",
-        "publishTitle": "Připraveno pro vaše čtenáře.",
-        "publishText": "Zkontrolujte jazyk, vyberte termín a publikujte tam, kde vás čtenáři najdou.",
-        "review": "Redakční kontrola",
-        "language": "Jazyk článku",
-        "languageValue": "Čeština",
-        "channel": "Publikační kanál",
-        "channelValue": "Váš web",
-        "date": "Termín vydání",
-        "dateValue": "Podle vašeho plánu",
+        "tabs": {
+          "knowledge": "Znalosti",
+          "write": "Článek",
+          "check": "Kontrola faktů",
+          "visibility": "Viditelnost"
+        },
+        "knowledge": {
+          "category": "ZNALOSTNÍ BÁZE",
+          "title": "Kontext, který AI opravdu použije.",
+          "text": "Kdykoli Topiqu píše, vybere z vašich zdrojů pasáže, které k tématu patří.",
+          "sources": [
+            {
+              "name": "Ceník 2026.pdf",
+              "meta": "Zaindexováno · 42 pasáží"
+            },
+            {
+              "name": "Poznámky k produktu",
+              "meta": "Jen jako podklad"
+            },
+            {
+              "name": "firma.cz/sitemap.xml",
+              "meta": "18 stránek · Veřejný zdroj"
+            }
+          ],
+          "used": "V tomto článku použity 3 zdroje"
+        },
+        "write": {
+          "saved": "Koncept",
+          "category": "OBSAHOVÁ STRATEGIE",
+          "title": "Jak si vybrat tarif podle objemu obsahu",
+          "excerpt": "Pro má 20 AI článků měsíčně, Premium 30. Srovnání vychází z aktuálního ceníku, ne z obecného zadání.",
+          "section": "Co když měsíční počet nestačí?",
+          "paragraph": "Další články lze dokoupit v balíčku a nepropadají. Před vydáním koncept znovu projde kontrolou tvrzení.",
+          "score": "Optimalizace",
+          "scoreValue": "92/100"
+        },
+        "check": {
+          "category": "KONTROLA FAKTŮ",
+          "title": "Každé tvrzení má svůj podklad.",
+          "summary": "3 tvrzení · 2 podložená · 1 k opravě",
+          "claims": [
+            {
+              "text": "Tarif Pro obsahuje 20 AI článků měsíčně.",
+              "status": "Podloženo",
+              "tone": "ok"
+            },
+            {
+              "text": "Dokoupené články nepropadají.",
+              "status": "Podloženo",
+              "tone": "ok"
+            },
+            {
+              "text": "Nastavení vždy trvá méně než deset minut.",
+              "status": "Chybí zdroj",
+              "tone": "warn"
+            }
+          ]
+        },
+        "visibility": {
+          "category": "VIDITELNOST",
+          "title": "Sledujte citace svého obsahu.",
+          "description": "U vybraných otázek zjistíte, jestli odpovědi OpenAI odkazují na vaše stránky.",
+          "provider": "Aktuálně sledovaný zdroj",
+          "items": {
+            "questions": {
+              "title": "Vybrané otázky",
+              "text": "Z vyhledávání a vašich témat"
+            },
+            "citations": {
+              "title": "Odkazované stránky",
+              "text": "Vaše zdroje i ostatní citace"
+            },
+            "opportunities": {
+              "title": "Další příležitosti",
+              "text": "Náměty pro nový nebo upravený článek"
+            }
+          }
+        },
         "caption": "Ilustrační ukázka pracovního prostředí",
-        "flow": "Nápad → koncept → kontrola → publikace"
+        "flow": "Znalosti → rešerše → kontrola → publikace → další krok"
       },
       "workflow": {
-        "eyebrow": "JEDEN SOUVISLÝ POSTUP",
-        "title": "Víc prostoru pro obsah. Méně přepínání.",
+        "eyebrow": "JEDNA PIPELINE",
+        "title": "Od zdroje až po další příležitost.",
         "steps": [
           {
-            "title": "Dejte nápadu směr",
-            "text": "Připravte zadání, přidejte zdroje a využijte AI při tvorbě prvního konceptu."
+            "title": "Znalosti firmy",
+            "text": "Z vašich podkladů vybere informace relevantní k tématu."
           },
           {
-            "title": "Dolaďte každý detail",
-            "text": "Upravte text v editoru, zapojte tým do kontroly a připravte jazykové verze."
+            "title": "Poptávka",
+            "text": "Z dotazů v Googlu a otázek čtenářů zjistí, co lidé hledají."
           },
           {
-            "title": "Dostaňte obsah ven",
-            "text": "Naplánujte vydání na vlastním webu nebo propojte své publikační kanály."
+            "title": "Rešerše",
+            "text": "Doplní aktuální zdroje a připraví podklady pro článek."
+          },
+          {
+            "title": "Psaní a kontrola",
+            "text": "Napíše koncept, ověří tvrzení a sporná místa vrátí k opravě."
+          },
+          {
+            "title": "Publikace",
+            "text": "Článek vydá na vaší publikaci a zpřístupní ho WordPressu či přes API."
+          },
+          {
+            "title": "Měření",
+            "text": "Výsledky v Googlu a citace v OpenAI ukážou, co upravit nebo napsat dál."
           }
         ]
       },
-      "features": {
-        "eyebrow": "VAŠE REDAKCE. VAŠE PRAVIDLA.",
-        "title": "Od prvního konceptu až po vlastní publikum.",
-        "text": "Nástroje, které drží krok s vaším týmem. Na jednom místě a ve vzhledu vaší značky.",
+      "capabilities": {
+        "eyebrow": "PROČ JE VÝSTUP JINÝ",
+        "title": "Rešerše před psaním. Kontrola po něm.",
+        "text": "Topiqu propojí firemní fakta s aktuálním děním a každý koncept znovu prověří před vydáním.",
         "items": [
           {
-            "title": "AI s kontextem",
-            "text": "Tvořte ze zdrojů a znalostí značky. Výsledný text máte vždy pod kontrolou.",
-            "icon": "mdi:creation-outline"
+            "title": "Skutečný kontext firmy",
+            "text": "Přidejte dokumentaci, ceníky, poznámky, URL nebo celý web. Topiqu pro každý článek vybere jen související pasáže."
           },
           {
-            "title": "Místo pro celý tým",
-            "text": "Redakční schvalování, role a překlady drží spolupráci přehlednou.",
-            "icon": "mdi:account-group-outline"
+            "title": "Aktuální rešerše",
+            "text": "Vlastní znalosti doplní živé zdroje z webu. Článek tak stojí na podkladech, které patří k tématu."
           },
           {
-            "title": "Publikace po vašem",
-            "text": "Vlastní web a doména, WordPress nebo API. Obsah patří vašemu publiku.",
-            "icon": "mdi:web"
+            "title": "Ověření tvrzení",
+            "text": "Samostatná revize porovná ověřitelná tvrzení se zdroji. Když najde problém, koncept vrátí k opravě."
+          },
+          {
+            "title": "Redakční rozhodnutí",
+            "text": "Koncept můžete schválit a upravit sami. Automatické vydání zapnete jen tehdy, když ho chcete; i před ním proběhne revize."
           }
-        ]
-      },
-      "publication": {
-        "eyebrow": "TAKHLE MŮŽE VYPADAT VÁŠ OBSAH",
-        "brand": "Váš magazín",
-        "issue": "NÁPADY A SOUVISLOSTI",
-        "title": "Příběhy, ke kterým se čtenáři vracejí.",
-        "text": "Vaše zkušenosti. Váš pohled. Vlastní místo, kde se z dobrých nápadů stává obsah, který má smysl číst.",
-        "byline": "Vaše redakce · 4 minuty čtení",
-        "note": "Vlastní doména. Vlastní identita."
+        ],
+        "moreLabel": "Dál v redakci:",
+        "more": "překlady · média · série · komentáře · týmy · vlastní doména"
       },
       "closing": {
-        "eyebrow": "ZAČNĚTE PRVNÍM NÁPADEM",
-        "title": "Váš další článek začíná tady.",
-        "text": "Vytvořte si prostor pro obsah. Všechno ostatní můžete rozvíjet postupně."
+        "eyebrow": "ZAČNĚTE JEDNÍM TÉMATEM",
+        "title": "Znalosti už máte. Dejte jim celý proces.",
+        "text": "Vyzkoušejte Topiqu {days} dní zdarma a sledujte cestu prvního článku od podkladů po výsledek."
       },
       "pricingEyebrow": "PRO JEDNOTLIVCE I REDAKCE",
-      "compareEyebrow": "JAK SI STOJÍME",
-      "footerLabel": "Obsah má své místo.",
-      "allFeatures": "Co tarif obsahuje"
+      "footerLabel": "Od znalostí k výsledkům.",
+      "allFeatures": "Součástí tarifu",
+      "after": {
+        "eyebrow": "PO PUBLIKACI",
+        "title": "Vydáním článek nekončí.",
+        "text": "Data z vyhledávání se vracejí do dalšího zadání i k už vydaným článkům.",
+        "items": {
+          "search": {
+            "title": "Search Console",
+            "text": "Uvidíte kliknutí, zobrazení, CTR a pozice. Topiqu upozorní na stránky s potenciálem."
+          },
+          "ai": {
+            "title": "Viditelnost",
+            "text": "Pravidelně ověří vybrané otázky v odpovědích OpenAI a ukáže, které zdroje citují."
+          },
+          "opportunities": {
+            "title": "Další příležitosti",
+            "text": "Z nepokrytých dotazů a citací konkurence vzniknou náměty na nový nebo upravený článek."
+          },
+          "autopilot": {
+            "title": "Volitelný autopilot",
+            "text": "Může upravit titulek nebo aktualizovat obsah podle dat ze Search Console. Změny eviduje a lze je vrátit."
+          }
+        },
+        "plan": "Search Console, sledování citací a SEO autopilot jsou dostupné v Premium a Custom."
+      },
+      "publishing": {
+        "eyebrow": "PUBLIKACE",
+        "title": "Publikujte kamkoli.",
+        "text": "Používejte Topiqu jako vlastní publikaci, synchronizujte články do WordPressu nebo je načítejte přes REST API.",
+        "items": {
+          "topiqu": {
+            "title": "Topiqu",
+            "text": "Hotová publikace na adrese Topiqu nebo na vaší vlastní doméně."
+          },
+          "wordpress": {
+            "title": "WordPress",
+            "text": "Plugin Topiqu Sync přenese články jako běžné příspěvky."
+          },
+          "api": {
+            "title": "REST API",
+            "text": "Čtěte publikovaný obsah a zobrazte ho ve svém webu či aplikaci."
+          }
+        }
+      }
     }
   }
 }

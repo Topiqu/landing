@@ -1,10 +1,12 @@
 <script setup lang="ts">
 const localePath = useLocalePath()
+const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
 </script>
 <template>
   <section class="hero-section">
     <div class="landing-container hero-grid">
       <div class="hero-copy">
+        <p class="eyebrow">{{ $t('landing.design.hero.kicker') }}</p>
         <h1>
           {{ $t('landing.design.hero.title') }} <span>{{ $t('landing.design.hero.accent') }}</span>
         </h1>
@@ -17,7 +19,9 @@ const localePath = useLocalePath()
             $t('landing.design.hero.secondary')
           }}</UButton>
         </div>
-        <p class="hero-note">{{ $t('landing.design.hero.note') }}</p>
+        <p class="hero-note">
+          {{ $t('landing.design.hero.note', trial) }}
+        </p>
       </div>
       <ProductPreview />
     </div>

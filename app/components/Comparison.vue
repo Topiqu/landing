@@ -1,308 +1,302 @@
+<script setup lang="ts">
+const { locale } = useI18n()
+const localePath = useLocalePath()
+const isCs = computed(() => locale.value === 'cs')
+
+interface Source {
+  label: string
+  url: string
+}
+
+interface Cell {
+  text: string
+  sources: Source[]
+}
+
+interface Row {
+  label: string
+  cells: Cell[]
+}
+
+const source = (label: string, url: string): Source => ({ label, url })
+const copy = computed(() =>
+  isCs.value
+    ? {
+        eyebrow: 'SROVNÁNÍ WORKFLOW',
+        title: 'Jak tyto kroky řeší jiné nástroje',
+        description: 'Konkrétní schopnosti místo vlastních známek. Každé tvrzení má odkaz na produktovou dokumentaci.',
+        area: 'Krok',
+        source: 'Zdroj',
+        sources: 'Zdroje',
+        note: 'Veřejná dokumentace produktů, září 2026. Dostupnost se může lišit podle tarifu.',
+      }
+    : {
+        eyebrow: 'WORKFLOW COMPARISON',
+        title: 'How other tools handle these steps',
+        description:
+          'Concrete capabilities instead of self-assigned scores. Every claim links to product documentation.',
+        area: 'Step',
+        source: 'Source',
+        sources: 'Sources',
+        note: 'Public product documentation, September 2026. Availability may vary by plan.',
+      },
+)
+
+const rows = computed<Row[]>(() => {
+  const cs = isCs.value
+  const topiqu = (slug: string) => localePath(`/changelog/${slug}`)
+
+  return [
+    {
+      label: cs ? 'Firemní kontext' : 'Company context',
+      cells: [
+        {
+          text: cs
+            ? 'Z poznámek, souborů a webu vybírá pasáže relevantní k článku.'
+            : 'Selects relevant passages from notes, files and your website for each article.',
+          sources: [source('Topiqu', topiqu('2026-09-26-knowledge-base'))],
+        },
+        {
+          text: cs
+            ? 'Knowledge Base ukládá firemní fakta a používá je při tvorbě.'
+            : 'Knowledge Base stores company facts and applies them during creation.',
+          sources: [source('Jasper', 'https://help.jasper.ai/hc/en-us/articles/55085018624411-Knowledge-Base')],
+        },
+        {
+          text: cs
+            ? 'Analyzuje firemní web, konkurenci a hlas značky.'
+            : 'Analyzes your website, competitors and brand voice.',
+          sources: [source('Contentbase', 'https://contentbase.ai/')],
+        },
+      ],
+    },
+    {
+      label: cs ? 'Rešerše a kontrola' : 'Research and review',
+      cells: [
+        {
+          text: cs
+            ? 'Živou rešerši doplňuje revize tvrzení před publikací.'
+            : 'Combines live research with a claim review before publishing.',
+          sources: [
+            source('Topiqu · rešerše', topiqu('2026-09-26-knowledge-base')),
+            source('Topiqu · revize', topiqu('2026-09-23-optimization-and-fact-check')),
+          ],
+        },
+        {
+          text: cs
+            ? 'Research Agent připravuje rešerše s odkazy na zdroje.'
+            : 'Research Agent produces research with source links.',
+          sources: [source('Jasper', 'https://help.jasper.ai/hc/en-us/articles/48810861467803-Research-Agent')],
+        },
+        {
+          text: cs
+            ? 'Zkoumá klíčová slova a do článků přidává externí zdroje.'
+            : 'Researches keywords and adds external sources to articles.',
+          sources: [
+            source('Contentbase · rešerše', 'https://contentbase.ai/'),
+            source('Contentbase · zdroje', 'https://contentbase.ai/docs/features/external-linking/'),
+          ],
+        },
+      ],
+    },
+    {
+      label: cs ? 'Publikace' : 'Publishing',
+      cells: [
+        {
+          text: cs
+            ? 'Vlastní publikace, synchronizace do WordPressu a REST API.'
+            : 'Hosted publication, WordPress sync and a REST API.',
+          sources: [source('Topiqu', '/llms-full.txt')],
+        },
+        {
+          text: cs
+            ? 'Tvorba obsahu přímo ve Webflow; API pro vlastní integrace.'
+            : 'Content creation inside Webflow; API for custom integrations.',
+          sources: [
+            source('Jasper · Webflow', 'https://www.jasper.ai/integrations'),
+            source('Jasper · API', 'https://help.jasper.ai/hc/en-us/articles/18618701173659-Jasper-s-API'),
+          ],
+        },
+        {
+          text: cs
+            ? 'Hostovaný blog, WordPress a další CMS integrace.'
+            : 'Hosted blog, WordPress and other CMS integrations.',
+          sources: [source('Contentbase', 'https://contentbase.ai/docs/features/contentbase-go/')],
+        },
+      ],
+    },
+    {
+      label: cs ? 'Po publikaci' : 'After publishing',
+      cells: [
+        {
+          text: cs
+            ? 'Search Console řídí návrhy a volitelný autopilot; sledování viditelnosti kontroluje citace v odpovědích OpenAI.'
+            : 'Search Console informs suggestions and optional autopilot; visibility tracking checks citations in OpenAI answers.',
+          sources: [
+            source('Topiqu · Google', topiqu('2026-08-27-search-console-autopilot')),
+            source('Topiqu · AI', topiqu('2026-09-27-ai-visibility')),
+          ],
+        },
+        {
+          text: cs
+            ? 'GEO Hub sleduje AI citace, propojuje data Search Console a doporučuje další obsah.'
+            : 'GEO Hub tracks AI citations, connects Search Console data and recommends content.',
+          sources: [
+            source('Jasper · GEO', 'https://help.jasper.ai/hc/en-us/articles/55317942235803-GEO-Hub'),
+            source(
+              'Jasper · Google',
+              'https://help.jasper.ai/hc/en-us/articles/55091361235355-Integrations-Google-Search-Console',
+            ),
+          ],
+        },
+        {
+          text: cs
+            ? 'Search Console pomáhá plánovat témata; analytika a automatické aktualizace sledují další vývoj.'
+            : 'Search Console helps plan topics; analytics and automatic updates support the next cycle.',
+          sources: [source('Contentbase', 'https://contentbase.ai/docs/')],
+        },
+      ],
+    },
+  ]
+})
+</script>
+
 <template>
   <section id="comparison" class="landing-section comparison-section">
     <div class="landing-container">
       <div class="section-heading">
         <p class="eyebrow">{{ copy.eyebrow }}</p>
         <h2>{{ copy.title }}</h2>
-        <p>{{ copy.subtitle }}</p>
+        <p class="section-description">{{ copy.description }}</p>
       </div>
-      <div class="comparison-frame">
-        <div class="comparison-scroll" tabindex="0" :aria-label="copy.title" role="region">
-          <table class="comparison-table">
-            <thead>
-              <tr>
-                <th scope="col" class="capability-heading">{{ copy.capability }}</th>
-                <th
-                  v-for="product in products"
-                  :key="product.name"
-                  scope="col"
-                  :class="{ 'topiqu-column': product.topiqu }"
-                >
-                  <div class="comparison-product">
-                    <span class="comparison-logo">
-                      <span v-if="product.name === 'BlendScribe'" class="blendscribe-mark" aria-hidden="true">B</span>
-                      <img v-else :src="product.logo" alt="" width="32" height="32" loading="lazy" />
-                    </span>
-                    <span>{{ product.name }}</span>
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="row in rows" :key="row.label">
-                <th scope="row">{{ row.label }}</th>
-                <td
-                  v-for="(value, index) in row.values"
-                  :key="index"
-                  :class="{ 'topiqu-column': products[index]?.topiqu }"
-                >
-                  <ComparisonRating :value="value" :label="ratingWord(value)!" />
-                </td>
-              </tr>
-              <tr class="comparison-fit">
-                <th scope="row">{{ copy.bestFor }}</th>
-                <td v-for="product in products" :key="product.name" :class="{ 'topiqu-column': product.topiqu }">
-                  {{ product.fit }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
+      <div class="comparison-scroll" tabindex="0" role="region" :aria-label="copy.title">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th scope="col">{{ copy.area }}</th>
+              <th scope="col">Topiqu</th>
+              <th scope="col">Jasper</th>
+              <th scope="col">Contentbase</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in rows" :key="row.label">
+              <th scope="row">{{ row.label }}</th>
+              <td v-for="(cell, index) in row.cells" :key="index">
+                <p>{{ cell.text }}</p>
+                <div class="comparison-sources">
+                  <a
+                    v-for="link in cell.sources"
+                    :key="link.url"
+                    :href="link.url"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {{ cell.sources.length === 1 ? copy.source : copy.sources }}: {{ link.label }}
+                    <span aria-hidden="true">↗</span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <div class="comparison-notes">
-        <p><UIcon name="mdi:arrow-all" aria-hidden="true" />{{ copy.scroll }}</p>
-        <p>{{ copy.methodology }}</p>
-      </div>
+      <p class="comparison-note">{{ copy.note }}</p>
     </div>
   </section>
 </template>
 
-<script setup lang="ts">
-const { locale } = useI18n()
-const isCs = computed(() => locale.value === 'cs')
-const copy = computed(() =>
-  isCs.value
-    ? {
-        eyebrow: 'Srovnání bez marketingové mlhy',
-        title: 'Topiqu vs. specializované AI nástroje',
-        subtitle:
-          'Nejsme nejlepší v každé izolované disciplíně. Vyhráváme tam, kde tým potřebuje dostat kvalitní obsah od rešerše až na živý a měřitelný web.',
-        capability: 'Schopnost',
-        bestFit: 'Nejlepší all-in-one fit',
-        bestFor: 'Nejlepší volba pro',
-        scale: 'Jak číst hodnocení',
-        scroll: 'Posuňte tabulku pro další nástroje a schopnosti',
-        methodology: 'Stav k srpnu 2026. Dostupnost funkcí konkurentů se může lišit podle tarifu.',
-      }
-    : {
-        eyebrow: 'A comparison without the marketing fog',
-        title: 'Topiqu vs. specialized AI tools',
-        subtitle:
-          'We are not the best at every isolated discipline. We win when a team needs to move quality content from research to a live, measurable website.',
-        capability: 'Capability',
-        bestFit: 'Best all-in-one fit',
-        bestFor: 'Best choice for',
-        scale: 'Reading the ratings',
-        scroll: 'Scroll to compare more tools and capabilities',
-        methodology: 'As of August 2026. Competitor feature availability may vary by plan.',
-      },
-)
-
-const products = computed(() => [
-  {
-    name: 'Topiqu',
-    logo: '/brand/topiqu-mark.png?v=20260910',
-    topiqu: true,
-    fit: isCs.value ? 'Kompletní obsahový provoz v jednom systému' : 'Complete content operations in one system',
-  },
-  {
-    name: 'Contentbase',
-    logo: '/brand/products/contentbase.svg',
-    fit: isCs.value ? 'Autonomní SEO obsah ve velkém' : 'Autonomous SEO content at scale',
-  },
-  {
-    name: 'NextBlog',
-    logo: '/brand/products/nextblog.ico',
-    fit: isCs.value ? 'Jednoduchý blog na autopilota' : 'Simple blog on autopilot',
-  },
-  {
-    name: 'EdgeBlog',
-    logo: '/brand/products/edgeblog.svg',
-    fit: isCs.value ? 'SEO/GEO automatizace pro B2B SaaS' : 'SEO/GEO automation for B2B SaaS',
-  },
-  {
-    name: 'BlendScribe',
-    logo: '',
-    fit: isCs.value ? 'Technicky AI-readable blog na vlastní doméně' : 'Technical AI-readable blog on your domain',
-  },
-  {
-    name: 'Jasper',
-    logo: '/brand/products/jasper.png',
-    fit: isCs.value ? 'Enterprise brand a marketingové workflow' : 'Enterprise brand and marketing workflows',
-  },
-  {
-    name: 'HubSpot',
-    logo: '/brand/products/hubspot.png',
-    fit: isCs.value ? 'CRM, kampaně a obsah v jednom ekosystému' : 'CRM, campaigns, and content in one ecosystem',
-  },
-])
-const labels = computed(() =>
-  isCs.value
-    ? [
-        'AI rešerše a dlouhé články',
-        'Práce se zdroji a citacemi',
-        'SEO optimalizace',
-        'AEO/GEO-ready publikace',
-        'Monitoring viditelnosti v AI',
-        'Brand voice a znalost značky',
-        'Vlastní CMS, web a doména',
-        'Plánování a automatická publikace',
-        'Překlady a redakční schválení',
-        'API / WordPress integrace',
-        'Čtenářský engagement a komunita',
-      ]
-    : [
-        'AI research and long-form articles',
-        'Sources and citations',
-        'SEO optimization',
-        'AEO/GEO-ready publishing',
-        'AI visibility monitoring',
-        'Brand voice and brand knowledge',
-        'Native CMS, website, and domain',
-        'Scheduling and automated publishing',
-        'Translations and editorial approval',
-        'API / WordPress integrations',
-        'Reader engagement and community',
-      ],
-)
-const matrix: number[][] = [
-  [5, 5, 4, 5, 4, 4, 4],
-  [5, 5, 3, 5, 4, 4, 3],
-  [5, 5, 5, 5, 4, 3, 4],
-  [5, 4, 5, 5, 5, 3, 4],
-  [3, 2, 2, 5, 1, 1, 4],
-  [5, 5, 3, 4, 5, 5, 5],
-  [5, 5, 4, 5, 5, 1, 5],
-  [5, 5, 5, 5, 3, 4, 5],
-  [5, 5, 3, 2, 3, 5, 5],
-  [5, 5, 4, 4, 3, 5, 5],
-  [5, 1, 1, 1, 1, 1, 3],
-]
-const rows = computed(() => labels.value.map((label, index) => ({ label, values: matrix[index]! })))
-const ratingWord = (rating: number) => {
-  const cs = ['Minimální', 'Základní', 'Dobré', 'Velmi dobré', 'Špičkové']
-  const en = ['Minimal', 'Basic', 'Good', 'Very good', 'Leading']
-  return (isCs.value ? cs : en)[rating - 1]
-}
-</script>
-
 <style scoped>
-.comparison-frame {
+.comparison-scroll {
+  overflow-x: auto;
   border: 1px solid var(--landing-line);
-  border-radius: var(--ui-radius);
-  overflow: hidden;
+}
+.comparison-scroll:focus-visible {
+  outline: 3px solid var(--landing-accent);
+  outline-offset: 3px;
 }
 .comparison-table {
   width: 100%;
-  min-width: 1120px;
-  border-collapse: separate;
-  border-spacing: 0;
-  font-size: 13px;
+  min-width: 800px;
+  border-collapse: collapse;
+  text-align: left;
 }
 .comparison-table th,
 .comparison-table td {
-  padding: 13px 10px;
-  border-bottom: 1px solid var(--landing-line);
-  text-align: center;
-}
-.comparison-table thead th {
-  background: var(--landing-surface);
-  padding-block: 23px;
-}
-.comparison-table th:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 2;
-  width: 220px;
-  min-width: 220px;
-  max-width: 220px;
-  padding-inline: 22px;
-  background: var(--landing-surface);
-  text-align: left;
-  font-weight: 600;
+  min-width: 0;
+  padding: 22px;
   border-right: 1px solid var(--landing-line);
+  border-bottom: 1px solid var(--landing-line);
+  vertical-align: top;
 }
-.comparison-table thead th:first-child {
-  z-index: 3;
-  color: var(--landing-muted);
-}
-.comparison-table .topiqu-column {
-  background: #fafaff;
-  border-inline: 1px solid var(--landing-line);
-}
-.comparison-table thead .topiqu-column {
-  background: #fafaff;
-  box-shadow: inset 0 3px #4338ca;
+.comparison-table tr > :last-child {
+  border-right: 0;
 }
 .comparison-table tbody tr:last-child > * {
   border-bottom: 0;
 }
-.comparison-table tbody tr:hover > * {
-  box-shadow: inset 0 0 0 9999px rgb(100 116 139 / 5%);
+.comparison-table thead th {
+  background: var(--landing-bg);
+  font-size: 14px;
+  font-weight: 750;
 }
-.comparison-product {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  font-weight: 800;
+.comparison-table th:first-child {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  width: 17%;
+  min-width: 140px;
+  background: var(--landing-surface);
+  font-size: 14px;
+  font-weight: 700;
 }
-.comparison-logo {
-  display: grid;
-  place-items: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: white;
+.comparison-table thead th:first-child {
+  z-index: 2;
+  background: var(--landing-bg);
 }
-.comparison-logo img {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
+.comparison-table td {
+  width: 27.7%;
 }
-.blendscribe-mark {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, #71d5ff, #36e0a1 52%, #ffb86b);
-  color: #03110f;
-  font:
-    900 18px/1 Inter,
-    sans-serif;
+.comparison-table td:nth-child(2) {
+  background: var(--landing-tint);
 }
-.comparison-fit td {
-  font-size: 11px;
-  line-height: 1.7;
-  vertical-align: top;
-  color: var(--landing-muted);
-  padding-block: 22px;
+.comparison-table td p {
+  color: var(--landing-ink);
+  font-size: 13px;
+  line-height: 1.65;
 }
-.comparison-notes {
+.comparison-sources {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: 16px;
+  gap: 3px 12px;
+  margin-top: 12px;
+}
+.comparison-sources a {
+  color: var(--landing-accent);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.comparison-sources a:hover {
+  color: var(--landing-ink);
+}
+.comparison-note {
+  margin-top: 14px !important;
   color: var(--landing-muted);
   font-size: 11px;
   line-height: 1.6;
 }
-.comparison-notes p {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  margin: 0;
-}
-:global(.dark .comparison-table .topiqu-column) {
-  background: #1a2335;
-  border-inline-color: #313a60;
-}
-:global(.dark .comparison-table thead .topiqu-column) {
-  background: #1a2335;
-  box-shadow: inset 0 3px #a5b4fc;
-}
-@media (max-width: 640px) {
+@media (max-width: 600px) {
   .comparison-table {
-    min-width: 1040px;
+    min-width: 720px;
+  }
+  .comparison-table th,
+  .comparison-table td {
+    padding: 15px;
   }
   .comparison-table th:first-child {
-    width: 142px;
-    min-width: 142px;
-    max-width: 142px;
-    padding-inline: 12px;
-    font-size: 12px;
+    min-width: 115px;
   }
 }
 </style>

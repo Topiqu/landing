@@ -99,6 +99,11 @@ Generated from `public/app-logo.png` (1024×1024) using `sips`: `icon-192x192.pn
 
 ## 🔵 Low — Polish and deployment
 
+### Real product visuals
+
+- Replace the illustrative landing preview with live screenshots captured in Topiqu, including Knowledge, article review, and visibility.
+- Consider short promo videos showing the actual source-to-publication workflow and what happens after publishing.
+
 ### Resend domain verification
 
 Add and verify a sending domain in the Resend dashboard so verification emails land in inboxes rather than spam. Update `EMAIL_FROM` to use that domain.

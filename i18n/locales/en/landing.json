@@ -1,231 +1,261 @@
 {
   "landing": {
-    "purpose": {
-      "title": "What Topiqu does",
-      "description": "Topiqu is an AI content operations platform. It helps businesses research, create, review, translate, publish, and continuously improve articles on their own websites.",
-      "gscTitle": "Google Search Console integration",
-      "gscDescription": "If you connect this optional integration, Topiqu receives read-only access to clicks, impressions, CTR, and average-position data. It uses the data for performance reporting and to flag possible opportunities; it does not guarantee search results and cannot change your website settings in Google.",
-      "privacyLink": "How we use your data"
-    },
     "pricing": {
       "title": "Plans & Pricing",
-      "subtitle": "Transparent pricing. No hidden fees. Choose the level that matches your ambition.",
+      "subtitle": "Every new blog starts with a {days}-day trial and {articles} AI articles. Choose Free to start without a card.",
       "month": "/mo",
+      "year": "/yr",
+      "intervalLabel": "Billing frequency",
+      "interval": {
+        "month": "Monthly",
+        "year": "Yearly"
+      },
+      "billedYearly": "Billed {price} once a year",
+      "articlePacks": {
+        "title": "Extra articles when you need them",
+        "description": "Buy additional packs in the app. Purchased articles never expire.",
+        "articles": "{count} articles",
+        "unitPrice": "{price} per article"
+      },
       "plans": {
         "free": {
           "badge": "Start",
           "name": "Free",
-          "desc": "Perfect for beginners and hobby projects.",
-          "price": "$0",
+          "desc": "Write and publish on your own blog, with no commitment.",
           "features": {
-            "manual_writing": "Manual Article Writing",
-            "subdomain": "Free Subdomain",
-            "no_ai": "No AI Generation",
-            "basic_analytics": "Basic Analytics",
-            "editor": "Editor with media, tables, and polls",
-            "community": "Comments and reader engagement",
-            "no_card": "No commitment or payment card"
+            "editor": "Editor with media, tables and polls",
+            "subdomain": "Free .topiqu.com address, up to 3 blogs",
+            "optimization": "Article optimization score",
+            "library": "Media library with image rights",
+            "community": "Comments, reactions and basic analytics",
+            "no_ai": "No AI writing",
+            "ads": "Topiqu ads shown on your blog"
           },
-          "cta": "Start for Free"
+          "cta": "Start for free"
         },
         "pro": {
           "badge": "Creator",
           "name": "Pro",
-          "desc": "For creators who want to grow with AI.",
-          "price": "$39",
+          "desc": "AI writing grounded in your knowledge, on your own domain.",
           "features": {
-            "ai_tokens": "20 AI articles every month",
-            "seo": "Advanced SEO Optimization",
-            "import": "Import Existing Articles",
-            "everything_free": "Everything in Free",
-            "sources": "Source-backed articles and citations",
-            "scheduling": "Scheduling and automated publishing",
-            "translations": "Multilingual article versions"
+            "no_ads": "Everything in Free, without ads",
+            "articles": "{count} AI articles every month",
+            "knowledge": "Knowledge base with up to {count} sources",
+            "review": "Fact-check and editorial review",
+            "translations": "Translations into EN, CS, DE and FR",
+            "scheduling": "Scheduling, series and auto-publishing",
+            "domain": "Custom domain, fonts and gradients",
+            "integrations": "WordPress plugin, API and import"
           },
-          "cta": "Select Pro"
+          "cta": "Choose Pro"
         },
         "premium": {
-          "badge": "Most Popular",
+          "badge": "Most popular",
           "name": "Premium",
-          "desc": "Maximum performance and complete automation.",
-          "price": "$79",
+          "desc": "Know where you rank in Google and whether OpenAI answers cite you — and act on it.",
           "features": {
-            "articles": "30 AI articles every month",
-            "sentiment": "AI Sentiment & Images",
-            "indexing": "Priority Indexing & Sourcing",
-            "branding": "Custom Emojis & Branding",
-            "support": "Priority 24/7 Support",
-            "gsc": "Google Search Console Intelligence",
-            "workflow": "Editorial workflow and approvals",
-            "distribution": "API, WordPress, and social distribution"
+            "everything": "Everything in Pro",
+            "articles": "{count} AI articles every month",
+            "visibility": "Citation tracking in OpenAI answers",
+            "gsc": "Search Console insights and SEO autopilot",
+            "knowledge": "Knowledge base with up to {count} sources",
+            "sentiment": "Reader sentiment analysis",
+            "indexing": "Priority indexing and sourcing",
+            "emoji": "Custom emoji reactions",
+            "support": "Priority 24/7 support"
           },
-          "cta": "Select Premium"
+          "cta": "Choose Premium"
         },
         "custom": {
           "badge": "Enterprise",
           "name": "Custom",
-          "desc": "White-label solution without any limits.",
-          "price": "Custom",
+          "desc": "For publishers with several brands, teams or special workflows.",
+          "price": "On request",
           "features": {
-            "domain": "Custom Domain (Apex)",
-            "whitelabel": "Full White-Label (No Branding)",
-            "banners": "Custom integrations and workflows",
-            "unlimited_ai": "Custom AI article allowance",
-            "multisite": "Multiple websites, brands, and teams",
+            "everything": "Everything in Premium",
+            "whitelabel": "White-label, without Topiqu branding",
+            "articles": "Custom AI article allowance",
+            "knowledge": "Knowledge base with up to {count} sources",
+            "multisite": "Multiple websites, brands and teams",
+            "domain": "Apex domain setup",
             "onboarding": "Tailored onboarding and migration",
-            "sla": "SLA and priority technical support"
+            "sla": "SLA and dedicated support"
           },
-          "cta": "Contact Us"
+          "cta": "Contact us"
         }
       }
     },
     "faq": {
       "badge": "Support & Help",
-      "title": "Frequently Asked Questions",
-      "subtitle": "Straight answers about creating, translating and publishing content with Topiqu.",
-      "cta_title": "Still have questions?",
-      "cta_desc": "Write to us and we will help.",
-      "cta_button": "Contact Support",
+      "title": "Frequently asked questions",
+      "subtitle": "Straight answers about the trial, AI articles, sources and publishing with Topiqu.",
+      "cta_button": "Contact support",
       "items": [
         {
-          "q": "What can I create with Topiqu?",
-          "a": "You can write and edit articles yourself, generate drafts with AI, add media, tables and polls, and manage multiple language versions from one workspace."
+          "q": "How does the free trial work?",
+          "a": "Every new blog starts with a 14-day trial and 5 AI articles. Continue on Free and you try the Premium features with no card. Choose Pro or Premium during sign-up and Stripe asks for a card, but the first charge comes only after the 14 days — you can cancel before then."
         },
         {
-          "q": "Can I use Topiqu on my own domain?",
-          "a": "Yes. Eligible plans can connect a verified custom domain. Topiqu guides you through the required DNS record and verifies ownership before activating it."
+          "q": "What counts as an AI article?",
+          "a": "Each article that AI writes for you uses one article from your allowance: 20 a month on Pro and 30 on Premium. Translations, fact-checks, prompt improvements, sentiment analysis and Search Console suggestions do not use articles. Purchased articles never expire; pack prices are listed above."
+        },
+        {
+          "q": "Where does the AI get its facts?",
+          "a": "Topiqu combines live web research with your own knowledge base — notes, PDF and Word files, web pages or a whole sitemap. Private sources shape the text but are never cited publicly; only sources you mark as public can become citations. Before publishing, a review step checks claims against the sources, and the fact-check panel lets you re-check any article."
         },
         {
           "q": "Does AI publish content automatically?",
-          "a": "Only when you configure automatic publishing. You can otherwise review and edit every AI-generated draft before it goes live, and you can display an AI-content disclosure."
+          "a": "Only when you turn on automatic publishing. Otherwise every AI draft waits for you to review and edit it, and you can show an AI-content disclosure on the article."
         },
         {
-          "q": "How can I publish Topiqu content on my website?",
-          "a": "You can use a hosted Topiqu site, connect a custom domain, synchronize articles with the Topiqu Sync plugin for WordPress, or consume them through the External API."
+          "q": "How do I know whether answers cite me?",
+          "a": "On Premium, Topiqu builds questions from your Search Console queries, articles and reader comments. It regularly checks whether OpenAI answers cite you and where competitors appear. Questions without your citation become article ideas. This is a sample of selected questions, not a record of private conversations."
         },
         {
-          "q": "Can Topiqu translate articles?",
-          "a": "Yes. Topiqu supports multiple language versions, AI-assisted translation and a review workflow. Readers are directed to the correct translated article URL when one is available."
+          "q": "Can I publish Topiqu articles on my existing website?",
+          "a": "Yes. Use the hosted Topiqu publication, connect your domain, sync articles into WordPress with the Topiqu Sync plugin, or fetch them through the External API."
         }
       ]
     },
     "onboarding": {
-      "title": "Create your own blog",
-      "siteInfo": "Site Information",
-      "siteInfoDesc": "Let's start with the most important thing - what will be the name of your project and where can we find it.",
-      "siteName": "Site Name",
-      "siteNamePlaceholder": "My Awesome Blog",
-      "subdomain": "Subdomain",
-      "subdomainPlaceholder": "my-blog",
-      "subdomainHint": "Lowercase letters, numbers, and dashes only.",
-      "domainPlaceholder": "my-awesome-site",
-      "customDomain": "Custom domain",
-      "customDomainHint": "Enter your custom domain. Then add a CNAME record to your domain's DNS pointing to app.topiqu.com",
-      "customDomainExample": "mycustomdomain.com",
-      "domainType": "Domain Type",
-      "domainTypeOptions": {
-        "SUBDOMAIN": "Subdomain (.topiqu.com)",
-        "CUSTOM": "Custom domain / CNAME"
-      },
-      "designFocus": "Design & Focus",
-      "designFocusDesc": "Customize the platform to your brand and define the main topic.",
-      "mainLanguage": "Main content language",
-      "langCz": "Czech",
-      "langEn": "English",
-      "mainColor": "Main brand color",
-      "siteFocus": "Main site focus (optional)",
-      "siteFocusPlaceholder": "e.g. Technology, Lifestyle...",
-      "continueToAccount": "Continue",
-      "language": "Site Language",
-      "adminInfo": "Admin Account",
-      "adminInfoDesc": "We're almost done. Create your access credentials to the administration.",
-      "usernamePlaceholder": "admin",
-      "emailPlaceholder": "admin{'@'}example.com",
-      "startTrial": "Start With Full Access",
-      "trialHint": "You'll instantly receive 5 free AI articles. You will be redirected to completion.",
-      "trialHintToken": "You'll instantly receive 5 free AI articles!",
+      "title": "Create your blog",
+      "close": "Close and return to the homepage",
       "stepLabel": "Step {current} of {total}",
+      "stepsLabel": "Sign-up steps",
+      "steps": {
+        "site": "Blog",
+        "design": "Look",
+        "account": "Account",
+        "plan": "Plan",
+        "verify": "Verify",
+        "summary": "Review"
+      },
+      "site": {
+        "title": "Name your blog",
+        "description": "Pick a name and an address. You can connect your own domain later, too.",
+        "name": "Blog name",
+        "namePlaceholder": "My company journal",
+        "domainType": "Address",
+        "subdomainTitle": "Topiqu subdomain",
+        "subdomainText": "Free address under topiqu.com",
+        "customTitle": "Your own domain",
+        "customText": "Included in Pro and Premium",
+        "subdomain": "Subdomain",
+        "subdomainPlaceholder": "my-journal",
+        "customDomain": "Domain",
+        "customDomainPlaceholder": "blog.mycompany.com",
+        "dnsTitle": "Connect the domain after sign-up",
+        "dnsText": "Topiqu shows the DNS record to add and verifies that you own the domain before activating it."
+      },
       "domainStatus": {
         "checking": "Checking availability…",
-        "available": "Domain is available",
-        "taken": "This domain is already taken",
-        "invalid": "Invalid format. Use only a-z, 0-9 and dashes.",
-        "tooShort": "At least 3 characters",
+        "available": "This address is available",
+        "taken": "This address is already taken",
+        "invalid": "Use only a–z, 0–9 and dashes.",
+        "invalidCustom": "Enter a domain such as blog.mycompany.com.",
+        "tooShort": "Use at least 3 characters",
         "reserved": "This name is reserved",
         "empty": ""
       },
-      "summary": "Almost there!",
-      "summaryDesc": "Review everything before we create your account.",
-      "summarySite": "Site name",
-      "summaryDomain": "Domain",
-      "summaryLanguage": "Content language",
-      "summaryColor": "Brand color",
-      "summaryFocus": "Focus",
-      "summaryAdmin": "Admin username",
-      "summaryEmail": "Admin email",
-      "summaryPlan": "Plan after trial",
-      "choosePlan": "Choose your plan",
-      "choosePlanDesc": "You get 14 days of PREMIUM free. Pick what you continue with — you can switch any time.",
-      "planSelected": "Selected",
-      "planFreeAfterTrial": "Free (after trial)",
-      "continueWithFree": "Continue with Free",
-      "continueWithPlan": "Continue with {plan}",
-      "planTrialBanner": "14 days of PREMIUM free · no card required · cancel anytime",
-      "planNavPrev": "Previous plan",
-      "planNavNext": "Next plan",
-      "planNavLabel": "Browse plans",
-      "planActiveAnnounce": "Selected plan: {plan}",
-      "planGoTo": "Go to {plan} plan",
-      "plans": {
+      "design": {
+        "title": "Language and colour",
+        "description": "Choose the language you will write in and your brand colour. You can translate articles into other languages later.",
+        "language": "Writing language",
+        "color": "Brand colour",
+        "preview": "Preview"
+      },
+      "account": {
+        "title": "Your admin account",
+        "description": "You will use these details to sign in to your blog administration.",
+        "username": "Username",
+        "usernamePlaceholder": "jane",
+        "email": "Work email",
+        "emailPlaceholder": "jane{'@'}company.com",
+        "password": "Password",
+        "passwordConfirm": "Repeat password",
+        "passwordMismatch": "The passwords do not match",
+        "usernameHint": "3 to 50 characters"
+      },
+      "plan": {
+        "title": "Choose what happens after the trial",
+        "description": "Your blog starts with a {days}-day trial and {articles} AI articles. Switch plans any time in settings.",
+        "trialBadge": "{days}-day trial",
+        "selected": "Selected",
+        "freeNote": "You try Premium for {days} days, then continue on Free. No card needed.",
+        "paidNote": "Stripe asks for a card after sign-up. The first charge is on {date} and you can cancel before then.",
+        "annualUnavailable": "Annual billing is temporarily unavailable. Try again later or choose monthly billing.",
         "free": {
-          "tagline": "For hobby projects & first steps",
-          "description": "Publish manually with zero commitment. The easiest way to try the platform out.",
-          "features": {
-            "editor": "Manual article editor",
-            "subdomain": "Free subdomain (.topiqu.com)",
-            "analytics": "Basic analytics & comments",
-            "community": "Access to community topics",
-            "noCard": "No payment, no card"
-          }
+          "tagline": "Write and publish manually",
+          "features": [
+            "Editor, media library and polls",
+            "Free .topiqu.com address",
+            "Optimization score and analytics"
+          ]
         },
         "pro": {
-          "tagline": "Grow with AI & built-in SEO",
-          "description": "For creators who want to publish consistently and climb the rankings. AI writes, you decide.",
-          "features": {
-            "tokens": "20 AI articles per month, with optional add-ons",
-            "seo": "Advanced SEO optimization",
-            "import": "Import existing articles",
-            "publishing": "Scheduling and automated publishing",
-            "support": "Email support within 24 h"
-          }
+          "tagline": "AI writing from your knowledge",
+          "features": [
+            "{articles} AI articles a month",
+            "Knowledge base and fact-check",
+            "Translations and custom domain"
+          ]
         },
         "premium": {
-          "tagline": "Max AI & full automation",
-          "description": "Fully automated content on autopilot. Sentiment, image generation, priority indexing.",
-          "highlight": "14 days free · no commitment",
-          "features": {
-            "unlimited": "30 AI articles per month, with optional add-ons",
-            "sentiment": "AI Sentiment & image generation",
-            "indexing": "Priority Google indexing",
-            "branding": "Custom emoji & branding",
-            "support": "Priority support 24/7"
-          }
+          "tagline": "Google growth and visibility in answers",
+          "features": [
+            "{articles} AI articles a month",
+            "Visibility and citation insights for OpenAI",
+            "Search Console SEO autopilot"
+          ]
         }
       },
-      "focusNotSet": "—",
-      "acceptTos": "I agree to the {tos} and {privacy}.",
-      "acceptTosLabel": "Terms of Service",
-      "acceptPrivacyLabel": "Privacy Policy",
-      "tosRequired": "You must accept the terms to continue",
-      "continueToSummary": "Continue to summary",
-      "createAccount": "Create account & continue to payment",
-      "continueToVerification": "Continue to verification",
-      "verifyTitle": "Verify your email",
-      "verifyDesc": "We've sent a 6-digit code to {email}. Enter it below to confirm.",
-      "verifyAndContinue": "Verify & continue",
-      "resendCode": "Resend code",
-      "resendCodeIn": "Resend in {seconds}s",
-      "codeNotReceived": "Didn't get the code?"
+      "verify": {
+        "title": "Verify your email",
+        "description": "We sent a 6-digit code to {email}. Enter it below or use the link in the email.",
+        "code": "Verification code",
+        "notReceived": "Didn't get the code?",
+        "resend": "Send a new code",
+        "resendIn": "New code in {seconds} s",
+        "submit": "Verify and continue"
+      },
+      "summary": {
+        "title": "Review and create",
+        "description": "Check the details. You can change everything except the email later in settings.",
+        "site": "Blog",
+        "domain": "Address",
+        "language": "Language",
+        "color": "Colour",
+        "admin": "Admin",
+        "email": "Email",
+        "plan": "After the trial",
+        "edit": "Edit",
+        "acceptTos": "I agree to the {tos} and the {privacy}.",
+        "tos": "Terms of Service",
+        "privacy": "Privacy Policy",
+        "tosRequired": "Accept the terms to continue",
+        "createFree": "Create my blog",
+        "createPaid": "Create blog and add a card",
+        "trialHint": "You get {articles} AI articles right away."
+      },
+      "back": "Back",
+      "continue": "Continue",
+      "colors": {
+        "indigo": "Indigo",
+        "blue": "Blue",
+        "sky": "Sky",
+        "cyan": "Cyan",
+        "teal": "Teal",
+        "green": "Green",
+        "lime": "Lime",
+        "yellow": "Yellow",
+        "amber": "Amber",
+        "orange": "Orange",
+        "red": "Red",
+        "pink": "Pink",
+        "purple": "Purple",
+        "violet": "Violet",
+        "gray": "Grey"
+      }
     },
     "footer": {
       "rights": "All rights reserved."
@@ -233,108 +263,213 @@
     "design": {
       "nav": {
         "features": "How it works",
+        "capabilities": "Why Topiqu",
         "docs": "Documentation",
+        "changelog": "What's new",
         "theme": "Toggle light and dark mode",
         "menu": "Open navigation",
         "navigation": "Main navigation",
         "skip": "Skip to content"
       },
       "hero": {
-        "title": "From a first idea",
-        "accent": "to a published story.",
-        "description": "Research, writing, review and publishing. Give your content one home, and your team more room for the work that matters.",
+        "kicker": "An AI newsroom that keeps working after publishing",
+        "title": "From what your company knows",
+        "accent": "to content people find.",
+        "description": "Topiqu finds topics worth covering. It combines your own sources with live research, checks the claims and publishes the article. Then it tracks Google results and citations in OpenAI answers to show what to improve next.",
         "cta": "Start for free",
-        "secondary": "Explore the platform",
-        "note": "No credit card. Your own space for content."
+        "secondary": "See how it works",
+        "note": "{days}-day trial with {articles} AI articles. No card required."
       },
       "preview": {
         "label": "Workspace preview",
         "workspace": "Your editorial workspace",
-        "research": "Research",
-        "write": "Article",
-        "publish": "Publish",
-        "saved": "Draft",
-        "category": "CONTENT STRATEGY",
-        "title": "Good content starts with the right question.",
-        "excerpt": "What do your readers really want to know? Start with their questions. Create a useful article that helps them find an answer.",
-        "paragraph": "Combine your experience with reliable sources. A clear structure and a thoughtful edit give every idea room to grow.",
-        "section": "From a question to a useful answer",
-        "sources": "Sources & context",
-        "source1": "Questions from your customers",
-        "source2": "Brand knowledge and voice",
-        "source3": "References to verify your facts",
-        "researchTitle": "Context first. Words second.",
-        "researchText": "Gather your sources, define your audience and give the article a clear direction.",
-        "publishTitle": "Ready for your readers.",
-        "publishText": "Review the language, pick a time and publish where your readers can find you.",
-        "review": "Editorial review",
-        "language": "Article language",
-        "languageValue": "English",
-        "channel": "Publishing channel",
-        "channelValue": "Your website",
-        "date": "Publication date",
-        "dateValue": "On your schedule",
+        "tabs": {
+          "knowledge": "Knowledge",
+          "write": "Article",
+          "check": "Fact-check",
+          "visibility": "Visibility"
+        },
+        "knowledge": {
+          "category": "KNOWLEDGE BASE",
+          "title": "Context the AI actually uses.",
+          "text": "Topiqu picks the relevant passages from your own sources whenever it writes.",
+          "sources": [
+            {
+              "name": "Pricing 2026.pdf",
+              "meta": "Indexed · 42 passages"
+            },
+            {
+              "name": "Product notes",
+              "meta": "Background only"
+            },
+            {
+              "name": "company.com/sitemap.xml",
+              "meta": "18 pages · Public source"
+            }
+          ],
+          "used": "3 sources used in this article"
+        },
+        "write": {
+          "saved": "Draft",
+          "category": "CONTENT STRATEGY",
+          "title": "Choosing a plan for your content volume",
+          "excerpt": "Pro includes 20 AI articles a month, Premium 30. This comparison uses current pricing, not a generic prompt.",
+          "section": "What if the monthly allowance is not enough?",
+          "paragraph": "You can buy extra article packs, and they never expire. Before release, the draft goes through another claim review.",
+          "score": "Optimization",
+          "scoreValue": "92/100"
+        },
+        "check": {
+          "category": "FACT-CHECK",
+          "title": "Every claim has a source.",
+          "summary": "3 claims · 2 supported · 1 needs revision",
+          "claims": [
+            {
+              "text": "Pro includes 20 AI articles a month.",
+              "status": "Supported",
+              "tone": "ok"
+            },
+            {
+              "text": "Purchased articles never expire.",
+              "status": "Supported",
+              "tone": "ok"
+            },
+            {
+              "text": "Setup always takes less than ten minutes.",
+              "status": "Needs a source",
+              "tone": "warn"
+            }
+          ]
+        },
+        "visibility": {
+          "category": "VISIBILITY",
+          "title": "Track citations of your content.",
+          "description": "See whether OpenAI answers link to your pages for the questions you track.",
+          "provider": "Currently monitored source",
+          "items": {
+            "questions": {
+              "title": "Selected questions",
+              "text": "From search data and your topics"
+            },
+            "citations": {
+              "title": "Linked pages",
+              "text": "Your sources and other citations"
+            },
+            "opportunities": {
+              "title": "Next opportunities",
+              "text": "Ideas for new or updated articles"
+            }
+          }
+        },
         "caption": "Illustrative workspace preview",
-        "flow": "Idea → draft → review → publish"
+        "flow": "Knowledge → research → review → publish → next step"
       },
       "workflow": {
-        "eyebrow": "ONE CONNECTED WORKFLOW",
-        "title": "More room for ideas. Less switching tools.",
+        "eyebrow": "ONE CONNECTED PIPELINE",
+        "title": "From source to the next opportunity.",
         "steps": [
           {
-            "title": "Give your idea direction",
-            "text": "Build a brief, add your sources and use AI to help shape the first draft."
+            "title": "Company knowledge",
+            "text": "Selects the parts of your own sources that matter for the topic."
           },
           {
-            "title": "Make every detail count",
-            "text": "Refine the text in your editor, bring your team into the review and prepare translations."
+            "title": "Search demand",
+            "text": "Uses Google queries and reader questions to find what people seek."
           },
           {
-            "title": "Put your content out there",
-            "text": "Schedule a story on your own website or connect your publishing channels."
+            "title": "Research",
+            "text": "Adds current sources and prepares the article brief."
+          },
+          {
+            "title": "Writing and review",
+            "text": "Drafts the article, checks claims and sends issues back for revision."
+          },
+          {
+            "title": "Publishing",
+            "text": "Publishes to your site and makes the article available to WordPress or your API client."
+          },
+          {
+            "title": "Measurement",
+            "text": "Google results and citations in OpenAI show what to update or write next."
           }
         ]
       },
-      "features": {
-        "eyebrow": "YOUR WORKSPACE. YOUR WAY.",
-        "title": "From the first draft to your own audience.",
-        "text": "Tools that work with your team. Together in one place, with your brand at the centre.",
+      "capabilities": {
+        "eyebrow": "WHY THE OUTPUT IS DIFFERENT",
+        "title": "Research before writing. Review after it.",
+        "text": "Topiqu connects company facts with current sources, then checks each draft again before release.",
         "items": [
           {
-            "title": "AI with context",
-            "text": "Work from sources and brand knowledge. Stay in control of the finished article.",
-            "icon": "mdi:creation-outline"
+            "title": "Real company context",
+            "text": "Add documentation, pricing, notes, URLs or your whole website. Topiqu selects only relevant passages for each article."
           },
           {
-            "title": "Room for the whole team",
-            "text": "Editorial approval, roles and translations keep collaboration clear.",
-            "icon": "mdi:account-group-outline"
+            "title": "Current research",
+            "text": "Live web sources complement your company knowledge, grounding each article in material relevant to its topic."
           },
           {
-            "title": "Publish on your terms",
-            "text": "Your own website and domain, WordPress or an API. Reach your readers your way.",
-            "icon": "mdi:web"
+            "title": "Claim verification",
+            "text": "A separate review compares verifiable claims with their sources. If it finds a problem, the draft goes back for revision."
+          },
+          {
+            "title": "Editorial decision",
+            "text": "Review and edit drafts yourself. Auto-publishing runs only if you enable it, and the review still runs first."
           }
-        ]
-      },
-      "publication": {
-        "eyebrow": "MAKE YOUR CONTENT FEEL AT HOME",
-        "brand": "Your journal",
-        "issue": "IDEAS & PERSPECTIVES",
-        "title": "Stories your readers come back to.",
-        "text": "Your experience. Your perspective. A place of your own, where good ideas become stories worth reading.",
-        "byline": "Your editorial team · 4 min read",
-        "note": "Your domain. Your identity."
+        ],
+        "moreLabel": "Also in the newsroom:",
+        "more": "translations · media · series · comments · teams · custom domain"
       },
       "closing": {
-        "eyebrow": "START WITH ONE IDEA",
-        "title": "Your next story starts here.",
-        "text": "Create a home for your content. Build everything else as you grow."
+        "eyebrow": "START WITH ONE TOPIC",
+        "title": "You have the knowledge. Give it a process.",
+        "text": "Try Topiqu free for {days} days and follow your first article from sources to results."
       },
       "pricingEyebrow": "FOR INDIVIDUALS AND EDITORIAL TEAMS",
-      "compareEyebrow": "THE BIGGER PICTURE",
-      "footerLabel": "A home for your content.",
-      "allFeatures": "Included in this plan"
+      "footerLabel": "From knowledge to results.",
+      "allFeatures": "Included in this plan",
+      "after": {
+        "eyebrow": "AFTER PUBLISHING",
+        "title": "The work continues after publishing.",
+        "text": "Search data feeds both the next brief and improvements to published articles.",
+        "items": {
+          "search": {
+            "title": "Search Console",
+            "text": "See clicks, impressions, CTR and positions. Topiqu flags pages with room to grow."
+          },
+          "ai": {
+            "title": "Visibility",
+            "text": "It regularly checks selected questions in OpenAI answers and shows which sources they cite."
+          },
+          "opportunities": {
+            "title": "Next opportunities",
+            "text": "Uncovered searches and competitor citations become ideas for a new or updated article."
+          },
+          "autopilot": {
+            "title": "Optional autopilot",
+            "text": "It can revise a title or update content using Search Console data. Changes are logged and reversible."
+          }
+        },
+        "plan": "Search Console, citation tracking and SEO autopilot are available on Premium and Custom."
+      },
+      "publishing": {
+        "eyebrow": "PUBLISHING",
+        "title": "Publish wherever you need.",
+        "text": "Use Topiqu as your own publication, sync articles to WordPress or fetch them through the REST API.",
+        "items": {
+          "topiqu": {
+            "title": "Topiqu",
+            "text": "A ready-to-use publication on a Topiqu address or your own domain."
+          },
+          "wordpress": {
+            "title": "WordPress",
+            "text": "Topiqu Sync imports articles as native posts."
+          },
+          "api": {
+            "title": "REST API",
+            "text": "Fetch published content for your existing website or app."
+          }
+        }
+      }
     }
   }
 }

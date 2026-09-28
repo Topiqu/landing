@@ -1,11 +1,12 @@
 <script setup lang="ts">
-const { t } = useI18n()
+const { tm, rt } = useI18n()
 const items = computed(() =>
-  Array.from({ length: 5 }, (_, i) => ({
-    label: t('landing.faq.items.' + i + '.q'),
-    content: t('landing.faq.items.' + i + '.a'),
+  (tm('landing.faq.items') as { q: string; a: string }[]).map((item) => ({
+    label: rt(item.q),
+    content: rt(item.a),
   })),
 )
+useSchemaOrg(items.value.map((item) => defineQuestion({ name: item.label, acceptedAnswer: item.content })))
 </script>
 <template>
   <section id="faq" class="landing-section faq-section">
