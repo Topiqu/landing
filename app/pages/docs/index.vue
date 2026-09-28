@@ -3,7 +3,14 @@ definePageMeta({ layout: 'docs' })
 const { locale } = useI18n()
 const localePath = useLocalePath()
 const cs = computed(() => locale.value === 'cs')
-useSeoMeta({ title: () => (cs.value ? 'Dokumentace · Topiqu' : 'Documentation · Topiqu') })
+const apiReferencePath = computed(() => `/${locale.value}/api-reference`)
+useSeoMeta({
+  title: () => (cs.value ? 'Dokumentace · Topiqu' : 'Documentation · Topiqu'),
+  description: () =>
+    cs.value
+      ? 'Průvodci, API reference a changelog pro Topiqu External API.'
+      : 'Guides, API reference, and changelog for the Topiqu External API.',
+})
 </script>
 <template>
   <main class="docs-home">
@@ -17,7 +24,7 @@ useSeoMeta({ title: () => (cs.value ? 'Dokumentace · Topiqu' : 'Documentation �
       }}
     </p>
     <div class="docs-actions">
-      <UButton :to="localePath('/api-reference')" size="lg" trailingIcon="mdi:arrow-right">{{
+      <UButton :to="apiReferencePath" size="lg" trailingIcon="mdi:arrow-right">{{
         cs ? 'Otevřít API dokumentaci' : 'Open API reference'
       }}</UButton>
       <UButton :to="localePath('/docs/authentication')" color="neutral" variant="outline" size="lg">{{

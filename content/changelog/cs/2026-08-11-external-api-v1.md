@@ -9,6 +9,9 @@ areas:
   - integrations
 breaking: false
 featured: true
+sitemap:
+  loc: /cs/changelog/2026-08-11-external-api-v1
+  changefreq: yearly
 ---
 
 # External API v1

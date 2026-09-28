@@ -1,0 +1,82 @@
+# Topiqu — product and developer context
+
+Topiqu is an AI content operations platform. It helps teams research, create, review, translate, publish, and improve business content. Its public website is https://topiqu.com and its application and API are hosted at https://app.topiqu.com.
+
+## Product capabilities
+
+- Knowledge base (beta, Pro and higher): notes, PDF/DOCX/TXT/Markdown files, web pages and whole sitemaps become context for AI writing. Private sources are never cited publicly; only sources marked as public can become citations.
+- AI writing with editorial review (Pro and higher): article formats (news, analysis, guide, comparison, opinion, story), live web research, a fact and copy review before publishing, and a fact-check panel that compares claims with sources.
+- Article optimization score (all plans): deterministic checks for SEO, AI visibility, readability and trust, each with a concrete recommendation.
+- Visibility (Premium and Custom): regular citation checks for selected questions in OpenAI answers, competitor detection, AI crawler and referral traffic, and article opportunities for uncited questions. Coverage is a sample, not a record of private conversations.
+- Google Search Console (Premium and Custom): read-only access for article metrics, near-top and low-CTR opportunities, and an opt-in SEO autopilot limited to one article change per day with rollback.
+- Languages: English, Czech, German and French for articles, translations, emails and the app interface. Translations can publish automatically or wait for human review; published translations get their own URLs and hreflang.
+- Publishing: hosted publication on a topiqu.com subdomain or a custom domain (Pro and higher), scheduling and automated publishing, the Topiqu Sync WordPress plugin, External API v1, personal LinkedIn sharing, Google Analytics 4 and Google Ad Manager.
+- Publication features: structured data, llms.txt, markdown versions of articles, answer boxes and FAQs, comments, reactions, polls, series and author pages.
+- Media library with image provenance and publishing-rights tracking, a visual style editor (accent colours; gradients and custom fonts on Pro and higher), team members with scoped permissions, and several blogs per account.
+
+## Plans
+
+Prices are in USD per month. Every new blog starts with a 14-day trial with Premium features and 5 AI articles; no card is required to continue on Free.
+
+- Free ($0): manual editor, free topiqu.com subdomain (up to three blogs), optimization score, media library, comments and basic analytics. No AI writing; Topiqu ads are shown on the blog.
+- Pro ($49): 20 AI articles a month, knowledge base up to 50 sources, fact-check, translations, scheduling, custom domain, custom fonts and gradients, WordPress plugin, API and import. No Topiqu ads.
+- Premium ($99): everything in Pro, 30 AI articles a month, citation tracking in OpenAI answers, Search Console insights and SEO autopilot, knowledge base up to 200 sources, reader sentiment analysis, priority indexing and priority support.
+- Custom (on request): white-label, custom AI article allowance, knowledge base up to 500 sources, multiple brands and teams, apex domain setup, SLA.
+
+Extra article packs (5, 12 or 25 articles) start at $8.99 and never expire. Translations, fact-checks, prompt improvements, sentiment analysis and Search Console suggestions do not use articles.
+
+## External API v1
+
+The Topiqu External API is a read-only REST API for retrieving content published for a Topiqu site. API v1 is a stable contract. Backwards-compatible fields and endpoints may be added without changing the versioned URL; breaking changes use a new major API version.
+
+Base URL: `https://app.topiqu.com/api/v1`
+
+Every request requires the API key belonging to the site whose articles are being retrieved:
+
+```http
+x-api-key: YOUR_API_KEY
+```
+
+Do not expose an API key in public browser code or commit it to source control. Use it from a server-side environment variable.
+
+### First request
+
+```bash
+curl https://app.topiqu.com/api/v1/articles \
+  -H "x-api-key: YOUR_API_KEY"
+```
+
+The API provides endpoints for listing published articles and retrieving an article by ID. Collection requests support `page`, `limit`, and `tag` query parameters. The default page size is 10 and the maximum is 100.
+
+```http
+GET /api/v1/articles?page=2&limit=25&tag=ai,marketing
+```
+
+Use HTTP status codes as the primary error signal. Treat human-readable error messages as diagnostic text. Clients should ignore unknown response fields so backwards-compatible additions do not break integrations.
+
+## Recent releases
+
+- 2026-09-27 — Visibility in OpenAI answers: https://topiqu.com/en/changelog/2026-09-27-ai-visibility
+- 2026-09-27 — German and French: https://topiqu.com/en/changelog/2026-09-27-german-and-french
+- 2026-09-26 — Knowledge base (beta): https://topiqu.com/en/changelog/2026-09-26-knowledge-base
+- 2026-09-26 — Time and money saved in statistics: https://topiqu.com/en/changelog/2026-09-26-writing-value
+- 2026-09-24 — Media library and visual style editor: https://topiqu.com/en/changelog/2026-09-24-media-library-and-visual-style
+- 2026-09-23 — Article optimization score and fact-check: https://topiqu.com/en/changelog/2026-09-23-optimization-and-fact-check
+- 2026-09-20 — AI allowance counted in articles: https://topiqu.com/en/changelog/2026-09-20-article-allowance
+- 2026-09-02 — Redesigned publication and multilingual editor: https://topiqu.com/en/changelog/2026-09-02-publication-and-editor-redesign
+- 2026-08-27 — Search Console intelligence and SEO autopilot: https://topiqu.com/en/changelog/2026-08-27-search-console-autopilot
+- 2026-08-26 — Teams and multiple blogs: https://topiqu.com/en/changelog/2026-08-26-teams-and-multiple-blogs
+- 2026-08-11 — External API v1 (version 1.0.0). It introduced stable article list and detail endpoints, consistent response shapes, `x-api-key` authentication, pagination, tag filtering, an OpenAPI 3.1 specification, and an interactive API reference. Existing `/api/external` integrations continue to work; new integrations should use `/api/v1`: https://topiqu.com/en/changelog/2026-08-11-external-api-v1
+
+## Canonical resources
+
+- Developer home: https://topiqu.com/en/docs
+- Authentication: https://topiqu.com/en/docs/authentication
+- Pagination and filtering: https://topiqu.com/en/docs/pagination
+- Errors and compatibility: https://topiqu.com/en/docs/errors
+- Interactive API reference: https://topiqu.com/en/api-reference
+- OpenAPI specification: https://topiqu.com/openapi/v1.json
+- Changelog: https://topiqu.com/en/changelog
+- Release note: https://topiqu.com/en/changelog/2026-08-11-external-api-v1
+- Czech documentation: https://topiqu.com/cs/docs
+- Czech changelog: https://topiqu.com/cs/changelog

@@ -2,6 +2,9 @@
 title: Autentizace
 description: Bezpečné přihlášení pomocí API klíče webu v Topiqu.
 order: 2
+sitemap:
+  loc: /cs/docs/authentication
+  changefreq: monthly
 ---
 
 # Autentizace

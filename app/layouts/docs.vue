@@ -1,13 +1,14 @@
 <script setup lang="ts">
 const { locale } = useI18n()
 const localePath = useLocalePath()
+const apiReferencePath = computed(() => `/${locale.value}/api-reference`)
 </script>
 <template>
   <div class="developer-layout">
     <Header />
     <nav class="developer-nav" :aria-label="locale === 'cs' ? 'Dokumentace' : 'Documentation'">
       <NuxtLink :to="localePath('/docs')">{{ locale === 'cs' ? 'Dokumentace' : 'Documentation' }}</NuxtLink>
-      <NuxtLink :to="localePath('/api-reference')">API Reference</NuxtLink>
+      <NuxtLink :to="apiReferencePath">API Reference</NuxtLink>
       <NuxtLink :to="localePath('/changelog')">{{ locale === 'cs' ? 'Co je nového' : 'Changelog' }}</NuxtLink>
     </nav>
     <slot />

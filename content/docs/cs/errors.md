@@ -2,19 +2,22 @@
 title: Chyby a kompatibilita
 description: Zpracování chyb, upgradů a zpětně kompatibilních rozšíření.
 order: 4
+sitemap:
+  loc: /cs/docs/errors
+  changefreq: monthly
 ---
 
 # Chyby a kompatibilita
 
 Jako hlavní signál používejte HTTP status. Textovou zprávu berte pouze jako diagnostickou informaci.
 
-| Status | Význam |
-| --- | --- |
-| `400` | Neplatný požadavek nebo parametr |
-| `401` | Chybějící nebo neplatný API klíč |
-| `404` | Článek neexistuje nebo není pro tento web publikovaný |
-| `429` | Příliš mnoho požadavků |
-| `500` | Neočekávaná chyba serveru |
+| Status | Význam                                                |
+| ------ | ----------------------------------------------------- |
+| `400`  | Neplatný požadavek nebo parametr                      |
+| `401`  | Chybějící nebo neplatný API klíč                      |
+| `404`  | Článek neexistuje nebo není pro tento web publikovaný |
+| `429`  | Příliš mnoho požadavků                                |
+| `500`  | Neočekávaná chyba serveru                             |
 
 ## Pravidla verzování
 

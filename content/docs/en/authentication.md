@@ -2,6 +2,9 @@
 title: Authentication
 description: Authenticate safely with a Topiqu site API key.
 order: 2
+sitemap:
+  loc: /en/docs/authentication
+  changefreq: monthly
 ---
 
 # Authentication

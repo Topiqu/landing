@@ -2,6 +2,9 @@
 title: Pagination & filtering
 description: Navigate article collections and filter them by tags.
 order: 3
+sitemap:
+  loc: /en/docs/pagination
+  changefreq: monthly
 ---
 
 # Pagination & filtering

@@ -1,7 +1,6 @@
-// Compatibility layer for helpers present in @unhead/schema-org 2.1.15's core
+// Nuxt compatibility layer for helpers present in @unhead/schema-org 2.1.15's core
 // entry but omitted from its Vue entry. Keeping this on public package exports
 // also prevents Nitro from externalizing package-internal relative paths.
-import { injectHead, useHead } from '@unhead/vue'
 import { computed, defineComponent, h, ref, unref, type VNode } from 'vue'
 import {
   UnheadSchemaOrg,
@@ -31,6 +30,8 @@ import {
   normalizeSchemaOrgInput,
 } from '@unhead/schema-org'
 
+import { injectHead, useHead } from '#imports'
+
 export * from '@unhead/schema-org'
 
 type SchemaDefinition = (input?: never) => unknown
@@ -40,7 +41,7 @@ function shallowVNodesToText(nodes: VNode[]) {
 }
 
 function fixKey(key: string) {
-  const normalized = key.replace(/-./g, match => match[1]!.toUpperCase())
+  const normalized = key.replace(/-./g, (match) => match[1]!.toUpperCase())
   return normalized === 'type' || normalized === 'id' ? `@${normalized}` : normalized
 }
 
@@ -57,7 +58,7 @@ export function useSchemaOrg(
   unhead.use(UnheadSchemaOrg())
   const entry = useHead(normalizeSchemaOrgInput(input) as Parameters<typeof useHead>[0], options)
   const patch = entry.patch
-  entry.patch = nextInput => patch(normalizeSchemaOrgInput(nextInput as never) as Parameters<typeof useHead>[0])
+  entry.patch = (nextInput) => patch(normalizeSchemaOrgInput(nextInput as never) as Parameters<typeof useHead>[0])
   return entry
 }
 
@@ -80,7 +81,7 @@ export function defineSchemaOrgComponent(name: string, defineNode?: SchemaDefini
         return value
       })
       if (defineNode) useSchemaOrg(defineNode(unref(nodePartial) as never) as never)
-      return () => slots.default ? h(props.as || 'div', {}, [slots.default(unref(nodePartial))]) : null
+      return () => (slots.default ? h(props.as || 'div', {}, [slots.default(unref(nodePartial))]) : null)
     },
   })
 }
@@ -89,7 +90,10 @@ export const SchemaOrgArticle = defineSchemaOrgComponent('SchemaOrgArticle', def
 export const SchemaOrgBreadcrumb = defineSchemaOrgComponent('SchemaOrgBreadcrumb', defineBreadcrumb)
 export const SchemaOrgComment = defineSchemaOrgComponent('SchemaOrgComment', defineComment)
 export const SchemaOrgEvent = defineSchemaOrgComponent('SchemaOrgEvent', defineEvent)
-export const SchemaOrgFoodEstablishment = defineSchemaOrgComponent('SchemaOrgFoodEstablishment', defineFoodEstablishment)
+export const SchemaOrgFoodEstablishment = defineSchemaOrgComponent(
+  'SchemaOrgFoodEstablishment',
+  defineFoodEstablishment,
+)
 export const SchemaOrgHowTo = defineSchemaOrgComponent('SchemaOrgHowTo', defineHowTo)
 export const SchemaOrgImage = defineSchemaOrgComponent('SchemaOrgImage', defineImage)
 export const SchemaOrgJobPosting = defineSchemaOrgComponent('SchemaOrgJobPosting', defineJobPosting)

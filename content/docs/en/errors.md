@@ -2,19 +2,22 @@
 title: Errors & compatibility
 description: Handle API failures, upgrades, and backwards-compatible additions.
 order: 4
+sitemap:
+  loc: /en/docs/errors
+  changefreq: monthly
 ---
 
 # Errors & compatibility
 
 Use the HTTP status code as the primary signal and treat the human-readable message as diagnostic text.
 
-| Status | Meaning |
-| --- | --- |
-| `400` | Invalid request or parameter |
-| `401` | Missing or invalid API key |
-| `404` | Article does not exist or is not published for this site |
-| `429` | Too many requests |
-| `500` | Unexpected server error |
+| Status | Meaning                                                  |
+| ------ | -------------------------------------------------------- |
+| `400`  | Invalid request or parameter                             |
+| `401`  | Missing or invalid API key                               |
+| `404`  | Article does not exist or is not published for this site |
+| `429`  | Too many requests                                        |
+| `500`  | Unexpected server error                                  |
 
 ## Versioning policy
 

@@ -11,8 +11,10 @@ onMounted(() => {
 })
 const links = computed(() => [
   { label: t('landing.design.nav.features'), to: localePath('/') + '#specs' },
+  { label: t('landing.design.nav.capabilities'), to: localePath('/') + '#features' },
   { label: t('landing.pricing.title'), to: localePath('/') + '#pricing' },
   { label: t('landing.design.nav.docs'), to: localePath('/docs') },
+  { label: t('landing.design.nav.changelog'), to: localePath('/changelog') },
 ])
 </script>
 <template>

@@ -17,7 +17,7 @@
         :variant="activeFilter === filter ? 'soft' : 'ghost'"
         :aria-pressed="activeFilter === filter"
         @click="activeFilter = filter"
-        >{{ filter === 'all' ? copy.all : filter }}</UButton
+        >{{ filter === 'all' ? copy.all : areaLabel(filter) }}</UButton
       >
     </div>
     <div class="release-list">
@@ -29,14 +29,14 @@
       >
         <div class="release-meta">
           <time :datetime="entry.date">{{ formatDate(entry.date) }}</time
-          ><span>v{{ entry.version }} · {{ entry.type }}</span
+          ><span>v{{ entry.version }} · {{ typeLabel(entry.type) }}</span
           ><span v-if="entry.breaking">Breaking</span>
         </div>
         <div>
           <h2>{{ entry.title }} <span aria-hidden="true">↗</span></h2>
           <p>{{ entry.description }}</p>
           <div class="release-areas">
-            <span v-for="area in entry.areas" :key="area">{{ area }}</span>
+            <span v-for="area in entry.areas" :key="area">{{ areaLabel(area) }}</span>
           </div>
         </div>
       </NuxtLinkLocale>
@@ -47,10 +47,11 @@
 definePageMeta({ layout: 'docs' })
 const { locale } = useI18n()
 const activeFilter = ref('all')
+const areaLabel = (area: string) => changelogAreaLabel(locale.value, area)
+const typeLabel = (type: string) => changelogTypeLabel(locale.value, type)
 const { data: entries } = await useAsyncData(
-  `changelog-${locale.value}`,
+  () => `changelog-${locale.value}`,
   () => queryCollection('changelog').where('path', 'LIKE', `/changelog/${locale.value}/%`).order('date', 'DESC').all(),
-  { watch: [locale] },
 )
 const filters = computed(() => ['all', ...new Set((entries.value || []).flatMap((entry) => entry.areas))])
 const filteredEntries = computed(() =>

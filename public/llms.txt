@@ -1,0 +1,33 @@
+# Topiqu
+
+> Topiqu is an AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.
+
+Topiqu writes articles from a publisher's own knowledge base and live research, reviews and fact-checks them, scores them for SEO and AI answers, translates them into English, Czech, German and French, publishes them on a hosted blog, WordPress or through an API, and measures clicks from Google Search Console and citations in selected OpenAI answers. Plans: Free ($0), Pro ($49/month), Premium ($99/month) and Custom; every new blog starts with a 14-day trial and 5 AI articles.
+
+Topiqu provides a read-only External API v1 for retrieving published articles. The canonical website is https://topiqu.com and the application/API host is https://app.topiqu.com.
+
+## Product
+
+- [Homepage](https://topiqu.com/en): Features, plans and pricing, comparison and FAQ.
+- [What's new](https://topiqu.com/en/changelog): Release notes for the product and the public API.
+
+## Developer documentation
+
+- [External API overview](https://topiqu.com/en/docs): Concepts, base URL, versioning, and first request.
+- [Authentication](https://topiqu.com/en/docs/authentication): API-key authentication with the `x-api-key` header.
+- [Pagination and filtering](https://topiqu.com/en/docs/pagination): Collection pagination and tag filters.
+- [Errors and compatibility](https://topiqu.com/en/docs/errors): HTTP errors and compatibility guarantees.
+- [Interactive API reference](https://topiqu.com/en/api-reference): Endpoint and schema reference.
+- [OpenAPI 3.1 specification](https://topiqu.com/openapi/v1.json): Machine-readable API contract.
+- [Changelog](https://topiqu.com/en/changelog): Product and public API changes.
+- [Full LLM context](https://topiqu.com/llms-full.txt): Consolidated product and API documentation.
+
+## Localized documentation
+
+- [Česká dokumentace](https://topiqu.com/cs/docs)
+- [Český changelog](https://topiqu.com/cs/changelog)
+
+## Feeds
+
+- [RSS changelog feed](https://topiqu.com/api/changelog/rss.xml)
+- [JSON changelog feed](https://topiqu.com/api/changelog/feed.json)

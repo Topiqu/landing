@@ -2,6 +2,9 @@
 title: Stránkování a filtrování
 description: Procházejte kolekce článků a filtrujte je podle štítků.
 order: 3
+sitemap:
+  loc: /cs/docs/pagination
+  changefreq: monthly
 ---
 
 # Stránkování a filtrování

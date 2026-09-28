@@ -15,7 +15,7 @@
           {{ item.title }}
         </NuxtLinkLocale>
         <a
-          href="/api-reference"
+          :href="`/${locale}/api-reference`"
           class="whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium text-slate-600 no-underline hover:bg-white hover:text-slate-950 dark:text-slate-400 dark:hover:bg-white/5 dark:hover:text-white"
         >
           {{ locale === 'cs' ? 'API reference' : 'API reference' }} ↗
@@ -48,20 +48,22 @@ const contentPath = computed(
   () => `/docs/${locale.value}${slug.value && slug.value !== 'index' ? `/${slug.value}` : ''}`,
 )
 const { data: page } = await useAsyncData(
-  `docs-${contentPath.value}`,
+  () => `docs-${contentPath.value}`,
   () => queryCollection('docs').path(contentPath.value).first(),
-  { watch: [contentPath] },
 )
 const { data: navigation } = await useAsyncData(
-  `docs-navigation-${locale.value}`,
+  () => `docs-navigation-${locale.value}`,
   () =>
     queryCollection('docs')
       .where('path', 'LIKE', `/docs/${locale.value}/%`)
       .order('order', 'ASC')
       .select('title', 'path', 'stem')
       .all(),
-  { watch: [locale] },
 )
+
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Documentation page not found' })
+}
 
 const docsUrl = (stem: string) => {
   const clean = stem.replace(`docs/${locale.value}/`, '').replace(/(^|\/)index$/, '')
@@ -72,4 +74,10 @@ useSeoMeta({
   title: () => (page.value ? `${page.value.title} · Topiqu Developers` : 'Topiqu Developers'),
   description: () => page.value?.description,
 })
+useSchemaOrg([
+  defineWebPage({
+    name: page.value.title,
+    description: page.value.description,
+  }),
+])
 </script>

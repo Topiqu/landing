@@ -2,6 +2,9 @@
 title: External API
 description: Integrate published Topiqu articles into your website or application.
 order: 1
+sitemap:
+  loc: /en/docs
+  changefreq: monthly
 ---
 
 # Build with Topiqu
@@ -29,5 +32,5 @@ The API returns JSON. Dates use ISO 8601 in UTC, list endpoints include paginati
 
 - Read [Authentication](/en/docs/authentication) before handling a production key.
 - Learn how [pagination and filtering](/en/docs/pagination) work.
-- Open the full [interactive API reference](/api-reference).
+- Open the full [interactive API reference](/en/api-reference).
 - Follow API changes in the [changelog](/en/changelog).

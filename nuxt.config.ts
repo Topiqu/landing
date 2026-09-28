@@ -5,7 +5,7 @@ import { topiquIcons } from './shared/brand'
 export default defineNuxtConfig({
   compatibilityDate: '2026-05-21',
   alias: {
-    '@unhead/schema-org/vue': fileURLToPath(new URL('./shared/schema-org-vue.ts', import.meta.url)),
+    '@unhead/schema-org/vue': fileURLToPath(new URL('./app/schema-org-vue.ts', import.meta.url)),
   },
 
   devtools: { enabled: true },
@@ -47,10 +47,11 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@nuxtjs/i18n',
+    // SEO must register its Nuxt Content hooks before Content parses files.
+    '@nuxtjs/seo',
     '@nuxt/icon',
     '@nuxt/image',
     '@nuxt/content',
-    '@nuxtjs/seo',
     '@nuxtjs/turnstile',
     '@pinia/nuxt',
     'pinia-plugin-persistedstate/nuxt',
@@ -111,24 +112,17 @@ export default defineNuxtConfig({
         'frame-src': ["'self'", 'https://challenges.cloudflare.com'],
         'connect-src': ["'self'", 'https:'],
         'frame-ancestors': ["'self'"],
-        'script-src': ["'self'", "'unsafe-inline'", 'blob:', 'https://challenges.cloudflare.com'],
+        'script-src': ["'self'", "'unsafe-inline'", "'wasm-unsafe-eval'", 'blob:', 'https://challenges.cloudflare.com'],
       },
     },
     xssValidator: false,
   },
 
   routeRules: {
-    // Scalar's interactive UI uses browser workers; keep it out of server rendering.
-    '/en/api-reference': { ssr: false },
-    '/en/api-reference/**': { ssr: false },
-    '/cs/api-reference': { ssr: false },
-    '/cs/api-reference/**': { ssr: false },
-    '/api-reference': { redirect: '/en/api-reference' },
-    '/api-reference/**': { ssr: false },
+    // Scalar itself is client-only, but the page keeps an SSR fallback so
+    // crawlers receive a title, description and a link to the OpenAPI spec.
     '/_scalar': { redirect: '/en/api-reference' },
     '/_scalar/**': { redirect: '/en/api-reference' },
-    // Keep the language-neutral developer URL useful.
-    '/docs': { redirect: '/en/docs' },
     // Landing pages — prerender for instant TTFB
     // OAuth reviewers and crawlers must receive an HTTP redirect, not i18n's tiny
     // meta-refresh shell, otherwise they never inspect the actual public homepage.
@@ -163,6 +157,7 @@ export default defineNuxtConfig({
   },
 
   i18n: {
+    baseUrl: 'https://topiqu.com',
     locales: [
       {
         code: 'en',
@@ -191,6 +186,9 @@ export default defineNuxtConfig({
     compilation: {
       strictMessage: false,
       escapeHtml: false,
+    },
+    experimental: {
+      strictSeo: true,
     },
     customRoutes: 'config',
     pages: {
@@ -233,11 +231,71 @@ export default defineNuxtConfig({
   },
 
   site: {
+    url: 'https://topiqu.com',
     name: 'Topiqu',
     description:
       'AI content operations platform for researching, creating, reviewing, translating, publishing, and improving business content.',
     defaultLocale: 'en',
     indexable: true,
+  },
+
+  sitemap: {
+    // A single bilingual sitemap is simpler and avoids dropping user/content
+    // sources when the i18n module partitions dynamic URLs into child maps.
+    sitemaps: false,
+    // Static routes are listed below; Content remains the only automatic
+    // source. This prevents duplicates from i18n pages, route rules and
+    // prerender discovery.
+    excludeAppSources: ['@nuxtjs/i18n:pages', 'nuxt:pages', 'nuxt:route-rules', 'nuxt:prerender'],
+    // Onboarding is intentionally noindex and must not be advertised here.
+    exclude: ['/en/onboarding/**', '/cs/onboarding/**'],
+    // Dynamic index/reference pages have no one-to-one Content document.
+    urls: [
+      '/en',
+      '/cs',
+      '/en/privacy-policy',
+      '/cs/ochrana-soukromi',
+      '/en/terms-of-service',
+      '/cs/obchodni-podminky',
+      {
+        loc: '/en/docs',
+        _i18nTransform: false,
+        alternatives: [
+          { hreflang: 'x-default', href: '/en/docs' },
+          { hreflang: 'en-US', href: '/en/docs' },
+          { hreflang: 'cs-CZ', href: '/cs/docs' },
+        ],
+      },
+      {
+        loc: '/cs/docs',
+        _i18nTransform: false,
+        alternatives: [
+          { hreflang: 'x-default', href: '/en/docs' },
+          { hreflang: 'en-US', href: '/en/docs' },
+          { hreflang: 'cs-CZ', href: '/cs/docs' },
+        ],
+      },
+      '/en/changelog',
+      '/cs/changelog',
+      {
+        loc: '/en/api-reference',
+        _i18nTransform: false,
+        alternatives: [
+          { hreflang: 'x-default', href: '/en/api-reference' },
+          { hreflang: 'en-US', href: '/en/api-reference' },
+          { hreflang: 'cs-CZ', href: '/cs/api-reference' },
+        ],
+      },
+      {
+        loc: '/cs/api-reference',
+        _i18nTransform: false,
+        alternatives: [
+          { hreflang: 'x-default', href: '/en/api-reference' },
+          { hreflang: 'en-US', href: '/en/api-reference' },
+          { hreflang: 'cs-CZ', href: '/cs/api-reference' },
+        ],
+      },
+    ],
   },
 
   // Dynamické (island) OG obrázky nejsou na Nuxt 4.4 (unhead v2) funkční:
@@ -265,13 +323,7 @@ export default defineNuxtConfig({
 
   vite: {
     optimizeDeps: {
-      include: [
-        '@vue/devtools-core',
-        '@vue/devtools-kit',
-        '@zxcvbn-ts/core',
-        'slugify',
-        'zod',
-      ],
+      include: ['@vue/devtools-core', '@vue/devtools-kit', '@zxcvbn-ts/core', 'slugify', 'zod'],
     },
   },
 

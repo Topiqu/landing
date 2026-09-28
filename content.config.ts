@@ -1,5 +1,12 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
 
+const sitemapSchema = z
+  .object({
+    loc: z.string(),
+    changefreq: z.enum(['always', 'hourly', 'daily', 'weekly', 'monthly', 'yearly', 'never']).optional(),
+  })
+  .optional()
+
 export default defineContentConfig({
   collections: {
     docs: defineCollection({
@@ -9,6 +16,7 @@ export default defineContentConfig({
         title: z.string(),
         description: z.string(),
         order: z.number(),
+        sitemap: sitemapSchema,
       }),
     }),
     changelog: defineCollection({
@@ -23,6 +31,7 @@ export default defineContentConfig({
         areas: z.array(z.string()),
         breaking: z.boolean().default(false),
         featured: z.boolean().default(false),
+        sitemap: sitemapSchema,
       }),
     }),
   },

@@ -2,6 +2,9 @@
 title: Externí API
 description: Napojte publikované články z Topiqu na svůj web nebo aplikaci.
 order: 1
+sitemap:
+  loc: /cs/docs
+  changefreq: monthly
 ---
 
 # Tvořte s Topiqu
@@ -29,5 +32,5 @@ API vrací JSON. Data používají ISO 8601 v UTC, seznamy obsahují metadata st
 
 - Před použitím produkčního klíče si přečtěte [Autentizaci](/cs/docs/authentication).
 - Projděte si [stránkování a filtrování](/cs/docs/pagination).
-- Otevřete kompletní [interaktivní API reference](/api-reference).
+- Otevřete kompletní [interaktivní API reference](/cs/api-reference).
 - Sledujte změny API v [changelogu](/cs/changelog).
