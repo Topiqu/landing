@@ -37,7 +37,7 @@
 .landing-page {
   color: var(--landing-ink);
 }
-.hero-grid > *,
+.hero-inner > *,
 .feature-grid > *,
 .integration-grid > *,
 .faq-grid > *,
@@ -78,23 +78,39 @@
   gap: 12px;
 }
 .hero-section {
-  padding-top: 80px;
-  background: var(--landing-surface);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-block: clamp(64px, 7vw, 104px) clamp(64px, 8vw, 112px);
+  background: linear-gradient(180deg, var(--landing-surface) 0%, var(--landing-tint) 100%);
 }
-.hero-grid {
-  display: grid;
-  grid-template-columns: 0.95fr 1.05fr;
-  gap: 64px;
-  align-items: center;
-  padding-bottom: 70px;
+.hero-section::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--landing-accent) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--landing-accent) 7%, transparent) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: linear-gradient(90deg, #000, transparent 30%, transparent 70%, #000);
+}
+.hero-inner {
+  position: relative;
+  text-align: center;
 }
 .hero-copy {
-  padding-bottom: 28px;
+  max-width: 1100px;
+  margin-inline: auto;
+}
+.hero-copy .eyebrow {
+  justify-content: center;
 }
 .hero-copy h1 {
-  font-size: clamp(2.8rem, 4.2vw, 3.9rem);
-  line-height: 1.075;
-  letter-spacing: -0.058em;
+  font-size: clamp(2.5rem, 5.2vw, 4.5rem);
+  line-height: 1.1;
+  letter-spacing: -0.055em;
   font-weight: 650;
   text-wrap: balance;
 }
@@ -103,24 +119,67 @@
   color: var(--landing-accent);
 }
 .hero-copy .hero-description {
-  margin-top: 28px;
-  max-width: 470px;
+  margin: 28px auto 0;
+  max-width: 660px;
   font-size: 17px;
   line-height: 1.8;
   color: var(--landing-muted);
 }
-.hero-actions {
-  margin-top: 32px;
+.hero-signup {
+  max-width: 560px;
+  margin: 36px auto 0;
+  padding: 6px;
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
+  align-items: stretch;
+  gap: 6px;
+  background: var(--landing-surface);
+  border: 1px solid var(--landing-line);
+  border-radius: calc(var(--ui-radius) + 6px);
+  box-shadow: 0 8px 24px -16px color-mix(in srgb, var(--landing-accent) 35%, transparent);
+}
+.hero-signup:focus-within {
+  border-color: var(--landing-accent);
+}
+.hero-email-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.hero-signup input[type='email'] {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 0;
+  background: transparent;
+  color: var(--landing-ink);
+  font-size: 15px;
+}
+.hero-signup input::placeholder {
+  color: var(--landing-muted);
+  opacity: 1;
+}
+.hero-signup input:focus-visible {
+  outline-offset: -3px;
+}
+.hero-signup button {
+  flex-shrink: 0;
+  justify-content: center;
+  min-height: 48px;
+  padding-inline: 24px;
 }
 .hero-copy .hero-note {
   font-size: 12px;
   line-height: 1.7;
   color: var(--landing-muted);
-  margin-top: 18px;
+  margin-top: 16px;
+}
+.hero-secondary {
+  margin-top: 22px;
 }
 .hero-news {
   display: inline-flex;
@@ -945,21 +1004,7 @@
 .system-status > span[data-status='maintenance'] {
   background: #2563eb;
 }
-@media (min-width: 1440px) {
-  .hero-section {
-    padding-top: 100px;
-  }
-  .hero-grid {
-    padding-bottom: 85px;
-  }
-}
 @media (max-width: 1100px) {
-  .hero-grid {
-    gap: 32px;
-  }
-  .hero-copy h1 {
-    font-size: 46px;
-  }
   .feature-grid,
   .integration-grid,
   .faq-grid {
@@ -970,9 +1015,6 @@
   }
   .plan-price strong {
     font-size: 28px;
-  }
-  .hero-actions {
-    gap: 8px;
   }
   .workflow-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -995,27 +1037,10 @@
   }
 }
 @media (max-width: 900px) {
-  .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 45px;
-  }
-  .hero-copy {
-    padding: 0;
-    max-width: 650px;
-  }
-  .hero-copy h1 {
-    font-size: clamp(42px, 7vw, 60px);
-  }
-  .hero-copy .hero-description {
-    max-width: 560px;
-  }
   .product-preview {
     width: 100%;
     max-width: 600px;
     margin-inline: auto;
-  }
-  .hero-section {
-    padding-top: 55px;
   }
   .feature-grid,
   .faq-grid {
@@ -1057,25 +1082,23 @@
     width: calc(100% - 40px);
   }
   .hero-section {
-    padding-top: 42px;
-  }
-  .hero-grid {
-    padding-bottom: 32px;
+    padding-block: 52px 56px;
   }
   .hero-copy h1 {
-    font-size: 42px;
+    font-size: clamp(2.1rem, 8.5vw, 2.8rem);
   }
   .hero-copy .hero-description {
     font-size: 16px;
     line-height: 1.75;
     margin-top: 22px;
   }
-  .hero-actions {
-    align-items: stretch;
+  .hero-signup {
+    margin-top: 28px;
     flex-direction: column;
   }
-  .hero-actions > a {
-    justify-content: center;
+  .hero-section::before {
+    background-size: 48px 48px;
+    opacity: 0.5;
   }
   .landing-page .eyebrow {
     font-size: 10px;

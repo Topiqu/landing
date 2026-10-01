@@ -277,6 +277,7 @@
         "accent": "to content people find.",
         "description": "Topiqu finds topics worth covering. It combines your own sources with live research, checks the claims and publishes the article. Then it tracks Google results and citations in OpenAI answers to show what to improve next.",
         "cta": "Start for free",
+        "emailPlaceholder": "Your email address",
         "secondary": "See how it works",
         "note": "{days}-day trial with {articles} AI articles. No card required."
       },

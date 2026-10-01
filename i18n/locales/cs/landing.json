@@ -269,6 +269,7 @@
         "accent": "k obsahu, který je vidět.",
         "description": "Topiqu zjistí, o čem má smysl psát. Z vašich podkladů a aktuálních zdrojů připraví článek, ověří jeho tvrzení a publikuje ho. Pak sleduje výsledky v Googlu a citace v OpenAI a ukáže, co zlepšit dál.",
         "cta": "Začít zdarma",
+        "emailPlaceholder": "Váš e-mail",
         "secondary": "Jak to funguje",
         "note": "{days} dní zdarma a {articles} AI článků. Bez platební karty."
       },
