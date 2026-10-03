@@ -1,6 +1,6 @@
 <template>
   <section class="landing-section connector-section">
-    <div class="landing-container">
+    <div class="landing-container connector-grid">
       <div class="section-heading connector-heading">
         <p class="eyebrow">{{ $t('landing.design.connector.eyebrow') }}</p>
         <h2>{{ $t('landing.design.connector.title') }}</h2>
@@ -191,59 +191,59 @@ const sheet = computed(() =>
       },
 )
 
-// Two hand-placed compositions: `wide` (1200 × 620) and `tall` (400 × 1040). Wires are computed from the same
+// Two hand-placed compositions: `wide` (900 × 540) and `tall` (400 × 1040). Wires are computed from the same
 // numbers, so they always meet the fragments regardless of how the stage is scaled.
 const layouts = {
-  wide: { width: 1200, height: 620, hub: { x: 672, y: 310, size: 124 }, article: { x: 808, y: 108, w: 392, h: 404 } },
+  wide: { width: 900, height: 540, hub: { x: 492, y: 270, size: 96 }, article: { x: 584, y: 52, w: 316, h: 436 } },
   tall: { width: 400, height: 1040, hub: { x: 200, y: 640, size: 104 }, article: { x: 16, y: 728, w: 368, h: 300 } },
 } as const
 const fragments: Fragment[] = [
   {
     kind: 'search',
     source: 'web',
-    wide: { x: 24, y: 28, w: 270, h: 108, r: -4 },
+    wide: { x: 0, y: 14, w: 222, h: 108, r: -4 },
     tall: { x: 8, y: 0, w: 220, h: 104, r: -4 },
   },
   {
     kind: 'pdf',
     source: 'data',
-    wide: { x: 318, y: 62, w: 224, h: 78, r: 5 },
+    wide: { x: 232, y: 36, w: 194, h: 78, r: 5 },
     tall: { x: 214, y: 34, w: 180, h: 78, r: 5 },
   },
   {
     kind: 'forum',
     source: 'web',
-    wide: { x: 44, y: 168, w: 250, h: 104, r: 3 },
+    wide: { x: 10, y: 146, w: 210, h: 112, r: 3 },
     tall: { x: 4, y: 130, w: 200, h: 112, r: 3 },
   },
   {
     kind: 'colors',
     source: 'brand',
-    wide: { x: 334, y: 186, w: 180, h: 104, r: -6 },
+    wide: { x: 240, y: 150, w: 170, h: 104, r: -6 },
     tall: { x: 222, y: 140, w: 170, h: 104, r: -6 },
   },
   {
     kind: 'sheet',
     source: 'data',
-    wide: { x: 12, y: 304, w: 262, h: 112, r: -2 },
+    wide: { x: 0, y: 284, w: 228, h: 112, r: -2 },
     tall: { x: 10, y: 268, w: 230, h: 112, r: -2 },
   },
   {
     kind: 'tone',
     source: 'brand',
-    wide: { x: 300, y: 322, w: 228, h: 106, r: 4 },
+    wide: { x: 244, y: 292, w: 168, h: 104, r: 4 },
     tall: { x: 232, y: 276, w: 160, h: 100, r: 4 },
   },
   {
     kind: 'query',
     source: 'search',
-    wide: { x: 64, y: 456, w: 246, h: 82, r: 2 },
+    wide: { x: 14, y: 428, w: 212, h: 82, r: 2 },
     tall: { x: 16, y: 410, w: 210, h: 82, r: 2 },
   },
   {
     kind: 'notes',
     source: 'data',
-    wide: { x: 322, y: 462, w: 206, h: 104, r: -5 },
+    wide: { x: 242, y: 420, w: 168, h: 110, r: -5 },
     tall: { x: 226, y: 404, w: 166, h: 110, r: -5 },
   },
 ]
@@ -251,7 +251,7 @@ const fragments: Fragment[] = [
 const frame = useTemplateRef<HTMLElement>('frame')
 const { width: frameWidth } = useElementSize(frame)
 const ready = computed(() => frameWidth.value > 0)
-const layoutName = computed<'wide' | 'tall'>(() => (frameWidth.value && frameWidth.value < 720 ? 'tall' : 'wide'))
+const layoutName = computed<'wide' | 'tall'>(() => (frameWidth.value && frameWidth.value < 520 ? 'tall' : 'wide'))
 const layout = computed(() => layouts[layoutName.value])
 const scale = computed(() => (frameWidth.value ? frameWidth.value / layout.value.width : 1))
 
@@ -315,18 +315,28 @@ watch([visible, animated, svg], () => {
   overflow: hidden;
   background: var(--landing-surface);
 }
+/* The diagram leads and the copy sits beside it, mirroring the showcase above (copy left, product right). */
+.connector-grid {
+  display: grid;
+  grid-template-areas: 'stage heading';
+  grid-template-columns: minmax(0, 7.4fr) minmax(0, 4.6fr);
+  gap: 64px;
+  align-items: center;
+}
 .connector-heading {
-  margin-inline: auto;
-  text-align: center;
-}
-.connector-heading .eyebrow {
-  justify-content: center;
-}
-.landing-page .connector-heading .section-description {
-  margin-inline: auto;
+  grid-area: heading;
+  margin-bottom: 0;
 }
 .connector-frame {
   position: relative;
+  grid-area: stage;
+}
+@media (max-width: 1000px) {
+  .connector-grid {
+    grid-template-areas: 'heading' 'stage';
+    grid-template-columns: minmax(0, 1fr);
+    gap: 38px;
+  }
 }
 .connector-stage {
   position: absolute;

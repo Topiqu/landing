@@ -17,8 +17,8 @@ useSchemaOrg([
 <template>
   <div class="landing-page">
     <Hero />
-    <Connector />
     <Showcase />
+    <Connector />
     <AfterPublishing />
     <Features />
     <Pricing />

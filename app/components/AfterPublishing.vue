@@ -48,7 +48,7 @@
         <li class="after-card after-ai">
           <div class="after-visual" aria-hidden="true">
             <div class="after-visual-head">
-              <span><Icon name="mdi:radar" />OpenAI</span>
+              <span><span class="after-openai" />OpenAI</span>
             </div>
             <p class="after-metric">
               <strong>{{ $t('landing.design.after.dashboard.citedValue') }}</strong>
@@ -231,29 +231,13 @@ onBeforeUnmount(() => cancelAnimationFrame(cardFrame))
 </script>
 
 <style scoped>
-/* A permanently dark band: redefining the landing tokens re-themes headings and mockup primitives inside it. */
+/* Follows the page theme like the other sections; the cards sit on the page background. */
 .after-section {
-  --landing-bg: #0b1222;
-  --landing-surface: #131d31;
-  --landing-ink: #f1f5f9;
-  --landing-muted: #a7b4c8;
-  --landing-line: #26334a;
-  --landing-accent: #a5b4fc;
-  --landing-tint: #1f2a4a;
-  --landing-success: #6ee7b7;
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  border-top: 0;
   background: var(--landing-bg);
   color: var(--landing-ink);
-  color-scheme: dark;
-}
-:global(.dark) .after-section {
-  --landing-bg: #070c18;
-  --landing-surface: #101a2d;
-  --landing-line: #223049;
-  border-block: 1px solid var(--landing-line);
 }
 .after-canvas {
   position: absolute;
@@ -352,6 +336,14 @@ onBeforeUnmount(() => cancelAnimationFrame(cardFrame))
 .after-visual-head .iconify {
   color: var(--landing-accent);
   font-size: 16px;
+}
+/* The OpenAI mark as a mask, so it takes the heading colour like the wordmark next to it. */
+.after-openai {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  background: currentColor;
+  mask: url('/brand/products/openai.svg') center / contain no-repeat;
 }
 .after-kpis {
   display: grid;
