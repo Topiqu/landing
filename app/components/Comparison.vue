@@ -6,8 +6,57 @@
         <h2>{{ copy.title }}</h2>
         <p class="section-description">{{ copy.description }}</p>
       </div>
-      <div class="comparison-scroll" tabindex="0" role="region" :aria-label="copy.title">
-        <table class="comparison-table">
+      <div class="comparison-pager">
+        <div role="tablist" class="comparison-tabs" :aria-label="copy.pagesLabel" @keydown="onKeydown">
+          <button
+            v-for="(group, index) in groups"
+            :id="`comparison-tab-${index}`"
+            :key="group.label"
+            type="button"
+            role="tab"
+            :aria-selected="index === page"
+            aria-controls="comparison-panel"
+            :tabindex="index === page ? 0 : -1"
+            @click="page = index"
+          >
+            {{ group.label }}
+            <small>{{ group.rows.length }}</small>
+          </button>
+        </div>
+        <div class="comparison-steps">
+          <span>{{ page + 1 }} / {{ groups.length }}</span>
+          <UButton
+            type="button"
+            color="neutral"
+            variant="outline"
+            size="sm"
+            square
+            icon="mdi:chevron-left"
+            :disabled="page === 0"
+            :aria-label="copy.previous"
+            @click="page--"
+          />
+          <UButton
+            type="button"
+            color="neutral"
+            variant="outline"
+            size="sm"
+            square
+            icon="mdi:chevron-right"
+            :disabled="page === groups.length - 1"
+            :aria-label="copy.next"
+            @click="page++"
+          />
+        </div>
+      </div>
+      <div
+        id="comparison-panel"
+        class="comparison-scroll"
+        tabindex="0"
+        role="tabpanel"
+        :aria-labelledby="`comparison-tab-${page}`"
+      >
+        <table class="comparison-table" :data-closed="page < groups.length - 1 || undefined">
           <thead>
             <tr>
               <th scope="col">{{ copy.feature }}</th>
@@ -19,10 +68,7 @@
               </th>
             </tr>
           </thead>
-          <tbody v-for="group in groups" :key="group.label">
-            <tr class="comparison-group">
-              <th scope="colgroup" :colspan="tools.length + 1">{{ group.label }}</th>
-            </tr>
+          <tbody v-for="(group, groupIndex) in groups" v-show="groupIndex === page" :key="group.label">
             <tr v-for="row in group.rows" :key="row.label">
               <th scope="row">
                 <strong>{{ row.label }}</strong>
@@ -36,7 +82,7 @@
               </td>
             </tr>
           </tbody>
-          <tbody>
+          <tbody v-show="page === groups.length - 1">
             <tr class="comparison-price">
               <th scope="row">
                 <strong>{{ copy.priceLabel }}</strong>
@@ -56,12 +102,14 @@
           <li><Icon :name="icons.no" class="comparison-legend-no" aria-hidden="true" />{{ copy.legendNo }}</li>
           <li>{{ copy.legendDate }}</li>
         </ul>
-        <div class="comparison-sources">
-          <span>{{ copy.sources }}</span>
-          <a v-for="link in sources" :key="link.url" :href="link.url" target="_blank" rel="noopener noreferrer"
-            >{{ link.label }}<Icon name="mdi:arrow-top-right" aria-hidden="true"
-          /></a>
-        </div>
+        <details class="comparison-sources">
+          <summary>{{ copy.sources }} {{ sources.length }}<Icon name="mdi:chevron-down" aria-hidden="true" /></summary>
+          <div>
+            <a v-for="link in sources" :key="link.url" :href="link.url" target="_blank" rel="noopener noreferrer"
+              >{{ link.label }}<Icon name="mdi:arrow-top-right" aria-hidden="true"
+            /></a>
+          </div>
+        </details>
       </div>
     </div>
   </section>
@@ -219,7 +267,10 @@ const copy = computed(() =>
         legendYes: 'popsáno ve veřejné dokumentaci nebo ceníku',
         legendNo: 've veřejné dokumentaci jsme nenašli',
         legendDate: 'Stav k říjnu 2026. Pokud je údaj nepřesný, napište nám.',
-        sources: 'Zdroje:',
+        sources: 'Zdroje',
+        pagesLabel: 'Oblasti srovnání',
+        previous: 'Předchozí oblast',
+        next: 'Další oblast',
       }
     : {
         eyebrow: 'COMPARISON',
@@ -234,9 +285,23 @@ const copy = computed(() =>
         legendYes: 'described in public documentation or pricing',
         legendNo: 'not found in public documentation',
         legendDate: 'As of October 2026. If anything is inaccurate, let us know.',
-        sources: 'Sources:',
+        sources: 'Sources',
+        pagesLabel: 'Comparison areas',
+        previous: 'Previous area',
+        next: 'Next area',
       },
 )
+
+// One feature group per page keeps the table short; the price row closes the last page.
+const page = shallowRef(0)
+const onKeydown = (event: KeyboardEvent) => {
+  const offsets: Record<string, number> = { ArrowRight: 1, ArrowLeft: -1 }
+  const offset = offsets[event.key]
+  if (!offset) return
+  event.preventDefault()
+  page.value = (page.value + offset + groups.value.length) % groups.value.length
+  nextTick(() => document.getElementById(`comparison-tab-${page.value}`)?.focus())
+}
 
 const sources = [
   { label: 'Jasper · pricing', url: 'https://www.jasper.ai/pricing' },
@@ -264,6 +329,76 @@ const sources = [
 </script>
 
 <style scoped>
+.comparison-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 18px;
+}
+.comparison-tabs {
+  display: flex;
+  gap: 4px;
+  max-width: 100%;
+  padding: 4px;
+  overflow-x: auto;
+  border: 1px solid var(--landing-line);
+  border-radius: 999px;
+  background: var(--landing-surface);
+}
+.comparison-tabs button {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--landing-muted);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 650;
+  cursor: pointer;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
+}
+.comparison-tabs button:hover {
+  color: var(--landing-ink);
+}
+.comparison-tabs button[aria-selected='true'] {
+  background: var(--landing-tint);
+  color: var(--landing-accent);
+}
+.comparison-tabs button:focus-visible {
+  outline: 2px solid var(--landing-accent);
+  outline-offset: 2px;
+}
+.comparison-tabs small {
+  display: inline-grid;
+  place-items: center;
+  min-width: 20px;
+  height: 20px;
+  padding-inline: 5px;
+  border-radius: 999px;
+  background: var(--landing-bg);
+  color: var(--landing-muted);
+  font-size: 11px;
+  font-weight: 700;
+}
+.comparison-steps {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--landing-muted);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.comparison-steps > span {
+  margin-right: 4px;
+}
 .comparison-scroll {
   overflow-x: auto;
 }
@@ -313,14 +448,6 @@ const sources = [
   color: var(--landing-muted);
   font-size: 13px;
   font-weight: 500;
-}
-.comparison-group th {
-  padding: 26px 16px 8px;
-  color: var(--landing-accent);
-  font-size: 11px;
-  font-weight: 750;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
 }
 .comparison-tool {
   display: inline-flex;
@@ -381,18 +508,17 @@ const sources = [
 .comparison-table td[data-own] {
   border-bottom-color: color-mix(in srgb, var(--landing-accent) 25%, var(--landing-tint));
 }
-/* Group headings interrupt the rows, but the Topiqu column carries on through them. */
-.comparison-group th {
-  --own-start: 34%;
-  --own-end: calc(34% + 66% / 5);
-  background: linear-gradient(
-    90deg,
-    transparent var(--own-start),
-    var(--landing-accent) var(--own-start) calc(var(--own-start) + 1px),
-    var(--landing-tint) calc(var(--own-start) + 1px) calc(var(--own-end) - 1px),
-    var(--landing-accent) calc(var(--own-end) - 1px) var(--own-end),
-    transparent var(--own-end)
-  );
+/* Pages without the price row close the Topiqu column on their last feature. */
+.comparison-table[data-closed] tbody tr:last-child td[data-own] {
+  border-radius: 0 0 var(--topiqu-surface-radius) var(--topiqu-surface-radius);
+  border-bottom-color: transparent;
+  box-shadow:
+    inset 1px 0 var(--landing-accent),
+    inset -1px 0 var(--landing-accent),
+    inset 0 -1px var(--landing-accent);
+}
+.comparison-table[data-closed] tbody tr:last-child > * {
+  border-bottom: 0;
 }
 .comparison-price > * {
   padding-block: 18px !important;
@@ -449,11 +575,29 @@ const sources = [
 .comparison-legend-no {
   color: color-mix(in srgb, var(--landing-muted) 55%, transparent);
 }
-.comparison-sources {
+.comparison-sources summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 650;
+  cursor: pointer;
+  list-style: none;
+}
+.comparison-sources summary::-webkit-details-marker {
+  display: none;
+}
+.comparison-sources summary .iconify {
+  font-size: 16px;
+  transition: rotate 0.2s;
+}
+.comparison-sources[open] summary .iconify {
+  rotate: 180deg;
+}
+.comparison-sources > div {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
   gap: 6px;
+  margin-top: 10px;
 }
 .comparison-sources a {
   display: inline-flex;
@@ -501,10 +645,6 @@ const sources = [
   }
   .comparison-table tbody th small {
     display: none;
-  }
-  .comparison-group th {
-    padding-top: 28px;
-    background: none;
   }
   .comparison-tool {
     gap: 6px;
