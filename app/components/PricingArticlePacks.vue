@@ -27,7 +27,7 @@
 </template>
 
 <script setup lang="ts">
-import { ARTICLE_PACKS_USD, formatUsd } from '../../shared/utils/plans'
+import { ARTICLE_PACKS_USD, formatUsd } from '~~/shared/utils/plans'
 
 const { locale } = useI18n()
 const baseUnit = ARTICLE_PACKS_USD[0].priceUsd / ARTICLE_PACKS_USD[0].articles

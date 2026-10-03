@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { annualPlanPriceUsd, formatUsd, PLAN_PRICES_USD } from '../../../shared/utils/plans'
+import { annualPlanPriceUsd, formatUsd, PLAN_PRICES_USD } from '~~/shared/utils/plans'
 
 definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
 

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import PricingIntervalToggle from '../../components/PricingIntervalToggle.vue'
 import {
   annualPlanPriceUsd,
   formatUsd,
@@ -7,7 +6,9 @@ import {
   PLAN_PRICES_USD,
   TRIAL_ARTICLES,
   TRIAL_DAYS,
-} from '../../../shared/utils/plans'
+} from '~~/shared/utils/plans'
+
+import PricingIntervalToggle from '../../components/PricingIntervalToggle.vue'
 
 definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
 

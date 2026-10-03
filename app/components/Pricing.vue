@@ -1,8 +1,6 @@
 <script setup lang="ts">
-import type { BillingInterval } from '../../shared/utils/plans'
+import type { BillingInterval } from '~~/shared/utils/plans'
 
-import PricingArticlePacks from './PricingArticlePacks.vue'
-import PricingIntervalToggle from './PricingIntervalToggle.vue'
 import {
   annualPlanPriceUsd,
   formatUsd,
@@ -11,7 +9,10 @@ import {
   PLAN_PRICES_USD,
   TRIAL_ARTICLES,
   TRIAL_DAYS,
-} from '../../shared/utils/plans'
+} from '~~/shared/utils/plans'
+
+import PricingArticlePacks from './PricingArticlePacks.vue'
+import PricingIntervalToggle from './PricingIntervalToggle.vue'
 
 const { t, tm, locale } = useI18n()
 const localePath = useLocalePath()

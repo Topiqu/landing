@@ -116,7 +116,7 @@
 </template>
 
 <script setup lang="ts">
-import { formatUsd, PLAN_ARTICLES, PLAN_PRICES_USD } from '../../shared/utils/plans'
+import { formatUsd, PLAN_ARTICLES, PLAN_PRICES_USD } from '~~/shared/utils/plans'
 
 const { locale } = useI18n()
 const isCs = computed(() => locale.value === 'cs')

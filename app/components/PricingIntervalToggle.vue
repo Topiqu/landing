@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import type { BillingInterval } from '../../shared/utils/plans'
+import type { BillingInterval } from '~~/shared/utils/plans'
 
-import { ANNUAL_DISCOUNT_RATE } from '../../shared/utils/plans'
+import { ANNUAL_DISCOUNT_RATE } from '~~/shared/utils/plans'
 
 const interval = defineModel<BillingInterval>({ required: true })
 const name = `billing-interval-${useId()}`
