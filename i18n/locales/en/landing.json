@@ -272,133 +272,28 @@
         "skip": "Skip to content"
       },
       "hero": {
-        "kicker": "An AI newsroom that keeps working after publishing",
+        "kicker": "A newsroom that keeps working after publishing",
         "title": "From what your company knows",
         "accent": "to content people find.",
-        "description": "Topiqu finds topics worth covering. It combines your own sources with live research, checks the claims and publishes the article. Then it tracks Google results and citations in OpenAI answers to show what to improve next.",
+        "description": "Topiqu finds topics worth covering. It combines your own sources with live research, checks the claims and publishes the article. Then it tracks the results and shows what to improve next.",
         "cta": "Start for free",
         "emailPlaceholder": "Your email address",
         "secondary": "See how it works",
-        "note": "{days}-day trial with {articles} AI articles. No card required."
+        "note": "{days}-day trial with {articles} AI articles. No card required.",
+        "scene": {
+          "verified": "Verified 3/3",
+          "published": "Published",
+          "cited": "Cited in AI",
+          "scheduled": "Scheduled",
+          "translated": "Translated"
+        }
       },
-      "preview": {
-        "label": "Workspace preview",
-        "workspace": "Your editorial workspace",
-        "tabs": {
-          "knowledge": "Knowledge",
-          "write": "Article",
-          "check": "Fact-check",
-          "visibility": "Visibility"
-        },
-        "knowledge": {
-          "category": "KNOWLEDGE BASE",
-          "title": "Context the AI actually uses.",
-          "text": "Topiqu picks the relevant passages from your own sources whenever it writes.",
-          "sources": [
-            {
-              "name": "Pricing 2026.pdf",
-              "meta": "Indexed · 42 passages"
-            },
-            {
-              "name": "Product notes",
-              "meta": "Background only"
-            },
-            {
-              "name": "company.com/sitemap.xml",
-              "meta": "18 pages · Public source"
-            }
-          ],
-          "used": "3 sources used in this article"
-        },
-        "write": {
-          "saved": "Draft",
-          "category": "CONTENT STRATEGY",
-          "title": "Choosing a plan for your content volume",
-          "excerpt": "Pro includes 20 AI articles a month, Premium 30. This comparison uses current pricing, not a generic prompt.",
-          "section": "What if the monthly allowance is not enough?",
-          "paragraph": "You can buy extra article packs, and they never expire. Before release, the draft goes through another claim review.",
-          "score": "Optimization",
-          "scoreValue": "92/100"
-        },
-        "check": {
-          "category": "FACT-CHECK",
-          "title": "Every claim has a source.",
-          "summary": "3 claims · 2 supported · 1 needs revision",
-          "claims": [
-            {
-              "text": "Pro includes 20 AI articles a month.",
-              "status": "Supported",
-              "tone": "ok"
-            },
-            {
-              "text": "Purchased articles never expire.",
-              "status": "Supported",
-              "tone": "ok"
-            },
-            {
-              "text": "Setup always takes less than ten minutes.",
-              "status": "Needs a source",
-              "tone": "warn"
-            }
-          ]
-        },
-        "visibility": {
-          "category": "VISIBILITY",
-          "title": "Track citations of your content.",
-          "description": "See whether OpenAI answers link to your pages for the questions you track.",
-          "provider": "Currently monitored source",
-          "items": {
-            "questions": {
-              "title": "Selected questions",
-              "text": "From search data and your topics"
-            },
-            "citations": {
-              "title": "Linked pages",
-              "text": "Your sources and other citations"
-            },
-            "opportunities": {
-              "title": "Next opportunities",
-              "text": "Ideas for new or updated articles"
-            }
-          }
-        },
-        "caption": "Illustrative workspace preview",
-        "flow": "Knowledge → research → review → publish → next step"
-      },
-      "workflow": {
-        "eyebrow": "ONE CONNECTED PIPELINE",
-        "title": "From source to the next opportunity.",
-        "steps": [
-          {
-            "title": "Company knowledge",
-            "text": "Selects the parts of your own sources that matter for the topic."
-          },
-          {
-            "title": "Search demand",
-            "text": "Uses Google queries and reader questions to find what people seek."
-          },
-          {
-            "title": "Research",
-            "text": "Adds current sources and prepares the article brief."
-          },
-          {
-            "title": "Writing and review",
-            "text": "Drafts the article, checks claims and sends issues back for revision."
-          },
-          {
-            "title": "Publishing",
-            "text": "Publishes to your site and makes the article available to WordPress or your API client."
-          },
-          {
-            "title": "Measurement",
-            "text": "Google results and citations in OpenAI show what to update or write next."
-          }
-        ]
-      },
-      "capabilities": {
-        "eyebrow": "WHY THE OUTPUT IS DIFFERENT",
+      "showcase": {
+        "eyebrow": "HOW AN ARTICLE IS MADE",
         "title": "Research before writing. Review after it.",
         "text": "Topiqu connects company facts with current sources, then checks each draft again before release.",
+        "tabsLabel": "Article preparation steps",
+        "sceneLabel": "Illustrative app preview: {step}",
         "items": [
           {
             "title": "Real company context",
@@ -417,8 +312,188 @@
             "text": "Review and edit drafts yourself. Auto-publishing runs only if you enable it, and the review still runs first."
           }
         ],
-        "moreLabel": "Also in the newsroom:",
-        "more": "translations · media · series · comments · teams · custom domain"
+        "mock": {
+          "workspace": "Heatwise",
+          "article": "A heat pump in an older house: when it pays off",
+          "nav": {
+            "overview": "Overview",
+            "visibility": "AI visibility",
+            "write": "New article",
+            "media": "Media",
+            "knowledge": "Knowledge",
+            "settings": "Settings"
+          },
+          "knowledge": {
+            "title": "Knowledge",
+            "subtitle": "The material Topiqu writes from.",
+            "add": "Add source",
+            "used": "Used",
+            "sources": [
+              {
+                "name": "Installation pricing 2026.pdf",
+                "meta": "PDF · 38 passages"
+              },
+              {
+                "name": "heatwise.com",
+                "meta": "Website · 24 pages"
+              },
+              {
+                "name": "Heat pump datasheets",
+                "meta": "6 files · 112 passages"
+              },
+              {
+                "name": "Installation notes",
+                "meta": "Text · 19 passages"
+              }
+            ],
+            "excerpt": "“Installing an air-to-water heat pump in a family home usually takes two to three working days.”",
+            "excerptSource": "Installation pricing 2026.pdf · p. 4",
+            "callout": "5 passages from 3 sources selected for this article"
+          },
+          "research": {
+            "run": "Generating article",
+            "elapsed": "0:42",
+            "steps": {
+              "knowledge": "Knowledge",
+              "research": "Web research",
+              "writing": "Article text",
+              "review": "Editorial review",
+              "media": "Images"
+            },
+            "state": {
+              "done": "Done",
+              "running": "Running",
+              "pending": "Pending"
+            },
+            "knowledgeDetail": "Sources used: 3",
+            "researchDetail": "Looking for current primary sources and checking the claims in the brief.",
+            "found": "Sources found: 7",
+            "sources": [
+              {
+                "domain": "energysavingtrust.org.uk",
+                "title": "Heat pumps in older homes"
+              },
+              {
+                "domain": "iea.org",
+                "title": "The future of heat pumps"
+              },
+              {
+                "domain": "energy.gov",
+                "title": "Air-source heat pumps"
+              }
+            ],
+            "callout": "7 current sources from the web"
+          },
+          "verify": {
+            "draft": "Draft",
+            "category": "GUIDE",
+            "lead": "In an older house, a heat pump ",
+            "removed": "always cuts heating costs by 70%.",
+            "inserted": "pays off mainly where the heating system can run at a lower water temperature.",
+            "section": "How long does installation take?",
+            "claim": "Fitting a family home usually takes two to three working days",
+            "tail": ", including connection to the existing pipework.",
+            "verified": "Verified · Installation pricing 2026.pdf",
+            "review": "Editorial review",
+            "result": "Revised, issues fixed: 2",
+            "issues": [
+              {
+                "label": "Unsupported claim",
+                "status": "Fixed",
+                "tone": "ok"
+              },
+              {
+                "label": "Stale framing",
+                "status": "Fixed",
+                "tone": "ok"
+              },
+              {
+                "label": "Missing specifics",
+                "status": "Needs a manual check",
+                "tone": "warn"
+              }
+            ],
+            "callout": "A disputed claim went back for revision"
+          },
+          "decide": {
+            "pending": "Awaiting approval",
+            "meta": "Draft · 1,480 words · reviewed",
+            "edit": "Edit",
+            "approve": "Approve",
+            "schedule": "Scheduled publishing",
+            "auto": "Automatic publishing",
+            "autoText": "Editorial review runs before every release.",
+            "frequency": "Article frequency",
+            "options": ["Daily", "Weekly", "Irregular"],
+            "next": "Next releases",
+            "dates": [
+              {
+                "day": "Tue, Oct 6",
+                "time": "9:00 AM"
+              },
+              {
+                "day": "Thu, Oct 8",
+                "time": "9:00 AM"
+              },
+              {
+                "day": "Tue, Oct 13",
+                "time": "9:00 AM"
+              },
+              {
+                "day": "Thu, Oct 15",
+                "time": "9:00 AM"
+              }
+            ],
+            "callout": "You decide what goes live, and when"
+          }
+        }
+      },
+      "connector": {
+        "eyebrow": "FROM MATERIAL TO ARTICLE",
+        "title": "A pile of material in. A finished article out.",
+        "text": "Websites, price lists, meeting notes and your brand guide. Topiqu picks what matters and writes an article that fits your brand and search engines alike.",
+        "label": "Illustration: material from the web, internal data and the brand comes together in Topiqu as a finished article",
+        "sources": {
+          "web": "Web",
+          "data": "Your data",
+          "brand": "Brand",
+          "search": "Search Console"
+        },
+        "search": {
+          "url": "energysavingtrust.org.uk › heat-pumps",
+          "title": "Heat pumps in older homes"
+        },
+        "pdf": {
+          "name": "Installation pricing 2026.pdf",
+          "meta": "38 pages"
+        },
+        "forum": {
+          "text": "“Anyone tried a heat pump in a 1980s house?”",
+          "meta": "12 replies"
+        },
+        "colors": {
+          "name": "Brand guide",
+          "meta": "Colours, logo, type"
+        },
+        "tone": {
+          "title": "Brand voice",
+          "text": "Plain, friendly, no jargon."
+        },
+        "query": {
+          "text": "heat pump noise",
+          "meta": "2,900 impressions"
+        },
+        "notes": {
+          "text": "From the team meeting: customers mostly ask about noise."
+        },
+        "article": {
+          "category": "GUIDE",
+          "meta": "Heatwise · 6 min read",
+          "section": "How loud is a heat pump, really?",
+          "paragraph": "Outdoor unit noise depends mostly on placement, output and defrosting. What to watch for during installation?",
+          "chips": ["7 sources", "Verified claims", "Brand voice", "Schema and FAQ"]
+        },
+        "output": "Article ready to publish"
       },
       "closing": {
         "eyebrow": "START WITH ONE TOPIC",
@@ -450,25 +525,165 @@
             "text": "It can revise a title or update content using Search Console data. Changes are logged and reversible."
           }
         },
-        "plan": "Search Console, citation tracking and SEO autopilot are available on Premium and Custom."
+        "plan": "Search Console, citation tracking and SEO autopilot are available on Premium and Custom.",
+        "dashboard": {
+          "label": "Illustrative preview of post-publishing reports",
+          "range": "Last 28 days",
+          "kpis": [
+            {
+              "label": "Clicks",
+              "value": "1,284",
+              "delta": "+38%"
+            },
+            {
+              "label": "Impressions",
+              "value": "42.1K"
+            },
+            {
+              "label": "CTR",
+              "value": "3.0%"
+            },
+            {
+              "label": "Position",
+              "value": "8.4"
+            }
+          ],
+          "annotation": "Autopilot updated the title",
+          "cited": "Cited in AI answers",
+          "citedValue": "38%",
+          "citedMeta": "3 of 8 answers",
+          "questions": [
+            {
+              "text": "Is a heat pump worth it in a house from the 1980s?",
+              "status": "Cites heatwise.com"
+            },
+            {
+              "text": "How loud is an air-to-water heat pump?",
+              "status": "Cites energysavingtrust.org.uk"
+            },
+            {
+              "text": "How much does heat pump installation cost?",
+              "status": "Cites heatwise.com"
+            }
+          ],
+          "opportunitiesLabel": "New ideas",
+          "opportunities": [
+            {
+              "query": "heat pump noise",
+              "meta": "2,900 impressions · no article",
+              "action": "Draft article"
+            },
+            {
+              "query": "heat pump with radiators",
+              "meta": "Position 14 · article to update",
+              "action": "Update"
+            }
+          ],
+          "autopilot": "Autopilot",
+          "log": [
+            {
+              "title": "Title updated",
+              "detail": "CTR 1.8% → 3.1%",
+              "when": "3 days ago"
+            },
+            {
+              "title": "Added a section on noise",
+              "detail": "Based on new Search Console queries",
+              "when": "9 days ago"
+            }
+          ],
+          "revert": "Revert"
+        },
+        "queries": [
+          "heat pump cost",
+          "Is a heat pump worth it in a house from the 1980s?",
+          "heat pump noise",
+          "heat pump with radiators",
+          "heat pump grants 2026",
+          "air source vs ground source",
+          "What size heat pump do I need?",
+          "heat pump running costs in winter",
+          "heat pump and solar panels",
+          "heat pump payback period",
+          "Do heat pumps work in freezing weather?",
+          "heat pump or gas boiler",
+          "heat pump servicing",
+          "How long does installation take?",
+          "hot water from a heat pump",
+          "heat pump lifespan",
+          "Do I need insulation for a heat pump?",
+          "heat pump defrost cycle"
+        ]
       },
-      "publishing": {
-        "eyebrow": "PUBLISHING",
-        "title": "Publish wherever you need.",
-        "text": "Use Topiqu as your own publication, sync articles to WordPress or fetch them through the REST API.",
-        "items": {
-          "topiqu": {
-            "title": "Topiqu",
-            "text": "A ready-to-use publication on a Topiqu address or your own domain."
+      "features": {
+        "eyebrow": "ALSO IN THE NEWSROOM",
+        "title": "And everything else a newsroom needs.",
+        "text": "From translations to analytics. All in one app, without plugins or extra subscriptions.",
+        "items": [
+          {
+            "title": "Translations",
+            "text": "Into four languages, automatically or after review."
           },
-          "wordpress": {
-            "title": "WordPress",
-            "text": "Topiqu Sync imports articles as native posts."
+          {
+            "title": "Media library",
+            "text": "Image provenance and publishing rights."
           },
-          "api": {
-            "title": "REST API",
-            "text": "Fetch published content for your existing website or app."
+          {
+            "title": "Series",
+            "text": "Related articles linked into a series."
+          },
+          {
+            "title": "Comments and reactions",
+            "text": "Discussion right under each article."
+          },
+          {
+            "title": "Polls",
+            "text": "Questions for readers inside the article."
+          },
+          {
+            "title": "Teams and permissions",
+            "text": "Roles with scoped access."
+          },
+          {
+            "title": "Multiple blogs",
+            "text": "Several publications under one account."
+          },
+          {
+            "title": "Custom domain",
+            "text": "Your publication on your address."
+          },
+          {
+            "title": "Visual style",
+            "text": "Colours, gradients and custom fonts."
+          },
+          {
+            "title": "Optimization score",
+            "text": "SEO, AI visibility, readability and trust."
+          },
+          {
+            "title": "Structured data",
+            "text": "Schema, llms.txt and Markdown versions."
+          },
+          {
+            "title": "Answers and FAQs",
+            "text": "A short answer and questions in the article."
+          },
+          {
+            "title": "Reader sentiment",
+            "text": "Sentiment analysis of reactions and comments."
+          },
+          {
+            "title": "LinkedIn sharing",
+            "text": "Personal sharing of published articles."
+          },
+          {
+            "title": "Analytics and ads",
+            "text": "Google Analytics 4 and Ad Manager."
           }
+        ],
+        "more": {
+          "title": "And much more",
+          "text": "Every release is in the changelog."
         }
       }
     }

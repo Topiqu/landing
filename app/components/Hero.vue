@@ -1,16 +1,6 @@
-<script setup lang="ts">
-const localePath = useLocalePath()
-const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
-const email = shallowRef('')
-
-const startOnboarding = () => {
-  const store = useOnboardingStore()
-  store.form.email = email.value.trim()
-  return navigateTo(localePath({ name: 'onboarding-site' }))
-}
-</script>
 <template>
   <section class="hero-section" aria-labelledby="hero-title">
+    <HeroScene />
     <div class="landing-container hero-inner">
       <div class="hero-copy">
         <p class="eyebrow">{{ $t('landing.design.hero.kicker') }}</p>
@@ -51,3 +41,15 @@ const startOnboarding = () => {
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+const localePath = useLocalePath()
+const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
+const email = shallowRef('')
+
+const startOnboarding = () => {
+  const store = useOnboardingStore()
+  store.form.email = email.value.trim()
+  return navigateTo(localePath({ name: 'onboarding-site' }))
+}
+</script>

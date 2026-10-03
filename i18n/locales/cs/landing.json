@@ -264,133 +264,28 @@
         "skip": "Přejít na obsah"
       },
       "hero": {
-        "kicker": "AI redakce, která nekončí publikací",
+        "kicker": "Redakce, která nekončí publikací",
         "title": "Od vašich znalostí",
         "accent": "k obsahu, který je vidět.",
-        "description": "Topiqu zjistí, o čem má smysl psát. Z vašich podkladů a aktuálních zdrojů připraví článek, ověří jeho tvrzení a publikuje ho. Pak sleduje výsledky v Googlu a citace v OpenAI a ukáže, co zlepšit dál.",
+        "description": "Topiqu zjistí, o čem má smysl psát. Z vašich podkladů a aktuálních zdrojů připraví článek, ověří jeho tvrzení a publikuje ho. Pak sleduje výsledky a ukáže, co zlepšit dál.",
         "cta": "Začít zdarma",
         "emailPlaceholder": "Váš e-mail",
         "secondary": "Jak to funguje",
-        "note": "{days} dní zdarma a {articles} AI článků. Bez platební karty."
+        "note": "{days} dní zdarma a {articles} AI článků. Bez platební karty.",
+        "scene": {
+          "verified": "Ověřeno 3/3",
+          "published": "Publikováno",
+          "cited": "Citováno v AI",
+          "scheduled": "Naplánováno",
+          "translated": "Přeloženo"
+        }
       },
-      "preview": {
-        "label": "Ukázka pracovního prostředí",
-        "workspace": "Vaše redakce",
-        "tabs": {
-          "knowledge": "Znalosti",
-          "write": "Článek",
-          "check": "Kontrola faktů",
-          "visibility": "Viditelnost"
-        },
-        "knowledge": {
-          "category": "ZNALOSTNÍ BÁZE",
-          "title": "Kontext, který AI opravdu použije.",
-          "text": "Kdykoli Topiqu píše, vybere z vašich zdrojů pasáže, které k tématu patří.",
-          "sources": [
-            {
-              "name": "Ceník 2026.pdf",
-              "meta": "Zaindexováno · 42 pasáží"
-            },
-            {
-              "name": "Poznámky k produktu",
-              "meta": "Jen jako podklad"
-            },
-            {
-              "name": "firma.cz/sitemap.xml",
-              "meta": "18 stránek · Veřejný zdroj"
-            }
-          ],
-          "used": "V tomto článku použity 3 zdroje"
-        },
-        "write": {
-          "saved": "Koncept",
-          "category": "OBSAHOVÁ STRATEGIE",
-          "title": "Jak si vybrat tarif podle objemu obsahu",
-          "excerpt": "Pro má 20 AI článků měsíčně, Premium 30. Srovnání vychází z aktuálního ceníku, ne z obecného zadání.",
-          "section": "Co když měsíční počet nestačí?",
-          "paragraph": "Další články lze dokoupit v balíčku a nepropadají. Před vydáním koncept znovu projde kontrolou tvrzení.",
-          "score": "Optimalizace",
-          "scoreValue": "92/100"
-        },
-        "check": {
-          "category": "KONTROLA FAKTŮ",
-          "title": "Každé tvrzení má svůj podklad.",
-          "summary": "3 tvrzení · 2 podložená · 1 k opravě",
-          "claims": [
-            {
-              "text": "Tarif Pro obsahuje 20 AI článků měsíčně.",
-              "status": "Podloženo",
-              "tone": "ok"
-            },
-            {
-              "text": "Dokoupené články nepropadají.",
-              "status": "Podloženo",
-              "tone": "ok"
-            },
-            {
-              "text": "Nastavení vždy trvá méně než deset minut.",
-              "status": "Chybí zdroj",
-              "tone": "warn"
-            }
-          ]
-        },
-        "visibility": {
-          "category": "VIDITELNOST",
-          "title": "Sledujte citace svého obsahu.",
-          "description": "U vybraných otázek zjistíte, jestli odpovědi OpenAI odkazují na vaše stránky.",
-          "provider": "Aktuálně sledovaný zdroj",
-          "items": {
-            "questions": {
-              "title": "Vybrané otázky",
-              "text": "Z vyhledávání a vašich témat"
-            },
-            "citations": {
-              "title": "Odkazované stránky",
-              "text": "Vaše zdroje i ostatní citace"
-            },
-            "opportunities": {
-              "title": "Další příležitosti",
-              "text": "Náměty pro nový nebo upravený článek"
-            }
-          }
-        },
-        "caption": "Ilustrační ukázka pracovního prostředí",
-        "flow": "Znalosti → rešerše → kontrola → publikace → další krok"
-      },
-      "workflow": {
-        "eyebrow": "JEDNA PIPELINE",
-        "title": "Od zdroje až po další příležitost.",
-        "steps": [
-          {
-            "title": "Znalosti firmy",
-            "text": "Z vašich podkladů vybere informace relevantní k tématu."
-          },
-          {
-            "title": "Poptávka",
-            "text": "Z dotazů v Googlu a otázek čtenářů zjistí, co lidé hledají."
-          },
-          {
-            "title": "Rešerše",
-            "text": "Doplní aktuální zdroje a připraví podklady pro článek."
-          },
-          {
-            "title": "Psaní a kontrola",
-            "text": "Napíše koncept, ověří tvrzení a sporná místa vrátí k opravě."
-          },
-          {
-            "title": "Publikace",
-            "text": "Článek vydá na vaší publikaci a zpřístupní ho WordPressu či přes API."
-          },
-          {
-            "title": "Měření",
-            "text": "Výsledky v Googlu a citace v OpenAI ukážou, co upravit nebo napsat dál."
-          }
-        ]
-      },
-      "capabilities": {
-        "eyebrow": "PROČ JE VÝSTUP JINÝ",
+      "showcase": {
+        "eyebrow": "JAK VZNIKÁ ČLÁNEK",
         "title": "Rešerše před psaním. Kontrola po něm.",
         "text": "Topiqu propojí firemní fakta s aktuálním děním a každý koncept znovu prověří před vydáním.",
+        "tabsLabel": "Kroky přípravy článku",
+        "sceneLabel": "Ilustrační ukázka aplikace: {step}",
         "items": [
           {
             "title": "Skutečný kontext firmy",
@@ -409,8 +304,188 @@
             "text": "Koncept můžete schválit a upravit sami. Automatické vydání zapnete jen tehdy, když ho chcete; i před ním proběhne revize."
           }
         ],
-        "moreLabel": "Dál v redakci:",
-        "more": "překlady · média · série · komentáře · týmy · vlastní doména"
+        "mock": {
+          "workspace": "Heatwise",
+          "article": "Tepelné čerpadlo do starého domu: kdy se vyplatí",
+          "nav": {
+            "overview": "Přehled",
+            "visibility": "Viditelnost v AI",
+            "write": "Nový článek",
+            "media": "Média",
+            "knowledge": "Znalosti",
+            "settings": "Nastavení"
+          },
+          "knowledge": {
+            "title": "Znalosti",
+            "subtitle": "Podklady, ze kterých Topiqu čerpá.",
+            "add": "Přidat zdroj",
+            "used": "Použito",
+            "sources": [
+              {
+                "name": "Ceník instalací 2026.pdf",
+                "meta": "PDF · 38 pasáží"
+              },
+              {
+                "name": "heatwise.cz",
+                "meta": "Web · 24 stránek"
+              },
+              {
+                "name": "Technické listy čerpadel",
+                "meta": "6 souborů · 112 pasáží"
+              },
+              {
+                "name": "Poznámky z realizací",
+                "meta": "Text · 19 pasáží"
+              }
+            ],
+            "excerpt": "„Instalace tepelného čerpadla vzduch–voda u rodinného domu trvá obvykle 2–3 pracovní dny.“",
+            "excerptSource": "Ceník instalací 2026.pdf · str. 4",
+            "callout": "Pro článek vybráno 5 pasáží ze 3 zdrojů"
+          },
+          "research": {
+            "run": "Generuji článek",
+            "elapsed": "0:42",
+            "steps": {
+              "knowledge": "Znalosti",
+              "research": "Rešerše na webu",
+              "writing": "Text článku",
+              "review": "Redakční kontrola",
+              "media": "Obrázky"
+            },
+            "state": {
+              "done": "Hotovo",
+              "running": "Probíhá",
+              "pending": "Čeká"
+            },
+            "knowledgeDetail": "Použité zdroje: 3",
+            "researchDetail": "Hledám aktuální primární zdroje a ověřuji tvrzení v zadání.",
+            "found": "Nalezené zdroje: 7",
+            "sources": [
+              {
+                "domain": "tzb-info.cz",
+                "title": "Tepelná čerpadla ve starší zástavbě"
+              },
+              {
+                "domain": "eru.cz",
+                "title": "Ceny elektřiny pro domácnosti"
+              },
+              {
+                "domain": "novazelenausporam.cz",
+                "title": "Podpora pro rodinné domy"
+              }
+            ],
+            "callout": "7 aktuálních zdrojů z webu"
+          },
+          "verify": {
+            "draft": "Koncept",
+            "category": "PRŮVODCE",
+            "lead": "Tepelné čerpadlo ve starším domě ",
+            "removed": "ušetří vždy 70 % nákladů na vytápění.",
+            "inserted": "se vyplatí hlavně tam, kde topná soustava zvládne nižší teplotu vody.",
+            "section": "Jak dlouho trvá instalace?",
+            "claim": "Montáž u rodinného domu obvykle zabere 2–3 pracovní dny",
+            "tail": ", včetně napojení na stávající rozvody.",
+            "verified": "Ověřeno · Ceník instalací 2026.pdf",
+            "review": "Redakční kontrola",
+            "result": "Upraveno, opravené problémy: 2",
+            "issues": [
+              {
+                "label": "Nepodložené tvrzení",
+                "status": "Opraveno",
+                "tone": "ok"
+              },
+              {
+                "label": "Zastaralé podání",
+                "status": "Opraveno",
+                "tone": "ok"
+              },
+              {
+                "label": "Chybí konkrétní údaje",
+                "status": "K ruční kontrole",
+                "tone": "warn"
+              }
+            ],
+            "callout": "Sporné tvrzení se vrátilo k opravě"
+          },
+          "decide": {
+            "pending": "Čeká na schválení",
+            "meta": "Koncept · 1 480 slov · kontrola proběhla",
+            "edit": "Upravit",
+            "approve": "Schválit",
+            "schedule": "Plánované publikování",
+            "auto": "Automatické publikování",
+            "autoText": "Před každým vydáním proběhne redakční kontrola.",
+            "frequency": "Frekvence článků",
+            "options": ["Denně", "Týdně", "Nepravidelně"],
+            "next": "Nejbližší vydání",
+            "dates": [
+              {
+                "day": "út 6. 10.",
+                "time": "09:00"
+              },
+              {
+                "day": "čt 8. 10.",
+                "time": "09:00"
+              },
+              {
+                "day": "út 13. 10.",
+                "time": "09:00"
+              },
+              {
+                "day": "čt 15. 10.",
+                "time": "09:00"
+              }
+            ],
+            "callout": "Co a kdy vyjde, řídíte vy"
+          }
+        }
+      },
+      "connector": {
+        "eyebrow": "OD PODKLADŮ K ČLÁNKU",
+        "title": "Hromada podkladů na vstupu. Hotový článek na výstupu.",
+        "text": "Web, ceníky, poznámky z porad i brand manuál. Topiqu z nich vybere to podstatné a napíše článek, který sedí vaší značce i vyhledávačům.",
+        "label": "Ilustrace: podklady z webu, interních dat a značky se v Topiqu spojí v hotový článek",
+        "sources": {
+          "web": "Web",
+          "data": "Vaše data",
+          "brand": "Značka",
+          "search": "Search Console"
+        },
+        "search": {
+          "url": "tzb-info.cz › tepelna-cerpadla",
+          "title": "Tepelná čerpadla ve starší zástavbě"
+        },
+        "pdf": {
+          "name": "Ceník instalací 2026.pdf",
+          "meta": "38 stran"
+        },
+        "forum": {
+          "text": "„Má někdo zkušenost s čerpadlem v domě z 80. let?“",
+          "meta": "12 odpovědí"
+        },
+        "colors": {
+          "name": "Brand manuál",
+          "meta": "Barvy, logo, písmo"
+        },
+        "tone": {
+          "title": "Tón značky",
+          "text": "Věcně, přátelsky, bez žargonu."
+        },
+        "query": {
+          "text": "hluk tepelného čerpadla",
+          "meta": "2 900 zobrazení"
+        },
+        "notes": {
+          "text": "Z porady: zákazníci se nejvíc ptají na hluk."
+        },
+        "article": {
+          "category": "PRŮVODCE",
+          "meta": "Heatwise · 6 min čtení",
+          "section": "Jak hlučné čerpadlo opravdu je?",
+          "paragraph": "Hlučnost venkovní jednotky závisí hlavně na umístění, výkonu a odmrazování. Na co si dát pozor při montáži?",
+          "chips": ["7 zdrojů", "Ověřená tvrzení", "Hlas značky", "Schema a FAQ"]
+        },
+        "output": "Článek připravený k vydání"
       },
       "closing": {
         "eyebrow": "ZAČNĚTE JEDNÍM TÉMATEM",
@@ -442,25 +517,165 @@
             "text": "Může upravit titulek nebo aktualizovat obsah podle dat ze Search Console. Změny eviduje a lze je vrátit."
           }
         },
-        "plan": "Search Console, sledování citací a SEO autopilot jsou dostupné v Premium a Custom."
+        "plan": "Search Console, sledování citací a SEO autopilot jsou dostupné v Premium a Custom.",
+        "dashboard": {
+          "label": "Ilustrační ukázka přehledů po publikaci",
+          "range": "Posledních 28 dní",
+          "kpis": [
+            {
+              "label": "Kliknutí",
+              "value": "1 284",
+              "delta": "+38 %"
+            },
+            {
+              "label": "Zobrazení",
+              "value": "42,1 tis."
+            },
+            {
+              "label": "CTR",
+              "value": "3,0 %"
+            },
+            {
+              "label": "Pozice",
+              "value": "8,4"
+            }
+          ],
+          "annotation": "Autopilot upravil titulek",
+          "cited": "Citováno v odpovědích AI",
+          "citedValue": "38 %",
+          "citedMeta": "3 z 8 odpovědí",
+          "questions": [
+            {
+              "text": "Vyplatí se tepelné čerpadlo do domu z 80. let?",
+              "status": "Cituje heatwise.cz"
+            },
+            {
+              "text": "Jak hlučné je tepelné čerpadlo vzduch–voda?",
+              "status": "Cituje tzb-info.cz"
+            },
+            {
+              "text": "Kolik stojí instalace tepelného čerpadla?",
+              "status": "Cituje heatwise.cz"
+            }
+          ],
+          "opportunitiesLabel": "Nové náměty",
+          "opportunities": [
+            {
+              "query": "hluk tepelného čerpadla",
+              "meta": "2 900 zobrazení · bez článku",
+              "action": "Navrhnout článek"
+            },
+            {
+              "query": "tepelné čerpadlo a radiátory",
+              "meta": "Pozice 14 · článek k aktualizaci",
+              "action": "Aktualizovat"
+            }
+          ],
+          "autopilot": "Autopilot",
+          "log": [
+            {
+              "title": "Titulek upraven",
+              "detail": "CTR 1,8 % → 3,1 %",
+              "when": "před 3 dny"
+            },
+            {
+              "title": "Doplněna sekce o hlučnosti",
+              "detail": "Podle nových dotazů ze Search Console",
+              "when": "před 9 dny"
+            }
+          ],
+          "revert": "Vrátit"
+        },
+        "queries": [
+          "kolik stojí tepelné čerpadlo",
+          "Vyplatí se tepelné čerpadlo do domu z 80. let?",
+          "hluk tepelného čerpadla",
+          "tepelné čerpadlo a radiátory",
+          "dotace na tepelné čerpadlo 2026",
+          "vzduch–voda nebo země–voda",
+          "Jak velké tepelné čerpadlo potřebuji?",
+          "spotřeba tepelného čerpadla v zimě",
+          "tepelné čerpadlo a fotovoltaika",
+          "návratnost tepelného čerpadla",
+          "Funguje tepelné čerpadlo v mrazu?",
+          "tepelné čerpadlo nebo plynový kotel",
+          "servis tepelného čerpadla",
+          "Jak dlouho trvá instalace?",
+          "ohřev vody tepelným čerpadlem",
+          "životnost tepelného čerpadla",
+          "Potřebuji kvůli čerpadlu zateplení?",
+          "odmrazování tepelného čerpadla"
+        ]
       },
-      "publishing": {
-        "eyebrow": "PUBLIKACE",
-        "title": "Publikujte kamkoli.",
-        "text": "Používejte Topiqu jako vlastní publikaci, synchronizujte články do WordPressu nebo je načítejte přes REST API.",
-        "items": {
-          "topiqu": {
-            "title": "Topiqu",
-            "text": "Hotová publikace na adrese Topiqu nebo na vaší vlastní doméně."
+      "features": {
+        "eyebrow": "DÁL V REDAKCI",
+        "title": "A k tomu všechno, co redakce potřebuje.",
+        "text": "Od překladů po analytiku. Všechno v jedné aplikaci, bez pluginů a dalších předplatných.",
+        "items": [
+          {
+            "title": "Překlady",
+            "text": "Do čtyř jazyků, automaticky nebo po kontrole."
           },
-          "wordpress": {
-            "title": "WordPress",
-            "text": "Plugin Topiqu Sync přenese články jako běžné příspěvky."
+          {
+            "title": "Knihovna médií",
+            "text": "Původ obrázků a práva k publikaci."
           },
-          "api": {
-            "title": "REST API",
-            "text": "Čtěte publikovaný obsah a zobrazte ho ve svém webu či aplikaci."
+          {
+            "title": "Série",
+            "text": "Související články propojené do seriálu."
+          },
+          {
+            "title": "Komentáře a reakce",
+            "text": "Diskuse přímo pod články."
+          },
+          {
+            "title": "Ankety",
+            "text": "Otázky pro čtenáře uvnitř článku."
+          },
+          {
+            "title": "Týmy a oprávnění",
+            "text": "Role s omezeným přístupem."
+          },
+          {
+            "title": "Více blogů",
+            "text": "Několik publikací pod jedním účtem."
+          },
+          {
+            "title": "Vlastní doména",
+            "text": "Publikace na vaší adrese."
+          },
+          {
+            "title": "Vizuální styl",
+            "text": "Barvy, gradienty a vlastní písma."
+          },
+          {
+            "title": "Skóre optimalizace",
+            "text": "SEO, AI viditelnost, čitelnost a důvěra."
+          },
+          {
+            "title": "Strukturovaná data",
+            "text": "Schema, llms.txt a Markdown verze článků."
+          },
+          {
+            "title": "Odpovědi a FAQ",
+            "text": "Stručná odpověď a otázky přímo v článku."
+          },
+          {
+            "title": "Nálada čtenářů",
+            "text": "Analýza sentimentu reakcí a komentářů."
+          },
+          {
+            "title": "Sdílení na LinkedIn",
+            "text": "Osobní sdílení vydaných článků."
+          },
+          {
+            "title": "Analytika a reklama",
+            "text": "Google Analytics 4 a Ad Manager."
           }
+        ],
+        "more": {
+          "title": "A mnohem víc",
+          "text": "Všechny novinky najdete v changelogu."
         }
       }
     }

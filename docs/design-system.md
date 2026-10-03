@@ -8,7 +8,13 @@ The reference checkout is `../app`. Its `app.config.ts`, `assets/styles/main.css
 
 - Keep the application's Manrope interface font, Source Serif 4 reading font, indigo/slate palette, 10px controls, 14px surfaces and 44px touch targets.
 - The app header depends on authentication, tenant configuration, notifications and article state. Its editor depends on article composables, sources, translations and backend mutations. Do not import those feature components into this public, independently deployed repository.
-- `ProductPreview` is explicitly an illustrative, locally switchable preview. It does not run an editor or make AI/publishing requests.
+- `Showcase` and the `AfterPublishing` dashboard are illustrative, coded mockups of the application (fictional tenant "Heatwise"). They mirror the app's sidebar, generation run panel, editor review and scheduling card, but run no editor and make no AI/publishing requests. Their demo copy lives under `landing.design.showcase.mock` and `after.dashboard`; shared primitives use the `mock-` prefix in `main.css`.
+- `Connector` (right under the hero) shows scattered inputs (web, internal data, brand, Search Console) wired into the Topiqu mark and out to one finished article. It has two hand-placed compositions, `wide` and `tall`; wires are computed from the same coordinates and the stage scales to the container, so they always line up.
+- The `AfterPublishing` query field is a canvas driven by `useCursorCanvas`. It drifts on its own on touch devices, draws a single static frame under reduced motion and only animates while visible. It is canvas-only on purpose, so repeated keywords never appear as hidden text in the HTML.
+- Comparison prices for other tools come from their public pricing pages; update them together with the date in the table note.
+- `HeroScene` is a pure CSS 3D floor of article cards below the hero copy (no WebGL dependency). The hero's `--hero-scene-band` reserves its space; animation pauses off-screen and stops under reduced motion, and the cursor tilt is disabled on touch devices.
+- There is no testimonial or results section until there are real, consented quotes and measured data; do not add invented testimonials, customer logos or result metrics.
+- Vue SFCs in this repo order blocks as `<template>`, `<script>`, `<style>`. Older files with script first are legacy.
 - `BrandLogo` is the single logo component for the landing, footer, documentation and onboarding layouts.
 
 ## CSS coexistence

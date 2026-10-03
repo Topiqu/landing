@@ -17,10 +17,10 @@ useSchemaOrg([
 <template>
   <div class="landing-page">
     <Hero />
-    <Workflow />
-    <Capabilities />
+    <Connector />
+    <Showcase />
     <AfterPublishing />
-    <Publishing />
+    <Features />
     <Pricing />
     <Comparison />
     <Faq />
