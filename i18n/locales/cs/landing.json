@@ -13,9 +13,13 @@
       "billedYearly": "Účtováno {price} jednou ročně",
       "articlePacks": {
         "title": "Další články podle potřeby",
-        "description": "Balíčky můžete dokoupit v aplikaci. Dokoupené články nepropadají.",
         "articles": "{count} článků",
-        "unitPrice": "{price} za článek"
+        "unitPrice": "{price} za článek",
+        "unit": "článků",
+        "save": "Ušetříte {percent} %",
+        "best": "Nejvýhodnější",
+        "noExpiry": "Dokoupené články nepropadají",
+        "inApp": "Dokoupíte kdykoli v aplikaci"
       },
       "plans": {
         "free": {

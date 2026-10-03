@@ -13,9 +13,13 @@
       "billedYearly": "Billed {price} once a year",
       "articlePacks": {
         "title": "Extra articles when you need them",
-        "description": "Buy additional packs in the app. Purchased articles never expire.",
         "articles": "{count} articles",
-        "unitPrice": "{price} per article"
+        "unitPrice": "{price} per article",
+        "unit": "articles",
+        "save": "Save {percent}%",
+        "best": "Best value",
+        "noExpiry": "Purchased articles never expire",
+        "inApp": "Top up anytime in the app"
       },
       "plans": {
         "free": {
