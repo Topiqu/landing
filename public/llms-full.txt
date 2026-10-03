@@ -4,13 +4,13 @@ Topiqu is an AI content operations platform. It helps teams research, create, re
 
 ## Product capabilities
 
-- Knowledge base (beta, Pro and higher): notes, PDF/DOCX/TXT/Markdown files, web pages and whole sitemaps become context for AI writing. Private sources are never cited publicly; only sources marked as public can become citations.
+- Knowledge base (beta, Pro and higher): notes, PDF/DOCX/TXT/Markdown files, web pages, whole sitemaps, Shopify catalogs and Heureka or Google Merchant product feeds become context for AI writing. Private sources are never cited publicly; only sources marked as public can become citations.
 - AI writing with editorial review (Pro and higher): article formats (news, analysis, guide, comparison, opinion, story), live web research, a fact and copy review before publishing, and a fact-check panel that compares claims with sources.
 - Article optimization score (all plans): deterministic checks for SEO, AI visibility, readability and trust, each with a concrete recommendation.
 - Visibility (Premium and Custom): regular citation checks for selected questions in OpenAI answers, competitor detection, AI crawler and referral traffic, and article opportunities for uncited questions. Coverage is a sample, not a record of private conversations.
 - Google Search Console (Premium and Custom): read-only access for article metrics, near-top and low-CTR opportunities, and an opt-in SEO autopilot limited to one article change per day with rollback.
 - Languages: English, Czech, German and French for articles, translations, emails and the app interface. Translations can publish automatically or wait for human review; published translations get their own URLs and hreflang.
-- Publishing: hosted publication on a topiqu.com subdomain or a custom domain (Pro and higher), scheduling and automated publishing, the Topiqu Sync WordPress plugin, External API v1, personal LinkedIn sharing, Google Analytics 4 and Google Ad Manager.
+- Publishing: hosted publication on a topiqu.com subdomain or a custom domain (Pro and higher), publishing to Shopify blogs (installable from Shopify, with optional Shopify billing), per-channel controls for web, Shopify and LinkedIn, daily, weekly or irregular release scheduling, the Topiqu Sync WordPress plugin, External API v1, personal LinkedIn sharing, Google Analytics 4 and Google Ad Manager.
 - Publication features: structured data, llms.txt, markdown versions of articles, answer boxes and FAQs, comments, reactions, polls, series and author pages.
 - Media library with image provenance and publishing-rights tracking, a visual style editor (accent colours; gradients and custom fonts on Pro and higher), team members with scoped permissions, and several blogs per account.
 
@@ -56,6 +56,7 @@ Use HTTP status codes as the primary error signal. Treat human-readable error me
 
 ## Recent releases
 
+- 2026-10-02 — Shopify, publication channels and new scheduling: https://topiqu.com/en/changelog/2026-10-02-shopify-and-publication-channels
 - 2026-09-27 — Visibility in OpenAI answers: https://topiqu.com/en/changelog/2026-09-27-ai-visibility
 - 2026-09-27 — German and French: https://topiqu.com/en/changelog/2026-09-27-german-and-french
 - 2026-09-26 — Knowledge base (beta): https://topiqu.com/en/changelog/2026-09-26-knowledge-base
