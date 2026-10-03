@@ -17,6 +17,10 @@
   --landing-line: #e2e8f0;
   --landing-accent: #4338ca;
   --landing-tint: #eef2ff;
+  --landing-success: #047857;
+  --landing-success-tint: #ecfdf5;
+  --landing-warn: #b45309;
+  --landing-warn-tint: #fffbeb;
 }
 .dark {
   --ui-primary: var(--ui-color-primary-300);
@@ -27,6 +31,10 @@
   --landing-line: #334155;
   --landing-accent: #a5b4fc;
   --landing-tint: #202b49;
+  --landing-success: #6ee7b7;
+  --landing-success-tint: #10302a;
+  --landing-warn: #fcd34d;
+  --landing-warn-tint: #382c12;
 }
 
 /* Marketing composition. Nuxt UI primitives use the tw: prefix; legacy routes keep UnoCSS. */
@@ -815,17 +823,6 @@
   display: inline-block;
 }
 .comparison-section {
-  background: var(--landing-surface);
-}
-.comparison-scroll {
-  overflow: auto;
-  max-height: 620px;
-  scrollbar-width: thin;
-}
-.comparison-scroll thead {
-  position: sticky;
-  top: 0;
-  z-index: 25;
   background: var(--landing-surface);
 }
 .comparison-section .section-heading > p:last-child {

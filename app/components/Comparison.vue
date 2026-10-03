@@ -1,166 +1,3 @@
-<script setup lang="ts">
-const { locale } = useI18n()
-const localePath = useLocalePath()
-const isCs = computed(() => locale.value === 'cs')
-
-interface Source {
-  label: string
-  url: string
-}
-
-interface Cell {
-  text: string
-  sources: Source[]
-}
-
-interface Row {
-  label: string
-  cells: Cell[]
-}
-
-const source = (label: string, url: string): Source => ({ label, url })
-const copy = computed(() =>
-  isCs.value
-    ? {
-        eyebrow: 'SROVNÁNÍ WORKFLOW',
-        title: 'Jak tyto kroky řeší jiné nástroje',
-        description: 'Konkrétní schopnosti místo vlastních známek. Každé tvrzení má odkaz na produktovou dokumentaci.',
-        area: 'Krok',
-        source: 'Zdroj',
-        sources: 'Zdroje',
-        note: 'Veřejná dokumentace produktů, září 2026. Dostupnost se může lišit podle tarifu.',
-      }
-    : {
-        eyebrow: 'WORKFLOW COMPARISON',
-        title: 'How other tools handle these steps',
-        description:
-          'Concrete capabilities instead of self-assigned scores. Every claim links to product documentation.',
-        area: 'Step',
-        source: 'Source',
-        sources: 'Sources',
-        note: 'Public product documentation, September 2026. Availability may vary by plan.',
-      },
-)
-
-const rows = computed<Row[]>(() => {
-  const cs = isCs.value
-  const topiqu = (slug: string) => localePath(`/changelog/${slug}`)
-
-  return [
-    {
-      label: cs ? 'Firemní kontext' : 'Company context',
-      cells: [
-        {
-          text: cs
-            ? 'Z poznámek, souborů a webu vybírá pasáže relevantní k článku.'
-            : 'Selects relevant passages from notes, files and your website for each article.',
-          sources: [source('Topiqu', topiqu('2026-09-26-knowledge-base'))],
-        },
-        {
-          text: cs
-            ? 'Knowledge Base ukládá firemní fakta a používá je při tvorbě.'
-            : 'Knowledge Base stores company facts and applies them during creation.',
-          sources: [source('Jasper', 'https://help.jasper.ai/hc/en-us/articles/55085018624411-Knowledge-Base')],
-        },
-        {
-          text: cs
-            ? 'Analyzuje firemní web, konkurenci a hlas značky.'
-            : 'Analyzes your website, competitors and brand voice.',
-          sources: [source('Contentbase', 'https://contentbase.ai/')],
-        },
-      ],
-    },
-    {
-      label: cs ? 'Rešerše a kontrola' : 'Research and review',
-      cells: [
-        {
-          text: cs
-            ? 'Živou rešerši doplňuje revize tvrzení před publikací.'
-            : 'Combines live research with a claim review before publishing.',
-          sources: [
-            source('Topiqu · rešerše', topiqu('2026-09-26-knowledge-base')),
-            source('Topiqu · revize', topiqu('2026-09-23-optimization-and-fact-check')),
-          ],
-        },
-        {
-          text: cs
-            ? 'Research Agent připravuje rešerše s odkazy na zdroje.'
-            : 'Research Agent produces research with source links.',
-          sources: [source('Jasper', 'https://help.jasper.ai/hc/en-us/articles/48810861467803-Research-Agent')],
-        },
-        {
-          text: cs
-            ? 'Zkoumá klíčová slova a do článků přidává externí zdroje.'
-            : 'Researches keywords and adds external sources to articles.',
-          sources: [
-            source('Contentbase · rešerše', 'https://contentbase.ai/'),
-            source('Contentbase · zdroje', 'https://contentbase.ai/docs/features/external-linking/'),
-          ],
-        },
-      ],
-    },
-    {
-      label: cs ? 'Publikace' : 'Publishing',
-      cells: [
-        {
-          text: cs
-            ? 'Vlastní publikace, synchronizace do WordPressu a REST API.'
-            : 'Hosted publication, WordPress sync and a REST API.',
-          sources: [source('Topiqu', '/llms-full.txt')],
-        },
-        {
-          text: cs
-            ? 'Tvorba obsahu přímo ve Webflow; API pro vlastní integrace.'
-            : 'Content creation inside Webflow; API for custom integrations.',
-          sources: [
-            source('Jasper · Webflow', 'https://www.jasper.ai/integrations'),
-            source('Jasper · API', 'https://help.jasper.ai/hc/en-us/articles/18618701173659-Jasper-s-API'),
-          ],
-        },
-        {
-          text: cs
-            ? 'Hostovaný blog, WordPress a další CMS integrace.'
-            : 'Hosted blog, WordPress and other CMS integrations.',
-          sources: [source('Contentbase', 'https://contentbase.ai/docs/features/contentbase-go/')],
-        },
-      ],
-    },
-    {
-      label: cs ? 'Po publikaci' : 'After publishing',
-      cells: [
-        {
-          text: cs
-            ? 'Search Console řídí návrhy a volitelný autopilot; sledování viditelnosti kontroluje citace v odpovědích OpenAI.'
-            : 'Search Console informs suggestions and optional autopilot; visibility tracking checks citations in OpenAI answers.',
-          sources: [
-            source('Topiqu · Google', topiqu('2026-08-27-search-console-autopilot')),
-            source('Topiqu · AI', topiqu('2026-09-27-ai-visibility')),
-          ],
-        },
-        {
-          text: cs
-            ? 'GEO Hub sleduje AI citace, propojuje data Search Console a doporučuje další obsah.'
-            : 'GEO Hub tracks AI citations, connects Search Console data and recommends content.',
-          sources: [
-            source('Jasper · GEO', 'https://help.jasper.ai/hc/en-us/articles/55317942235803-GEO-Hub'),
-            source(
-              'Jasper · Google',
-              'https://help.jasper.ai/hc/en-us/articles/55091361235355-Integrations-Google-Search-Console',
-            ),
-          ],
-        },
-        {
-          text: cs
-            ? 'Search Console pomáhá plánovat témata; analytika a automatické aktualizace sledují další vývoj.'
-            : 'Search Console helps plan topics; analytics and automatic updates support the next cycle.',
-          sources: [source('Contentbase', 'https://contentbase.ai/docs/')],
-        },
-      ],
-    },
-  ]
-})
-</script>
-
 <template>
   <section id="comparison" class="landing-section comparison-section">
     <div class="landing-container">
@@ -173,130 +10,521 @@ const rows = computed<Row[]>(() => {
         <table class="comparison-table">
           <thead>
             <tr>
-              <th scope="col">{{ copy.area }}</th>
-              <th scope="col">Topiqu</th>
-              <th scope="col">Jasper</th>
-              <th scope="col">Contentbase</th>
+              <th scope="col">{{ copy.feature }}</th>
+              <th v-for="tool in tools" :key="tool.name" scope="col" :data-own="tool.own || undefined">
+                <span class="comparison-tool">
+                  <img :src="tool.logo" alt="" width="28" height="28" />
+                  {{ tool.name }}
+                </span>
+              </th>
             </tr>
           </thead>
+          <tbody v-for="group in groups" :key="group.label">
+            <tr class="comparison-group">
+              <th scope="colgroup" :colspan="tools.length + 1">{{ group.label }}</th>
+            </tr>
+            <tr v-for="row in group.rows" :key="row.label">
+              <th scope="row">
+                <strong>{{ row.label }}</strong>
+                <small>{{ row.hint }}</small>
+              </th>
+              <td v-for="(has, index) in row.support" :key="index" :data-own="tools[index]!.own || undefined">
+                <span class="comparison-mark" :data-has="has || undefined">
+                  <Icon :name="has ? icons.yes : icons.no" aria-hidden="true" />
+                  <span class="comparison-visually-hidden">{{ has ? copy.yes : copy.no }}</span>
+                </span>
+              </td>
+            </tr>
+          </tbody>
           <tbody>
-            <tr v-for="row in rows" :key="row.label">
-              <th scope="row">{{ row.label }}</th>
-              <td v-for="(cell, index) in row.cells" :key="index">
-                <p>{{ cell.text }}</p>
-                <div class="comparison-sources">
-                  <a
-                    v-for="link in cell.sources"
-                    :key="link.url"
-                    :href="link.url"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {{ cell.sources.length === 1 ? copy.source : copy.sources }}: {{ link.label }}
-                    <span aria-hidden="true">↗</span>
-                  </a>
-                </div>
+            <tr class="comparison-price">
+              <th scope="row">
+                <strong>{{ copy.priceLabel }}</strong>
+                <small>{{ copy.priceHint }}</small>
+              </th>
+              <td v-for="(price, index) in prices" :key="index" :data-own="tools[index]!.own || undefined">
+                <strong>{{ price.amount }}</strong>
+                <small>{{ price.detail }}</small>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      <p class="comparison-note">{{ copy.note }}</p>
+      <div class="comparison-footer">
+        <ul class="comparison-legend">
+          <li><Icon :name="icons.yes" class="comparison-legend-yes" aria-hidden="true" />{{ copy.legendYes }}</li>
+          <li><Icon :name="icons.no" class="comparison-legend-no" aria-hidden="true" />{{ copy.legendNo }}</li>
+          <li>{{ copy.legendDate }}</li>
+        </ul>
+        <div class="comparison-sources">
+          <span>{{ copy.sources }}</span>
+          <a v-for="link in sources" :key="link.url" :href="link.url" target="_blank" rel="noopener noreferrer"
+            >{{ link.label }}<Icon name="mdi:arrow-top-right" aria-hidden="true"
+          /></a>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
+<script setup lang="ts">
+import { formatUsd, PLAN_ARTICLES, PLAN_PRICES_USD } from '../../shared/utils/plans'
+
+const { locale } = useI18n()
+const isCs = computed(() => locale.value === 'cs')
+const usd = (amount: number) => formatUsd(amount, locale.value)
+const icons = { yes: 'mdi:check-circle', no: 'mdi:close-circle-outline' }
+
+const tools = [
+  { name: 'Topiqu', logo: '/brand/topiqu-mark.png', own: true },
+  { name: 'Jasper', logo: '/brand/products/jasper.png', own: false },
+  { name: 'Contentbase', logo: '/brand/products/contentbase.svg', own: false },
+  { name: 'Writesonic', logo: '/brand/products/writesonic.svg', own: false },
+  { name: 'Arvow', logo: '/brand/products/arvow.png', own: false },
+]
+
+// A tick only where public documentation or pricing describes the feature; a cross where we could not find it
+// (October 2026). Columns follow `tools`: Topiqu, Jasper, Contentbase, Writesonic, Arvow.
+const featureGroups = [
+  {
+    key: 'writing',
+    features: [
+      { key: 'knowledge', support: [true, true, false, true, true] },
+      { key: 'research', support: [true, true, true, true, true] },
+      { key: 'review', support: [true, false, false, true, false] },
+      { key: 'imageRights', support: [true, false, false, false, false] },
+    ],
+  },
+  {
+    key: 'publishing',
+    features: [
+      { key: 'hosted', support: [true, false, true, false, false] },
+      { key: 'wordpress', support: [true, true, true, true, true] },
+      { key: 'scheduling', support: [true, false, true, false, true] },
+      { key: 'hreflang', support: [true, false, false, false, false] },
+      { key: 'api', support: [true, true, false, true, true] },
+    ],
+  },
+  {
+    key: 'after',
+    features: [
+      { key: 'searchConsole', support: [true, true, true, true, true] },
+      { key: 'aiCitations', support: [true, true, false, true, true] },
+      { key: 'aiTraffic', support: [true, false, false, true, false] },
+      { key: 'autopilot', support: [true, false, true, false, false] },
+    ],
+  },
+  {
+    key: 'plans',
+    features: [
+      { key: 'free', support: [true, false, false, false, false] },
+      { key: 'affordable', support: [true, false, false, false, true] },
+    ],
+  },
+] as const
+
+type GroupKey = (typeof featureGroups)[number]['key']
+type FeatureKey = (typeof featureGroups)[number]['features'][number]['key']
+
+const labels: Record<'cs' | 'en', Record<GroupKey, string> & Record<FeatureKey, readonly [string, string]>> = {
+  cs: {
+    writing: 'Psaní',
+    publishing: 'Publikace',
+    after: 'Po publikaci',
+    plans: 'Tarify',
+    knowledge: ['Znalostní báze z vašich dokumentů', 'Ceníky, poznámky, soubory i celý web.'],
+    research: ['Živá rešerše na webu', 'Aktuální zdroje ke každému tématu.'],
+    review: ['Kontrola tvrzení před vydáním', 'Sporná místa se vrátí k opravě.'],
+    imageRights: ['Původ obrázků a práva k publikaci', 'U každého obrázku víte, odkud je a jestli ho smíte použít.'],
+    hosted: ['Hostovaný blog na vlastní doméně', 'Bez šablony a vlastního hostingu.'],
+    wordpress: ['Publikace do WordPressu', 'Články jako běžné příspěvky.'],
+    scheduling: ['Plánované automatické vydávání', 'Rytmus vydávání nastavíte jednou.'],
+    hreflang: ['Propojené jazykové verze článku', 'Vlastní URL a hreflang pro každý překlad.'],
+    api: ['API pro integrace', 'Napojení na vlastní web či systémy.'],
+    searchConsole: ['Data ze Search Console', 'Kliknutí, zobrazení a pozice.'],
+    aiCitations: ['Sledování citací v odpovědích AI', 'Kdo je citován u vašich otázek.'],
+    aiTraffic: ['Návštěvy z AI a AI crawlerů', 'Provoz, který Google Analytics nevidí.'],
+    autopilot: ['Automatické úpravy vydaných článků', 'Podle dat, s možností změnu vrátit.'],
+    free: ['Tarif zdarma bez časového limitu', 'Ruční editor a publikace; AI od tarifu Pro.'],
+    affordable: ['Tarif s AI do 50 $ měsíčně', 'Při měsíční platbě.'],
+  },
+  en: {
+    writing: 'Writing',
+    publishing: 'Publishing',
+    after: 'After publishing',
+    plans: 'Plans',
+    knowledge: ['Knowledge base from your documents', 'Pricing sheets, notes, files or your whole site.'],
+    research: ['Live web research', 'Current sources for every topic.'],
+    review: ['Claim review before publishing', 'Disputed claims go back for revision.'],
+    imageRights: [
+      'Image provenance and publishing rights',
+      'Know where every image comes from and whether you may use it.',
+    ],
+    hosted: ['Hosted blog on your own domain', 'No theme or hosting to manage.'],
+    wordpress: ['Publishing to WordPress', 'Articles arrive as regular posts.'],
+    scheduling: ['Scheduled automatic publishing', 'Set your publishing rhythm once.'],
+    hreflang: ['Linked language versions', 'Own URL and hreflang for every translation.'],
+    api: ['API for integrations', 'Connect your own site or systems.'],
+    searchConsole: ['Search Console data', 'Clicks, impressions and positions.'],
+    aiCitations: ['AI answer citation tracking', 'Who gets cited for your questions.'],
+    aiTraffic: ['AI referrals and AI crawler visits', 'Traffic Google Analytics does not show.'],
+    autopilot: ['Automatic updates to published articles', 'Data-driven and reversible.'],
+    free: ['Free plan with no time limit', 'Manual editor and publishing; AI from Pro.'],
+    affordable: ['AI plan under $50 a month', 'With monthly billing.'],
+  },
+}
+
+const groups = computed(() => {
+  const text = labels[isCs.value ? 'cs' : 'en']
+  return featureGroups.map((group) => ({
+    label: text[group.key],
+    rows: group.features.map((feature) => ({
+      label: text[feature.key][0],
+      hint: text[feature.key][1],
+      support: feature.support,
+    })),
+  }))
+})
+
+const prices = computed(() =>
+  isCs.value
+    ? [
+        { amount: usd(PLAN_PRICES_USD.pro), detail: `${PLAN_ARTICLES.pro} AI článků` },
+        { amount: usd(69), detail: 'za uživatele' },
+        { amount: usd(99), detail: '30 článků' },
+        { amount: usd(99), detail: '15 článků' },
+        { amount: usd(39), detail: 'akce, běžně 69 $' },
+      ]
+    : [
+        { amount: usd(PLAN_PRICES_USD.pro), detail: `${PLAN_ARTICLES.pro} AI articles` },
+        { amount: usd(69), detail: 'per seat' },
+        { amount: usd(99), detail: '30 articles' },
+        { amount: usd(99), detail: '15 articles' },
+        { amount: usd(39), detail: 'offer, usually $69' },
+      ],
+)
+
+const copy = computed(() =>
+  isCs.value
+    ? {
+        eyebrow: 'SROVNÁNÍ',
+        title: 'Co dostanete navíc',
+        description:
+          'Topiqu pokrývá celou cestu článku od podkladů po data z vyhledávání. Takhle vypadá srovnání s nástroji, na které narazíte nejčastěji.',
+        feature: 'Funkce',
+        yes: 'Ano',
+        no: 'Ne',
+        priceLabel: 'Nejnižší tarif s AI',
+        priceHint: 'Měsíčně v USD, při měsíční platbě.',
+        legendYes: 'popsáno ve veřejné dokumentaci nebo ceníku',
+        legendNo: 've veřejné dokumentaci jsme nenašli',
+        legendDate: 'Stav k říjnu 2026. Pokud je údaj nepřesný, napište nám.',
+        sources: 'Zdroje:',
+      }
+    : {
+        eyebrow: 'COMPARISON',
+        title: 'What you get on top',
+        description:
+          'Topiqu covers the whole journey of an article, from your material to search data. Here is how it compares with the tools you are most likely to meet.',
+        feature: 'Feature',
+        yes: 'Yes',
+        no: 'No',
+        priceLabel: 'Lowest AI plan',
+        priceHint: 'Per month in USD, billed monthly.',
+        legendYes: 'described in public documentation or pricing',
+        legendNo: 'not found in public documentation',
+        legendDate: 'As of October 2026. If anything is inaccurate, let us know.',
+        sources: 'Sources:',
+      },
+)
+
+const sources = [
+  { label: 'Jasper · pricing', url: 'https://www.jasper.ai/pricing' },
+  { label: 'Jasper · Knowledge Base', url: 'https://help.jasper.ai/hc/en-us/articles/55085018624411-Knowledge-Base' },
+  { label: 'Jasper · Research Agent', url: 'https://help.jasper.ai/hc/en-us/articles/48810861467803-Research-Agent' },
+  { label: 'Jasper · integrations', url: 'https://www.jasper.ai/integrations' },
+  { label: 'Jasper · API', url: 'https://help.jasper.ai/hc/en-us/articles/18618701173659-Jasper-s-API' },
+  {
+    label: 'Jasper · Search Console',
+    url: 'https://help.jasper.ai/hc/en-us/articles/55091361235355-Integrations-Google-Search-Console',
+  },
+  { label: 'Jasper · GEO Hub', url: 'https://help.jasper.ai/hc/en-us/articles/55317942235803-GEO-Hub' },
+  { label: 'Contentbase · pricing & FAQ', url: 'https://contentbase.ai/pricing' },
+  { label: 'Contentbase · docs', url: 'https://contentbase.ai/docs/' },
+  { label: 'Contentbase · Go', url: 'https://contentbase.ai/docs/features/contentbase-go/' },
+  { label: 'Writesonic · pricing', url: 'https://writesonic.com/pricing' },
+  { label: 'Writesonic · docs & API', url: 'https://docs.writesonic.com/' },
+  {
+    label: 'Writesonic · Article Writer 6.0',
+    url: 'https://cxotoday.com/media-coverage/writesonic-unveils-ai-article-writer-6-0-write-factually-accurate-articles-with-real-time-data-that-drive-traffic/',
+  },
+  { label: 'Arvow · pricing', url: 'https://arvow.com/pricing' },
+  { label: 'Arvow · changelog', url: 'https://arvow.featurebase.app/en/changelog' },
+]
+</script>
+
 <style scoped>
 .comparison-scroll {
   overflow-x: auto;
-  border: 1px solid var(--landing-line);
 }
 .comparison-scroll:focus-visible {
-  outline: 3px solid var(--landing-accent);
-  outline-offset: 3px;
+  outline: 2px solid var(--landing-accent);
+  outline-offset: 4px;
 }
 .comparison-table {
   width: 100%;
-  min-width: 800px;
-  border-collapse: collapse;
+  min-width: 860px;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
   text-align: left;
 }
 .comparison-table th,
 .comparison-table td {
-  min-width: 0;
-  padding: 22px;
-  border-right: 1px solid var(--landing-line);
+  padding: 13px 16px;
   border-bottom: 1px solid var(--landing-line);
-  vertical-align: top;
-}
-.comparison-table tr > :last-child {
-  border-right: 0;
-}
-.comparison-table tbody tr:last-child > * {
-  border-bottom: 0;
+  vertical-align: middle;
 }
 .comparison-table thead th {
-  background: var(--landing-bg);
-  font-size: 14px;
-  font-weight: 750;
-}
-.comparison-table th:first-child {
-  position: sticky;
-  left: 0;
-  z-index: 1;
-  width: 17%;
-  min-width: 140px;
-  background: var(--landing-surface);
-  font-size: 14px;
+  padding-block: 18px;
+  border-bottom-color: var(--landing-ink);
+  color: var(--landing-muted);
+  font-size: 12px;
   font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  vertical-align: bottom;
 }
 .comparison-table thead th:first-child {
-  z-index: 2;
-  background: var(--landing-bg);
+  width: 34%;
 }
+.comparison-table thead th:not(:first-child),
 .comparison-table td {
-  width: 27.7%;
+  text-align: center;
 }
-.comparison-table td:nth-child(2) {
-  background: var(--landing-tint);
+.comparison-table tbody th strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
 }
-.comparison-table td p {
-  color: var(--landing-ink);
+.comparison-table tbody th small {
+  display: block;
+  margin-top: 2px;
+  color: var(--landing-muted);
   font-size: 13px;
-  line-height: 1.65;
+  font-weight: 500;
+}
+.comparison-group th {
+  padding: 26px 16px 8px;
+  color: var(--landing-accent);
+  font-size: 11px;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.comparison-tool {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--landing-ink);
+  font-size: 14px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+  text-transform: none;
+}
+.comparison-tool img {
+  width: 32px;
+  height: 32px;
+  padding: 3px;
+  border: 1px solid var(--landing-line);
+  border-radius: 9px;
+  background: #fff;
+  object-fit: contain;
+}
+.comparison-mark {
+  display: inline-grid;
+  place-items: center;
+  color: color-mix(in srgb, var(--landing-muted) 55%, transparent);
+  font-size: 22px;
+}
+.comparison-mark[data-has] {
+  color: var(--landing-success);
+}
+.comparison-table td[data-own] .comparison-mark[data-has] {
+  color: var(--landing-accent);
+  font-size: 24px;
+}
+/* Topiqu reads as one raised column running through the table. */
+.comparison-table td[data-own],
+.comparison-table thead th[data-own] {
+  background: var(--landing-tint);
+  box-shadow:
+    inset 1px 0 var(--landing-accent),
+    inset -1px 0 var(--landing-accent);
+}
+.comparison-table thead th[data-own] {
+  border-radius: var(--topiqu-surface-radius) var(--topiqu-surface-radius) 0 0;
+  border-bottom-color: var(--landing-accent);
+  box-shadow:
+    inset 1px 0 var(--landing-accent),
+    inset -1px 0 var(--landing-accent),
+    inset 0 1px var(--landing-accent);
+}
+.comparison-price td[data-own] {
+  border-radius: 0 0 var(--topiqu-surface-radius) var(--topiqu-surface-radius);
+  box-shadow:
+    inset 1px 0 var(--landing-accent),
+    inset -1px 0 var(--landing-accent),
+    inset 0 -1px var(--landing-accent);
+}
+.comparison-table td[data-own] {
+  border-bottom-color: color-mix(in srgb, var(--landing-accent) 25%, var(--landing-tint));
+}
+/* Group headings interrupt the rows, but the Topiqu column carries on through them. */
+.comparison-group th {
+  --own-start: 34%;
+  --own-end: calc(34% + 66% / 5);
+  background: linear-gradient(
+    90deg,
+    transparent var(--own-start),
+    var(--landing-accent) var(--own-start) calc(var(--own-start) + 1px),
+    var(--landing-tint) calc(var(--own-start) + 1px) calc(var(--own-end) - 1px),
+    var(--landing-accent) calc(var(--own-end) - 1px) var(--own-end),
+    transparent var(--own-end)
+  );
+}
+.comparison-price > * {
+  padding-block: 18px !important;
+  border-bottom: 0 !important;
+}
+.comparison-price td strong {
+  display: block;
+  font-size: 18px;
+  font-weight: 750;
+  letter-spacing: -0.01em;
+}
+.comparison-price td small {
+  display: block;
+  margin-top: 2px;
+  color: var(--landing-muted);
+  font-size: 12px;
+}
+.comparison-visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.comparison-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 22px;
+  color: var(--landing-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+.comparison-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.comparison-legend li {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.comparison-legend .iconify {
+  font-size: 16px;
+}
+.comparison-legend-yes {
+  color: var(--landing-success);
+}
+.comparison-legend-no {
+  color: color-mix(in srgb, var(--landing-muted) 55%, transparent);
 }
 .comparison-sources {
   display: flex;
   flex-wrap: wrap;
-  gap: 3px 12px;
-  margin-top: 12px;
+  align-items: center;
+  gap: 6px;
 }
 .comparison-sources a {
-  color: var(--landing-accent);
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-}
-.comparison-sources a:hover {
-  color: var(--landing-ink);
-}
-.comparison-note {
-  margin-top: 14px !important;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 8px;
+  border: 1px solid var(--landing-line);
+  border-radius: 999px;
   color: var(--landing-muted);
   font-size: 11px;
-  line-height: 1.6;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    border-color 0.15s,
+    color 0.15s;
 }
-@media (max-width: 600px) {
-  .comparison-table {
-    min-width: 720px;
+.comparison-sources a:hover {
+  border-color: var(--landing-accent);
+  color: var(--landing-accent);
+}
+
+/* Narrow screens: the feature name spans the row and the five tools share the width beneath it. */
+@media (max-width: 760px) {
+  .comparison-table,
+  .comparison-table thead,
+  .comparison-table tbody {
+    display: block;
+    min-width: 0;
+  }
+  .comparison-table tr {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+  .comparison-table thead th:first-child {
+    display: none;
   }
   .comparison-table th,
   .comparison-table td {
-    padding: 15px;
+    padding: 8px 2px;
   }
-  .comparison-table th:first-child {
-    min-width: 115px;
+  .comparison-table tbody th {
+    grid-column: 1 / -1;
+    padding: 14px 4px 4px;
+    border-bottom: 0;
+  }
+  .comparison-table tbody th small {
+    display: none;
+  }
+  .comparison-group th {
+    padding-top: 28px;
+    background: none;
+  }
+  .comparison-tool {
+    gap: 6px;
+    font-size: 10px;
+    letter-spacing: 0;
+  }
+  .comparison-tool img {
+    width: 28px;
+    height: 28px;
+  }
+  .comparison-mark,
+  .comparison-table td[data-own] .comparison-mark[data-has] {
+    font-size: 20px;
+  }
+  .comparison-price td strong {
+    font-size: 14px;
+  }
+  .comparison-price td small {
+    font-size: 10px;
+    line-height: 1.3;
   }
 }
 </style>
