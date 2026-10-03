@@ -8,12 +8,13 @@ export default defineNuxtRouteMiddleware((to) => {
 
   const is = (...pages: string[]) => pages.some((page) => routeName.includes(`onboarding-${page}`))
 
-  if (is('design', 'account', 'plan', 'verify', 'summary') && !store.form.siteName) {
+  // Design and plan are optional and can be skipped, but every later step needs a named blog.
+  if (is('design', 'plan', 'account', 'verify', 'summary') && !store.form.siteName) {
     return navigateTo(localePath({ name: 'onboarding-site' }))
   }
 
   // Passwords are deliberately not persisted, so a reload past the account step lands back on it.
-  if (is('plan', 'verify', 'summary') && !store.form.password) {
+  if (is('verify', 'summary') && !store.form.password) {
     return navigateTo(localePath({ name: 'onboarding-account' }))
   }
 

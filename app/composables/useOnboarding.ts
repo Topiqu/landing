@@ -9,6 +9,10 @@ export interface OnboardingForm {
   domainType: DomainType
   language: ContentLanguage
   theme: ThemeKey
+  accentColor: string
+  gradient: GradientStyle | null
+  typography: TypographyPreset
+  tagline: string
   username: string
   email: string
   password: string
@@ -19,11 +23,15 @@ export interface OnboardingForm {
   billingInterval: SelectedBillingInterval
 }
 
-export const ONBOARDING_STEPS = ['site', 'design', 'account', 'plan', 'verify', 'summary'] as const
+// The fun, optional steps come first; the account and its verification close the flow.
+export const ONBOARDING_STEPS = ['site', 'design', 'plan', 'account', 'verify', 'summary'] as const
 export type OnboardingStep = (typeof ONBOARDING_STEPS)[number]
 export const TOTAL_STEPS = ONBOARDING_STEPS.length
+export const OPTIONAL_STEPS: readonly OnboardingStep[] = ['design', 'plan']
+export type StepProgress = 'done' | 'skipped'
 
 export const stepRouteName = (step: OnboardingStep) => `onboarding-${step}` as const
+export const nextStep = (step: OnboardingStep) => ONBOARDING_STEPS[ONBOARDING_STEPS.indexOf(step) + 1] ?? step
 
 export const useOnboarding = () => {
   const store = useOnboardingStore()
@@ -31,6 +39,14 @@ export const useOnboarding = () => {
   const refs = storeToRefs(store)
 
   const goTo = (step: OnboardingStep) => navigateTo(localePath({ name: stepRouteName(step) }))
+  const complete = (step: OnboardingStep) => {
+    store.markStep(step, 'done')
+    return goTo(nextStep(step))
+  }
+  const skip = (step: OnboardingStep) => {
+    store.markStep(step, store.isStepDirty(step) ? 'done' : 'skipped')
+    return goTo(nextStep(step))
+  }
 
   return {
     form: store.form,
@@ -38,6 +54,8 @@ export const useOnboarding = () => {
     userEditedDomain: refs.userEditedDomain,
     domainStatus: refs.domainStatus,
     fullDomainPreview: refs.fullDomainPreview,
+    brandAccent: refs.brandAccent,
+    brandGradientValue: refs.brandGradientValue,
     challenge: refs.challenge,
     verifiedToken: refs.verifiedToken,
     code: refs.code,
@@ -55,5 +73,7 @@ export const useOnboarding = () => {
     verifyCode: store.verifyCode,
     submit: store.submit,
     goTo,
+    complete,
+    skip,
   }
 }

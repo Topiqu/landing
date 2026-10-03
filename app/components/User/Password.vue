@@ -53,7 +53,7 @@ const strength = computed(() => {
 })
 </script>
 <template>
-  <UFormField :label="label" :error="error" :hint="showStrength && password ? strength.label : undefined">
+  <UFormField :label="label" :error="error" required :hint="showStrength && password ? strength.label : undefined">
     <UInput
       v-model="password"
       :type="visible ? 'text' : 'password'"

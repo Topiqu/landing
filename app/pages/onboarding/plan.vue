@@ -12,7 +12,7 @@ import {
 definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
 
 const { locale, tm, rt } = useI18n()
-const { form, trialEndsOn, goTo } = useOnboarding()
+const { form, trialEndsOn, complete } = useOnboarding()
 const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
 
 const plans = computed(() =>
@@ -46,7 +46,7 @@ const note = computed(() =>
 )
 </script>
 <template>
-  <form class="onb-form" @submit.prevent="goTo('verify')">
+  <form class="onb-form" @submit.prevent="complete('plan')">
     <div class="onb-heading">
       <h1 id="onboarding-title">{{ $t('landing.onboarding.plan.title') }}</h1>
       <p>{{ $t('landing.onboarding.plan.description', trial) }}</p>
@@ -87,7 +87,7 @@ const note = computed(() =>
       <span>{{ note }}</span>
     </div>
 
-    <OnboardingActions back="account" />
+    <OnboardingActions back="design" skip="plan" />
   </form>
 </template>
 <style scoped>

@@ -6,13 +6,21 @@ const SUBDOMAIN_RE = /^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?$/
 const CUSTOM_DOMAIN_RE = /^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/
 
 // Mirrors the platform's POST /api/onboarding/checkout body. `language` follows its
-// LANGUAGE_OPTIONS and `theme` its THEME_OPTIONS.
+// LANGUAGE_OPTIONS, `theme` its THEME_OPTIONS and the branding fields its ClientSite columns.
+const HEX_RE = /^#[0-9a-f]{6}$/i
 const schema = z
   .object({
     siteName: z.string().trim().min(1).max(255),
     domain: z.string().trim().toLowerCase().min(1).max(253),
     domainType: z.enum(['SUBDOMAIN', 'CUSTOM']).default('SUBDOMAIN'),
     theme: z.enum(Object.keys(THEME_COLORS) as [ThemeKey, ...ThemeKey[]]).optional(),
+    accentColor: z.string().regex(HEX_RE).optional(),
+    brandGradient: z
+      .object({ colors: z.array(z.string().regex(HEX_RE)).min(2).max(3), angle: z.number().int().min(0).max(360) })
+      .strict()
+      .optional(),
+    typographyPreset: z.enum(TYPOGRAPHY_PRESETS).optional(),
+    tagline: z.string().trim().max(80).optional(),
     language: z.enum(CONTENT_LANGUAGES),
     username: z.string().trim().min(3).max(50),
     email: z.string().email(),

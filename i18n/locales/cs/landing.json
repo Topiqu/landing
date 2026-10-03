@@ -149,7 +149,9 @@
         "customDomain": "Doména",
         "customDomainPlaceholder": "blog.mojefirma.cz",
         "dnsTitle": "Doménu připojíte po registraci",
-        "dnsText": "Topiqu vám ukáže DNS záznam, který je potřeba přidat, a před aktivací ověří, že doména patří vám."
+        "dnsText": "Topiqu vám ukáže DNS záznam, který je potřeba přidat, a před aktivací ověří, že doména patří vám.",
+        "language": "Jazyk psaní",
+        "languageHelp": "Články později přeložíte i do dalších jazyků."
       },
       "domainStatus": {
         "checking": "Ověřujeme dostupnost…",
@@ -162,11 +164,36 @@
         "empty": ""
       },
       "design": {
-        "title": "Jazyk a barva",
-        "description": "Vyberte jazyk, ve kterém budete psát, a barvu své značky. Články můžete později přeložit i do dalších jazyků.",
-        "language": "Jazyk psaní",
+        "title": "Vzhled blogu",
+        "description": "Vyberte barvu, přechod, písmo a podtitul. Náhled se mění s každou volbou.",
         "color": "Barva značky",
-        "preview": "Náhled"
+        "preview": "Náhled blogu",
+        "customColor": "Vlastní barva",
+        "hex": "Kód barvy (HEX)",
+        "gradient": "Přechod v záhlaví",
+        "gradientHelp": "Pozadí titulní části, ukazatel čtení a obrázek pro sdílení. Součást tarifů Pro a Premium.",
+        "gradients": {
+          "none": "Bez přechodu",
+          "soft": "Jemný",
+          "deep": "Sytý",
+          "three": "Tři barvy"
+        },
+        "typography": "Písmo",
+        "typefaces": {
+          "modern": "Moderní",
+          "editorial": "Editorial",
+          "magazine": "Magazín",
+          "system": "Systémové"
+        },
+        "typeSample": "Krátký úvod ukazuje, jak bude text působit.",
+        "fontsHelp": "Vlastní písma ve formátu WOFF2 nahrajete v nastavení blogu.",
+        "tagline": "Podtitul",
+        "taglinePlaceholder": "Krátká věta, která popisuje vaši publikaci",
+        "sampleCta": "Odebírat",
+        "sampleCategory": "Průvodce",
+        "sampleTitle": "Příběhy, které stojí za přečtení",
+        "sampleExcerpt": "Krátký úvod ukazuje, jak bude váš text působit na čtenáře.",
+        "sampleMore": "Číst dál"
       },
       "account": {
         "title": "Váš administrátorský účet",
@@ -231,7 +258,13 @@
         "tosRequired": "Pro pokračování přijměte podmínky",
         "createFree": "Vytvořit blog",
         "createPaid": "Vytvořit blog a přidat kartu",
-        "trialHint": "Hned po vytvoření dostanete {articles} AI článků."
+        "trialHint": "Hned po vytvoření dostanete {articles} AI článků.",
+        "typography": "Písmo",
+        "tagline": "Podtitul",
+        "default": "Výchozí",
+        "unfilledTitle": "Přeskočeno: {steps}",
+        "unfilledText": "Blog začne s výchozím nastavením. Doplnit ho můžete teď, nebo kdykoli v nastavení.",
+        "unfilledAction": "Doplnit"
       },
       "back": "Zpět",
       "continue": "Pokračovat",
@@ -251,7 +284,10 @@
         "purple": "Purpurová",
         "violet": "Fialová",
         "gray": "Šedá"
-      }
+      },
+      "optional": "Nepovinné",
+      "unfilled": "Nevyplněno",
+      "skip": "Přeskočit"
     },
     "footer": {
       "rights": "Všechna práva vyhrazena."

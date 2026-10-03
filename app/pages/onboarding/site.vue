@@ -2,13 +2,18 @@
 definePageMeta({ layout: 'onboarding' })
 
 const route = useRoute()
-const { form, userEditedDomain, domainStatus, fullDomainPreview, canAdvanceSite, setDomainType, goTo } = useOnboarding()
+const { form, userEditedDomain, domainStatus, fullDomainPreview, canAdvanceSite, setDomainType, complete } =
+  useOnboarding()
 
 // Pricing CTAs pass ?plan= so the plan step opens on the plan the visitor chose.
 const requestedPlan = String(route.query.plan ?? '').toUpperCase()
 if (requestedPlan === 'PRO' || requestedPlan === 'PREMIUM') form.selectedPlan = requestedPlan
 const requestedInterval = String(route.query.interval ?? '')
 if (requestedInterval === 'month' || requestedInterval === 'year') form.billingInterval = requestedInterval
+
+const languageOptions = computed(() =>
+  CONTENT_LANGUAGES.map((value) => ({ value, label: $t('languages.' + value), code: value.toUpperCase() })),
+)
 
 const domainOptions = computed(() => [
   {
@@ -37,7 +42,7 @@ const status = computed(() => {
 })
 
 const handleSubmit = () => {
-  if (canAdvanceSite.value) goTo('design')
+  if (canAdvanceSite.value) complete('site')
 }
 </script>
 <template>
@@ -128,6 +133,54 @@ const handleSubmit = () => {
       >
     </div>
 
+    <fieldset class="onb-fieldset">
+      <legend class="onb-legend">{{ $t('landing.onboarding.site.language') }}</legend>
+      <div class="site-languages">
+        <label v-for="option in languageOptions" :key="option.value" class="onb-choice">
+          <input v-model="form.language" type="radio" name="language" :value="option.value" />
+          <span class="site-language-code" aria-hidden="true">{{ option.code }}</span>
+          <span class="onb-choice-text">
+            <strong>{{ option.label }}</strong>
+          </span>
+        </label>
+      </div>
+      <p class="onb-help">{{ $t('landing.onboarding.site.languageHelp') }}</p>
+    </fieldset>
+
     <OnboardingActions :disabled="!canAdvanceSite" />
   </form>
 </template>
+<style scoped>
+.site-languages {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+}
+.site-languages .onb-choice {
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+}
+.site-language-code {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 30px;
+  height: 22px;
+  border: 1px solid var(--landing-line);
+  border-radius: 6px;
+  background: var(--landing-bg);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+}
+.onb-choice:has(input:checked) .site-language-code {
+  border-color: var(--landing-accent);
+  color: var(--landing-accent);
+}
+@media (max-width: 640px) {
+  .site-languages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+</style>

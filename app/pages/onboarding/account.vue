@@ -1,7 +1,7 @@
 <script setup lang="ts">
 definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
 
-const { form, canAdvanceAccount, goTo } = useOnboarding()
+const { form, canAdvanceAccount, complete } = useOnboarding()
 const mismatch = computed(
   () =>
     !!form.passwordConfirm &&
@@ -9,7 +9,7 @@ const mismatch = computed(
     $t('landing.onboarding.account.passwordMismatch'),
 )
 const handleSubmit = () => {
-  if (canAdvanceAccount.value) goTo('plan')
+  if (canAdvanceAccount.value) complete('account')
 }
 </script>
 <template>
@@ -53,7 +53,7 @@ const handleSubmit = () => {
       />
     </div>
 
-    <OnboardingActions back="design" :disabled="!canAdvanceAccount" />
+    <OnboardingActions back="plan" :disabled="!canAdvanceAccount" />
   </form>
 </template>
 <style scoped>

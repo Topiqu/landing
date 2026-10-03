@@ -149,7 +149,9 @@
         "customDomain": "Domain",
         "customDomainPlaceholder": "blog.mycompany.com",
         "dnsTitle": "Connect the domain after sign-up",
-        "dnsText": "Topiqu shows the DNS record to add and verifies that you own the domain before activating it."
+        "dnsText": "Topiqu shows the DNS record to add and verifies that you own the domain before activating it.",
+        "language": "Writing language",
+        "languageHelp": "You can translate articles into other languages later."
       },
       "domainStatus": {
         "checking": "Checking availability…",
@@ -162,11 +164,36 @@
         "empty": ""
       },
       "design": {
-        "title": "Language and colour",
-        "description": "Choose the language you will write in and your brand colour. You can translate articles into other languages later.",
-        "language": "Writing language",
+        "title": "Your blog's look",
+        "description": "Pick a colour, gradient, typeface and tagline. The preview follows every choice.",
         "color": "Brand colour",
-        "preview": "Preview"
+        "preview": "Blog preview",
+        "customColor": "Custom colour",
+        "hex": "Colour code (HEX)",
+        "gradient": "Header gradient",
+        "gradientHelp": "Behind the homepage hero, in the reading bar and on the share image. Included in Pro and Premium.",
+        "gradients": {
+          "none": "No gradient",
+          "soft": "Soft",
+          "deep": "Deep",
+          "three": "Three colours"
+        },
+        "typography": "Typeface",
+        "typefaces": {
+          "modern": "Modern",
+          "editorial": "Editorial",
+          "magazine": "Magazine",
+          "system": "System"
+        },
+        "typeSample": "A short introduction shows how your writing will feel.",
+        "fontsHelp": "Upload your own WOFF2 fonts in the blog settings.",
+        "tagline": "Tagline",
+        "taglinePlaceholder": "A short line describing your publication",
+        "sampleCta": "Subscribe",
+        "sampleCategory": "Guide",
+        "sampleTitle": "Stories worth reading",
+        "sampleExcerpt": "A short introduction shows how your writing will feel to readers.",
+        "sampleMore": "Read more"
       },
       "account": {
         "title": "Your admin account",
@@ -239,7 +266,13 @@
         "tosRequired": "Accept the terms to continue",
         "createFree": "Create my blog",
         "createPaid": "Create blog and add a card",
-        "trialHint": "You get {articles} AI articles right away."
+        "trialHint": "You get {articles} AI articles right away.",
+        "typography": "Typeface",
+        "tagline": "Tagline",
+        "default": "Default",
+        "unfilledTitle": "Skipped: {steps}",
+        "unfilledText": "Your blog starts with the default settings. Fill them in now or any time in settings.",
+        "unfilledAction": "Fill in"
       },
       "back": "Back",
       "continue": "Continue",
@@ -259,7 +292,10 @@
         "purple": "Purple",
         "violet": "Violet",
         "gray": "Grey"
-      }
+      },
+      "optional": "Optional",
+      "unfilled": "Not filled in",
+      "skip": "Skip"
     },
     "footer": {
       "rights": "All rights reserved."

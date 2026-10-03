@@ -108,7 +108,12 @@ watch(code, () => {
       </i18n-t>
     </div>
 
-    <UFormField :label="$t('landing.onboarding.verify.code')" :error="codeError || undefined">
+    <UFormField
+      class="verify-field"
+      :label="$t('landing.onboarding.verify.code')"
+      :error="codeError || undefined"
+      :ui="{ labelWrapper: 'tw:justify-center', container: 'tw:flex tw:flex-col tw:items-center' }"
+    >
       <UPinInput
         v-model="digits"
         :length="6"
@@ -144,7 +149,7 @@ watch(code, () => {
     </div>
 
     <OnboardingActions
-      back="plan"
+      back="account"
       icon="mdi:check"
       :label="$t('landing.onboarding.verify.submit')"
       :disabled="!canVerify && !store.verifiedToken"
@@ -153,11 +158,14 @@ watch(code, () => {
   </form>
 </template>
 <style scoped>
+.verify-field {
+  text-align: center;
+}
 .verify-resend {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 8px;
   color: var(--landing-muted);
   font-size: 13px;

@@ -2,7 +2,7 @@ import slugify from 'slugify'
 import { defineStore } from 'pinia'
 import { zxcvbn } from '@zxcvbn-ts/core'
 
-import type { DomainStatus, OnboardingForm } from '~/composables/useOnboarding'
+import type { DomainStatus, OnboardingForm, OnboardingStep, StepProgress } from '~/composables/useOnboarding'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -13,6 +13,16 @@ export const normalizeDomain = (value: string) =>
     .replace(/^https?:\/\//, '')
     .replace(/\/.*$/, '')
     .replace(/\.$/, '')
+
+// Start in the language the visitor is reading; restoring persisted state overrides it.
+const initialLanguage = (): ContentLanguage => {
+  try {
+    const locale = (useNuxtApp().$i18n as { locale: { value: string } }).locale.value
+    return (CONTENT_LANGUAGES as readonly string[]).includes(locale) ? (locale as ContentLanguage) : 'en'
+  } catch {
+    return 'en'
+  }
+}
 
 export const useOnboardingStore = defineStore(
   'onboarding',
@@ -50,8 +60,12 @@ export const useOnboardingStore = defineStore(
       siteName: '',
       domain: '',
       domainType: 'SUBDOMAIN',
-      language: 'en',
+      language: initialLanguage(),
       theme: 'indigo',
+      accentColor: '',
+      gradient: null,
+      typography: 'MODERN',
+      tagline: '',
       username: '',
       email: '',
       password: '',
@@ -63,6 +77,15 @@ export const useOnboardingStore = defineStore(
     })
 
     const domainStatus = shallowRef<DomainStatus>('idle')
+
+    // How the visitor left each step: `done` when they continued, `skipped` when they jumped past it untouched.
+    const progress = reactive<Partial<Record<OnboardingStep, StepProgress>>>({})
+    const markStep = (step: OnboardingStep, value: StepProgress) => {
+      progress[step] = value
+    }
+
+    const brandAccent = computed(() => normalizeAccentColor(form.accentColor) ?? THEME_COLORS[form.theme].toUpperCase())
+    const brandGradientValue = computed(() => (form.gradient ? brandGradient(form.gradient, brandAccent.value) : null))
 
     const fullDomainPreview = computed(() =>
       form.domainType === 'SUBDOMAIN' ? `${form.domain}.topiqu.com` : normalizeDomain(form.domain),
@@ -122,6 +145,28 @@ export const useOnboardingStore = defineStore(
         form.password === form.passwordConfirm,
     )
     const canVerify = computed(() => !!challenge.value && code.value.length === 6)
+
+    // Optional steps count as filled once anything differs from the defaults.
+    const isStepDirty = (step: OnboardingStep) => {
+      if (step === 'design')
+        return (
+          form.theme !== 'indigo' ||
+          !!form.accentColor ||
+          !!form.gradient ||
+          form.typography !== 'MODERN' ||
+          !!form.tagline.trim()
+        )
+      if (step === 'plan') return form.selectedPlan !== null || form.billingInterval !== 'month'
+      return false
+    }
+    const isStepComplete = (step: OnboardingStep) => {
+      if (step === 'site') return progress.site === 'done' && !!form.siteName.trim() && !!form.domain
+      if (step === 'account') return canAdvanceAccount.value
+      if (step === 'verify') return !!verifiedToken.value
+      if (step === 'summary') return false
+      // An optional step left through the step list still counts once something in it was changed.
+      return progress[step] === 'done' || isStepDirty(step)
+    }
 
     const trialEndsOn = computed(() => new Date(Date.now() + TRIAL_DAYS * 86_400_000))
 
@@ -229,6 +274,10 @@ export const useOnboardingStore = defineStore(
             domainType: form.domainType,
             language: form.language,
             theme: form.theme,
+            accentColor: normalizeAccentColor(form.accentColor) ?? undefined,
+            brandGradient: brandGradientValue.value ?? undefined,
+            typographyPreset: form.typography,
+            tagline: form.tagline.trim() || undefined,
             username: form.username.trim(),
             email: form.email,
             password: form.password,
@@ -259,6 +308,9 @@ export const useOnboardingStore = defineStore(
       userEditedDomain,
       domainStatus,
       fullDomainPreview,
+      progress,
+      brandAccent,
+      brandGradientValue,
       challenge,
       verifiedToken,
       code,
@@ -272,6 +324,9 @@ export const useOnboardingStore = defineStore(
       canVerify,
       trialEndsOn,
       setDomainType,
+      markStep,
+      isStepDirty,
+      isStepComplete,
       sendCode,
       verifyCode,
       submit,
@@ -286,11 +341,16 @@ export const useOnboardingStore = defineStore(
         'form.domainType',
         'form.language',
         'form.theme',
+        'form.accentColor',
+        'form.gradient',
+        'form.typography',
+        'form.tagline',
         'form.username',
         'form.email',
         'form.selectedPlan',
         'form.billingInterval',
         'userEditedDomain',
+        'progress',
       ],
     },
   },
