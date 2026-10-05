@@ -19,8 +19,8 @@ export const PLAN_PRICES_USD = {
   premium: 99,
 } as const
 export const PLAN_ARTICLES = {
-  pro: 20,
-  premium: 30,
+  pro: 30,
+  premium: 50,
 } as const
 export const KNOWLEDGE_SOURCES = {
   pro: 50,

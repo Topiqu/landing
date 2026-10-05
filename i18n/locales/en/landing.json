@@ -38,7 +38,7 @@
           "cta": "Start for free"
         },
         "pro": {
-          "badge": "Creator",
+          "badge": "Autopilot",
           "name": "Pro",
           "desc": "AI writing grounded in your knowledge, on your own domain.",
           "features": {
@@ -101,7 +101,7 @@
         },
         {
           "q": "What counts as an AI article?",
-          "a": "Each article that AI writes for you uses one article from your allowance: 20 a month on Pro and 30 on Premium. Translations, fact-checks, prompt improvements, sentiment analysis and Search Console suggestions do not use articles. Purchased articles never expire; pack prices are listed above."
+          "a": "Each article that AI writes for you uses one article from your allowance: 30 a month on Pro and 50 on Premium. Translations, fact-checks, prompt improvements, sentiment analysis and Search Console suggestions do not use articles. Purchased articles never expire; pack prices are listed above."
         },
         {
           "q": "Where does the AI get its facts?",
