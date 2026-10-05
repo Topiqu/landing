@@ -2,6 +2,7 @@ import { z } from 'zod'
 import { randomInt } from 'crypto'
 import { sendVerificationCode } from '~~/server/utils/email'
 import { issueChallenge } from '~~/server/utils/onboardingTokens'
+import { isDisposableEmail } from '~~/server/utils/disposableEmails'
 
 const schema = z.object({
   email: z.string().email(),
@@ -26,6 +27,10 @@ export default defineEventHandler(async (event) => {
     if (!verification.success) {
       throw createError({ statusCode: 400, message: 'Verification failed. Please try again.' })
     }
+  }
+
+  if (isDisposableEmail(email)) {
+    throw createError({ statusCode: 400, message: 'Disposable email addresses are not allowed.' })
   }
 
   // TODO(platform): there is no read-only email check on the platform yet (`/api/users/check-email`

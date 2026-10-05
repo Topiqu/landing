@@ -57,11 +57,14 @@ export default defineEventHandler(async (event) => {
   }
 
   try {
-    const { timestamp, sig } = signLandingRequest()
+    // Vercel overwrites X-Forwarded-For with the visitor's address, so it cannot be spoofed here.
+    const clientIp = getRequestIP(event, { xForwardedFor: true }) ?? ''
+    const { timestamp, sig } = signLandingRequest(clientIp)
     const res = await $fetch<{ url?: string }>(`${platformUrl}/api/onboarding/checkout`, {
       method: 'POST',
       body,
       headers: {
+        'X-Landing-Client-Ip': clientIp,
         'X-Landing-Timestamp': timestamp,
         'X-Landing-Sig': sig,
         'Content-Type': 'application/json',
