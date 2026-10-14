@@ -13,6 +13,7 @@ export interface OnboardingForm {
   gradient: GradientStyle | null
   typography: TypographyPreset
   tagline: string
+  websiteUrl: string
   username: string
   email: string
   password: string

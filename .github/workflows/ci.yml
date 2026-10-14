@@ -41,6 +41,9 @@ jobs:
       - name: Lint
         run: bun run lint
 
+      - name: Test onboarding
+        run: bun run test
+
       - name: Typecheck
         run: bun run typecheck
 

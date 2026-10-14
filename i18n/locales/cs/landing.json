@@ -151,7 +151,10 @@
         "dnsTitle": "Doménu připojíte po registraci",
         "dnsText": "Topiqu vám ukáže DNS záznam, který je potřeba přidat, a před aktivací ověří, že doména patří vám.",
         "language": "Jazyk psaní",
-        "languageHelp": "Články později přeložíte i do dalších jazyků."
+        "languageHelp": "Články později přeložíte i do dalších jazyků.",
+        "website": "Web vaší firmy",
+        "websitePlaceholder": "mojefirma.cz",
+        "websiteHelp": "Po registraci si vyberete, které stránky přidáte do znalostní báze, aby AI psala o tom, co vaše firma skutečně nabízí."
       },
       "domainStatus": {
         "checking": "Ověřujeme dostupnost…",
@@ -247,6 +250,7 @@
         "site": "Blog",
         "domain": "Adresa",
         "language": "Jazyk",
+        "website": "Web",
         "color": "Barva",
         "admin": "Administrátor",
         "email": "E-mail",

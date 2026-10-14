@@ -151,7 +151,10 @@
         "dnsTitle": "Connect the domain after sign-up",
         "dnsText": "Topiqu shows the DNS record to add and verifies that you own the domain before activating it.",
         "language": "Writing language",
-        "languageHelp": "You can translate articles into other languages later."
+        "languageHelp": "You can translate articles into other languages later.",
+        "website": "Your company website",
+        "websitePlaceholder": "mycompany.com",
+        "websiteHelp": "After sign-up, choose which pages to add to your knowledge base so AI writes about what your company actually offers."
       },
       "domainStatus": {
         "checking": "Checking availability…",
@@ -255,6 +258,7 @@
         "site": "Blog",
         "domain": "Address",
         "language": "Language",
+        "website": "Website",
         "color": "Colour",
         "admin": "Admin",
         "email": "Email",

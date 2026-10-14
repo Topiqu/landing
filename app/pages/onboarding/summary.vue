@@ -1,69 +1,3 @@
-<script setup lang="ts">
-import { annualPlanPriceUsd, formatUsd, PLAN_PRICES_USD } from '~~/shared/utils/plans'
-
-definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
-
-const { locale } = useI18n()
-const store = useOnboardingStore()
-const { submit, form, loading, fullDomainPreview, brandAccent, trialEndsOn, goTo } = useOnboarding()
-const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
-const planValue = computed(() => {
-  const plan = form.selectedPlan?.toLowerCase() as 'pro' | 'premium' | undefined
-  const name = $t(`landing.pricing.plans.${plan ?? 'free'}.name`)
-  if (!plan) return name
-  const monthlyPrice = PLAN_PRICES_USD[plan]
-  const annual = form.billingInterval === 'year'
-  const amount = annual ? annualPlanPriceUsd(monthlyPrice) : monthlyPrice
-  return `${name} · ${formatUsd(amount, locale.value)} ${$t(`landing.pricing.${annual ? 'year' : 'month'}`)}`
-})
-
-// Optional steps the visitor jumped over; their rows show the defaults the blog starts with.
-const unfilled = computed(() => OPTIONAL_STEPS.filter((step) => !store.isStepComplete(step)))
-const unfilledLabels = computed(() => unfilled.value.map((step) => $t('landing.onboarding.steps.' + step)).join(', '))
-
-const rows = computed(() => [
-  { key: 'site', icon: 'mdi:web', value: form.siteName, step: 'site' as const },
-  { key: 'domain', icon: 'mdi:link-variant', value: fullDomainPreview.value, step: 'site' as const },
-  { key: 'language', icon: 'mdi:translate', value: $t('languages.' + form.language), step: 'site' as const },
-  {
-    key: 'color',
-    icon: 'mdi:palette-outline',
-    value: form.accentColor
-      ? `${$t('landing.onboarding.design.customColor')} · ${brandAccent.value}`
-      : $t('landing.onboarding.colors.' + form.theme),
-    swatch: brandAccent.value,
-    step: 'design' as const,
-  },
-  {
-    key: 'typography',
-    icon: 'mdi:format-font',
-    value: [
-      $t(`landing.onboarding.design.typefaces.${form.typography.toLowerCase()}`),
-      form.gradient && $t(`landing.onboarding.design.gradients.${form.gradient}`),
-    ]
-      .filter(Boolean)
-      .join(' · '),
-    step: 'design' as const,
-  },
-  ...(form.tagline.trim()
-    ? [{ key: 'tagline', icon: 'mdi:format-quote-open', value: form.tagline.trim(), step: 'design' as const }]
-    : []),
-  { key: 'admin', icon: 'mdi:account-outline', value: form.username, step: 'account' as const },
-  { key: 'email', icon: 'mdi:email-outline', value: form.email, step: 'account' as const },
-  {
-    key: 'plan',
-    icon: 'mdi:crown-outline',
-    value: planValue.value,
-    step: 'plan' as const,
-  },
-])
-
-const paidNote = computed(() =>
-  $t('landing.onboarding.plan.paidNote', {
-    date: new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(trialEndsOn.value),
-  }),
-)
-</script>
 <template>
   <form class="onb-form" @submit.prevent="submit">
     <div class="onb-heading">
@@ -123,6 +57,7 @@ const paidNote = computed(() =>
               $t('landing.onboarding.summary.tos')
             }}</NuxtLinkLocale>
           </template>
+
           <template #privacy>
             <NuxtLinkLocale to="/privacy" target="_blank" class="summary-link">{{
               $t('landing.onboarding.summary.privacy')
@@ -143,6 +78,88 @@ const paidNote = computed(() =>
     />
   </form>
 </template>
+
+<script setup lang="ts">
+import { annualPlanPriceUsd, formatUsd, PLAN_PRICES_USD } from '~~/shared/utils/plans'
+
+definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
+
+const { locale } = useI18n()
+const store = useOnboardingStore()
+const { submit, form, loading, fullDomainPreview, brandAccent, trialEndsOn, goTo } = useOnboarding()
+const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
+const planValue = computed(() => {
+  const plan = form.selectedPlan?.toLowerCase() as 'pro' | 'premium' | undefined
+  const name = $t(`landing.pricing.plans.${plan ?? 'free'}.name`)
+  if (!plan) return name
+  const monthlyPrice = PLAN_PRICES_USD[plan]
+  const annual = form.billingInterval === 'year'
+  const amount = annual ? annualPlanPriceUsd(monthlyPrice) : monthlyPrice
+  return `${name} · ${formatUsd(amount, locale.value)} ${$t(`landing.pricing.${annual ? 'year' : 'month'}`)}`
+})
+
+// Optional steps the visitor jumped over; their rows show the defaults the blog starts with.
+const unfilled = computed(() => OPTIONAL_STEPS.filter((step) => !store.isStepComplete(step)))
+const unfilledLabels = computed(() => unfilled.value.map((step) => $t('landing.onboarding.steps.' + step)).join(', '))
+
+const rows = computed(() => [
+  { key: 'site', icon: 'mdi:web', value: form.siteName, step: 'site' as const },
+  { key: 'domain', icon: 'mdi:link-variant', value: fullDomainPreview.value, step: 'site' as const },
+  {
+    key: 'language',
+    icon: 'mdi:translate',
+    value: $t('languages.' + form.language),
+    step: 'site' as const,
+  },
+  ...(form.websiteUrl.trim()
+    ? [{ key: 'website', icon: 'mdi:earth', value: form.websiteUrl.trim(), step: 'site' as const }]
+    : []),
+  {
+    key: 'color',
+    icon: 'mdi:palette-outline',
+    value: form.accentColor
+      ? `${$t('landing.onboarding.design.customColor')} · ${brandAccent.value}`
+      : $t('landing.onboarding.colors.' + form.theme),
+    swatch: brandAccent.value,
+    step: 'design' as const,
+  },
+  {
+    key: 'typography',
+    icon: 'mdi:format-font',
+    value: [
+      $t(`landing.onboarding.design.typefaces.${form.typography.toLowerCase()}`),
+      form.gradient && $t(`landing.onboarding.design.gradients.${form.gradient}`),
+    ]
+      .filter(Boolean)
+      .join(' · '),
+    step: 'design' as const,
+  },
+  ...(form.tagline.trim()
+    ? [
+        {
+          key: 'tagline',
+          icon: 'mdi:format-quote-open',
+          value: form.tagline.trim(),
+          step: 'design' as const,
+        },
+      ]
+    : []),
+  { key: 'admin', icon: 'mdi:account-outline', value: form.username, step: 'account' as const },
+  { key: 'email', icon: 'mdi:email-outline', value: form.email, step: 'account' as const },
+  {
+    key: 'plan',
+    icon: 'mdi:crown-outline',
+    value: planValue.value,
+    step: 'plan' as const,
+  },
+])
+
+const paidNote = computed(() =>
+  $t('landing.onboarding.plan.paidNote', {
+    date: new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(trialEndsOn.value),
+  }),
+)
+</script>
 <style scoped>
 .summary-list {
   margin: 0;

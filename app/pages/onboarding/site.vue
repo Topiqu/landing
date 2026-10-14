@@ -1,50 +1,3 @@
-<script setup lang="ts">
-definePageMeta({ layout: 'onboarding' })
-
-const route = useRoute()
-const { form, userEditedDomain, domainStatus, fullDomainPreview, canAdvanceSite, setDomainType, complete } =
-  useOnboarding()
-
-// Pricing CTAs pass ?plan= so the plan step opens on the plan the visitor chose.
-const requestedPlan = String(route.query.plan ?? '').toUpperCase()
-if (requestedPlan === 'PRO' || requestedPlan === 'PREMIUM') form.selectedPlan = requestedPlan
-const requestedInterval = String(route.query.interval ?? '')
-if (requestedInterval === 'month' || requestedInterval === 'year') form.billingInterval = requestedInterval
-
-const languageOptions = computed(() =>
-  CONTENT_LANGUAGES.map((value) => ({ value, label: $t('languages.' + value), code: value.toUpperCase() })),
-)
-
-const domainOptions = computed(() => [
-  {
-    value: 'SUBDOMAIN' as const,
-    icon: 'mdi:link-variant',
-    title: $t('landing.onboarding.site.subdomainTitle'),
-    text: $t('landing.onboarding.site.subdomainText'),
-  },
-  {
-    value: 'CUSTOM' as const,
-    icon: 'mdi:web',
-    title: $t('landing.onboarding.site.customTitle'),
-    text: $t('landing.onboarding.site.customText'),
-  },
-])
-
-const status = computed(() => {
-  const value = domainStatus.value
-  if (!form.domain || value === 'idle' || value === 'empty') return null
-  if (value === 'checking')
-    return { tone: 'muted', icon: 'mdi:loading', text: $t('landing.onboarding.domainStatus.checking') }
-  if (value === 'available')
-    return { tone: 'available', icon: 'mdi:check-circle', text: $t('landing.onboarding.domainStatus.available') }
-  const key = value === 'invalid' && form.domainType === 'CUSTOM' ? 'invalidCustom' : value
-  return { tone: 'error', icon: 'mdi:alert-circle', text: $t('landing.onboarding.domainStatus.' + key) }
-})
-
-const handleSubmit = () => {
-  if (canAdvanceSite.value) complete('site')
-}
-</script>
 <template>
   <form class="onb-form" novalidate @submit.prevent="handleSubmit">
     <div class="onb-heading">
@@ -119,8 +72,8 @@ const handleSubmit = () => {
         <span v-if="status" class="onb-domain-status" :data-status="status.tone" role="status" aria-live="polite">
           <Icon :name="status.icon" :class="{ 'tw:animate-spin': status.tone === 'muted' }" aria-hidden="true" />
           <span
-            >{{ status.text }}<template v-if="status.tone === 'available'"> · {{ fullDomainPreview }}</template></span
-          >
+            >{{ status.text }}<template v-if="status.tone === 'available'"> · {{ fullDomainPreview }}</template>
+          </span>
         </span>
       </template>
     </UFormField>
@@ -147,9 +100,84 @@ const handleSubmit = () => {
       <p class="onb-help">{{ $t('landing.onboarding.site.languageHelp') }}</p>
     </fieldset>
 
+    <UFormField
+      :label="$t('landing.onboarding.site.website')"
+      :hint="$t('landing.onboarding.optional')"
+      :help="$t('landing.onboarding.site.websiteHelp')"
+    >
+      <UInput
+        v-model="form.websiteUrl"
+        size="lg"
+        class="tw:w-full"
+        icon="mdi:earth"
+        inputmode="url"
+        autocomplete="url"
+        autocapitalize="off"
+        spellcheck="false"
+        maxlength="2048"
+        :placeholder="$t('landing.onboarding.site.websitePlaceholder')"
+      />
+    </UFormField>
+
     <OnboardingActions :disabled="!canAdvanceSite" />
   </form>
 </template>
+
+<script setup lang="ts">
+definePageMeta({ layout: 'onboarding' })
+
+const route = useRoute()
+const { form, userEditedDomain, domainStatus, fullDomainPreview, canAdvanceSite, setDomainType, complete } =
+  useOnboarding()
+
+// Pricing CTAs pass ?plan= so the plan step opens on the plan the visitor chose.
+const requestedPlan = String(route.query.plan ?? '').toUpperCase()
+if (requestedPlan === 'PRO' || requestedPlan === 'PREMIUM') form.selectedPlan = requestedPlan
+const requestedInterval = String(route.query.interval ?? '')
+if (requestedInterval === 'month' || requestedInterval === 'year') form.billingInterval = requestedInterval
+
+const languageOptions = computed(() =>
+  CONTENT_LANGUAGES.map((value) => ({
+    value,
+    label: $t('languages.' + value),
+    code: value.toUpperCase(),
+  })),
+)
+
+const domainOptions = computed(() => [
+  {
+    value: 'SUBDOMAIN' as const,
+    icon: 'mdi:link-variant',
+    title: $t('landing.onboarding.site.subdomainTitle'),
+    text: $t('landing.onboarding.site.subdomainText'),
+  },
+  {
+    value: 'CUSTOM' as const,
+    icon: 'mdi:web',
+    title: $t('landing.onboarding.site.customTitle'),
+    text: $t('landing.onboarding.site.customText'),
+  },
+])
+
+const status = computed(() => {
+  const value = domainStatus.value
+  if (!form.domain || value === 'idle' || value === 'empty') return null
+  if (value === 'checking')
+    return { tone: 'muted', icon: 'mdi:loading', text: $t('landing.onboarding.domainStatus.checking') }
+  if (value === 'available')
+    return {
+      tone: 'available',
+      icon: 'mdi:check-circle',
+      text: $t('landing.onboarding.domainStatus.available'),
+    }
+  const key = value === 'invalid' && form.domainType === 'CUSTOM' ? 'invalidCustom' : value
+  return { tone: 'error', icon: 'mdi:alert-circle', text: $t('landing.onboarding.domainStatus.' + key) }
+})
+
+const handleSubmit = () => {
+  if (canAdvanceSite.value) complete('site')
+}
+</script>
 <style scoped>
 .site-languages {
   display: grid;

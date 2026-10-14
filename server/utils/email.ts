@@ -8,6 +8,8 @@ interface SendVerificationCodeOptions {
   link?: string
 }
 
+type VerificationEmailDelivery = { delivery: 'ses'; messageId: string } | { delivery: 'development' }
+
 let sesClient: SESv2Client | undefined
 
 function getSesClient(): SESv2Client | undefined {
@@ -53,7 +55,13 @@ const COPY = {
 const escapeHtml = (value: string) =>
   value.replace(/[&<>"']/g, (char) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[char]!)
 
-export async function sendVerificationCode({ to, code, name, locale = 'en', link }: SendVerificationCodeOptions) {
+export async function sendVerificationCode({
+  to,
+  code,
+  name,
+  locale = 'en',
+  link,
+}: SendVerificationCodeOptions): Promise<VerificationEmailDelivery> {
   const config = useRuntimeConfig() as any
   const from = config.emailFrom || 'Topiqu <noreply@topiqu.com>'
   const client = getSesClient()
@@ -62,13 +70,13 @@ export async function sendVerificationCode({ to, code, name, locale = 'en', link
   if (!client) {
     if (import.meta.dev) {
       console.log(`[DEV EMAIL] Verification code for ${to}: ${code}${link ? ` | link: ${link}` : ''}`)
-      return
+      return { delivery: 'development' }
     }
     throw createError({ statusCode: 500, message: 'Email service not configured' })
   }
 
   try {
-    await client.send(
+    const result = await client.send(
       new SendEmailCommand({
         FromEmailAddress: from,
         Destination: { ToAddresses: [to] },
@@ -100,6 +108,13 @@ export async function sendVerificationCode({ to, code, name, locale = 'en', link
         },
       }),
     )
+    if (!result.MessageId) throw new Error('SES did not return a message ID')
+    console.info('[SES] Verification email accepted:', {
+      messageId: result.MessageId,
+      region: await client.config.region(),
+      requestId: result.$metadata.requestId,
+    })
+    return { delivery: 'ses', messageId: result.MessageId }
   } catch (err: any) {
     // Surface the real SES failure (bad creds, unverified sender, region
     // mismatch, throttling…) in the server logs, then return a generic error.

@@ -16,7 +16,7 @@ const sign = (payload: string) => {
 
 const verify = (token: string): Record<string, any> | null => {
   const [b64, sig] = token.split('.')
-  if (!b64 || !sig) return null
+  if (!b64 || !sig || !/^[0-9a-f]{64}$/i.test(sig)) return null
   const payload = Buffer.from(b64, 'base64url').toString('utf8')
   const expected = crypto.createHmac('sha256', getSecret()).update(payload).digest('hex')
   if (sig.length !== expected.length) return null
@@ -29,7 +29,7 @@ const verify = (token: string): Record<string, any> | null => {
 }
 
 const hashCode = (email: string, code: string) =>
-  crypto.createHash('sha256').update(`${email.toLowerCase()}:${code}`).digest('hex')
+  crypto.createHmac('sha256', getSecret()).update(`${email.toLowerCase()}:${code}`).digest('hex')
 
 export const issueChallenge = (email: string, code: string) => {
   const payload = JSON.stringify({
