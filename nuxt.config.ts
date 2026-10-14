@@ -329,6 +329,7 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png?v=20260910' },
         { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' },
       ],
+      meta: [{ name: 'google-adsense-account', content: 'ca-pub-9731440718321055' }],
     },
   },
 
