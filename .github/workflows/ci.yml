@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   check:
-    name: Lint, types & OpenAPI
+    name: Lint, types, OpenAPI & production rendering
     runs-on: ubuntu-latest
     env:
       NUXT_TELEMETRY_DISABLED: '1'
@@ -23,7 +23,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
-          bun-version: latest
+          bun-version: '1.4.2'
 
       - name: Cache Nuxt build artifacts
         uses: actions/cache@v4
@@ -46,3 +46,21 @@ jobs:
 
       - name: Validate OpenAPI
         run: bun run openapi:check
+
+      - name: Build production image
+        run: docker build --tag topiqu-landing:ci .
+
+      - name: Start production image
+        id: production_server
+        run: docker run --detach --name topiqu-landing-ci --publish 127.0.0.1:3000:3000 topiqu-landing:ci
+
+      - name: Check production rendering
+        run: bun run test:production
+
+      - name: Production logs
+        if: failure() && steps.production_server.outcome == 'success'
+        run: docker logs topiqu-landing-ci
+
+      - name: Stop production image
+        if: always() && steps.production_server.outcome == 'success'
+        run: docker rm --force topiqu-landing-ci

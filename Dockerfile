@@ -1,5 +1,8 @@
+# Nuxt builds under Node; the generated server runs under Bun.
+FROM node:24-slim AS build-node
+
 # base (https://hub.docker.com/r/oven/bun/tags)
-FROM oven/bun:1.3.14-slim AS base
+FROM oven/bun:1.4.2-slim AS base
 
 WORKDIR /usr/src/app
 
@@ -18,10 +21,11 @@ RUN cd /temp && bun --bun install --shamefully-hoist --frozen-lockfile
 FROM base AS prerelease
 
 COPY --from=install /temp/node_modules node_modules
+COPY --from=build-node /usr/local/bin/node /usr/local/bin/node
 COPY . .
 
 ENV NODE_ENV=production
-RUN bun --bun run build
+RUN NODE_OPTIONS="--max-old-space-size=5120" bun run build
 
 # release
 FROM base AS release

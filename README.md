@@ -10,6 +10,7 @@
 Landing page and onboarding flow for **Topiqu - Your AI Blog Platform**.
 
 **Includes:**
+
 - Marketing landing page - workspace preview, editorial workflow, comparison, pricing and FAQ
 - 6-step onboarding - site setup, design, account, plan, email verification, summary
 - Legal pages - Terms of Service, Privacy Policy
@@ -35,10 +36,27 @@ bun dev       # start Nuxt dev server
 **Build & preview**
 
 ```bash
-bun run build   # production server build (Vercel preset)
+bun run build   # production server build (Bun preset)
 bun generate    # static site generation
 bun preview     # preview production build locally
 ```
+
+Docker builds Nuxt with Node 24 and runs the standalone server with Bun 1.4.2.
+Nuxt Content uses the built-in SQLite driver in both stages.
+
+Check the packaged production server with the same image used for deployment:
+
+```bash
+docker build --tag topiqu-landing:smoke .
+docker run --detach --rm --name topiqu-landing-smoke --publish 127.0.0.1:3000:3000 topiqu-landing:smoke
+bun run test:production
+docker stop topiqu-landing-smoke
+```
+
+The smoke test checks server rendering of all six onboarding steps in English and Czech,
+documentation, changelog and the 404 page. Set `PRODUCTION_TEST_URL` to test a different local
+port. CI runs it against the final Docker image so development dependencies cannot mask missing
+runtime dependencies.
 
 ## 🔑 Environment Variables
 

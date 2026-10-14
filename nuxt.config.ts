@@ -42,6 +42,17 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'bun',
+    externals: {
+      // Dependency tracing can omit vue/server-renderer from the standalone Bun output.
+      inline: ['vue', '@vue/server-renderer'],
+    },
+  },
+
+  content: {
+    experimental: {
+      // Both the Node build and Bun runtime provide the built-in SQLite driver.
+      sqliteConnector: 'native',
+    },
   },
 
   modules: [
