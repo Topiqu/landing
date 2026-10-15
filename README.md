@@ -63,18 +63,26 @@ runtime dependencies.
 
 Copy `.env.example` and fill in:
 
-| Variable                | Description                                             |
-| ----------------------- | ------------------------------------------------------- |
-| `CDN_URL`               | CDN base URL for assets                                 |
-| `TURNSTILE_SECRET_KEY`  | Cloudflare Turnstile secret (onboarding bot protection) |
-| `TURNSTILE_SITE_KEY`    | Cloudflare Turnstile site key                           |
-| `AUTH_SECRET`           | HMAC signing secret shared with the platform            |
-| `PLATFORM_API_URL`      | Main Topiqu platform URL (receives checkout data)       |
-| `SES_REGION`            | Amazon SES region (`eu-central-1` for Frankfurt)        |
-| `SES_ACCESS_KEY_ID`     | IAM access key with permission to send through SES      |
-| `SES_SECRET_ACCESS_KEY` | IAM secret access key for SES                           |
-| `EMAIL_FROM`            | Sender address for verification emails                  |
-| `GTAG_ID`               | Google Analytics measurement ID (`G-XXXXXXXXXX`)        |
+| Variable                           | Description                                             |
+| ---------------------------------- | ------------------------------------------------------- |
+| `CDN_URL`                          | CDN base URL for assets                                 |
+| `TURNSTILE_SECRET_KEY`             | Cloudflare Turnstile secret (onboarding bot protection) |
+| `TURNSTILE_SITE_KEY`               | Cloudflare Turnstile site key                           |
+| `AUTH_SECRET`                      | HMAC signing secret shared with the platform            |
+| `PLATFORM_API_URL`                 | Main Topiqu platform URL (receives checkout data)       |
+| `SES_REGION`                       | Amazon SES region (`eu-central-1` for Frankfurt)        |
+| `SES_ACCESS_KEY_ID`                | IAM access key with permission to send through SES      |
+| `SES_SECRET_ACCESS_KEY`            | IAM secret access key for SES                           |
+| `EMAIL_FROM`                       | Sender address for verification emails                  |
+| `GTAG_ID`                          | Google Analytics measurement ID (`G-XXXXXXXXXX`)        |
+| `NUXT_PUBLIC_ADSENSE_PUBLISHER_ID` | AdSense account (defaults to `ca-pub-9731440718321055`) |
+
+AdSense publishes its account meta tag during server rendering. The script loads once after
+hydration and cookie consent; withdrawing consent reloads the page to stop the advertising runtime.
+Privacy policy pages exclude both AdSense and GA4, including when a visitor has already consented;
+entering a policy page after either runtime has loaded reloads the page to stop it.
+`public/ads.txt` authorizes the same publisher. Google advertising consent still requires a
+published Google CMP message for `topiqu.com` (AdSense → Privacy & messaging).
 
 After SES accepts a verification email, the server logs `[SES] Verification email accepted`
 with the SES `messageId` and sending region. The `/api/send-code` response includes
