@@ -91,10 +91,6 @@ Generated from `public/app-logo.png` (1024×1024) using `sips`: `icon-192x192.pn
 
 ~~`nuxt.config.ts` sets `site.defaultLocale: 'cs'` but `i18n.defaultLocale` is `'en'`.~~ Done — both now use `'en'`.
 
-### Google AdSense ID in `public/ads.txt`
-
-`ads.txt` contains a hardcoded publisher ID (`pub-9286243311790870`). Verify this is the correct account or update it.
-
 ---
 
 ## 🔵 Low — Polish and deployment

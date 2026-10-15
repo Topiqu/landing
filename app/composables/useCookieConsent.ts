@@ -18,7 +18,7 @@ const DENIED = {
 } as const
 
 /**
- * Consent Mode v2 gate for the landing site's own GA4.
+ * Consent Mode v2 gate for the landing site's own GA4 and AdSense.
  *
  * Denied means nothing loads — gtag runs in `initMode: 'manual'`, so declining
  * never fetches the script at all. The cookie is domain-scoped, so this choice
@@ -35,11 +35,21 @@ export function useCookieConsent() {
   const banner = useState('consentBannerOpen', () => false)
   const granted = computed(() => choice.value === 'granted')
   const decided = computed(() => choice.value === 'granted' || choice.value === 'denied')
+  const route = useRoute()
+  const getRouteBaseName = useRouteBaseName()
+  const trackingAllowed = computed(() => granted.value && getRouteBaseName(route) !== 'privacy')
+  const reloadPending = useState('trackingReloadPending', () => false)
+
+  function reloadWithoutTracking() {
+    if (!import.meta.client || reloadPending.value) return
+    reloadPending.value = true
+    window.location.reload()
+  }
 
   /** Loads GA4. No-op unless consent was granted. */
   function apply() {
     const id = useRuntimeConfig().public.gtagId
-    if (!import.meta.client || !granted.value || !id) return
+    if (!import.meta.client || !trackingAllowed.value || !id) return
 
     const { initialize, gtag } = useGtag()
     initialize(id)
@@ -49,7 +59,6 @@ export function useCookieConsent() {
   function accept() {
     choice.value = 'granted'
     banner.value = false
-    apply()
   }
 
   function reject() {
@@ -67,5 +76,5 @@ export function useCookieConsent() {
     banner.value = true
   }
 
-  return { choice, granted, decided, banner, apply, accept, reject, reopen }
+  return { choice, granted, decided, trackingAllowed, banner, apply, accept, reject, reopen, reloadWithoutTracking }
 }

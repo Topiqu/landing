@@ -1,9 +1,17 @@
 /** Replays a stored consent decision on boot, or asks for one. */
 export default defineNuxtPlugin(() => {
-  if (!useRuntimeConfig().public.gtagId) return
+  const config = useRuntimeConfig().public
+  if (!config.gtagId && !config.adsensePublisherId) return
 
-  const { decided, granted, apply, banner } = useCookieConsent()
+  const { decided, trackingAllowed, apply, banner, reloadWithoutTracking } = useCookieConsent()
 
-  if (granted.value) apply()
-  else if (!decided.value) banner.value = true
+  watch(
+    trackingAllowed,
+    (allowed, wasAllowed) => {
+      if (allowed) apply()
+      else if (wasAllowed && config.gtagId) reloadWithoutTracking()
+    },
+    { immediate: true },
+  )
+  if (!decided.value) banner.value = true
 })

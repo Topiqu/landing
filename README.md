@@ -62,16 +62,24 @@ runtime dependencies.
 
 Copy `.env.example` and fill in:
 
-| Variable               | Description                                             |
-| ---------------------- | ------------------------------------------------------- |
-| `CDN_URL`              | CDN base URL for assets                                 |
-| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile secret (onboarding bot protection) |
-| `TURNSTILE_SITE_KEY`   | Cloudflare Turnstile site key                           |
-| `AUTH_SECRET`          | HMAC signing secret shared with the platform            |
-| `PLATFORM_API_URL`     | Main Topiqu platform URL (receives checkout data)       |
-| `RESEND_API_KEY`       | Resend API key for email verification                   |
-| `EMAIL_FROM`           | Sender address for verification emails                  |
-| `GTAG_ID`              | Google Analytics measurement ID (`G-XXXXXXXXXX`)        |
+| Variable                           | Description                                             |
+| ---------------------------------- | ------------------------------------------------------- |
+| `CDN_URL`                          | CDN base URL for assets                                 |
+| `TURNSTILE_SECRET_KEY`             | Cloudflare Turnstile secret (onboarding bot protection) |
+| `TURNSTILE_SITE_KEY`               | Cloudflare Turnstile site key                           |
+| `AUTH_SECRET`                      | HMAC signing secret shared with the platform            |
+| `PLATFORM_API_URL`                 | Main Topiqu platform URL (receives checkout data)       |
+| `RESEND_API_KEY`                   | Resend API key for email verification                   |
+| `EMAIL_FROM`                       | Sender address for verification emails                  |
+| `GTAG_ID`                          | Google Analytics measurement ID (`G-XXXXXXXXXX`)        |
+| `NUXT_PUBLIC_ADSENSE_PUBLISHER_ID` | AdSense account (defaults to `ca-pub-9731440718321055`) |
+
+AdSense publishes its account meta tag during server rendering. The script loads once after
+hydration and cookie consent; withdrawing consent reloads the page to stop the advertising runtime.
+Privacy policy pages exclude both AdSense and GA4, including when a visitor has already consented;
+entering a policy page after either runtime has loaded reloads the page to stop it.
+`public/ads.txt` authorizes the same publisher. Google advertising consent still requires a
+published Google CMP message for `topiqu.com` (AdSense → Privacy & messaging).
 
 ## 🧹 Linting & Formatting
 
