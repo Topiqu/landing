@@ -80,12 +80,16 @@ const links = computed(() => [
     </template>
     <template #body>
       <nav class="mobile-nav" :aria-label="t('landing.design.nav.navigation')">
-        <NuxtLink v-for="link in links" :key="link.to" :to="link.to" @click="open = false">{{ link.label }}</NuxtLink>
-        <NuxtLink :to="localePath('/') + '#faq'" @click="open = false">FAQ</NuxtLink>
-        <UButton :to="platformUrl + '/' + locale + '/auth'" color="neutral" variant="outline">{{
+        <NuxtLink v-for="link in links" :key="link.to" :to="link.to" class="mobile-nav-link" @click="open = false">{{
+          link.label
+        }}</NuxtLink>
+        <NuxtLink :to="localePath('/') + '#faq'" class="mobile-nav-link" @click="open = false">FAQ</NuxtLink>
+        <UButton :to="platformUrl + '/' + locale + '/auth'" color="neutral" variant="outline" block>{{
           $t('common.auth.login')
         }}</UButton>
-        <UButton :to="localePath({ name: 'onboarding-site' })">{{ $t('landing.design.hero.cta') }}</UButton>
+        <UButton :to="localePath({ name: 'onboarding-site' })" block @click="open = false">{{
+          $t('landing.design.hero.cta')
+        }}</UButton>
       </nav>
     </template>
   </UHeader>
@@ -103,13 +107,14 @@ const links = computed(() => [
   gap: 2rem;
 }
 .desktop-nav a,
-.mobile-nav > a {
+.mobile-nav-link {
   color: var(--landing-muted);
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
 }
-.desktop-nav a:hover {
+.desktop-nav a:hover,
+.mobile-nav-link:hover {
   color: var(--landing-accent);
 }
 .mobile-nav {
@@ -117,7 +122,7 @@ const links = computed(() => [
   gap: 1.75rem;
   padding: 1rem 0;
 }
-.mobile-nav > a {
+.mobile-nav-link {
   font-size: 18px;
 }
 @media (max-width: 1023px) {
