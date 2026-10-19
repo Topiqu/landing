@@ -45,6 +45,7 @@ export const useOnboardingStore = defineStore(
     }
 
     const loading = shallowRef(false)
+    const submitError = shallowRef('')
     const userEditedDomain = shallowRef(false)
 
     const challenge = shallowRef<string | null>(null)
@@ -56,7 +57,7 @@ export const useOnboardingStore = defineStore(
     const resendCooldown = shallowRef(0)
     let cooldownTimer: ReturnType<typeof setInterval> | null = null
 
-    const form = shallowReactive<OnboardingForm>({
+    const defaultForm = (): OnboardingForm => ({
       siteName: '',
       domain: '',
       domainType: 'SUBDOMAIN',
@@ -76,6 +77,8 @@ export const useOnboardingStore = defineStore(
       selectedPlan: null,
       billingInterval: 'month',
     })
+
+    const form = shallowReactive<OnboardingForm>(defaultForm())
 
     const domainStatus = shallowRef<DomainStatus>('idle')
 
@@ -119,9 +122,15 @@ export const useOnboardingStore = defineStore(
         if (form.domain !== domain || form.domainType !== type) return
         domainStatus.value = res.ok ? 'available' : (res.reason ?? 'invalid')
       } catch {
-        domainStatus.value = 'idle'
+        if (form.domain === domain && form.domainType === type) domainStatus.value = 'unavailable'
       }
     }, 350)
+
+    const retryDomainCheck = () => {
+      if (!form.domain || domainStatus.value === 'checking') return
+      domainStatus.value = 'checking'
+      return runDomainCheck(form.domain, form.domainType)
+    }
 
     watch(
       () => [form.domain, form.domainType] as const,
@@ -266,9 +275,12 @@ export const useOnboardingStore = defineStore(
         return
       }
       loading.value = true
+      submitError.value = ''
       try {
         const res = await $fetch<{ url?: string }>('/api/checkout', {
           method: 'POST',
+          retry: 0,
+          timeout: 35_000,
           body: {
             siteName: form.siteName.trim(),
             domain: form.domainType === 'CUSTOM' ? normalizeDomain(form.domain) : form.domain,
@@ -290,23 +302,37 @@ export const useOnboardingStore = defineStore(
         })
         if (res.url) window.location.href = res.url
       } catch (error: any) {
-        const annualUnavailable =
-          form.selectedPlan &&
-          form.billingInterval === 'year' &&
-          (error.statusCode === 503 || error.data?.statusCode === 503)
-        toast.error({
-          message: annualUnavailable
-            ? $t('landing.onboarding.plan.annualUnavailable')
-            : error.data?.message || $t('common.errors.general'),
-        })
+        const reason = error.data?.data?.reason
+        submitError.value =
+          reason === 'checkoutUnknown' || reason === 'checkoutConflict' || reason === 'checkoutRejected'
+            ? reason
+            : 'checkoutFailed'
+        toast.error({ message: $t('landing.onboarding.summary.' + submitError.value) })
       } finally {
         loading.value = false
       }
     }
 
+    const reset = () => {
+      Object.assign(form, defaultForm())
+      submitError.value = ''
+      for (const step of Object.keys(progress)) Reflect.deleteProperty(progress, step)
+      userEditedDomain.value = false
+      domainStatus.value = 'idle'
+      challenge.value = null
+      verifiedToken.value = null
+      code.value = ''
+      codeError.value = ''
+      resendCooldown.value = 0
+      if (cooldownTimer) clearInterval(cooldownTimer)
+      cooldownTimer = null
+    }
+
     return {
       form,
+      reset,
       loading,
+      submitError,
       userEditedDomain,
       domainStatus,
       fullDomainPreview,
@@ -326,6 +352,7 @@ export const useOnboardingStore = defineStore(
       canVerify,
       trialEndsOn,
       setDomainType,
+      retryDomainCheck,
       markStep,
       isStepDirty,
       isStepComplete,
@@ -335,7 +362,7 @@ export const useOnboardingStore = defineStore(
     }
   },
   {
-    // Passwords never touch localStorage; a reload sends the visitor back to the account step.
+    // Passwords are never persisted; a reload sends the visitor back to the account step.
     persist: {
       pick: [
         'form.siteName',

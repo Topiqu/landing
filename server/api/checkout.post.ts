@@ -1,6 +1,10 @@
 import { z } from 'zod'
+import { onboardingLog } from '~~/server/utils/onboardingLog'
 import { signLandingRequest } from '~~/server/utils/landingAuth'
 import { verifyVerifiedToken } from '~~/server/utils/onboardingTokens'
+import { createCheckoutRequests, checkoutKeys } from '~~/server/utils/checkoutRequests'
+
+const checkoutRequests = createCheckoutRequests()
 
 const SUBDOMAIN_RE = /^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?$/
 const CUSTOM_DOMAIN_RE = /^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/
@@ -58,23 +62,51 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  try {
-    // Vercel overwrites X-Forwarded-For with the visitor's address, so it cannot be spoofed here.
-    const clientIp = getRequestIP(event, { xForwardedFor: true }) ?? ''
-    const { timestamp, sig } = signLandingRequest(clientIp)
-    const res = await $fetch<{ url?: string }>(`${platformUrl}/api/onboarding/checkout`, {
-      method: 'POST',
-      body,
-      headers: {
-        'X-Landing-Client-Ip': clientIp,
-        'X-Landing-Timestamp': timestamp,
-        'X-Landing-Sig': sig,
-        'Content-Type': 'application/json',
-      },
-    })
-    return res
-  } catch (error: any) {
-    const msg = error?.data?.message || error?.message || 'Failed to create account. Please try again.'
-    throw createError({ statusCode: error?.statusCode ?? 500, message: msg })
-  }
+  const { identity, fingerprint } = checkoutKeys(config.authSecret, body)
+  return checkoutRequests(identity, fingerprint, async () => {
+    const startedAt = performance.now()
+    try {
+      // Vercel overwrites X-Forwarded-For with the visitor's address, so it cannot be spoofed here.
+      const clientIp = getRequestIP(event, { xForwardedFor: true }) ?? ''
+      const { timestamp, sig } = signLandingRequest(clientIp)
+      const res = await $fetch<{ url?: string }>(`${platformUrl}/api/onboarding/checkout`, {
+        method: 'POST',
+        timeout: 30_000,
+        retry: 0,
+        body,
+        headers: {
+          'X-Landing-Client-Ip': clientIp,
+          'X-Landing-Timestamp': timestamp,
+          'X-Landing-Sig': sig,
+          'Content-Type': 'application/json',
+          'Idempotency-Key': fingerprint,
+          ...(event.context?.requestId ? { 'X-Request-Id': event.context.requestId } : {}),
+        },
+      })
+      if (!res?.url || !/^https?:\/\//.test(res.url)) throw new Error('Invalid checkout response')
+      onboardingLog(event, 'checkout.completed', {
+        dependency: 'platform',
+        status: 200,
+        durationMs: Math.round(performance.now() - startedAt),
+      })
+      return { url: res.url }
+    } catch (error: any) {
+      const upstreamStatus = error?.statusCode ?? error?.response?.status
+      const rejected = upstreamStatus >= 400 && upstreamStatus < 500
+      const status = rejected ? upstreamStatus : 503
+      onboardingLog(event, 'checkout.failed', {
+        dependency: 'platform',
+        status,
+        durationMs: Math.round(performance.now() - startedAt),
+        outcome: rejected ? 'rejected' : 'unknown',
+      })
+      throw createError({
+        statusCode: status,
+        message: rejected
+          ? 'Registration could not be completed. Check your details or sign in if you already have an account.'
+          : 'Registration outcome could not be confirmed. Check your email or sign in before trying again.',
+        data: { reason: rejected ? 'checkoutRejected' : 'checkoutUnknown' },
+      })
+    }
+  })
 })

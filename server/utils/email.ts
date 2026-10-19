@@ -1,4 +1,8 @@
+import type { H3Event } from 'h3'
+
 import { SESv2Client, SendEmailCommand } from '@aws-sdk/client-sesv2'
+
+import { onboardingLog } from './onboardingLog'
 
 interface SendVerificationCodeOptions {
   to: string
@@ -6,6 +10,7 @@ interface SendVerificationCodeOptions {
   name: string
   locale?: 'cs' | 'en'
   link?: string
+  event?: H3Event
 }
 
 type VerificationEmailDelivery = { delivery: 'ses'; messageId: string } | { delivery: 'development' }
@@ -61,6 +66,7 @@ export async function sendVerificationCode({
   name,
   locale = 'en',
   link,
+  event,
 }: SendVerificationCodeOptions): Promise<VerificationEmailDelivery> {
   const config = useRuntimeConfig() as any
   const from = config.emailFrom || 'Topiqu <noreply@topiqu.com>'
@@ -72,6 +78,7 @@ export async function sendVerificationCode({
       console.log(`[DEV EMAIL] Verification code for ${to}: ${code}${link ? ` | link: ${link}` : ''}`)
       return { delivery: 'development' }
     }
+    onboardingLog(event, 'email.failed', { dependency: 'ses', status: 500, outcome: 'missing_configuration' })
     throw createError({ statusCode: 500, message: 'Email service not configured' })
   }
 
@@ -109,16 +116,29 @@ export async function sendVerificationCode({
       }),
     )
     if (!result.MessageId) throw new Error('SES did not return a message ID')
-    console.info('[SES] Verification email accepted:', {
+    onboardingLog(event, 'email.accepted', {
+      dependency: 'ses',
+      status: 200,
       messageId: result.MessageId,
       region: await client.config.region(),
-      requestId: result.$metadata.requestId,
+      providerRequestId: result.$metadata.requestId,
     })
     return { delivery: 'ses', messageId: result.MessageId }
-  } catch (err: any) {
-    // Surface the real SES failure (bad creds, unverified sender, region
-    // mismatch, throttling…) in the server logs, then return a generic error.
-    console.error('[SES] sendVerificationCode failed:', err?.name, '-', err?.message)
+  } catch (error) {
+    // Provider messages can contain recipient information. Log only a safe outcome.
+    const code = error instanceof Error ? error.name : ''
+    const outcome = [
+      'MessageRejected',
+      'MailFromDomainNotVerifiedException',
+      'TooManyRequestsException',
+      'AccessDeniedException',
+      'UnrecognizedClientException',
+      'CredentialsProviderError',
+      'TimeoutError',
+    ].includes(code)
+      ? code
+      : 'provider_error'
+    onboardingLog(event, 'email.failed', { dependency: 'ses', status: 502, outcome })
     throw createError({ statusCode: 500, message: 'Failed to send verification email' })
   }
 }

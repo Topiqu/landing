@@ -48,25 +48,28 @@ export default defineEventHandler(async (event): Promise<Result> => {
     if (raw === 'topiqu.com' || raw.endsWith('.topiqu.com')) return { ok: false, reason: 'reserved' }
   }
 
-  return (
-    (await platformDomainCheck(raw, type)) ?? {
-      ok: true,
-      fullDomain: type === 'SUBDOMAIN' ? `${raw}.topiqu.com` : raw,
-    }
-  )
+  return platformDomainCheck(raw, type)
 })
 
-// Same contract as the platform's GET /api/onboarding/check-domain. Fails open: the platform
-// re-checks availability when the account is created, so an outage only delays the error.
-async function platformDomainCheck(domain: string, type: 'SUBDOMAIN' | 'CUSTOM'): Promise<Result | null> {
+// Availability must be confirmed by the platform; syntax validation is not an availability check.
+async function platformDomainCheck(domain: string, type: 'SUBDOMAIN' | 'CUSTOM'): Promise<Result> {
   const platformUrl = (useRuntimeConfig() as any).platformApiUrl
-  if (!platformUrl) return null
   try {
-    return await $fetch<Result>(`${platformUrl}/api/onboarding/check-domain`, {
+    if (!platformUrl) throw new Error('Platform not configured')
+    const result = await $fetch<Result>(`${platformUrl}/api/onboarding/check-domain`, {
       query: { domain, type },
       timeout: 5000,
+      retry: 0,
     })
+    if (result?.ok === true && typeof result.fullDomain === 'string') return result
+    if (result?.ok === false && ['empty', 'tooShort', 'invalid', 'reserved', 'taken'].includes(result.reason))
+      return result
+    throw new Error('Invalid availability response')
   } catch {
-    return null
+    throw createError({
+      statusCode: 503,
+      message: 'Domain availability could not be checked.',
+      data: { reason: 'unavailable' },
+    })
   }
 }

@@ -55,7 +55,13 @@
           :placeholder="$t('landing.onboarding.site.subdomainPlaceholder')"
           @update:modelValue="userEditedDomain = true"
         />
-        <UBadge color="neutral" variant="outline" size="lg" class="tw:font-mono">.topiqu.com</UBadge>
+        <UBadge
+          color="neutral"
+          variant="outline"
+          size="lg"
+          class="tw:font-mono tw:rounded-e-[var(--topiqu-input-radius)]"
+          >.topiqu.com</UBadge
+        >
       </UFieldGroup>
       <UInput
         v-else
@@ -74,6 +80,15 @@
           <span
             >{{ status.text }}<template v-if="status.tone === 'available'"> · {{ fullDomainPreview }}</template>
           </span>
+          <UButton
+            v-if="domainStatus === 'unavailable'"
+            type="button"
+            color="neutral"
+            variant="link"
+            size="sm"
+            @click="retryDomainCheck"
+            >{{ $t('landing.onboarding.domainStatus.retry') }}</UButton
+          >
         </span>
       </template>
     </UFormField>
@@ -127,8 +142,16 @@
 definePageMeta({ layout: 'onboarding' })
 
 const route = useRoute()
-const { form, userEditedDomain, domainStatus, fullDomainPreview, canAdvanceSite, setDomainType, complete } =
-  useOnboarding()
+const {
+  form,
+  userEditedDomain,
+  domainStatus,
+  fullDomainPreview,
+  canAdvanceSite,
+  setDomainType,
+  retryDomainCheck,
+  complete,
+} = useOnboarding()
 
 // Pricing CTAs pass ?plan= so the plan step opens on the plan the visitor chose.
 const requestedPlan = String(route.query.plan ?? '').toUpperCase()

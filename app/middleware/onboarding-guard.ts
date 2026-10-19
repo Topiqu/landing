@@ -1,6 +1,6 @@
 export default defineNuxtRouteMiddleware((to) => {
-  // Progress lives in localStorage, so only the client can judge it; Nuxt re-runs route
-  // middleware during hydration, which is where a reloaded step is checked.
+  // Passwords and verification state are intentionally not persisted. Check the hydrated
+  // client store; Nuxt re-runs this middleware during hydration after a reload.
   if (import.meta.server) return
   const store = useOnboardingStore()
   const localePath = useLocalePath()

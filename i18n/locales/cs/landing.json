@@ -151,12 +151,14 @@
         "dnsTitle": "Doménu připojíte po registraci",
         "dnsText": "Topiqu vám ukáže DNS záznam, který je potřeba přidat, a před aktivací ověří, že doména patří vám.",
         "language": "Jazyk psaní",
-        "languageHelp": "Články později přeložíte i do dalších jazyků.",
+        "languageHelp": "Jazyk psaní můžete kdykoliv změnit v nastavení a články překládat do dalších jazyků.",
         "website": "Web vaší firmy",
         "websitePlaceholder": "mojefirma.cz",
         "websiteHelp": "Po registraci si vyberete, které stránky přidáte do znalostní báze, aby AI psala o tom, co vaše firma skutečně nabízí."
       },
       "domainStatus": {
+        "unavailable": "Dostupnost se nepodařilo ověřit. Zkuste to prosím znovu.",
+        "retry": "Ověřit znovu",
         "checking": "Ověřujeme dostupnost…",
         "available": "Adresa je volná",
         "taken": "Tato adresa je už obsazená",
@@ -168,7 +170,7 @@
       },
       "design": {
         "title": "Vzhled blogu",
-        "description": "Vyberte barvu, přechod, písmo a podtitul. Náhled se mění s každou volbou.",
+        "description": "Vyberte barvu, přechod, písmo a podtitul. Náhled se mění s každou volbou. Vše můžete kdykoliv změnit v nastavení.",
         "color": "Barva značky",
         "preview": "Náhled blogu",
         "customColor": "Vlastní barva",
@@ -245,6 +247,10 @@
         "submit": "Ověřit a pokračovat"
       },
       "summary": {
+        "checkoutUnknown": "Nemůžeme potvrdit, zda byla registrace dokončena. Před dalším odesláním zkontrolujte e-mail nebo se zkuste přihlásit.",
+        "checkoutConflict": "Registrace pro tento e-mail již byla odeslána. Zkuste se přihlásit nebo kontaktujte podporu.",
+        "checkoutRejected": "Registrace byla odmítnuta. Zkontrolujte údaje, nebo se přihlaste, pokud již máte účet.",
+        "checkoutFailed": "Registraci se nepodařilo dokončit. Zkuste to prosím později.",
         "title": "Zkontrolujte a vytvořte",
         "description": "Projděte si údaje. Kromě e-mailu můžete vše později změnit v nastavení.",
         "site": "Blog",

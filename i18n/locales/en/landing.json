@@ -151,12 +151,14 @@
         "dnsTitle": "Connect the domain after sign-up",
         "dnsText": "Topiqu shows the DNS record to add and verifies that you own the domain before activating it.",
         "language": "Writing language",
-        "languageHelp": "You can translate articles into other languages later.",
+        "languageHelp": "You can change the writing language at any time in settings and translate articles into other languages.",
         "website": "Your company website",
         "websitePlaceholder": "mycompany.com",
         "websiteHelp": "After sign-up, choose which pages to add to your knowledge base so AI writes about what your company actually offers."
       },
       "domainStatus": {
+        "unavailable": "We could not check availability. Please try again.",
+        "retry": "Retry check",
         "checking": "Checking availability…",
         "available": "This address is available",
         "taken": "This address is already taken",
@@ -168,7 +170,7 @@
       },
       "design": {
         "title": "Your blog's look",
-        "description": "Pick a colour, gradient, typeface and tagline. The preview follows every choice.",
+        "description": "Pick a colour, gradient, typeface and tagline. The preview follows every choice. You can change these settings at any time.",
         "color": "Brand colour",
         "preview": "Blog preview",
         "customColor": "Custom colour",
@@ -253,6 +255,10 @@
         "submit": "Verify and continue"
       },
       "summary": {
+        "checkoutUnknown": "We could not confirm whether registration completed. Check your email or try signing in before submitting again.",
+        "checkoutConflict": "A registration for this email has already been submitted. Try signing in or contact support.",
+        "checkoutRejected": "Registration was rejected. Check your details, or sign in if you already have an account.",
+        "checkoutFailed": "Registration could not be completed. Please try again later.",
         "title": "Review and create",
         "description": "Check the details. You can change everything except the email later in settings.",
         "site": "Blog",

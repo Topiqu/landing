@@ -21,6 +21,7 @@ const names = [
   'useRuntimeConfig',
   'createError',
   'getRequestIP',
+  'getQuery',
 ]
 const originalGlobals = Object.fromEntries(names.map((name) => [name, (globalThis as any)[name]]))
 const storageValues = new Map<string, string>()
@@ -46,6 +47,7 @@ Bun.plugin({
 
 let useOnboardingStore: (typeof import('../app/stores/onboarding'))['useOnboardingStore']
 let checkout: (typeof import('../server/api/checkout.post'))['default']
+let checkDomain: (typeof import('../server/api/check-domain.get'))['default']
 let issueVerifiedToken: (typeof import('../server/utils/onboardingTokens'))['issueVerifiedToken']
 const stores: ReturnType<typeof useOnboardingStore>[] = []
 const createStore = () => {
@@ -69,9 +71,11 @@ beforeAll(async () => {
     useRuntimeConfig: () => config,
     createError: (options: any) => Object.assign(new Error(options.message), options),
     getRequestIP: () => '203.0.113.4',
+    getQuery: (event: any) => event.query,
   })
   ;({ useOnboardingStore } = await import('../app/stores/onboarding'))
   ;({ default: checkout } = await import('../server/api/checkout.post'))
+  ;({ default: checkDomain } = await import('../server/api/check-domain.get'))
   ;({ issueVerifiedToken } = await import('../server/utils/onboardingTokens'))
 })
 beforeEach(() => {
@@ -99,6 +103,39 @@ describe('company website onboarding', () => {
     expect(saved.form.websiteUrl).toBe('https://firma.cz/about')
     expect(saved.form.password).toBeUndefined()
     expect(createStore().form.websiteUrl).toBe('https://firma.cz/about')
+  })
+
+  test('reset clears the persisted draft, progress, and verification state', async () => {
+    const store = createStore()
+    Object.assign(store.form, {
+      siteName: 'Draft',
+      domain: 'draft',
+      email: 'draft@example.test',
+      password: 'secret',
+      selectedPlan: 'PRO',
+    })
+    store.markStep('site', 'done')
+    store.challenge = 'challenge'
+    store.verifiedToken = 'proof'
+    store.code = '123456'
+    store.userEditedDomain = true
+    await vue.nextTick()
+
+    store.reset()
+    await vue.nextTick()
+
+    expect(store.form.siteName).toBe('')
+    expect(store.form.password).toBe('')
+    expect(store.form.selectedPlan).toBeNull()
+    expect(store.progress).toEqual({})
+    expect(store.challenge).toBeNull()
+    expect(store.verifiedToken).toBeNull()
+    expect(store.code).toBe('')
+    expect(store.userEditedDomain).toBe(false)
+    const restored = createStore()
+    expect(restored.form.siteName).toBe('')
+    expect(restored.form.email).toBe('')
+    expect(restored.progress).toEqual({})
   })
 
   test.each([' firma.cz ', ''])('passes the optional website from the form through checkout: %s', async (website) => {
@@ -142,6 +179,9 @@ describe('company website onboarding', () => {
     expect(request.options.body.website).toBeUndefined()
     expect(request.options.headers['X-Landing-Client-Ip']).toBe('203.0.113.4')
     expect(request.options.headers['X-Landing-Sig']).toHaveLength(64)
+    expect(request.options.headers['Idempotency-Key']).toHaveLength(64)
+    expect(request.options.retry).toBe(0)
+    expect(request.options.timeout).toBe(30_000)
   })
 
   test('rejects an unverified email before forwarding the website', async () => {
@@ -160,5 +200,55 @@ describe('company website onboarding', () => {
       } as never),
     ).rejects.toMatchObject({ statusCode: 400 })
     expect(fetch).not.toHaveBeenCalled()
+  })
+
+  test('does not retry an uncertain platform result or expose its raw error', async () => {
+    const email = 'uncertain@example.test'
+    const event = {
+      body: {
+        siteName: 'Uncertain',
+        domain: 'uncertain',
+        language: 'en',
+        username: 'Owner',
+        email,
+        password: 'test-password',
+        verifiedToken: issueVerifiedToken(email),
+      },
+    }
+    fetch.mockImplementationOnce(async () => {
+      throw new Error('Internal error containing private provider details')
+    })
+    await expect(checkout(event as never)).rejects.toMatchObject({
+      statusCode: 503,
+      data: { reason: 'checkoutUnknown' },
+    })
+    await expect(checkout(event as never)).rejects.toMatchObject({
+      statusCode: 503,
+      message: 'Registration outcome could not be confirmed. Check your email or sign in before trying again.',
+    })
+    expect(fetch).toHaveBeenCalledTimes(1)
+  })
+})
+
+describe('domain availability', () => {
+  test('never reports available when the platform is down', async () => {
+    fetch.mockImplementationOnce(async () => {
+      throw new Error('Unavailable')
+    })
+    await expect(checkDomain({ query: { domain: 'example', type: 'SUBDOMAIN' } } as never)).rejects.toMatchObject({
+      statusCode: 503,
+    })
+  })
+  test('rejects malformed upstream responses', async () => {
+    await expect(checkDomain({ query: { domain: 'example', type: 'SUBDOMAIN' } } as never)).rejects.toMatchObject({
+      statusCode: 503,
+    })
+  })
+  test('only reports availability confirmed by the platform', async () => {
+    fetch.mockImplementationOnce(async () => ({ ok: true, fullDomain: 'example.topiqu.com' }) as any)
+    expect(await checkDomain({ query: { domain: 'example', type: 'SUBDOMAIN' } } as never)).toEqual({
+      ok: true,
+      fullDomain: 'example.topiqu.com',
+    })
   })
 })
