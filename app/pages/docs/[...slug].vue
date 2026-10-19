@@ -1,7 +1,7 @@
 <template>
   <div class="mx-auto grid max-w-[100rem] grid-cols-1 lg:grid-cols-[16rem_minmax(0,1fr)]">
     <aside
-      class="border-b border-slate-200 p-5 dark:border-white/10 lg:sticky lg:top-16 lg:h-[calc(100vh-4rem)] lg:border-b-0 lg:border-r lg:p-7"
+      class="border-b border-slate-200 p-5 dark:border-white/10 lg:sticky docs-sidebar lg:border-b-0 lg:border-r lg:p-7"
     >
       <p class="mb-3 text-xs font-bold uppercase tracking-[0.16em] text-indigo-600 dark:text-indigo-400">API v1</p>
       <nav class="flex gap-2 overflow-x-auto lg:flex-col">
@@ -25,7 +25,11 @@
 
     <main class="min-w-0 px-6 py-12 sm:px-10 lg:px-16 lg:py-16">
       <article v-if="page" class="docs-prose mx-auto max-w-3xl">
-        <p class="mb-3 text-sm font-semibold text-indigo-600 dark:text-indigo-400">Topiqu External API</p>
+        <DeveloperBreadcrumb
+          class="tw:mb-6"
+          :label="page.title"
+          :parent="{ label: locale === 'cs' ? 'Dokumentace' : 'Documentation', to: `/${locale}/docs` }"
+        />
         <ContentRenderer :value="page" />
       </article>
       <div v-else class="mx-auto max-w-3xl">
@@ -81,3 +85,13 @@ useSchemaOrg([
   }),
 ])
 </script>
+
+<style scoped>
+@media (min-width: 1024px) {
+  .docs-sidebar {
+    top: var(--developer-header-height);
+    height: calc(100dvh - var(--developer-header-height));
+    overflow-y: auto;
+  }
+}
+</style>

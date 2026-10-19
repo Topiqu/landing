@@ -10,11 +10,13 @@
       </div>
       <ul class="features-grid">
         <li v-for="(item, index) in items" :key="item.title">
-          <span class="features-icon"><Icon :name="icons[index]!" aria-hidden="true" /></span>
-          <div>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.text }}</p>
-          </div>
+          <NuxtLinkLocale :to="'/changelog/' + releases[index]">
+            <span class="features-icon"><Icon :name="icons[index]!" aria-hidden="true" /></span>
+            <div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.text }}</p>
+            </div>
+          </NuxtLinkLocale>
         </li>
         <li class="features-more">
           <NuxtLinkLocale to="/changelog">
@@ -32,6 +34,24 @@
 
 <script setup lang="ts">
 const items = useMessageList<'title' | 'text'>('landing.design.features.items')
+// Links follow the same order as the translated feature list; both locales share release slugs.
+const releases = [
+  '2026-09-27-german-and-french',
+  '2026-09-24-media-library-and-visual-style',
+  '2026-09-20-article-allowance',
+  '2026-09-02-publication-and-editor-redesign',
+  '2026-09-20-article-allowance',
+  '2026-08-26-teams-and-multiple-blogs',
+  '2026-08-26-teams-and-multiple-blogs',
+  '2026-08-26-teams-and-multiple-blogs',
+  '2026-09-24-media-library-and-visual-style',
+  '2026-09-23-optimization-and-fact-check',
+  '2026-09-27-ai-visibility',
+  '2026-09-20-article-allowance',
+  '2026-09-20-article-allowance',
+  '2026-10-02-shopify-and-publication-channels',
+  '2026-10-02-shopify-and-publication-channels',
+]
 // Same order as `landing.design.features.items`.
 const icons = [
   'mdi:translate',
@@ -81,19 +101,21 @@ const icons = [
   display: flex;
   gap: 14px;
   min-width: 0;
-  padding: 22px 20px 22px 0;
+
   border-bottom: 1px solid var(--landing-line);
 }
-.features-more a {
+.features-grid li > a {
+  width: 100%;
+  padding: 22px 20px 22px 0;
   display: flex;
   gap: 14px;
   color: inherit;
   text-decoration: none;
 }
-.features-more a:focus-visible {
+.features-grid li > a:focus-visible {
   outline: 2px solid var(--landing-accent);
   outline-offset: 4px;
-  border-radius: 8px;
+  border-radius: var(--topiqu-control-radius);
 }
 .features-more .features-icon {
   background: var(--landing-accent);
@@ -117,7 +139,7 @@ const icons = [
   place-items: center;
   width: 38px;
   height: 38px;
-  border-radius: 10px;
+  border-radius: var(--topiqu-control-radius);
   background: var(--landing-tint);
   color: var(--landing-accent);
   font-size: 20px;
@@ -125,7 +147,8 @@ const icons = [
     background-color 0.2s,
     color 0.2s;
 }
-.features-grid li:hover .features-icon {
+.features-grid li:hover .features-icon,
+.features-grid li:focus-within .features-icon {
   background: var(--landing-accent);
   color: var(--landing-surface);
 }
@@ -151,7 +174,7 @@ const icons = [
   .features-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-  .features-grid li {
+  .features-grid li > a {
     padding: 16px 0;
   }
 }
