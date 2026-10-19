@@ -42,6 +42,7 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'bun',
+    compressPublicAssets: true,
     externals: {
       // Dependency tracing can omit vue/server-renderer from the standalone Bun output.
       inline: ['vue', '@vue/server-renderer'],
@@ -319,6 +320,9 @@ export default defineNuxtConfig({
   },
 
   experimental: {
+    defaults: {
+      nuxtLink: { prefetchOn: { visibility: false, interaction: true } },
+    },
     renderJsonPayloads: true,
     headNext: true,
   },
