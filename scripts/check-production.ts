@@ -47,6 +47,16 @@ for (const locale of ['en', 'cs']) {
 }
 await checkPage('/en/production-smoke-missing-page', 404)
 
+// A local validation failure needs no configured platform, email service or test account.
+const domainResponse = await fetch(new URL('/api/check-domain?domain=www&type=SUBDOMAIN', baseUrl))
+const domainResult = await domainResponse.json()
+if (domainResponse.status !== 200 || domainResult.ok !== false || domainResult.reason !== 'reserved') {
+  failures.push('Domain syntax validation is not available in the production server')
+}
+if (!domainResponse.headers.get('x-request-id') || !domainResponse.headers.get('cache-control')?.includes('no-store')) {
+  failures.push('Onboarding responses must include request correlation and disable caching')
+}
+
 if (failures.length) {
   console.error(failures.join('\n'))
   process.exit(1)

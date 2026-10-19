@@ -4,3 +4,6 @@ screenshots/
 .nuxt/
 .output/
 node_modules/
+.env
+.env.*
+!.env.example
