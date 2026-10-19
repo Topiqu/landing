@@ -103,7 +103,8 @@ export default defineNuxtConfig({
 
   appConfig: { ui: { icons: topiquIcons } },
 
-  ui: { colorMode: false, fonts: false, theme: { prefix: 'tw' } },
+  ui: { fonts: false, theme: { prefix: 'tw' } },
+  colorMode: { preference: 'light', fallback: 'light', classSuffix: '', storage: 'cookie', storageKey: 'theme' },
   toast: { composableName: 'useLegacyToast' },
 
   css: ['~/assets/styles/main.css', '~/assets/styles/base.scss'],
@@ -188,8 +189,8 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_lang',
-      cookieSecure: true,
-      cookieCrossOrigin: true,
+      cookieSecure: !import.meta.dev,
+      cookieCrossOrigin: false,
       redirectOn: 'root',
       alwaysRedirect: true,
       fallbackLocale: 'en',

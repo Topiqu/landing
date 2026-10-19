@@ -21,7 +21,7 @@ The reference checkout is `../app`. Its `app.config.ts`, `assets/styles/main.css
 
 Nuxt UI's Tailwind utilities use the `tw:` prefix. Existing onboarding and documentation continue to use UnoCSS. The prefix prevents the two utility systems from redefining each other's classes. Do not use `ui:` as the Tailwind prefix: its generated color variables collide with Nuxt UI's own `--ui-color-*` variables.
 
-Marketing tokens and layout live in `app/assets/styles/main.css`; global accessibility and form defaults live in `base.scss`. Avoid global selectors that recolor all `div`, `span` or `button` elements. The existing theme store remains the sole color-mode owner; Nuxt UI's color-mode module is disabled.
+Marketing tokens and layout live in `app/assets/styles/main.css`; global accessibility and form defaults live in `base.scss`. Avoid global selectors that recolor all `div`, `span` or `button` elements. The theme store wraps Nuxt UI's native color-mode module, with cookie persistence. Controls use 10px radii, surfaces 14px and inputs 16px; configure shared Nuxt UI slots in `app.config.ts`.
 
 The original notification composable is named `useLegacyToast` so it cannot collide with Nuxt UI's `useToast`.
 

@@ -4,7 +4,9 @@
 @import '@fontsource-variable/source-serif-4/wght.css';
 :root {
   --ui-primary: var(--ui-color-primary-700);
-  --ui-radius: 0.625rem;
+  --ui-radius: 0.25rem;
+  --topiqu-control-radius: 0.625rem;
+  --topiqu-input-radius: 1rem;
   --ui-container: 80rem;
   --ui-header-height: 4.5rem;
   --topiqu-surface-radius: 0.875rem;
@@ -38,6 +40,17 @@
 }
 
 /* Marketing composition. Nuxt UI primitives use the tw: prefix; legacy routes keep UnoCSS. */
+.skip-link {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.75rem 1rem;
+  background: var(--landing-surface);
+}
+.skip-link:focus {
+  top: 1rem;
+}
 .landing-container {
   width: min(100% - 4rem, 1248px);
   margin-inline: auto;
@@ -132,7 +145,7 @@
   gap: 6px;
   background: var(--landing-surface);
   border: 1px solid var(--landing-line);
-  border-radius: calc(var(--ui-radius) + 6px);
+  border-radius: var(--topiqu-surface-radius);
   box-shadow: 0 8px 24px -16px color-mix(in srgb, var(--landing-accent) 35%, transparent);
 }
 .hero-signup:focus-within {
@@ -909,7 +922,7 @@
 }
 .onb-main {
   flex: 1;
-  padding: 40px 20px 72px;
+  padding: clamp(16px, 2.5vh, 32px) 20px;
 }
 .onb-frame {
   width: min(100%, 720px);
@@ -957,7 +970,7 @@
   gap: 8px;
   min-width: 0;
   padding: 6px 8px;
-  border-radius: var(--ui-radius);
+  border-radius: var(--topiqu-control-radius);
   color: var(--landing-muted);
   font-size: 12px;
   font-weight: 600;
@@ -1061,7 +1074,7 @@ a.onb-step:hover {
   gap: 12px;
   padding: 14px 16px;
   border: 1px solid var(--landing-line);
-  border-radius: var(--ui-radius);
+  border-radius: var(--topiqu-control-radius);
   background: var(--landing-surface);
   cursor: pointer;
   transition:
@@ -1172,7 +1185,7 @@ a.onb-step:hover {
   align-items: flex-start;
   gap: 10px;
   padding: 12px 14px;
-  border-radius: var(--ui-radius);
+  border-radius: var(--topiqu-control-radius);
   background: var(--landing-tint);
   color: var(--landing-ink);
   font-size: 13px;
@@ -1210,5 +1223,22 @@ a.onb-step:hover {
   }
   .onb-actions-forward {
     flex-direction: column-reverse;
+  }
+}
+
+.onb-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+@media (min-width: 641px) and (max-height: 1100px) {
+  .onb-card {
+    padding: 24px 32px;
+  }
+  .onb-form {
+    gap: 18px;
+  }
+  .onb-heading p {
+    margin-top: 8px;
   }
 }
