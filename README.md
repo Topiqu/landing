@@ -76,6 +76,8 @@ Copy `.env.example` and fill in:
 | `NUXT_EMAIL_FROM`                | Sender address for verification emails                  |
 | `NUXT_PUBLIC_GTAG_ID`            | Google Analytics measurement ID (`G-XXXXXXXXXX`)        |
 
+AdSense uses `NUXT_PUBLIC_ADSENSE_PUBLISHER_ID` (default: `ca-pub-9731440718321055`).
+
 For an already-built image use the native `NUXT_` runtime overrides described in
 [production operations](docs/production.md), which also documents retries, logging and release checks.
 
@@ -85,6 +87,13 @@ with the SES `messageId`, sending region and request correlation. The `/api/send
 In local development without SES credentials, the code is printed to the terminal
 as `[DEV EMAIL]` instead of being sent,
 and the response explicitly reports `delivery: "development"`.
+
+AdSense publishes its account meta tag during server rendering. The script loads once after
+hydration and cookie consent; withdrawing consent reloads the page to stop the advertising runtime.
+Privacy policy pages exclude both AdSense and GA4, including when a visitor has already consented;
+entering a policy page after either runtime has loaded reloads the page to stop it.
+`public/ads.txt` authorizes the same publisher. Google advertising consent still requires a
+published Google CMP message for `topiqu.com` (AdSense → Privacy & messaging).
 
 ## 🧹 Linting & Formatting
 

@@ -31,6 +31,7 @@ export default defineNuxtConfig({
       statusUrl: process.env.STATUS_URL || 'https://status.topiqu.com',
       // Read by useCookieConsent; gtag itself stays in manual init mode.
       gtagId: process.env.GTAG_ID || '',
+      adsensePublisherId: process.env.NUXT_PUBLIC_ADSENSE_PUBLISHER_ID || 'ca-pub-9731440718321055',
     },
   },
 
@@ -122,10 +123,30 @@ export default defineNuxtConfig({
       crossOriginOpenerPolicy: 'unsafe-none',
       contentSecurityPolicy: {
         'img-src': ["'self'", 'data:', 'blob:', 'https:'],
-        'frame-src': ["'self'", 'https://challenges.cloudflare.com'],
+        'frame-src': [
+          "'self'",
+          'https://challenges.cloudflare.com',
+          'https://googleads.g.doubleclick.net',
+          'https://tpc.googlesyndication.com',
+          'https://www.google.com',
+          'https://fundingchoicesmessages.google.com',
+          'https://pagead2.googlesyndication.com',
+          'https://ep2.adtrafficquality.google',
+        ],
         'connect-src': ["'self'", 'https:'],
         'frame-ancestors': ["'self'"],
-        'script-src': ["'self'", "'unsafe-inline'", "'wasm-unsafe-eval'", 'blob:', 'https://challenges.cloudflare.com'],
+        'script-src': [
+          "'self'",
+          "'unsafe-inline'",
+          "'wasm-unsafe-eval'",
+          'blob:',
+          'https://challenges.cloudflare.com',
+          'https://pagead2.googlesyndication.com',
+          'https://tpc.googlesyndication.com',
+          'https://adservice.google.com',
+          'https://fundingchoicesmessages.google.com',
+          'https://ep2.adtrafficquality.google',
+        ],
       },
     },
     xssValidator: false,
@@ -334,6 +355,7 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png?v=20260910' },
         { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' },
       ],
+      meta: [{ name: 'google-adsense-account', content: 'ca-pub-9731440718321055' }],
     },
   },
 
