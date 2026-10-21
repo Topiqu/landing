@@ -129,7 +129,7 @@
             <span class="connector-ring" />
             <span class="connector-logo">
               <NuxtImg
-                src="/brand/topiqu-mark.png"
+                src="/brand/topiqu-mark.webp"
                 width="64"
                 height="64"
                 format="webp"

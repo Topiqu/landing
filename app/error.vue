@@ -32,7 +32,7 @@ useSeoMeta({
         <div class="error-content">
           <NuxtImg
             v-if="status === 404"
-            src="/topik_404_rm.png"
+            src="/topik_404_rm.webp"
             width="180"
             height="220"
             fit="inside"

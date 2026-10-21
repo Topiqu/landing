@@ -1,7 +1,7 @@
 <template>
   <NuxtLink :to="localePath('/')" class="brand-logo" aria-label="Topiqu">
     <NuxtImg
-      src="/brand/topiqu-wordmark.png"
+      src="/brand/topiqu-wordmark.webp"
       width="126"
       height="48"
       format="webp"
@@ -12,7 +12,7 @@
     />
     <span class="brand-dark-wordmark">
       <NuxtImg
-        src="/brand/topiqu-wordmark-dark.png"
+        src="/brand/topiqu-wordmark-dark.webp"
         width="188"
         height="106"
         format="webp"

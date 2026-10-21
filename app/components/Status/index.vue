@@ -5,7 +5,7 @@
     >
       <slot name="icon">
         <div class="flex justify-center mb-4">
-          <NuxtImg v-if="showTopik404" src="/topik_404_rm.png" class="w-32 h-32 object-contain" loading="lazy" />
+          <NuxtImg v-if="showTopik404" src="/topik_404_rm.webp" class="w-32 h-32 object-contain" loading="lazy" />
           <div v-else-if="effectiveType === 'error'" class="relative">
             <Icon :name="ui.icon!" class="w-12 h-12 mx-auto" :class="ui.classes.icon" aria-hidden="true" />
             <span class="absolute -top-1 -right-1 w-4 h-4 bg-red-200 dark:bg-red-800 rounded-full"></span>
