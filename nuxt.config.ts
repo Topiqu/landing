@@ -76,6 +76,7 @@ export default defineNuxtConfig({
     'nuxt-toast',
     'nuxt-gtag',
     '@scalar/nuxt',
+    'nuxt-vitalizer',
   ],
 
   scalar: {
@@ -109,6 +110,9 @@ export default defineNuxtConfig({
   // Inline the CSS needed by SSR pages instead of waiting for blocking stylesheets.
   features: { inlineStyles: true },
   unocss: { disableNuxtInlineStyle: false },
+  // Remove shared-chunk stylesheet links only when their Vue styles are already inlined.
+  // Keep resource hints so navigation and dependency discovery retain their normal behavior.
+  vitalizer: { disableStylesheets: true, disablePrefetchLinks: false, disablePreloadLinks: false },
   colorMode: { preference: 'light', fallback: 'light', classSuffix: '', storage: 'cookie', storageKey: 'theme' },
   toast: { composableName: 'useLegacyToast' },
 

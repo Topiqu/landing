@@ -78,3 +78,57 @@ cache headers, compression and mobile field LCP/INP after release. Cloudflare's 
 email decoding script is controlled at the hosting layer; this repository does not remove it.
 See the [earlier production audit](production-audit.md) for outstanding Scalar accessibility
 and platform release requirements.
+
+## Vitalizer follow-up
+
+`nuxt-vitalizer@3.0.0` is pinned as a build-only development dependency. Only
+`disableStylesheets` is enabled. Both `disablePrefetchLinks` and `disablePreloadLinks`
+are explicitly false, preserving Nuxt's resource hints. The measured homepage had
+no prefetch tags already, so a second prefetch variant would not change that page.
+
+The module removes duplicate shared-chunk CSS links when their Vue styles are
+inlined. The built homepage goes from three external stylesheet links (`Header`,
+`Modal`, `PricingIntervalToggle`) to zero. Header and billing-switch scoped CSS
+remain inside SSR style tags. Both builds have 29 modulepreload tags and zero
+prefetch tags. This affects the production build; `nuxt dev` does not demonstrate it.
+
+Cloudflare's `email-decode.min.js` is injected outside the build and remains a
+separate deployment concern. The local benchmark does not include this script.
+The deployed desktop TBT report cannot be explained by these CSS requests alone;
+attribute long JavaScript tasks in a deployed trace before changing hydration globally.
+
+To roll back this optimization alone, remove `nuxt-vitalizer` from `modules`, remove
+its `vitalizer` config and uninstall the dependency. The previous SSR inline-style
+and visible-hydration configuration remains valid independently.
+
+Fresh sequential runs against the same localhost production server and mobile preset:
+
+| Variant                   | Performance |   FCP |   LCP |   TBT | CLS |  Transfer |
+| ------------------------- | ----------: | ----: | ----: | ----: | --: | --------: |
+| Without Vitalizer         |          83 | 2.6 s | 4.0 s | 86 ms |   0 | 440,465 B |
+| Stylesheet removal        |          86 | 2.3 s | 3.8 s | 91 ms |   0 | 439,368 B |
+| Stylesheet removal repeat |          86 | 2.3 s | 3.8 s | 90 ms |   0 | 439,368 B |
+
+The earlier baseline runs scored 84; the fresh baseline's 83 reflects run-to-run
+variation, particularly TBT. The repeated benefit here is earlier paint, not a
+reduction in JavaScript blocking time. Inline style content was byte-for-byte
+identical in the baseline and optimized homepage (276,726 characters each).
+Final desktop: 99 performance, 100 accessibility, FCP 0.5 s, LCP 0.9 s, TBT 0 ms,
+CLS 0. All mobile accessibility runs scored 100. These remain local lab results.
+
+Commands use the reproduction recipe above. Save outputs as
+`/tmp/topiqu-vitalizer-before-mobile.json`, `/tmp/topiqu-vitalizer-after-mobile.json`
+and `/tmp/topiqu-vitalizer-after-repeat-mobile.json`. Build, lint, typecheck, 27 unit
+tests, OpenAPI validation and bilingual production rendering/image smoke checks passed.
+
+Browser verification covered the 390px homepage, dark mobile menu, yearly pricing
+selection, onboarding reset modal opening/cancelling and Czech documentation. No
+horizontal overflow or browser errors were observed. Runtime navigation can still
+insert stylesheet links; the optimization removes them from the initial blocking
+SSR head, not necessarily from all later network activity.
+
+A separate desktop run against the **currently deployed** `https://topiqu.com/en`
+scored 100 with FCP 0.5 s, LCP 0.7 s and TBT 0 ms (no reported long tasks). It was
+measured from this workstation, not Google's PageSpeed infrastructure, and the
+Vitalizer change was not deployed. This does not reproduce or explain the supplied
+370 ms TBT result, and must not be presented as a deployed improvement from this patch.
