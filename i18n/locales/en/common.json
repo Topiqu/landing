@@ -419,6 +419,13 @@
       "accept": "Accept all",
       "reject": "Necessary only",
       "settings": "Cookie settings"
+    },
+    "errorPage": {
+      "notFoundTitle": "This page is missing",
+      "notFoundDescription": "The page may have moved, or the link may be incorrect. Let’s get you back to Topiqu.",
+      "title": "Something went wrong",
+      "description": "We couldn’t load this page. Please try again in a moment, or return to the homepage.",
+      "home": "Back to homepage"
     }
   }
 }

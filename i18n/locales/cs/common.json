@@ -420,6 +420,13 @@
       "accept": "Přijmout vše",
       "reject": "Jen nezbytné",
       "settings": "Nastavení cookies"
+    },
+    "errorPage": {
+      "notFoundTitle": "Tahle stránka tu není",
+      "notFoundDescription": "Stránka se mohla přesunout nebo je v odkazu překlep. Vraťte se na úvod a pokračujte odtud.",
+      "title": "Něco se nepovedlo",
+      "description": "Stránku se nepodařilo načíst. Zkuste to za chvíli znovu nebo se vraťte na úvod.",
+      "home": "Zpět na úvod"
     }
   }
 }
