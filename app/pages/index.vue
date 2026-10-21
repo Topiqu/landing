@@ -17,13 +17,13 @@ useSchemaOrg([
 <template>
   <div class="landing-page">
     <Hero />
-    <Showcase />
+    <LazyShowcase hydrateOnVisible />
     <Connector />
-    <AfterPublishing />
-    <Features />
-    <Pricing />
-    <Comparison />
-    <Faq />
-    <Closing />
+    <LazyAfterPublishing hydrateOnVisible />
+    <LazyFeatures hydrateOnVisible />
+    <LazyPricing hydrateOnVisible />
+    <LazyComparison hydrateOnVisible />
+    <LazyFaq hydrateOnVisible />
+    <LazyClosing hydrateOnVisible />
   </div>
 </template>

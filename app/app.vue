@@ -16,6 +16,7 @@
 
 <script setup lang="ts">
 import { cs, en } from '@nuxt/ui/locale'
+import interfaceFont from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url'
 const { locale } = useI18n()
 const ogImageUrl = 'https://topiqu.com/brand/topiqu-mark.png?v=20260910'
 
@@ -44,6 +45,7 @@ useSeoMeta({
 
 useHead({
   link: [
+    { rel: 'preload', as: 'font', type: 'font/woff2', href: interfaceFont, crossorigin: 'anonymous' },
     {
       rel: 'icon',
       type: 'image/x-icon',

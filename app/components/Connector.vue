@@ -128,7 +128,16 @@
             <span class="connector-ring" />
             <span class="connector-ring" />
             <span class="connector-logo">
-              <img src="/brand/topiqu-mark.png" width="64" height="67" alt="" />
+              <NuxtImg
+                src="/brand/topiqu-mark.png"
+                width="64"
+                height="64"
+                format="webp"
+                fit="inside"
+                densities="x1 x2"
+                loading="lazy"
+                alt=""
+              />
             </span>
           </div>
 

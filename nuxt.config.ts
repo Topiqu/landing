@@ -105,7 +105,10 @@ export default defineNuxtConfig({
 
   appConfig: { ui: { icons: topiquIcons } },
 
-  ui: { fonts: false, theme: { prefix: 'tw' } },
+  ui: { fonts: false, theme: { prefix: 'tw' }, experimental: { componentDetection: true } },
+  // Inline the CSS needed by SSR pages instead of waiting for blocking stylesheets.
+  features: { inlineStyles: true },
+  unocss: { disableNuxtInlineStyle: false },
   colorMode: { preference: 'light', fallback: 'light', classSuffix: '', storage: 'cookie', storageKey: 'theme' },
   toast: { composableName: 'useLegacyToast' },
 
@@ -169,6 +172,9 @@ export default defineNuxtConfig({
     '/cs/ochrana-soukromi': { prerender: true },
     // Nuxt build assets — immutable long cache
     '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    // Unhashed brand sources can change; keep their cache bounded and revalidatable.
+    '/brand/**': { headers: { 'cache-control': 'public, max-age=86400, stale-while-revalidate=604800' } },
+    '/_ipx/**': { headers: { 'cache-control': 'public, max-age=86400, stale-while-revalidate=604800' } },
     // Static public files (nitro routeRules don't support `**` inside a path
     // segment, so list each file explicitly)
     '/logo.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },

@@ -62,7 +62,18 @@
               <th scope="col">{{ copy.feature }}</th>
               <th v-for="tool in tools" :key="tool.name" scope="col" :data-own="tool.own || undefined">
                 <span class="comparison-tool">
-                  <img :src="tool.logo" alt="" width="28" height="28" />
+                  <NuxtImg
+                    v-if="tool.logo.endsWith('.png')"
+                    :src="tool.logo"
+                    alt=""
+                    width="28"
+                    height="28"
+                    format="webp"
+                    fit="inside"
+                    densities="x1 x2"
+                    loading="lazy"
+                  />
+                  <img v-else :src="tool.logo" alt="" width="28" height="28" loading="lazy" decoding="async" />
                   {{ tool.name }}
                 </span>
               </th>
