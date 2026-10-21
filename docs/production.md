@@ -93,6 +93,40 @@ Operational alerts should cover repeated 5xx responses, checkout unknown outcome
 requests without a matching completion. Log emission is implemented here; log retention and alert delivery
 must be configured in the hosting environment. Use platform-side correlation when investigating a request.
 
+## Dokploy deployment
+
+Use the Dockerfile build type with Dockerfile path `Dockerfile`, context `.`, and
+build stage `release` (or leave the stage empty to use the final stage). The
+application listens on container port `3000`; configure the Dokploy domain to use
+that port. Runtime environment variables belong in the application's environment
+settings, not Docker build arguments. Keep the existing `NUXT_` runtime variable
+names documented above.
+
+The Dockerfile uses BuildKit cache mounts for downloaded Bun packages and normal
+Docker layer caching for installed dependencies. Repeated builds on the same
+VPS/builder can reuse these caches; moving to another builder or pruning its cache
+makes the next build cold. Keep normal build caching enabled. There is no dependency
+on GitHub Actions cache or a registry cache exporter. The cache mount's architecture
+suffix keeps package caches separate between ARM64 and AMD64 builders.
+
+Both dependency installation and the Nuxt build run under Bun **1.4.3**. The build
+uses `bun --bun run build` so the Nuxt CLI's Node shebang does not select Node.
+No Node image or binary is needed. CI uses the same Bun version.
+
+The previous `BUILD_NODE_OPTIONS` argument has been removed: Node's V8 heap flags
+do not control Bun's JavaScriptCore heap. Remove that build argument in Dokploy if
+it was configured. Size build resources through the builder/container limits and
+allow room for native tools, Docker and running apps.
+
+The final image runs as the existing `bun` user, with `NODE_ENV=production`,
+`HOST=0.0.0.0` and `PORT=3000`. Only `.output` is copied from the build stage; Node,
+source files and the package download cache stay out of the final image. The
+application directory and copied output are owned by `bun` so Content can initialize
+its generated SQLite database. Local `.data` is excluded from the build context.
+Do not mount a host-owned directory over the application tree; any deliberate data
+mount must allow writes by the container's `bun` user. Content's generated database
+is derived from repository content and does not require a persistent volume.
+
 ## Verification and release
 
 Run `bun test`, `bun run lint`, `bun run typecheck`, `bun run openapi:check` and `bun run build`.
