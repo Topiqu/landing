@@ -154,7 +154,7 @@
         "languageHelp": "Články později přeložíte i do dalších jazyků.",
         "website": "Web vaší firmy",
         "websitePlaceholder": "mojefirma.cz",
-        "websiteHelp": "Po registraci si vyberete, které stránky přidáte do znalostní báze, aby AI psala o tom, co vaše firma skutečně nabízí."
+        "websiteHelp": "Zadáním webu souhlasíte, že po registraci AI zpracuje jeho veřejný obsah a připraví nastavení blogu i podklady do znalostní báze. Před použitím vše zkontrolujete a potvrdíte."
       },
       "domainStatus": {
         "checking": "Ověřujeme dostupnost…",

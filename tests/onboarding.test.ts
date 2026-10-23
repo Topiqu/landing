@@ -117,6 +117,7 @@ describe('company website onboarding', () => {
     await store.submit()
     const request = requests.find(({ url }) => url === '/api/checkout')!
     expect(request.options.body.websiteUrl).toBe(website.trim() || undefined)
+    expect(request.options.body.websiteImportConsentVersion).toBe(website.trim() ? 1 : undefined)
     expect(request.options.body.website).toBeUndefined()
   })
 
@@ -132,6 +133,7 @@ describe('company website onboarding', () => {
         password: 'test-password',
         verifiedToken: issueVerifiedToken(email),
         websiteUrl: ' firma.cz ',
+        websiteImportConsentVersion: 1,
         website: 'honeypot',
       },
     } as never)
@@ -139,6 +141,7 @@ describe('company website onboarding', () => {
     const request = requests[0]!
     expect(request.url).toBe('https://platform.example.test/api/onboarding/checkout')
     expect(request.options.body.websiteUrl).toBe('firma.cz')
+    expect(request.options.body.websiteImportConsentVersion).toBe(1)
     expect(request.options.body.website).toBeUndefined()
     expect(request.options.headers['X-Landing-Client-Ip']).toBe('203.0.113.4')
     expect(request.options.headers['X-Landing-Sig']).toHaveLength(64)

@@ -280,6 +280,7 @@ export const useOnboardingStore = defineStore(
             typographyPreset: form.typography,
             tagline: form.tagline.trim() || undefined,
             websiteUrl: form.websiteUrl.trim() || undefined,
+            websiteImportConsentVersion: form.websiteUrl.trim() ? 1 : undefined,
             username: form.username.trim(),
             email: form.email,
             password: form.password,
