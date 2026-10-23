@@ -79,10 +79,12 @@ const options = { to: 'owner@firma.cz', code: '123456', name: 'Owner' }
 test('returns the SES receipt and logs acceptance without credentials', async () => {
   expect(await send(options)).toEqual({ delivery: 'ses', messageId: 'receipt-1' })
   expect(messages).toHaveLength(1)
-  expect(info).toHaveBeenCalledWith('[SES] Verification email accepted:', {
+  expect(JSON.parse(info.mock.calls[0]![0])).toMatchObject({
+    action: 'email.accepted',
+    dependency: 'ses',
     messageId: 'receipt-1',
     region: 'eu-central-1',
-    requestId: 'request-1',
+    providerRequestId: 'request-1',
   })
   expect(JSON.stringify(info.mock.calls)).not.toContain('test-secret-key')
 })
@@ -101,6 +103,17 @@ test('does not report acceptance without a message ID', async () => {
   response = { $metadata: {} }
   await expect(send(options)).rejects.toMatchObject({ statusCode: 500 })
   expect(info).not.toHaveBeenCalled()
+})
+test('logs a safe provider code without raw recipient or verification details', async () => {
+  failure = Object.assign(new Error('Recipient owner@firma.cz, code 123456, test-secret-key'), {
+    name: 'MessageRejected',
+  })
+  await expect(send(options)).rejects.toMatchObject({ statusCode: 500 })
+  expect(JSON.parse(error.mock.calls[0]![0])).toMatchObject({ action: 'email.failed', outcome: 'MessageRejected' })
+  const serialized = JSON.stringify(error.mock.calls)
+  expect(serialized).not.toContain('owner@firma.cz')
+  expect(serialized).not.toContain('123456')
+  expect(serialized).not.toContain('test-secret-key')
 })
 test('reports development delivery explicitly without sending email', async () => {
   delete process.env.SES_ACCESS_KEY_ID

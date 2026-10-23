@@ -44,12 +44,17 @@
 
 <script setup lang="ts">
 const localePath = useLocalePath()
+const nuxtApp = useNuxtApp()
 const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
 const email = shallowRef('')
 
-const startOnboarding = () => {
-  const store = useOnboardingStore()
-  store.form.email = email.value.trim()
-  return navigateTo(localePath({ name: 'onboarding-site' }))
+const startOnboarding = async () => {
+  // Password analysis and signup state are not needed to render the public homepage.
+  const { useOnboardingStore } = await import('~/stores/onboarding')
+  return nuxtApp.runWithContext(() => {
+    const store = useOnboardingStore()
+    store.form.email = email.value.trim()
+    return navigateTo(localePath({ name: 'onboarding-site' }))
+  })
 }
 </script>

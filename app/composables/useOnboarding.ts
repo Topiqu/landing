@@ -1,4 +1,13 @@
-export type DomainStatus = 'idle' | 'checking' | 'available' | 'taken' | 'invalid' | 'tooShort' | 'reserved' | 'empty'
+export type DomainStatus =
+  | 'idle'
+  | 'checking'
+  | 'available'
+  | 'taken'
+  | 'invalid'
+  | 'tooShort'
+  | 'reserved'
+  | 'empty'
+  | 'unavailable'
 export type DomainType = 'SUBDOMAIN' | 'CUSTOM'
 export type SelectedPlan = 'PRO' | 'PREMIUM' | null
 export type SelectedBillingInterval = 'month' | 'year'
@@ -70,6 +79,7 @@ export const useOnboarding = () => {
     canVerify: refs.canVerify,
     trialEndsOn: refs.trialEndsOn,
     setDomainType: store.setDomainType,
+    retryDomainCheck: store.retryDomainCheck,
     sendCode: store.sendCode,
     verifyCode: store.verifyCode,
     submit: store.submit,

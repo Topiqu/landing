@@ -1,7 +1,7 @@
 <template>
   <main class="release-page">
     <header class="release-heading">
-      <p class="release-eyebrow">Topiqu / Changelog</p>
+      <DeveloperBreadcrumb :label="copy.title" class="release-eyebrow" />
       <h1>{{ copy.title }}</h1>
       <p>{{ copy.description }}</p>
       <div class="release-feeds">
@@ -65,13 +65,13 @@ const copy = computed(() =>
         title: 'Co je nového',
         description: 'Nové funkce, vylepšení, opravy a všechny změny veřejného API na jednom místě.',
         filter: 'Filtrovat změny',
-        all: 'vše',
+        all: 'Vše',
       }
     : {
         title: 'What’s new',
         description: 'New features, improvements, fixes, and every public API change in one place.',
         filter: 'Filter changes',
-        all: 'all',
+        all: 'All',
       },
 )
 const formatDate = (date: string) =>

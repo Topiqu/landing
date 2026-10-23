@@ -30,10 +30,19 @@ const checkPage = async (path: string, status = 200, marker?: string) => {
   } else {
     console.log(`${response.status} ${path}`)
   }
+  return html
 }
 
+const imageSources = new Set<string>()
 for (const locale of ['en', 'cs']) {
-  await checkPage(`/${locale}`, 200, 'id="hero-title"')
+  const home = await checkPage(`/${locale}`, 200, 'id="hero-title"')
+  for (const [tag] of home.matchAll(/<img\b[^>]*>/g)) {
+    const src = tag.match(/\bsrc="([^"]+)"/)?.[1]
+    const srcset = tag.match(/\bsrcset="([^"]+)"/)?.[1]
+    for (const url of [src, ...(srcset?.split(',').map((source) => source.trim().split(/\s+/)[0]) ?? [])]) {
+      if (url?.startsWith('/_ipx/')) imageSources.add(url.replaceAll('&amp;', '&'))
+    }
+  }
   await checkPage(`/${locale}/docs`)
   await checkPage(`/${locale}/docs/authentication`, 200, 'x-api-key')
   await checkPage(`/${locale}/changelog`)
@@ -46,6 +55,26 @@ for (const locale of ['en', 'cs']) {
   for (const step of steps) await checkPage(`/${locale}/onboarding/${step}`, 200, 'id="onboarding-title"')
 }
 await checkPage('/en/production-smoke-missing-page', 404)
+
+// Verify the image variants rendered into SSR HTML in the final deployment image,
+// including 2x variants and transformations that need the packaged Sharp binary.
+for (const source of imageSources) {
+  const response = await fetch(new URL(source, baseUrl), { signal: AbortSignal.timeout(10_000) })
+  const bytes = await response.arrayBuffer()
+  if (!response.ok || !response.headers.get('content-type')?.startsWith('image/') || !bytes.byteLength) {
+    failures.push(`Optimized image is unavailable: ${source}`)
+  }
+}
+
+// A local validation failure needs no configured platform, email service or test account.
+const domainResponse = await fetch(new URL('/api/check-domain?domain=www&type=SUBDOMAIN', baseUrl))
+const domainResult = await domainResponse.json()
+if (domainResponse.status !== 200 || domainResult.ok !== false || domainResult.reason !== 'reserved') {
+  failures.push('Domain syntax validation is not available in the production server')
+}
+if (!domainResponse.headers.get('x-request-id') || !domainResponse.headers.get('cache-control')?.includes('no-store')) {
+  failures.push('Onboarding responses must include request correlation and disable caching')
+}
 
 if (failures.length) {
   console.error(failures.join('\n'))

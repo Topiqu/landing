@@ -128,7 +128,16 @@
             <span class="connector-ring" />
             <span class="connector-ring" />
             <span class="connector-logo">
-              <img src="/brand/topiqu-mark.png" width="64" height="67" alt="" />
+              <NuxtImg
+                src="/brand/topiqu-mark.webp"
+                width="64"
+                height="64"
+                format="webp"
+                fit="inside"
+                densities="x1 x2"
+                loading="lazy"
+                alt=""
+              />
             </span>
           </div>
 
@@ -435,12 +444,9 @@ watch([visible, animated, svg], () => {
   box-shadow: inset 0 0 0 3px var(--landing-success);
 }
 .connector-link {
-  color: #1a4fd6;
+  color: var(--landing-accent);
   font-size: 14px;
   font-weight: 600;
-}
-:global(.dark) .connector-link {
-  color: #8ab4f8;
 }
 .connector-bar {
   height: 6px;
@@ -595,7 +601,7 @@ watch([visible, animated, svg], () => {
 }
 .connector-article-category {
   margin-bottom: 8px !important;
-  color: #0d9488;
+  color: var(--landing-success);
   font-size: 10px;
   font-weight: 750;
   letter-spacing: 0.12em;

@@ -67,6 +67,20 @@
       </template>
     </UCheckbox>
 
+    <UAlert
+      v-if="store.submitError"
+      color="warning"
+      variant="soft"
+      icon="mdi:alert-circle-outline"
+      :title="$t('landing.onboarding.summary.' + store.submitError)"
+    >
+      <template #actions>
+        <UButton :to="`${platformUrl}/${locale}/auth`" color="neutral" variant="outline">{{
+          $t('common.auth.login')
+        }}</UButton>
+      </template>
+    </UAlert>
+
     <OnboardingActions
       back="verify"
       :icon="form.selectedPlan ? 'mdi:credit-card-outline' : 'mdi:rocket-launch-outline'"
@@ -85,6 +99,7 @@ import { annualPlanPriceUsd, formatUsd, PLAN_PRICES_USD } from '~~/shared/utils/
 definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
 
 const { locale } = useI18n()
+const { platformUrl } = useRuntimeConfig().public
 const store = useOnboardingStore()
 const { submit, form, loading, fullDomainPreview, brandAccent, trialEndsOn, goTo } = useOnboarding()
 const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }

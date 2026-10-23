@@ -58,6 +58,7 @@ const strength = computed(() => {
       v-model="password"
       :type="visible ? 'text' : 'password'"
       autocomplete="new-password"
+      placeholder="••••••••"
       size="lg"
       class="tw:w-full"
       :ui="{ trailing: 'tw:pe-1' }"

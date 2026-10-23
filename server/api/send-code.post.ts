@@ -49,7 +49,7 @@ export default defineEventHandler(async (event) => {
   const verifyPath = locale === 'cs' ? '/cs/onboarding/overeni' : '/en/onboarding/verify'
   const link = `${origin}${verifyPath}?code=${code}&token=${encodeURIComponent(challenge)}`
 
-  const delivery = await sendVerificationCode({ to: email, code, name, locale, link })
+  const delivery = await sendVerificationCode({ to: email, code, name, locale, link, event })
 
   return { challenge, ...delivery }
 })

@@ -62,7 +62,18 @@
               <th scope="col">{{ copy.feature }}</th>
               <th v-for="tool in tools" :key="tool.name" scope="col" :data-own="tool.own || undefined">
                 <span class="comparison-tool">
-                  <img :src="tool.logo" alt="" width="28" height="28" />
+                  <NuxtImg
+                    v-if="!tool.logo.endsWith('.svg')"
+                    :src="tool.logo"
+                    alt=""
+                    width="28"
+                    height="28"
+                    format="webp"
+                    fit="inside"
+                    densities="x1 x2"
+                    loading="lazy"
+                  />
+                  <img v-else :src="tool.logo" alt="" width="28" height="28" loading="lazy" decoding="async" />
                   {{ tool.name }}
                 </span>
               </th>
@@ -124,11 +135,11 @@ const usd = (amount: number) => formatUsd(amount, locale.value)
 const icons = { yes: 'mdi:check-circle', no: 'mdi:close-circle-outline' }
 
 const tools = [
-  { name: 'Topiqu', logo: '/brand/topiqu-mark.png', own: true },
-  { name: 'Jasper', logo: '/brand/products/jasper.png', own: false },
+  { name: 'Topiqu', logo: '/brand/topiqu-mark.webp', own: true },
+  { name: 'Jasper', logo: '/brand/products/jasper.webp', own: false },
   { name: 'Contentbase', logo: '/brand/products/contentbase.svg', own: false },
   { name: 'Writesonic', logo: '/brand/products/writesonic.svg', own: false },
-  { name: 'Arvow', logo: '/brand/products/arvow.png', own: false },
+  { name: 'Arvow', logo: '/brand/products/arvow.webp', own: false },
 ]
 
 // A tick only where public documentation or pricing describes the feature; a cross where we could not find it

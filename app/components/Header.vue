@@ -1,7 +1,25 @@
 <script setup lang="ts">
-const { locale, t } = useI18n()
+const { locale, locales, setLocale, t } = useI18n()
 const localePath = useLocalePath()
-const switchLocalePath = useSwitchLocalePath()
+const languageItems = computed(() =>
+  locales.value.map((language) => ({
+    label: language.code === 'cs' ? 'Čeština' : 'English',
+    flag: language.code === 'cs' ? '🇨🇿' : '🇬🇧',
+    type: 'checkbox' as const,
+    checked: language.code === locale.value,
+    onSelect: () => setLocale(language.code),
+  })),
+)
+const languageButton = useTemplateRef<{ $el: HTMLButtonElement }>('languageButton')
+let languageMenuInteractedOutside = false
+const markLanguageInteractionOutside = () => {
+  languageMenuInteractedOutside = true
+}
+const restoreLanguageFocus = (event: Event) => {
+  event.preventDefault()
+  if (!languageMenuInteractedOutside) languageButton.value?.$el.focus({ preventScroll: true })
+  languageMenuInteractedOutside = false
+}
 const { platformUrl } = useRuntimeConfig().public
 const theme = useThemeStore()
 const hydrated = ref(false)
@@ -24,13 +42,27 @@ const links = computed(() => [
       <NuxtLink v-for="link in links" :key="link.to" :to="link.to">{{ link.label }}</NuxtLink>
     </nav>
     <template #right>
-      <UButton
-        :to="switchLocalePath(locale === 'cs' ? 'en' : 'cs')"
-        color="neutral"
-        variant="ghost"
-        :aria-label="locale === 'cs' ? 'Switch to English' : 'Přepnout do češtiny'"
-        >{{ locale === 'cs' ? 'EN' : 'CZ' }}</UButton
+      <UDropdownMenu
+        :items="languageItems"
+        :content="{
+          align: 'end',
+          onCloseAutoFocus: restoreLanguageFocus,
+          onInteractOutside: markLanguageInteractionOutside,
+        }"
+        :ui="{ content: 'tw:min-w-44' }"
       >
+        <template #item-leading="{ item }">
+          <span class="tw:shrink-0 tw:text-lg tw:leading-5" aria-hidden="true">{{ item.flag }}</span>
+        </template>
+        <UButton
+          ref="languageButton"
+          color="neutral"
+          variant="ghost"
+          icon="i-lucide-languages"
+          square
+          :aria-label="locale === 'cs' ? 'Vybrat jazyk' : 'Choose language'"
+        />
+      </UDropdownMenu>
       <UButton
         color="neutral"
         variant="ghost"
@@ -48,12 +80,16 @@ const links = computed(() => [
     </template>
     <template #body>
       <nav class="mobile-nav" :aria-label="t('landing.design.nav.navigation')">
-        <NuxtLink v-for="link in links" :key="link.to" :to="link.to" @click="open = false">{{ link.label }}</NuxtLink>
-        <NuxtLink :to="localePath('/') + '#faq'" @click="open = false">FAQ</NuxtLink>
-        <UButton :to="platformUrl + '/' + locale + '/auth'" color="neutral" variant="outline">{{
+        <NuxtLink v-for="link in links" :key="link.to" :to="link.to" class="mobile-nav-link" @click="open = false">{{
+          link.label
+        }}</NuxtLink>
+        <NuxtLink :to="localePath('/') + '#faq'" class="mobile-nav-link" @click="open = false">FAQ</NuxtLink>
+        <UButton :to="platformUrl + '/' + locale + '/auth'" color="neutral" variant="outline" block>{{
           $t('common.auth.login')
         }}</UButton>
-        <UButton :to="localePath({ name: 'onboarding-site' })">{{ $t('landing.design.hero.cta') }}</UButton>
+        <UButton :to="localePath({ name: 'onboarding-site' })" block @click="open = false">{{
+          $t('landing.design.hero.cta')
+        }}</UButton>
       </nav>
     </template>
   </UHeader>
@@ -71,13 +107,14 @@ const links = computed(() => [
   gap: 2rem;
 }
 .desktop-nav a,
-.mobile-nav > a {
+.mobile-nav-link {
   color: var(--landing-muted);
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
 }
-.desktop-nav a:hover {
+.desktop-nav a:hover,
+.mobile-nav-link:hover {
   color: var(--landing-accent);
 }
 .mobile-nav {
@@ -85,7 +122,7 @@ const links = computed(() => [
   gap: 1.75rem;
   padding: 1rem 0;
 }
-.mobile-nav > a {
+.mobile-nav-link {
   font-size: 18px;
 }
 @media (max-width: 1023px) {

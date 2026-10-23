@@ -6,7 +6,13 @@ useSeoMeta({ robots: 'noindex, nofollow' })
 const store = useOnboardingStore()
 const localePath = useLocalePath()
 const route = useRoute()
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const resetOpen = shallowRef(false)
+const resetDraft = async () => {
+  store.reset()
+  resetOpen.value = false
+  await navigateTo(stepPath('site'))
+}
 
 const totalSteps = TOTAL_STEPS
 const stepPath = (step: OnboardingStep) => localePath({ name: stepRouteName(step) })
@@ -48,20 +54,26 @@ onKeyStroke('Escape', () => navigateTo(localePath('/')))
 </script>
 <template>
   <div class="onb-shell">
+    <a class="skip-link" href="#onboarding-content">{{ $t('landing.design.nav.skip') }}</a>
     <header class="onb-header">
       <div class="onb-header-inner">
         <BrandLogo />
-        <UButton
-          :to="localePath('/')"
-          color="neutral"
-          variant="ghost"
-          icon="mdi:close"
-          square
-          :aria-label="$t('landing.onboarding.close')"
-        />
+        <div class="onb-header-actions">
+          <UButton color="neutral" variant="ghost" icon="i-lucide-rotate-ccw" @click="resetOpen = true">
+            {{ locale === 'cs' ? 'Začít znovu' : 'Start over' }}
+          </UButton>
+          <UButton
+            :to="localePath('/')"
+            color="neutral"
+            variant="ghost"
+            icon="mdi:close"
+            square
+            :aria-label="$t('landing.onboarding.close')"
+          />
+        </div>
       </div>
     </header>
-    <main class="onb-main" aria-labelledby="onboarding-title">
+    <main id="onboarding-content" class="onb-main" tabindex="-1" aria-labelledby="onboarding-title">
       <div class="onb-frame">
         <nav class="onb-steps" :aria-label="$t('landing.onboarding.stepsLabel')">
           <p class="onb-step-count">
@@ -97,6 +109,23 @@ onKeyStroke('Escape', () => navigateTo(localePath('/')))
         </section>
       </div>
     </main>
+    <UModal
+      v-model:open="resetOpen"
+      :close="{ color: 'neutral', variant: 'ghost', square: true }"
+      :title="locale === 'cs' ? 'Začít znovu?' : 'Start over?'"
+      :description="
+        locale === 'cs'
+          ? 'Vymaže se uložené nastavení tohoto průvodce a vrátíte se na první krok.'
+          : 'This clears your saved setup and takes you back to the first step.'
+      "
+    >
+      <template #footer>
+        <UButton color="neutral" variant="outline" autofocus @click="resetOpen = false">{{
+          locale === 'cs' ? 'Zrušit' : 'Cancel'
+        }}</UButton>
+        <UButton @click="resetDraft">{{ locale === 'cs' ? 'Začít znovu' : 'Start over' }}</UButton>
+      </template>
+    </UModal>
     <input
       v-model="store.form.website"
       class="onb-honeypot"

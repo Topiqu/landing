@@ -43,6 +43,7 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'bun',
+    compressPublicAssets: true,
     externals: {
       // Dependency tracing can omit vue/server-renderer from the standalone Bun output.
       inline: ['vue', '@vue/server-renderer'],
@@ -75,6 +76,7 @@ export default defineNuxtConfig({
     'nuxt-toast',
     'nuxt-gtag',
     '@scalar/nuxt',
+    'nuxt-vitalizer',
   ],
 
   scalar: {
@@ -104,7 +106,14 @@ export default defineNuxtConfig({
 
   appConfig: { ui: { icons: topiquIcons } },
 
-  ui: { colorMode: false, fonts: false, theme: { prefix: 'tw' } },
+  ui: { fonts: false, theme: { prefix: 'tw' }, experimental: { componentDetection: true } },
+  // Inline the CSS needed by SSR pages instead of waiting for blocking stylesheets.
+  features: { inlineStyles: true },
+  unocss: { disableNuxtInlineStyle: false },
+  // Remove shared-chunk stylesheet links only when their Vue styles are already inlined.
+  // Keep resource hints so navigation and dependency discovery retain their normal behavior.
+  vitalizer: { disableStylesheets: true, disablePrefetchLinks: false, disablePreloadLinks: false },
+  colorMode: { preference: 'light', fallback: 'light', classSuffix: '', storage: 'cookie', storageKey: 'theme' },
   toast: { composableName: 'useLegacyToast' },
 
   css: ['~/assets/styles/main.css', '~/assets/styles/base.scss'],
@@ -167,18 +176,21 @@ export default defineNuxtConfig({
     '/cs/ochrana-soukromi': { prerender: true },
     // Nuxt build assets — immutable long cache
     '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    // Unhashed brand sources can change; keep their cache bounded and revalidatable.
+    '/brand/**': { headers: { 'cache-control': 'public, max-age=86400, stale-while-revalidate=604800' } },
+    '/_ipx/**': { headers: { 'cache-control': 'public, max-age=86400, stale-while-revalidate=604800' } },
     // Static public files (nitro routeRules don't support `**` inside a path
     // segment, so list each file explicitly)
-    '/logo.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-    '/app-logo.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/logo.webp': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/app-logo.webp': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     '/icon-192x192.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     '/icon-512x512.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     '/apple-touch-icon.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-    '/topik_404_rm.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-    '/topik_empty_rm.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-    '/topik_normal_rm.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-    '/topik_premysli_rm.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
-    '/topik_smutny_rm.png': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/topik_404_rm.webp': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/topik_empty_rm.webp': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/topik_normal_rm.webp': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/topik_premysli_rm.webp': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
+    '/topik_smutny_rm.webp': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     // API rate limiting
     '/api/send-code': {
       security: { rateLimiter: { tokensPerInterval: 5, interval: 60 * 60 * 1000 } },
@@ -209,8 +221,8 @@ export default defineNuxtConfig({
     detectBrowserLanguage: {
       useCookie: true,
       cookieKey: 'i18n_lang',
-      cookieSecure: true,
-      cookieCrossOrigin: true,
+      cookieSecure: !import.meta.dev,
+      cookieCrossOrigin: false,
       redirectOn: 'root',
       alwaysRedirect: true,
       fallbackLocale: 'en',
@@ -339,6 +351,9 @@ export default defineNuxtConfig({
   },
 
   experimental: {
+    defaults: {
+      nuxtLink: { prefetchOn: { visibility: false, interaction: true } },
+    },
     renderJsonPayloads: true,
     headNext: true,
   },
@@ -350,6 +365,7 @@ export default defineNuxtConfig({
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png?v=20260910' },
         { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' },
       ],
+      meta: [{ name: 'google-adsense-account', content: 'ca-pub-9731440718321055' }],
     },
   },
 

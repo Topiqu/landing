@@ -1,8 +1,25 @@
 <template>
   <NuxtLink :to="localePath('/')" class="brand-logo" aria-label="Topiqu">
-    <img src="/brand/topiqu-wordmark.png?v=20260910" width="628" height="237" alt="Topiqu" class="brand-wordmark" />
+    <NuxtImg
+      src="/brand/topiqu-wordmark.webp"
+      width="126"
+      height="48"
+      format="webp"
+      fit="inside"
+      densities="x1 x2"
+      alt="Topiqu"
+      class="brand-wordmark"
+    />
     <span class="brand-dark-wordmark">
-      <img src="/brand/topiqu-wordmark-dark.png" width="666" height="375" alt="Topiqu" />
+      <NuxtImg
+        src="/brand/topiqu-wordmark-dark.webp"
+        width="188"
+        height="106"
+        format="webp"
+        fit="inside"
+        densities="x1 x2"
+        alt="Topiqu"
+      />
     </span>
   </NuxtLink>
 </template>

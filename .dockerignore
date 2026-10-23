@@ -4,3 +4,13 @@ screenshots/
 .nuxt/
 .output/
 node_modules/
+.env
+.env.*
+!.env.example
+
+# Local databases, caches and test artifacts are not build inputs.
+.data/
+.cache/
+coverage/
+*.log
+.DS_Store
