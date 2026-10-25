@@ -3,14 +3,14 @@ import crypto from 'crypto'
 const CHALLENGE_TTL_MS = 15 * 60 * 1000
 const VERIFIED_TTL_MS = 30 * 60 * 1000
 
-const getSecret = () => {
+export const onboardingSecret = () => {
   const secret = (useRuntimeConfig() as any).authSecret || process.env.AUTH_SECRET
   if (!secret) throw new Error('AUTH_SECRET is not configured')
   return secret as string
 }
 
 const sign = (payload: string) => {
-  const sig = crypto.createHmac('sha256', getSecret()).update(payload).digest('hex')
+  const sig = crypto.createHmac('sha256', onboardingSecret()).update(payload).digest('hex')
   return `${Buffer.from(payload).toString('base64url')}.${sig}`
 }
 
@@ -18,7 +18,7 @@ const verify = (token: string): Record<string, any> | null => {
   const [b64, sig] = token.split('.')
   if (!b64 || !sig || !/^[0-9a-f]{64}$/i.test(sig)) return null
   const payload = Buffer.from(b64, 'base64url').toString('utf8')
-  const expected = crypto.createHmac('sha256', getSecret()).update(payload).digest('hex')
+  const expected = crypto.createHmac('sha256', onboardingSecret()).update(payload).digest('hex')
   if (sig.length !== expected.length) return null
   if (!crypto.timingSafeEqual(Buffer.from(sig, 'hex'), Buffer.from(expected, 'hex'))) return null
   try {
@@ -29,7 +29,7 @@ const verify = (token: string): Record<string, any> | null => {
 }
 
 const hashCode = (email: string, code: string) =>
-  crypto.createHmac('sha256', getSecret()).update(`${email.toLowerCase()}:${code}`).digest('hex')
+  crypto.createHmac('sha256', onboardingSecret()).update(`${email.toLowerCase()}:${code}`).digest('hex')
 
 export const issueChallenge = (email: string, code: string) => {
   const payload = JSON.stringify({

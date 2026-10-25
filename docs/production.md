@@ -37,10 +37,14 @@ page does not reuse an old build-time key. Both Turnstile runtime variables must
 application; restart/redeploy the container after updating them. An empty key prevents the browser from
 requesting an email. The UI reports this as unavailable instead of claiming a message was sent.
 
-The verification screen shows security-check and sending progress, persistent acceptance/error feedback,
+The verification screen shows one sending indicator and concise persistent success/error feedback,
 spam-folder guidance and a 60-second resend cooldown. Success requires an SES receipt, while development
 console delivery is labelled separately. Failed resends preserve the previous challenge. Changing the email
 cancels the pending browser request and clears verification state; an already accepted email cannot be recalled.
+
+Verification tokens, checkout request signatures and idempotency fingerprints use the same secret resolver:
+`NUXT_AUTH_SECRET` through runtime config, falling back to the legacy runtime `AUTH_SECRET`. A legacy-only
+deployment must not verify an email successfully and then fail locally before forwarding checkout.
 
 ## Availability checks
 

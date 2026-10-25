@@ -15,7 +15,13 @@
       <UButton v-if="skip" type="button" color="neutral" variant="ghost" size="lg" @click="skipStep(skip)">
         {{ $t('landing.onboarding.skip') }}
       </UButton>
-      <UButton type="submit" size="lg" :trailingIcon="icon" :disabled="disabled || loading" :loading="loading">
+      <UButton
+        type="submit"
+        size="lg"
+        :trailingIcon="loading ? undefined : icon"
+        :disabled="disabled || loading"
+        :loading="loading"
+      >
         {{ label ?? $t('landing.onboarding.continue') }}
       </UButton>
     </div>

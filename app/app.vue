@@ -1,6 +1,6 @@
 <template>
   <UApp :locale="locale === 'cs' ? cs : en">
-    <NuxtLoadingIndicator class="z-[9999]" color="#4f46e5" />
+    <NuxtLoadingIndicator v-if="route.meta.layout !== 'onboarding'" class="z-[9999]" color="#4f46e5" />
 
     <StatusBar />
 
@@ -18,6 +18,7 @@
 import { cs, en } from '@nuxt/ui/locale'
 import interfaceFont from '@fontsource-variable/manrope/files/manrope-latin-wght-normal.woff2?url'
 const { locale } = useI18n()
+const route = useRoute()
 const ogImageUrl = 'https://topiqu.com/brand/topiqu-mark.png?v=20260910'
 
 useSeoMeta({

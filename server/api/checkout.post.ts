@@ -1,8 +1,8 @@
 import { z } from 'zod'
 import { onboardingLog } from '~~/server/utils/onboardingLog'
 import { signLandingRequest } from '~~/server/utils/landingAuth'
-import { verifyVerifiedToken } from '~~/server/utils/onboardingTokens'
 import { createCheckoutRequests, checkoutKeys } from '~~/server/utils/checkoutRequests'
+import { onboardingSecret, verifyVerifiedToken } from '~~/server/utils/onboardingTokens'
 
 const checkoutRequests = createCheckoutRequests()
 
@@ -63,7 +63,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const { identity, fingerprint } = checkoutKeys(config.authSecret, body)
+  const { identity, fingerprint } = checkoutKeys(onboardingSecret(), body)
   return checkoutRequests(identity, fingerprint, async () => {
     const startedAt = performance.now()
     try {

@@ -61,14 +61,17 @@
         color="neutral"
         variant="link"
         :loading="busy"
+        :aria-busy="busy"
         :disabled="busy || codeVerifying || !!store.verifiedToken || resendCooldown > 0"
         icon="mdi:email-sync-outline"
         @click="requestCode()"
       >
         {{
-          resendCooldown > 0
-            ? $t('landing.onboarding.verify.resendIn', { seconds: resendCooldown })
-            : $t('landing.onboarding.verify.resend')
+          busy
+            ? $t('landing.onboarding.verify.sending')
+            : resendCooldown > 0
+              ? $t('landing.onboarding.verify.resendIn', { seconds: resendCooldown })
+              : $t('landing.onboarding.verify.resend')
         }}
       </UButton>
     </div>
@@ -130,11 +133,7 @@ const security = useVerificationCodeRequest({
 const busy = computed(() => refreshingConfig.value || security.waiting.value || codeSending.value)
 const status = computed(() => {
   if (busy.value) {
-    return {
-      color: 'info' as const,
-      icon: 'mdi:progress-clock',
-      title: t(`landing.onboarding.verify.${codeSending.value ? 'sending' : 'checking'}`),
-    }
+    return null
   }
   if (security.error.value || codeSendError.value) {
     return {
@@ -151,7 +150,6 @@ const status = computed(() => {
       color: 'success' as const,
       icon: 'mdi:email-check-outline',
       title: t('landing.onboarding.verify.sent'),
-      description: t('landing.onboarding.verify.sentHint'),
     }
   }
   if (codeDelivery.value === 'development') {

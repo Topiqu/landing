@@ -1,11 +1,13 @@
 import * as vue from 'vue'
 import { resolve } from 'node:path'
+import { createHmac } from 'node:crypto'
 import { createPinia, setActivePinia } from 'pinia'
 import { createPersistedState } from 'pinia-plugin-persistedstate'
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, mock, test } from 'bun:test'
 
 import * as plans from '../shared/utils/plans'
 import * as branding from '../shared/utils/branding'
+import { checkoutKeys } from '../server/utils/checkoutRequests'
 
 const names = [
   ...Object.keys(vue),
@@ -189,6 +191,42 @@ describe('verification email feedback', () => {
 })
 
 describe('company website onboarding', () => {
+  test('uses the same runtime AUTH_SECRET fallback for verification and checkout signing', async () => {
+    const previousSecret = process.env.AUTH_SECRET
+    const previousConfigSecret = config.authSecret
+    try {
+      process.env.AUTH_SECRET = 'legacy-runtime-signing-test'
+      config.authSecret = ''
+      const email = 'legacy-signup@example.test'
+      const result = await checkout({
+        body: {
+          siteName: 'Legacy signup',
+          domain: 'legacy-signup',
+          language: 'en',
+          username: 'Owner',
+          email,
+          password: 'test-password',
+          verifiedToken: issueVerifiedToken(email),
+        },
+      } as never)
+      expect(result.url).toBe('https://workspace.example.test')
+      expect(requests).toHaveLength(1)
+      const request = requests[0]!.options
+      expect(request.headers['X-Landing-Sig']).toBe(
+        createHmac('sha256', 'legacy-runtime-signing-test')
+          .update(`${request.headers['X-Landing-Timestamp']}.203.0.113.4`)
+          .digest('hex'),
+      )
+      expect(request.headers['Idempotency-Key']).toBe(
+        checkoutKeys('legacy-runtime-signing-test', request.body).fingerprint,
+      )
+    } finally {
+      config.authSecret = previousConfigSecret
+      if (previousSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = previousSecret
+    }
+  })
+
   test('keeps the website across reloads while leaving passwords out of persistence', async () => {
     const store = createStore()
     store.form.websiteUrl = 'https://firma.cz/about'
