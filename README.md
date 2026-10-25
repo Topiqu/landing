@@ -42,7 +42,7 @@ bun generate    # static marketing export only; registration still needs a serve
 bun preview     # preview production build locally
 ```
 
-Docker builds Nuxt with Node 24 and runs the standalone server with Bun 1.4.3.
+Docker builds Nuxt and runs the standalone server with Bun 1.4.3.
 Nuxt Content uses the built-in SQLite driver in both stages.
 
 Check the packaged production server with the same image used for deployment:
@@ -87,6 +87,10 @@ with the SES `messageId`, sending region and request correlation. The `/api/send
 In local development without SES credentials, the code is printed to the terminal
 as `[DEV EMAIL]` instead of being sent,
 and the response explicitly reports `delivery: "development"`.
+The verification screen distinguishes security checking, sending, confirmed acceptance and errors, and
+includes spam-folder guidance. It loads the public Turnstile key from the running server instead of relying
+on the configuration embedded in prerendered marketing pages. Runtime/container logs are available in Dokploy;
+Better Stack ingestion requires a separately configured log collector.
 
 AdSense publishes its account meta tag during server rendering. The script loads once after
 hydration and cookie consent; withdrawing consent reloads the page to stop the advertising runtime.

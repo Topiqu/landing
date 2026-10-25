@@ -70,6 +70,8 @@ export const useOnboarding = () => {
     verifiedToken: refs.verifiedToken,
     code: refs.code,
     codeSending: refs.codeSending,
+    codeDelivery: refs.codeDelivery,
+    codeSendError: refs.codeSendError,
     codeVerifying: refs.codeVerifying,
     codeError: refs.codeError,
     resendCooldown: refs.resendCooldown,

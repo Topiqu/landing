@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     },
     turnstile: { secretKey: process.env.TURNSTILE_SECRET_KEY || '' },
     public: {
+      turnstile: { siteKey: process.env.TURNSTILE_SITE_KEY || '' },
       appVersion: '1.0.0 beta',
       cdnUrl: process.env.CDN_URL || 'https://cdn.topiqu.com',
       // Public URL of the main platform (existing-client login lives there)
@@ -35,8 +36,7 @@ export default defineNuxtConfig({
     },
   },
 
-  // Cloudflare Turnstile (@nuxtjs/turnstile). Secret is read from
-  // runtimeConfig.turnstile.secretKey above (baked from TURNSTILE_SECRET_KEY).
+  // Legacy build defaults; deployed images use the NUXT_ runtime overrides above.
   turnstile: {
     siteKey: process.env.TURNSTILE_SITE_KEY || '',
   },

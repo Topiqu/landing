@@ -52,10 +52,14 @@ export const useOnboardingStore = defineStore(
     const verifiedToken = shallowRef<string | null>(null)
     const code = shallowRef('')
     const codeSending = shallowRef(false)
+    const codeDelivery = shallowRef<'idle' | 'sent' | 'development'>('idle')
+    const codeSendError = shallowRef('')
     const codeVerifying = shallowRef(false)
     const codeError = shallowRef('')
     const resendCooldown = shallowRef(0)
     let cooldownTimer: ReturnType<typeof setInterval> | null = null
+    let sendVersion = 0
+    let sendController: AbortController | undefined
 
     const defaultForm = (): OnboardingForm => ({
       siteName: '',
@@ -183,11 +187,20 @@ export const useOnboardingStore = defineStore(
     watch(
       () => form.email,
       () => {
+        sendVersion += 1
+        sendController?.abort()
+        codeSending.value = false
+        codeDelivery.value = 'idle'
+        codeSendError.value = ''
+        resendCooldown.value = 0
+        if (cooldownTimer) clearInterval(cooldownTimer)
+        cooldownTimer = null
         challenge.value = null
         verifiedToken.value = null
         code.value = ''
         codeError.value = ''
       },
+      { flush: 'sync' },
     )
 
     const startResendCooldown = (seconds = 60) => {
@@ -203,31 +216,49 @@ export const useOnboardingStore = defineStore(
     }
 
     onScopeDispose(() => {
+      sendVersion += 1
+      sendController?.abort()
       if (cooldownTimer) clearInterval(cooldownTimer)
     })
 
     // `turnstileToken` is supplied by the caller (verify.vue owns the
     // <NuxtTurnstile> widget) — it must be a fresh, single-use token.
-    const sendCode = async (turnstileToken = '') => {
-      if (codeSending.value || resendCooldown.value > 0) return
-      if (!form.email) return
-      const { $t, locale, toast } = captureI18nToast()
+    const sendCode = async (turnstileToken = ''): Promise<boolean> => {
+      if (codeSending.value || codeVerifying.value || verifiedToken.value || resendCooldown.value > 0 || !form.email)
+        return false
+      const { $t, locale } = captureI18nToast()
+      const version = ++sendVersion
+      const email = form.email
+      const controller = new AbortController()
+      sendController = controller
       codeSending.value = true
       codeError.value = ''
+      codeSendError.value = ''
       try {
-        const res = await $fetch<{ challenge: string }>('/api/send-code', {
+        const res = await $fetch<{ challenge?: string; delivery?: string; messageId?: string }>('/api/send-code', {
           method: 'POST',
-          body: { email: form.email, locale, website: form.website, turnstileToken },
+          retry: 0,
+          timeout: 20_000,
+          signal: controller.signal,
+          body: { email, locale, website: form.website, turnstileToken },
         })
+        if (version !== sendVersion) return false
+        const accepted = res.delivery === 'ses' && typeof res.messageId === 'string' && !!res.messageId.trim()
+        if (!res.challenge || (!accepted && res.delivery !== 'development')) throw new Error('Missing email receipt')
         challenge.value = res.challenge
         code.value = ''
         verifiedToken.value = null
+        codeDelivery.value = accepted ? 'sent' : 'development'
         startResendCooldown(60)
-        toast.success({ message: $t('common.auth.verificationCodeSent') })
-      } catch (error: any) {
-        toast.error({ message: error.data?.message || $t('common.auth.sendCodeFailed') })
+        return true
+      } catch {
+        if (version === sendVersion) codeSendError.value = $t('landing.onboarding.verify.sendFailed')
+        return false
       } finally {
-        codeSending.value = false
+        if (version === sendVersion) {
+          codeSending.value = false
+          sendController = undefined
+        }
       }
     }
 
@@ -315,6 +346,11 @@ export const useOnboardingStore = defineStore(
     }
 
     const reset = () => {
+      sendVersion += 1
+      sendController?.abort()
+      codeSending.value = false
+      codeDelivery.value = 'idle'
+      codeSendError.value = ''
       Object.assign(form, defaultForm())
       submitError.value = ''
       for (const step of Object.keys(progress)) Reflect.deleteProperty(progress, step)
@@ -344,6 +380,8 @@ export const useOnboardingStore = defineStore(
       verifiedToken,
       code,
       codeSending,
+      codeDelivery,
+      codeSendError,
       codeVerifying,
       codeError,
       resendCooldown,

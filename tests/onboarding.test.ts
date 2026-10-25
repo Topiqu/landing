@@ -33,7 +33,7 @@ const storage = {
 }
 const requests: { url: string; options: any }[] = []
 const config = { authSecret: 'test-onboarding-secret', platformApiUrl: 'https://platform.example.test' }
-const fetch = mock(async (url: string, options: any) => {
+const fetch = mock(async (url: string, options: any): Promise<unknown> => {
   requests.push({ url, options })
   return { url: 'https://workspace.example.test', ok: true }
 })
@@ -91,6 +91,101 @@ afterAll(() => {
     if (value === undefined) Reflect.deleteProperty(globalThis, name)
     else (globalThis as any)[name] = value
   }
+})
+
+describe('verification email feedback', () => {
+  const emailStore = () => {
+    const store = createStore()
+    store.form.email = 'owner@example.test'
+    return store
+  }
+
+  test('confirms sending only with an SES receipt and starts the resend cooldown', async () => {
+    const store = emailStore()
+    fetch.mockResolvedValueOnce({ challenge: 'challenge', delivery: 'ses', messageId: 'receipt' })
+    expect(await store.sendCode('security-token')).toBe(true)
+    expect(store.codeDelivery).toBe('sent')
+    expect(store.challenge).toBe('challenge')
+    expect(store.resendCooldown).toBe(60)
+    expect(store.codeSendError).toBe('')
+    expect(fetch.mock.calls[0]![1]).toMatchObject({ retry: 0, timeout: 20_000 })
+    expect(await store.sendCode('another-token')).toBe(false)
+    expect(fetch).toHaveBeenCalledTimes(1)
+  })
+
+  test.each([{ challenge: 'ok' }, { challenge: 'challenge', delivery: 'ses' }])(
+    'does not claim success for an incomplete receipt: %j',
+    async (response) => {
+      const store = emailStore()
+      fetch.mockResolvedValueOnce(response)
+      expect(await store.sendCode('security-token')).toBe(false)
+      expect(store.codeDelivery).toBe('idle')
+      expect(store.challenge).toBeNull()
+      expect(store.codeSendError).toBe('landing.onboarding.verify.sendFailed')
+      expect(store.resendCooldown).toBe(0)
+    },
+  )
+
+  test('distinguishes development console delivery from a sent email', async () => {
+    const store = emailStore()
+    fetch.mockResolvedValueOnce({ challenge: 'challenge', delivery: 'development' })
+    expect(await store.sendCode('security-token')).toBe(true)
+    expect(store.codeDelivery).toBe('development')
+    expect(store.challenge).toBe('challenge')
+  })
+
+  test('keeps the previous code usable after a failed resend and allows retry', async () => {
+    const store = emailStore()
+    store.challenge = 'previous-challenge'
+    store.code = '123'
+    fetch.mockRejectedValueOnce(new Error('Network unavailable'))
+    expect(await store.sendCode('security-token')).toBe(false)
+    expect(store.codeSendError).toBe('landing.onboarding.verify.sendFailed')
+    expect(store.challenge).toBe('previous-challenge')
+    expect(store.code).toBe('123')
+    expect(store.codeSending).toBe(false)
+    fetch.mockResolvedValueOnce({ challenge: 'new-challenge', delivery: 'ses', messageId: 'receipt' })
+    expect(await store.sendCode('new-security-token')).toBe(true)
+    expect(store.codeSendError).toBe('')
+    expect(store.code).toBe('')
+  })
+
+  test('ignores a late response after changing the email and resets the cooldown', async () => {
+    const store = emailStore()
+    let finish!: (value: unknown) => void
+    fetch.mockImplementationOnce(() => new Promise((resolve) => (finish = resolve)))
+    const pending = store.sendCode('security-token')
+    expect(store.codeSending).toBe(true)
+    const signal = fetch.mock.calls[0]![1].signal as AbortSignal
+    store.form.email = 'different@example.test'
+    expect(signal.aborted).toBe(true)
+    finish({ challenge: 'old-challenge', delivery: 'ses', messageId: 'receipt' })
+    expect(await pending).toBe(false)
+    expect(store.challenge).toBeNull()
+    expect(store.codeDelivery).toBe('idle')
+    expect(store.codeSending).toBe(false)
+    expect(store.resendCooldown).toBe(0)
+    fetch.mockResolvedValueOnce({ challenge: 'current-challenge', delivery: 'ses', messageId: 'receipt' })
+    expect(await store.sendCode('new-security-token')).toBe(true)
+    store.form.email = 'corrected@example.test'
+    expect(store.resendCooldown).toBe(0)
+    expect(store.challenge).toBeNull()
+  })
+
+  test('does not submit twice or wipe completed verification', async () => {
+    const store = emailStore()
+    let finish!: (value: unknown) => void
+    fetch.mockImplementationOnce(() => new Promise((resolve) => (finish = resolve)))
+    const pending = store.sendCode('security-token')
+    expect(await store.sendCode('duplicate-token')).toBe(false)
+    finish({ challenge: 'challenge', delivery: 'ses', messageId: 'receipt' })
+    await pending
+    expect(fetch).toHaveBeenCalledTimes(1)
+    store.resendCooldown = 0
+    store.verifiedToken = 'verified'
+    expect(await store.sendCode('another-token')).toBe(false)
+    expect(store.verifiedToken).toBe('verified')
+  })
 })
 
 describe('company website onboarding', () => {

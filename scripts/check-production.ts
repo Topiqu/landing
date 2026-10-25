@@ -20,6 +20,17 @@ while (Date.now() < deadline) {
 if (!ready) throw new Error(`Production server did not become ready at ${baseUrl}`)
 
 const failures: string[] = []
+const verificationResponse = await fetch(new URL('/api/verification-config', baseUrl))
+const verificationConfig = await verificationResponse.json()
+if (
+  !verificationResponse.ok ||
+  Object.keys(verificationConfig).join(',') !== 'siteKey' ||
+  typeof verificationConfig.siteKey !== 'string' ||
+  !verificationResponse.headers.get('cache-control')?.includes('no-store')
+) {
+  failures.push('Verification config must expose only the public site key and disable caching')
+}
+
 const checkPage = async (path: string, status = 200, marker?: string) => {
   const response = await fetch(new URL(path, baseUrl), { headers, signal: AbortSignal.timeout(10_000) })
   const html = await response.text()
