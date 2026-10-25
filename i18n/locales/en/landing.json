@@ -253,6 +253,7 @@
         "verified": "Email verified.",
         "verifying": "Verifying…",
         "linkBack": "Back to registration",
+        "continueInOriginalTab": "Continue in the original tab.",
         "spamHint": "Check your spam folder.",
         "sendError": "Email couldn't be sent",
         "sendFailed": "Please try again.",

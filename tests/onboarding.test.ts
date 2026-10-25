@@ -129,6 +129,31 @@ describe('verification email feedback', () => {
     return store
   }
 
+  test.each(['accepted', 'failed'])(
+    'keeps a completed link verification when a pending resend is %s',
+    async (outcome) => {
+      const store = emailStore()
+      store.challenge = 'previous-challenge'
+      let finish!: () => void
+      fetch.mockImplementationOnce(
+        () =>
+          new Promise((resolve, reject) => {
+            finish = () =>
+              outcome === 'accepted'
+                ? resolve({ challenge: 'new-challenge', delivery: 'ses', messageId: 'receipt' })
+                : reject(new Error('Email unavailable'))
+          }),
+      )
+      const pending = store.sendCode('security-token')
+      store.verifiedToken = 'proof-from-link-tab'
+      finish()
+      expect(await pending).toBe(false)
+      expect(store.verifiedToken).toBe('proof-from-link-tab')
+      expect(store.codeSendError).toBe('')
+      expect(store.codeSending).toBe(false)
+    },
+  )
+
   test('confirms sending only with an SES receipt and starts the resend cooldown', async () => {
     const store = emailStore()
     fetch.mockResolvedValueOnce({ challenge: 'challenge', delivery: 'ses', messageId: 'receipt' })

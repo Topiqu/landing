@@ -91,6 +91,7 @@ definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
 
 const { t } = useI18n()
 const store = useOnboardingStore()
+const verification = useOnboardingVerification()
 const {
   form,
   code,
@@ -195,6 +196,10 @@ const handleSubmit = async () => {
 // Tokens can refresh in the background; only mount or an explicit resend sends mail.
 watch(code, () => {
   if (canVerify.value && !codeVerifying.value) handleSubmit()
+})
+
+watch(verification.received, (received) => {
+  if (received) goTo('summary')
 })
 </script>
 

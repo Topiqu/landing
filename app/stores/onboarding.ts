@@ -242,7 +242,7 @@ export const useOnboardingStore = defineStore(
           signal: controller.signal,
           body: { email, locale, website: form.website, turnstileToken },
         })
-        if (version !== sendVersion) return false
+        if (version !== sendVersion || verifiedToken.value) return false
         const accepted = res.delivery === 'ses' && typeof res.messageId === 'string' && !!res.messageId.trim()
         if (!res.challenge || (!accepted && res.delivery !== 'development')) throw new Error('Missing email receipt')
         challenge.value = res.challenge
@@ -252,7 +252,8 @@ export const useOnboardingStore = defineStore(
         startResendCooldown(60)
         return true
       } catch {
-        if (version === sendVersion) codeSendError.value = $t('landing.onboarding.verify.sendFailed')
+        if (version === sendVersion && !verifiedToken.value)
+          codeSendError.value = $t('landing.onboarding.verify.sendFailed')
         return false
       } finally {
         if (version === sendVersion) {

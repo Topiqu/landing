@@ -50,9 +50,13 @@ Email links enter the unguarded verification page (`/en/onboarding/verify-email`
 `/cs/onboarding/overit-email`) before the wizard requires a password. Credentials travel in the URL
 fragment and are removed before the verification POST. The server validates the challenge and code,
 then returns only the verified email and proof. An existing draft remains bound to its own email.
-Older query links through the regular verification step redirect to this entry point. New tabs resume
-the account step to enter a password; a browser with no draft starts at blog setup. Passwords and
-verification proofs remain outside persisted state.
+Older query links through the regular verification step redirect to this entry point. A same-origin
+BroadcastChannel passes only the verified email and short-lived proof back to a matching active
+verification tab. That tab keeps its password in memory and advances directly to review; the link tab
+confirms where to continue after acknowledgement. A link opened inside a wizard that still has complete
+account details advances directly to review. Otherwise, without an active matching tab, the link page
+resumes account setup (or blog setup without a draft). Passwords are never transmitted between tabs, and
+neither passwords nor verification proofs are persisted. Checkout still validates the signed proof on the server.
 
 ## Availability checks
 

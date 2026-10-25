@@ -10,10 +10,11 @@
       {{ store.codeError || $t('common.auth.verifyFailed') }}
     </p>
     <div role="status" aria-live="polite">
+      <p v-if="shared">{{ $t('landing.onboarding.verify.continueInOriginalTab') }}</p>
       <UButton v-if="pending" type="button" loading disabled>
         {{ $t('landing.onboarding.verify.verifying') }}
       </UButton>
-      <UButton v-else :to="continuePath" trailingIcon="mdi:arrow-right">
+      <UButton v-else-if="!shared" :to="continuePath" trailingIcon="mdi:arrow-right">
         {{ $t(verified ? 'landing.onboarding.continue' : 'landing.onboarding.verify.linkBack') }}
       </UButton>
     </div>
@@ -26,6 +27,7 @@ import { readVerificationLink } from '~/utils/verificationLink'
 definePageMeta({ layout: 'onboarding', onboardingStep: 'verify' })
 
 const store = useOnboardingStore()
+const { share, shared } = useOnboardingVerification()
 const route = useRoute()
 const router = useRouter()
 const localePath = useLocalePath()
@@ -42,7 +44,15 @@ onMounted(async () => {
   // This page has no wizard guard, so clearing the URL cannot redirect before verification.
   await router.replace({ query: {}, hash: '' })
   try {
-    if (link) verified.value = await store.verifyCode(link)
+    if (!link) return
+    verified.value = await store.verifyCode(link)
+    if (!verified.value) return
+    if (store.form.siteName && store.canAdvanceAccount) {
+      store.markStep('verify', 'done')
+      await navigateTo(continuePath.value, { replace: true })
+    } else {
+      await share(link.challenge)
+    }
   } finally {
     pending.value = false
   }
