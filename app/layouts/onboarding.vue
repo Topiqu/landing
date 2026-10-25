@@ -59,8 +59,14 @@ onKeyStroke('Escape', () => navigateTo(localePath('/')))
       <div class="onb-header-inner">
         <BrandLogo />
         <div class="onb-header-actions">
-          <UButton color="neutral" variant="ghost" icon="i-lucide-rotate-ccw" @click="resetOpen = true">
-            {{ locale === 'cs' ? 'Začít znovu' : 'Start over' }}
+          <UButton
+            color="neutral"
+            variant="ghost"
+            icon="mdi:restore"
+            :aria-label="locale === 'cs' ? 'Začít znovu' : 'Start over'"
+            @click="resetOpen = true"
+          >
+            <span class="tw:hidden tw:sm:inline">{{ locale === 'cs' ? 'Začít znovu' : 'Start over' }}</span>
           </UButton>
           <UButton
             :to="localePath('/')"
