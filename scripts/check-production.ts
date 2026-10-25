@@ -64,6 +64,11 @@ for (const locale of ['en', 'cs']) {
       ? ['web', 'design', 'plan', 'ucet', 'overeni', 'prehled']
       : ['site', 'design', 'plan', 'account', 'verify', 'summary']
   for (const step of steps) await checkPage(`/${locale}/onboarding/${step}`, 200, 'id="onboarding-title"')
+  await checkPage(
+    `/${locale}/onboarding/${locale === 'cs' ? 'overit-email' : 'verify-email'}`,
+    200,
+    'id="onboarding-title"',
+  )
 }
 await checkPage('/en/production-smoke-missing-page', 404)
 

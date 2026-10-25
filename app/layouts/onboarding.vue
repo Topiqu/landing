@@ -18,9 +18,10 @@ const totalSteps = TOTAL_STEPS
 const stepPath = (step: OnboardingStep) => localePath({ name: stepRouteName(step) })
 const currentIndex = computed(() => {
   const name = String(route.name ?? '').split('___')[0] ?? ''
+  const step = route.meta.onboardingStep ?? name.replace(/^onboarding-/, '')
   return Math.max(
     0,
-    ONBOARDING_STEPS.findIndex((step) => stepRouteName(step) === name),
+    ONBOARDING_STEPS.findIndex((item) => item === step),
   )
 })
 // Any step is open once the required steps before it are complete, so optional ones can be jumped over;

@@ -106,8 +106,6 @@ const {
   verifyCode,
   goTo,
 } = useOnboarding()
-const route = useRoute()
-const router = useRouter()
 
 // Marketing pages are prerendered: their embedded runtime config may precede
 // the deployment's Turnstile setup. Read the running server's public key here.
@@ -185,14 +183,6 @@ const requestCode = async () => {
 }
 
 onMounted(() => {
-  const qCode = String(route.query.code ?? '')
-  const qToken = String(route.query.token ?? '')
-  if (/^\d{6}$/.test(qCode) && qToken) {
-    challenge.value = qToken
-    code.value = qCode
-    router.replace({ query: {} })
-    return
-  }
   if (!store.challenge && !store.verifiedToken) requestCode()
 })
 

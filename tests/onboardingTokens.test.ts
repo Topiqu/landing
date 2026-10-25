@@ -1,5 +1,5 @@
 import { createHash, createHmac } from 'node:crypto'
-import { afterAll, beforeAll, describe, expect, test } from 'bun:test'
+import { afterAll, beforeAll, describe, expect, spyOn, test } from 'bun:test'
 
 import { signLandingRequest } from '../server/utils/landingAuth'
 import {
@@ -53,8 +53,22 @@ describe('email verification tokens', () => {
     const input = 'owner@firma.cz:123456'
     expect(payload.h).not.toBe(createHash('sha256').update(input).digest('hex'))
     expect(payload.h).toBe(createHmac('sha256', secret).update(input).digest('hex'))
-    expect(consumeChallenge(token, 'owner@firma.cz', '123456')).toEqual({ ok: true })
+    expect(consumeChallenge(token, 'owner@firma.cz', '123456')).toEqual({ ok: true, email: 'owner@firma.cz' })
     expect(consumeChallenge(token, 'owner@firma.cz', '654321')).toEqual({ ok: false, reason: 'mismatch' })
+  })
+
+  test('recovers the email from an authenticated link and still rejects an incorrect code or another draft', () => {
+    const token = issueChallenge('Owner@example.test', '123456')
+    expect(consumeChallenge(token, undefined, '123456')).toEqual({ ok: true, email: 'owner@example.test' })
+    expect(consumeChallenge(token, undefined, '654321')).toEqual({ ok: false, reason: 'mismatch' })
+    expect(consumeChallenge(token, 'different@example.test', '123456')).toEqual({ ok: false, reason: 'invalid' })
+    expect(consumeChallenge(token + 'bad', undefined, '123456')).toEqual({ ok: false, reason: 'invalid' })
+    const time = spyOn(Date, 'now').mockReturnValue(Date.now() + 16 * 60_000)
+    try {
+      expect(consumeChallenge(token, undefined, '123456')).toEqual({ ok: false, reason: 'expired' })
+    } finally {
+      time.mockRestore()
+    }
   })
 
   test('binds a verified token to the email address', () => {

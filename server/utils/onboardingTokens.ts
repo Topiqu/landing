@@ -43,15 +43,16 @@ export const issueChallenge = (email: string, code: string) => {
 
 export const consumeChallenge = (
   challenge: string,
-  email: string,
+  email: string | undefined,
   code: string,
-): { ok: true } | { ok: false; reason: 'invalid' | 'expired' | 'mismatch' } => {
+): { ok: true; email: string } | { ok: false; reason: 'invalid' | 'expired' | 'mismatch' } => {
   const data = verify(challenge)
   if (!data || data.t !== 'challenge') return { ok: false, reason: 'invalid' }
   if (typeof data.exp !== 'number' || data.exp < Date.now()) return { ok: false, reason: 'expired' }
-  if (data.e !== email.toLowerCase()) return { ok: false, reason: 'invalid' }
-  if (data.h !== hashCode(email, code)) return { ok: false, reason: 'mismatch' }
-  return { ok: true }
+  if (typeof data.e !== 'string' || (email !== undefined && data.e !== email.toLowerCase()))
+    return { ok: false, reason: 'invalid' }
+  if (data.h !== hashCode(data.e, code)) return { ok: false, reason: 'mismatch' }
+  return { ok: true, email: data.e }
 }
 
 export const issueVerifiedToken = (email: string) => {

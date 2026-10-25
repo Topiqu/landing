@@ -262,25 +262,36 @@ export const useOnboardingStore = defineStore(
       }
     }
 
-    const verifyCode = async (): Promise<boolean> => {
-      if (codeVerifying.value || !canVerify.value) return false
+    const verifyCode = async (link?: { code: string; challenge: string }): Promise<boolean> => {
+      if (codeVerifying.value || (!link && !canVerify.value)) return false
       const { $t } = captureI18nToast()
+      const email = form.email
       codeVerifying.value = true
       codeError.value = ''
       try {
-        const res = await $fetch<{ verifiedToken: string }>('/api/verify-code', {
+        const res = await $fetch<{ verifiedToken: string; email: string }>('/api/verify-code', {
           method: 'POST',
-          body: { email: form.email, code: code.value, challenge: challenge.value },
+          retry: 0,
+          timeout: 20_000,
+          body: link
+            ? { email: email || undefined, code: link.code, challenge: link.challenge }
+            : { email, code: code.value, challenge: challenge.value },
         })
+        if (form.email !== email) return false
+        if (!res.verifiedToken || (link && !res.email)) throw new Error('Invalid verification response')
+        // Email changes clear verification synchronously, so restore the proven identity first.
+        if (link) form.email = res.email
         verifiedToken.value = res.verifiedToken
         return true
       } catch (error: any) {
         const reason = error.data?.data?.reason
         if (reason === 'expired') {
           codeError.value = $t('common.auth.codeExpired')
-          challenge.value = null
+          if (!link) challenge.value = null
         } else if (reason === 'mismatch') {
           codeError.value = $t('common.auth.codeMismatch')
+        } else if (reason === 'invalid') {
+          codeError.value = $t('common.auth.verifyFailed')
         } else {
           codeError.value = error.data?.message || $t('common.auth.verifyFailed')
         }

@@ -46,6 +46,14 @@ Verification tokens, checkout request signatures and idempotency fingerprints us
 `NUXT_AUTH_SECRET` through runtime config, falling back to the legacy runtime `AUTH_SECRET`. A legacy-only
 deployment must not verify an email successfully and then fail locally before forwarding checkout.
 
+Email links enter the unguarded verification page (`/en/onboarding/verify-email` or
+`/cs/onboarding/overit-email`) before the wizard requires a password. Credentials travel in the URL
+fragment and are removed before the verification POST. The server validates the challenge and code,
+then returns only the verified email and proof. An existing draft remains bound to its own email.
+Older query links through the regular verification step redirect to this entry point. New tabs resume
+the account step to enter a password; a browser with no draft starts at blog setup. Passwords and
+verification proofs remain outside persisted state.
+
 ## Availability checks
 
 `GET /api/check-domain` validates syntax locally, then calls the platform with a five-second timeout

@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { consumeChallenge, issueVerifiedToken } from '~~/server/utils/onboardingTokens'
 
 const schema = z.object({
-  email: z.string().email(),
+  email: z.string().email().optional(),
   code: z.string().regex(/^\d{6}$/),
   challenge: z.string().min(1),
 })
@@ -25,5 +25,5 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  return { verifiedToken: issueVerifiedToken(email) }
+  return { verifiedToken: issueVerifiedToken(result.email), email: result.email }
 })

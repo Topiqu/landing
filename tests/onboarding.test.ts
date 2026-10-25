@@ -96,6 +96,33 @@ afterAll(() => {
 })
 
 describe('verification email feedback', () => {
+  test('verifies an emailed link with no saved email without losing the returned proof', async () => {
+    const store = createStore()
+    fetch.mockResolvedValueOnce({ email: 'owner@example.test', verifiedToken: 'verified-proof' })
+    expect(await store.verifyCode({ code: '123456', challenge: 'signed-challenge' })).toBe(true)
+    expect(store.form.email).toBe('owner@example.test')
+    expect(store.verifiedToken).toBe('verified-proof')
+    expect(store.form.password).toBe('')
+    expect(fetch.mock.calls[0]![1].body).toEqual({
+      email: undefined,
+      code: '123456',
+      challenge: 'signed-challenge',
+    })
+  })
+
+  test('binds a clicked link to the active draft email and keeps a newer challenge on expiry', async () => {
+    const store = createStore()
+    store.form.email = 'current@example.test'
+    store.challenge = 'current-challenge'
+    fetch.mockRejectedValueOnce({ data: { data: { reason: 'expired' } } })
+    expect(await store.verifyCode({ code: '123456', challenge: 'older-link' })).toBe(false)
+    expect(fetch.mock.calls[0]![1].body.email).toBe('current@example.test')
+    expect(store.form.email).toBe('current@example.test')
+    expect(store.challenge).toBe('current-challenge')
+    expect(store.verifiedToken).toBeNull()
+    expect(store.codeError).toBe('common.auth.codeExpired')
+  })
+
   const emailStore = () => {
     const store = createStore()
     store.form.email = 'owner@example.test'

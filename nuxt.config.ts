@@ -250,6 +250,7 @@ export default defineNuxtConfig({
       'onboarding/account': { cs: '/onboarding/ucet', en: '/onboarding/account' },
       'onboarding/plan': { cs: '/onboarding/plan', en: '/onboarding/plan' },
       'onboarding/verify': { cs: '/onboarding/overeni', en: '/onboarding/verify' },
+      'onboarding/verify-email': { cs: '/onboarding/overit-email', en: '/onboarding/verify-email' },
       'onboarding/summary': { cs: '/onboarding/prehled', en: '/onboarding/summary' },
     },
   },
