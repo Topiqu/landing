@@ -246,6 +246,8 @@
         "verifying": "Ověřování…",
         "linkBack": "Zpět k registraci",
         "continueInOriginalTab": "Pokračujte v původní kartě.",
+        "enterCodeInOriginalTab": "V původní kartě zadejte kód z e-mailu.",
+        "continueHere": "Pokračovat v této kartě",
         "spamHint": "Zkontrolujte také spam.",
         "sendError": "E-mail se nepodařilo odeslat",
         "sendFailed": "Zkuste to prosím znovu.",

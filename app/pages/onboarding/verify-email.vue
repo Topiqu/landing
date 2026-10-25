@@ -9,13 +9,22 @@
     <p v-if="!pending && !verified" role="alert" class="tw:text-error">
       {{ store.codeError || $t('common.auth.verifyFailed') }}
     </p>
-    <div role="status" aria-live="polite">
+    <div role="status" aria-live="polite" class="tw:space-y-4">
       <p v-if="shared">{{ $t('landing.onboarding.verify.continueInOriginalTab') }}</p>
+      <p v-else-if="!pending && needsManualHandoff">
+        {{ $t('landing.onboarding.verify.enterCodeInOriginalTab') }}
+      </p>
       <UButton v-if="pending" type="button" loading disabled>
         {{ $t('landing.onboarding.verify.verifying') }}
       </UButton>
-      <UButton v-else-if="!shared" :to="continuePath" trailingIcon="mdi:arrow-right">
-        {{ $t(verified ? 'landing.onboarding.continue' : 'landing.onboarding.verify.linkBack') }}
+      <UButton
+        v-else-if="!shared"
+        :to="continuePath"
+        :color="needsManualHandoff ? 'neutral' : 'primary'"
+        :variant="needsManualHandoff ? 'outline' : 'solid'"
+        trailingIcon="mdi:arrow-right"
+      >
+        {{ $t(continueLabel) }}
       </UButton>
     </div>
   </div>
@@ -33,6 +42,14 @@ const router = useRouter()
 const localePath = useLocalePath()
 const pending = shallowRef(true)
 const verified = shallowRef(false)
+const needsManualHandoff = computed(() => verified.value && !shared.value && !!store.form.siteName)
+const continueLabel = computed(() =>
+  needsManualHandoff.value
+    ? 'landing.onboarding.verify.continueHere'
+    : verified.value
+      ? 'landing.onboarding.continue'
+      : 'landing.onboarding.verify.linkBack',
+)
 const continuePath = computed(() => {
   const step = !store.form.siteName ? 'site' : store.canAdvanceAccount && store.verifiedToken ? 'summary' : 'account'
   return localePath({ name: stepRouteName(step) })

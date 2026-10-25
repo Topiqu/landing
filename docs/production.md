@@ -54,9 +54,12 @@ Older query links through the regular verification step redirect to this entry p
 BroadcastChannel passes only the verified email and short-lived proof back to a matching active
 verification tab. That tab keeps its password in memory and advances directly to review; the link tab
 confirms where to continue after acknowledgement. A link opened inside a wizard that still has complete
-account details advances directly to review. Otherwise, without an active matching tab, the link page
-resumes account setup (or blog setup without a draft). Passwords are never transmitted between tabs, and
-neither passwords nor verification proofs are persisted. Checkout still validates the signed proof on the server.
+account details advances directly to review. If handoff is not acknowledged (including an original tab
+opened before the handoff code was deployed), the link page instructs entering the emailed code in the
+original tab to preserve its account details. Continuing account setup in the link tab is an explicitly
+labelled alternative; without a draft it starts at blog setup. Passwords are never transmitted between
+tabs, and neither passwords nor verification proofs are persisted. Checkout still validates the signed
+proof on the server.
 
 ## Availability checks
 

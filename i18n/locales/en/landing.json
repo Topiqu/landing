@@ -254,6 +254,8 @@
         "verifying": "Verifying…",
         "linkBack": "Back to registration",
         "continueInOriginalTab": "Continue in the original tab.",
+        "enterCodeInOriginalTab": "Enter the email code in the original tab.",
+        "continueHere": "Continue in this tab",
         "spamHint": "Check your spam folder.",
         "sendError": "Email couldn't be sent",
         "sendFailed": "Please try again.",
