@@ -96,8 +96,9 @@ AdSense publishes its account meta tag during server rendering. The script loads
 hydration and cookie consent; withdrawing consent reloads the page to stop the advertising runtime.
 Privacy policy pages exclude both AdSense and GA4, including when a visitor has already consented;
 entering a policy page after either runtime has loaded reloads the page to stop it.
-`public/ads.txt` authorizes the same publisher. Google advertising consent still requires a
-published Google CMP message for `topiqu.com` (AdSense → Privacy & messaging).
+Google advertising consent still requires a published Google CMP message for `topiqu.com`
+(AdSense → Privacy & messaging). There is deliberately no `ads.txt`: tenant blogs on `*.topiqu.com`
+inherit the apex file, and listing only this publisher would mark their own GAM sellers unauthorized.
 
 ## 🧹 Linting & Formatting
 
