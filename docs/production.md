@@ -24,6 +24,18 @@ Use Nuxt's native runtime environment overrides for an already-built image:
 The legacy names in `nuxt.config.ts` supply build-time defaults. Prefer `NUXT_` overrides for
 runtime configuration so secrets do not need to be baked into the build. `.env` files are excluded
 from Docker's build context. Public runtime keys are visible in the browser and must never contain secrets.
+Set `NUXT_PLATFORM_API_URL=https://app.topiqu.com` as a runtime environment variable
+in Dokploy, using the origin without `/api`. `PLATFORM_API_URL` only supplies a
+build-time default and does not override an already-built image at runtime. DNS and
+network access must work from the landing container as well as from the browser.
+
+A failed domain lookup returns 503 and leaves Continue disabled. Check
+`domain_check.failed` in Dokploy logs for `outcome` (`not_configured`, `request_failed`,
+`invalid_response`, `upstream_http_error`) and an optional `upstreamStatus`. These
+records exclude domain queries, credentials and raw provider errors. Use the response
+`X-Request-Id` to correlate failures. The availability endpoint is read-only and can
+be checked with `/api/check-domain?domain=your-subdomain&type=SUBDOMAIN`.
+
 The native color-mode module and i18n retain preferences in cookies.
 Nuxt links prefetch on interaction rather than visibility, and Nitro emits gzip/Brotli versions of
 public assets. Keep the reverse proxy/CDN configured to preserve content negotiation (`Vary: Accept-Encoding`).
@@ -46,28 +58,26 @@ preflight currently fails open; the inspected platform has no `/api/users/check-
 The browser blocks double submission, uses no automatic retry and waits up to 35 seconds. The proxy
 waits up to 30 seconds for the platform and explicitly disables mutation retries.
 
-Within one running landing process, requests for the same verified email and identical validated
-payload share one upstream call. Successful responses and uncertain failures are retained for ten minutes.
-A changed payload for the same identity returns 409 while a retained request exists. Explicit upstream
-4xx rejections release the slot so details can be corrected. At most 500 identities are retained; pending
-entries are never evicted to make room. Only HMAC fingerprints and result promises are stored, not request bodies.
-Login URLs in successful results remain private in process memory and must not be logged.
+Within one running landing process, simultaneous requests for the same verified email and identical
+validated payload share one upstream call. Only pending requests are retained, up to 500 identities;
+they are never evicted to make room. Completed login links and uncertain errors are not cached.
+An explicit resubmission asks the platform for the current result; no mutation retries run automatically.
 
-The proxy forwards `Idempotency-Key` and `X-Request-Id`. **The inspected platform does not yet consume
-the idempotency key.** Its account/site transaction and duplicate checks help, but are not a durable
-replay mechanism for account creation plus Stripe. The landing's protection is lost on restart and is
-not shared by multiple replicas. A timeout can occur after the platform has committed the account.
-The UI therefore reports an uncertain result and offers sign-in rather than claiming creation failed.
+The proxy forwards `Idempotency-Key` and `X-Request-Id`. The platform binds the key and an HMAC of the
+original validated payload to a system-only `OnboardingRequest`. Account creation and the request's
+account link commit together. Database leases fence concurrent workers, and Stripe customer/Checkout
+creation use stable provider idempotency keys. A lost response resumes the same account and original
+trial deadline across process restarts. Renewed email proof is accepted; changed signup details after
+account creation are rejected. Correct details before creation may be resubmitted.
 
-Required platform follow-up for full end-to-end idempotency:
+Retries require valid email proof and the original details. The platform retrieves the saved Checkout
+state instead of serving a stale URL, and never remints a consumed or expired single-use login token.
+Expired/completed Checkouts and uncertain mutations older than 23 hours lead to ordinary sign-in,
+where the user can manage billing. This stops automatic retries before Stripe's idempotency retention
+can expire. It is bounded recovery, not an unlimited exactly-once claim. Never log login URLs.
 
-- Atomically claim a unique idempotency key in shared durable storage and bind it to a payload fingerprint.
-- Store progress and the successful redirect result; replay it for matching requests, reject changed payloads.
-- Resume after partial completion; pass stable idempotency keys to Stripe customer/session creation.
-- Test concurrent requests against multiple processes and a connection loss after the database commit.
-
-Until that exists, do not advertise exactly-once registration across replicas. For an uncertain outcome,
-check platform records and Stripe before manually replaying the operation.
+Deploy the matching platform release and its migrations before this landing release. Without that
+platform implementation, an explicit resubmission cannot recover a partially committed signup.
 
 ## Server logs
 
