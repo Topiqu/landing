@@ -25,8 +25,9 @@ const currentIndex = computed(() => {
 })
 // Any step is open once the required steps before it are complete, so optional ones can be jumped over;
 // those stay flagged as unfilled until the visitor comes back to them.
-const stepState = (step: OnboardingStep, index: number) => {
+const stepState = (step: OnboardingStep, index: number, reachable: boolean) => {
   if (index === currentIndex.value) return 'current'
+  if (!reachable) return 'blocked'
   if (store.isStepComplete(step)) return 'done'
   if (OPTIONAL_STEPS.includes(step) && (store.progress[step] === 'skipped' || index < currentIndex.value))
     return 'skipped'
@@ -34,7 +35,10 @@ const stepState = (step: OnboardingStep, index: number) => {
 }
 const steps = computed(() =>
   ONBOARDING_STEPS.map((step, index) => {
-    const state = stepState(step, index)
+    const reachable = ONBOARDING_STEPS.slice(0, index).every(
+      (before) => OPTIONAL_STEPS.includes(before) || store.isStepComplete(before),
+    )
+    const state = stepState(step, index, reachable)
     const optional = OPTIONAL_STEPS.includes(step)
     return {
       step,
@@ -42,9 +46,7 @@ const steps = computed(() =>
       label: t('landing.onboarding.steps.' + step),
       state,
       note: state === 'skipped' ? t('landing.onboarding.unfilled') : optional ? t('landing.onboarding.optional') : '',
-      reachable: ONBOARDING_STEPS.slice(0, index).every(
-        (before) => OPTIONAL_STEPS.includes(before) || store.isStepComplete(before),
-      ),
+      reachable,
     }
   }),
 )
@@ -90,6 +92,7 @@ onKeyStroke('Escape', () => navigateTo(localePath('/')))
                 :to="item.state !== 'current' && item.reachable ? stepPath(item.step) : undefined"
                 class="onb-step"
                 :aria-current="item.state === 'current' ? 'step' : undefined"
+                :aria-disabled="item.state === 'blocked' || undefined"
               >
                 <span class="onb-step-dot">
                   <Icon v-if="item.state === 'done'" name="mdi:check" aria-hidden="true" />

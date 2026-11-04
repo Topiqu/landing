@@ -984,6 +984,10 @@ a.onb-step:hover {
   background: var(--landing-tint);
   color: var(--landing-accent);
 }
+.onb-steps li[data-state='blocked'] .onb-step {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 .onb-step-dot {
   display: grid;
   place-items: center;
