@@ -155,7 +155,8 @@ const {
 
 // Pricing CTAs pass ?plan= so the plan step opens on the plan the visitor chose.
 const requestedPlan = String(route.query.plan ?? '').toUpperCase()
-if (requestedPlan === 'PRO' || requestedPlan === 'PREMIUM') form.selectedPlan = requestedPlan
+if (requestedPlan === 'PRO' || requestedPlan === 'PREMIUM' || requestedPlan === 'CUSTOM')
+  form.selectedPlan = requestedPlan
 const requestedInterval = String(route.query.interval ?? '')
 if (requestedInterval === 'month' || requestedInterval === 'year') form.billingInterval = requestedInterval
 

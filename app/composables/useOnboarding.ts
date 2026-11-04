@@ -9,7 +9,7 @@ export type DomainStatus =
   | 'empty'
   | 'unavailable'
 export type DomainType = 'SUBDOMAIN' | 'CUSTOM'
-export type SelectedPlan = 'PRO' | 'PREMIUM' | null
+export type SelectedPlan = 'PRO' | 'PREMIUM' | 'CUSTOM' | null
 export type SelectedBillingInterval = 'month' | 'year'
 
 export interface OnboardingForm {

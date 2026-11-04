@@ -17,10 +17,12 @@ export const PLAN_PRICES_USD = {
   free: 0,
   pro: 49,
   premium: 99,
+  custom: 199,
 } as const
 export const PLAN_ARTICLES = {
   pro: 30,
   premium: 50,
+  custom: 50,
 } as const
 export const KNOWLEDGE_SOURCES = {
   pro: 50,

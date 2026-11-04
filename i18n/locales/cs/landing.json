@@ -2,7 +2,7 @@
   "landing": {
     "pricing": {
       "title": "Ceník",
-      "subtitle": "Každý nový blog začíná {days}denní zkušební verzí a {articles} AI články. Při volbě Free nepotřebujete kartu.",
+      "subtitle": "První způsobilý blog dostane {days}denní zkušební verzi a {articles} jednotek článků. Další blogy začínají ve Free; každý blog má vlastní předplatné.",
       "month": "/měs.",
       "year": "/rok",
       "intervalLabel": "Frekvence platby",
@@ -25,15 +25,15 @@
         "free": {
           "badge": "Start",
           "name": "Free",
-          "desc": "Pište a publikujte na vlastním blogu, bez závazků.",
+          "desc": "Pište a publikujte na svém blogu. První způsobilé blogy vyzkouší Premium bez karty.",
           "features": {
             "editor": "Editor s médii, tabulkami a anketami",
-            "subdomain": "Adresa .topiqu.com zdarma, až 3 blogy",
+            "subdomain": "Neomezeně blogů, každý s adresou .topiqu.com zdarma",
             "optimization": "Skóre optimalizace článků",
             "library": "Knihovna médií s evidencí práv",
             "community": "Komentáře, reakce a základní analytika",
             "no_ai": "Bez psaní pomocí AI",
-            "ads": "Na blogu se zobrazuje reklama Topiqu"
+            "seats": "1 člen týmu včetně majitele"
           },
           "cta": "Začít zdarma"
         },
@@ -42,14 +42,15 @@
           "name": "Pro",
           "desc": "Psaní s AI z vašich vlastních znalostí, na vlastní doméně.",
           "features": {
-            "no_ads": "Vše z Free, bez reklam",
-            "articles": "{count} AI článků každý měsíc",
+            "no_ads": "Vše z Free",
+            "articles": "{count} jednotek článků měsíčně",
             "knowledge": "Znalostní báze až s {count} zdroji",
             "review": "Kontrola faktů a redakční revize",
-            "translations": "Překlady do EN, CS, DE a FR",
+            "translations": "2 zahrnuté jazyky překladu, 60 překladů měsíčně",
             "scheduling": "Plánování, série a automatická publikace",
             "domain": "Vlastní doména, písma a přechody",
-            "integrations": "WordPress plugin, API a import"
+            "integrations": "WordPress plugin, API a import",
+            "seats": "2 členové týmu včetně majitele"
           },
           "cta": "Vybrat Pro"
         },
@@ -59,35 +60,36 @@
           "desc": "Víte, kde jste v Googlu a zda vás citují odpovědi OpenAI — a umíte s tím pracovat.",
           "features": {
             "everything": "Vše z Pro",
-            "articles": "{count} AI článků každý měsíc",
-            "visibility": "Sledování citací v odpovědích OpenAI",
+            "articles": "{count} jednotek článků měsíčně",
+            "visibility": "Až 300 odpovědí pro AI viditelnost měsíčně",
             "gsc": "Přehledy ze Search Console a SEO autopilot",
             "knowledge": "Znalostní báze až s {count} zdroji",
             "sentiment": "Analýza nálady čtenářů",
             "indexing": "Prioritní indexace a zdrojování",
             "emoji": "Vlastní emoji reakce",
-            "support": "Prioritní podpora 24/7"
+            "support": "Prioritní podpora 24/7",
+            "seats": "3 členové týmu včetně majitele"
           },
           "cta": "Vybrat Premium"
         },
         "custom": {
           "badge": "Enterprise",
           "name": "Custom",
-          "desc": "Pro vydavatele s více značkami, týmy nebo specifickými procesy.",
-          "price": "Na vyžádání",
+          "desc": "Sdílené publikační nástroje pro týmy, které potřebují více placených míst.",
           "features": {
             "everything": "Vše z Premium",
             "whitelabel": "White-label bez značky Topiqu",
-            "articles": "Individuální počet AI článků",
+            "articles": "{count} jednotek článků měsíčně",
             "knowledge": "Znalostní báze až s {count} zdroji",
-            "multisite": "Více webů, značek a týmů",
-            "domain": "Nastavení hlavní domény",
-            "onboarding": "Onboarding a migrace na míru",
-            "sla": "SLA a dedikovaná podpora"
+            "multisite": "3 místa v ceně; každé další za 20 USD měsíčně",
+            "domain": "Vlastní doména se spravovaným HTTPS",
+            "onboarding": "Sdílená spotřeba týmu a správa fakturace",
+            "sla": "Roční sleva 20 % včetně dalších míst"
           },
-          "cta": "Kontaktovat"
+          "cta": "Vybrat Custom"
         }
-      }
+      },
+      "usagePolicy": "Ceny jsou za blog, bez daně. Články Standard / High / Ultra spotřebují 1 / 2 / 3 jednotky článků. AI práce zároveň sdílí kapacitní limit: po vyčerpání počká na obnovení nebo výslovné dokoupení, nic navíc se neúčtuje automaticky. I u ročního tarifu se spotřeba obnovuje měsíčně."
     },
     "faq": {
       "badge": "Podpora a nápověda",
@@ -97,11 +99,11 @@
       "items": [
         {
           "q": "Jak funguje zkušební verze?",
-          "a": "Každý nový blog začíná 14denní zkušební verzí a 5 AI články. Když budete pokračovat ve Free, vyzkoušíte si funkce Premium bez karty. Pokud při registraci zvolíte Pro nebo Premium, Stripe si vyžádá kartu, ale první platbu strhne až po 14 dnech — do té doby můžete kdykoli zrušit."
+          "a": "První způsobilý blog dostane 14denní zkušební verzi Premium a 5 jednotek článků. Free nepotřebuje kartu. Při volbě Pro nebo Premium zadáte kartu, první platba přijde až po zkušební době a do té doby lze zrušit. CUSTOM se platí rovnou po potvrzení. Další blogy stejného majitele začínají ve Free bez další zkušební doby. Každý blog má vlastní předplatné."
         },
         {
           "q": "Co se počítá jako AI článek?",
-          "a": "Každý článek, který za vás napíše AI, spotřebuje jeden článek z vašeho limitu: 30 měsíčně v Pro a 50 v Premium. Překlady, kontrola faktů, vylepšení zadání, analýza nálady ani návrhy ze Search Console články nespotřebovávají. Dokoupené články nepropadají; ceny balíčků najdete v ceníku."
+          "a": "Články Standard / High / Ultra spotřebují 1 / 2 / 3 jednotky článků. Pro zahrnuje 30 jednotek měsíčně, Premium a samoobslužný CUSTOM 50. Ostatní AI práce má vlastní počty operací a s články sdílí AI kapacitu. Po vyčerpání počká na obnovení nebo výslovné dokoupení; nic navíc se neúčtuje automaticky. Dokoupené jednotky článků nepropadají a jsou oddělené od rozšíření AI spotřeby; pro generování je potřeba aktivní tarif s AI."
         },
         {
           "q": "Odkud AI bere fakta?",
@@ -143,7 +145,7 @@
         "subdomainTitle": "Subdoména Topiqu",
         "subdomainText": "Adresa zdarma na topiqu.com",
         "customTitle": "Vlastní doména",
-        "customText": "Součást tarifů Pro a Premium",
+        "customText": "Součást tarifů Pro, Premium a Custom",
         "subdomain": "Subdoména",
         "subdomainPlaceholder": "firemni-magazin",
         "customDomain": "Doména",
@@ -214,7 +216,7 @@
       },
       "plan": {
         "title": "Vyberte, co bude po zkušební verzi",
-        "description": "Váš blog začíná {days}denní zkušební verzí a {articles} AI články. Tarif můžete kdykoli změnit v nastavení.",
+        "description": "První způsobilý blog dostane {days}denní zkušební verzi a {articles} jednotek článků. Další blogy začínají ve Free; každý blog má vlastní předplatné.",
         "trialBadge": "{days} dní zdarma",
         "selected": "Vybráno",
         "freeNote": "{days} dní si vyzkoušíte Premium a pak budete pokračovat ve Free. Karta není potřeba.",
@@ -234,6 +236,16 @@
             "{articles} AI článků měsíčně",
             "Viditelnost a přehled citací v OpenAI",
             "SEO autopilot se Search Console"
+          ]
+        },
+        "customNote": "CUSTOM se účtuje při potvrzení objednávky. Minimum jsou 3 místa včetně majitele: 199 USD měsíčně nebo 1 910,40 USD ročně, bez daně. CUSTOM nemá odloženou platbu po zkušební době.",
+        "custom": {
+          "tagline": "Nástroje Premium s placenou kapacitou týmu",
+          "features": [
+            "Vše z Premium",
+            "50 jednotek článků měsíčně se sdíleným AI limitem",
+            "3 placená místa včetně majitele",
+            "Další místa za 20 USD měsíčně, ročně o 20 % levněji"
           ]
         }
       },

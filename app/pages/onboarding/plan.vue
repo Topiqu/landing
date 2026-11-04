@@ -22,6 +22,7 @@ const plans = computed(() =>
       { id: null, key: 'free', icon: 'mdi:feather', articles: 0 },
       { id: 'PRO', key: 'pro', icon: 'mdi:rocket-launch-outline', articles: PLAN_ARTICLES.pro },
       { id: 'PREMIUM', key: 'premium', icon: 'mdi:crown-outline', articles: PLAN_ARTICLES.premium },
+      { id: 'CUSTOM', key: 'custom', icon: 'mdi:account-group-outline', articles: PLAN_ARTICLES.custom },
     ] as const
   ).map((plan) => ({
     ...plan,
@@ -39,11 +40,13 @@ const plans = computed(() =>
 )
 
 const note = computed(() =>
-  form.selectedPlan
-    ? $t('landing.onboarding.plan.paidNote', {
-        date: new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(trialEndsOn.value),
-      })
-    : $t('landing.onboarding.plan.freeNote', { days: TRIAL_DAYS }),
+  form.selectedPlan === 'CUSTOM'
+    ? $t('landing.onboarding.plan.customNote')
+    : form.selectedPlan
+      ? $t('landing.onboarding.plan.paidNote', {
+          date: new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(trialEndsOn.value),
+        })
+      : $t('landing.onboarding.plan.freeNote', { days: TRIAL_DAYS }),
 )
 </script>
 <template>
@@ -99,7 +102,7 @@ const note = computed(() =>
 }
 .plan-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 .plan-card {
