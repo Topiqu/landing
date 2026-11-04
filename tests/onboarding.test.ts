@@ -2,7 +2,7 @@ import * as vue from 'vue'
 import { resolve } from 'node:path'
 import { createPinia, setActivePinia } from 'pinia'
 import { createPersistedState } from 'pinia-plugin-persistedstate'
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, mock, test } from 'bun:test'
+import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, mock, spyOn, test } from 'bun:test'
 
 import * as plans from '../shared/utils/plans'
 import * as branding from '../shared/utils/branding'
@@ -202,7 +202,7 @@ describe('company website onboarding', () => {
     expect(fetch).not.toHaveBeenCalled()
   })
 
-  test('does not retry an uncertain platform result or expose its raw error', async () => {
+  test('does not retry automatically or expose raw errors, but lets an explicit resubmission resume', async () => {
     const email = 'uncertain@example.test'
     const event = {
       body: {
@@ -221,16 +221,41 @@ describe('company website onboarding', () => {
     await expect(checkout(event as never)).rejects.toMatchObject({
       statusCode: 503,
       data: { reason: 'checkoutUnknown' },
-    })
-    await expect(checkout(event as never)).rejects.toMatchObject({
-      statusCode: 503,
-      message: 'Registration outcome could not be confirmed. Check your email or sign in before trying again.',
+      message:
+        'Registration was interrupted. Submit the same details again to resume, or sign in if you already completed it.',
     })
     expect(fetch).toHaveBeenCalledTimes(1)
+    await expect(checkout(event as never)).resolves.toHaveProperty('url')
+    expect(fetch).toHaveBeenCalledTimes(2)
   })
 })
 
 describe('domain availability', () => {
+  test('logs diagnostic status without the domain or raw upstream error', async () => {
+    const log = spyOn(console, 'error').mockImplementation(() => {})
+    try {
+      fetch.mockImplementationOnce(async () => {
+        throw Object.assign(new Error('private-domain-name secret-provider-token'), { response: { status: 502 } })
+      })
+      await expect(
+        checkDomain({
+          query: { domain: 'private-domain-name', type: 'SUBDOMAIN' },
+          context: { requestId: 'domain-test' },
+        } as never),
+      ).rejects.toMatchObject({ statusCode: 503 })
+      const record = JSON.parse(String(log.mock.calls.at(-1)?.[0]))
+      expect(record).toMatchObject({
+        action: 'domain_check.failed',
+        requestId: 'domain-test',
+        upstreamStatus: 502,
+        outcome: 'upstream_http_error',
+      })
+      expect(JSON.stringify(record)).not.toContain('private-domain-name')
+      expect(JSON.stringify(record)).not.toContain('secret-provider-token')
+    } finally {
+      log.mockRestore()
+    }
+  })
   test('never reports available when the platform is down', async () => {
     fetch.mockImplementationOnce(async () => {
       throw new Error('Unavailable')

@@ -2,14 +2,12 @@ import { createError } from 'h3'
 import { createHmac } from 'node:crypto'
 
 type CheckoutResult = { url: string }
-type Entry = { fingerprint: string; expiresAt: number; result: Promise<CheckoutResult> }
+type Entry = { fingerprint: string; result: Promise<CheckoutResult> }
 
-/** Process-local protection. Durable, cross-instance idempotency belongs on the platform. */
-export function createCheckoutRequests(ttlMs = 10 * 60_000, maxEntries = 500) {
+/** Coalesce only in-flight requests; the platform owns durable recovery and current redirects. */
+export function createCheckoutRequests(maxEntries = 500) {
   const entries = new Map<string, Entry>()
   return (identity: string, fingerprint: string, run: () => Promise<CheckoutResult>) => {
-    const now = Date.now()
-    for (const [key, entry] of entries) if (entry.expiresAt <= now) entries.delete(key)
     const existing = entries.get(identity)
     if (existing) {
       if (existing.fingerprint !== fingerprint) {
@@ -23,17 +21,16 @@ export function createCheckoutRequests(ttlMs = 10 * 60_000, maxEntries = 500) {
     }
     if (entries.size >= maxEntries)
       throw createError({ statusCode: 503, message: 'Registration is busy. Please try again later.' })
-    const entry: Entry = { fingerprint, expiresAt: Infinity, result: Promise.resolve().then(run) }
+    const entry: Entry = { fingerprint, result: Promise.resolve().then(run) }
     entries.set(identity, entry)
     entry.result = entry.result.then(
       (result) => {
-        entry.expiresAt = Date.now() + ttlMs
+        entries.delete(identity)
         return result
       },
       (error) => {
-        // Do not blindly replay a mutation whose upstream outcome is unknown.
-        if (error?.statusCode >= 400 && error.statusCode < 500) entries.delete(identity)
-        else entry.expiresAt = Date.now() + ttlMs
+        // The platform persists signup progress and Stripe keys; an explicit retry resumes it.
+        entries.delete(identity)
         throw error
       },
     )

@@ -1,6 +1,7 @@
 import type { H3Event } from 'h3'
 
 type LogFields = {
+  upstreamStatus?: number
   status?: number
   durationMs?: number
   dependency?: 'platform' | 'ses'

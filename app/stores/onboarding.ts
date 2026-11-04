@@ -118,6 +118,7 @@ export const useOnboardingStore = defineStore(
       try {
         const res = await $fetch<{ ok: boolean; reason?: DomainStatus }>('/api/check-domain', {
           query: { domain: type === 'CUSTOM' ? normalizeDomain(domain) : domain, type },
+          retry: 0,
         })
         if (form.domain !== domain || form.domainType !== type) return
         domainStatus.value = res.ok ? 'available' : (res.reason ?? 'invalid')

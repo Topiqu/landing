@@ -1,3 +1,7 @@
+import type { H3Event } from 'h3'
+
+import { onboardingLog } from '~~/server/utils/onboardingLog'
+
 const RESERVED = new Set([
   'www',
   'api',
@@ -48,12 +52,14 @@ export default defineEventHandler(async (event): Promise<Result> => {
     if (raw === 'topiqu.com' || raw.endsWith('.topiqu.com')) return { ok: false, reason: 'reserved' }
   }
 
-  return platformDomainCheck(raw, type)
+  return platformDomainCheck(event, raw, type)
 })
 
 // Availability must be confirmed by the platform; syntax validation is not an availability check.
-async function platformDomainCheck(domain: string, type: 'SUBDOMAIN' | 'CUSTOM'): Promise<Result> {
-  const platformUrl = (useRuntimeConfig() as any).platformApiUrl
+async function platformDomainCheck(event: H3Event, domain: string, type: 'SUBDOMAIN' | 'CUSTOM'): Promise<Result> {
+  const platformUrl = (useRuntimeConfig(event) as any).platformApiUrl
+  const startedAt = performance.now()
+  let outcome = platformUrl ? 'request_failed' : 'not_configured'
   try {
     if (!platformUrl) throw new Error('Platform not configured')
     const result = await $fetch<Result>(`${platformUrl}/api/onboarding/check-domain`, {
@@ -64,8 +70,17 @@ async function platformDomainCheck(domain: string, type: 'SUBDOMAIN' | 'CUSTOM')
     if (result?.ok === true && typeof result.fullDomain === 'string') return result
     if (result?.ok === false && ['empty', 'tooShort', 'invalid', 'reserved', 'taken'].includes(result.reason))
       return result
+    outcome = 'invalid_response'
     throw new Error('Invalid availability response')
-  } catch {
+  } catch (error: any) {
+    const upstreamStatus = error?.response?.status ?? error?.statusCode
+    onboardingLog(event, 'domain_check.failed', {
+      dependency: 'platform',
+      status: 503,
+      durationMs: Math.round(performance.now() - startedAt),
+      outcome: typeof upstreamStatus === 'number' ? 'upstream_http_error' : outcome,
+      ...(typeof upstreamStatus === 'number' ? { upstreamStatus } : {}),
+    })
     throw createError({
       statusCode: 503,
       message: 'Domain availability could not be checked.',

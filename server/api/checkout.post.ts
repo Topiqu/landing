@@ -104,7 +104,7 @@ export default defineEventHandler(async (event) => {
         statusCode: status,
         message: rejected
           ? 'Registration could not be completed. Check your details or sign in if you already have an account.'
-          : 'Registration outcome could not be confirmed. Check your email or sign in before trying again.',
+          : 'Registration was interrupted. Submit the same details again to resume, or sign in if you already completed it.',
         data: { reason: rejected ? 'checkoutRejected' : 'checkoutUnknown' },
       })
     }
