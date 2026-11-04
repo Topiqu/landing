@@ -46,7 +46,7 @@
             "articles": "{count} jednotek článků měsíčně",
             "knowledge": "Znalostní báze až s {count} zdroji",
             "review": "Kontrola faktů a redakční revize",
-            "translations": "2 zahrnuté jazyky překladu, 60 překladů měsíčně",
+            "translations": "Překlady do {count} jazyků, až 60 překladů měsíčně; další jazyky za {price} měsíčně každý",
             "scheduling": "Plánování, série a automatická publikace",
             "domain": "Vlastní doména, písma a přechody",
             "integrations": "WordPress plugin, API a import",
@@ -68,7 +68,8 @@
             "indexing": "Prioritní indexace a zdrojování",
             "emoji": "Vlastní emoji reakce",
             "support": "Prioritní podpora 24/7",
-            "seats": "3 členové týmu včetně majitele"
+            "seats": "3 členové týmu včetně majitele",
+            "translations": "Překlady do {count} jazyků, až 250 překladů měsíčně"
           },
           "cta": "Vybrat Premium"
         },
@@ -103,7 +104,7 @@
         },
         {
           "q": "Co se počítá jako AI článek?",
-          "a": "Články Standard / High / Ultra spotřebují 1 / 2 / 3 jednotky článků. Pro zahrnuje 30 jednotek měsíčně, Premium a samoobslužný CUSTOM 50. Ostatní AI práce má vlastní počty operací a s články sdílí AI kapacitu. Po vyčerpání počká na obnovení nebo výslovné dokoupení; nic navíc se neúčtuje automaticky. Dokoupené jednotky článků nepropadají a jsou oddělené od rozšíření AI spotřeby; pro generování je potřeba aktivní tarif s AI."
+          "a": "Články Standard / High / Ultra spotřebují 1 / 2 / 3 jednotky článků. Pro zahrnuje 50 jednotek měsíčně, Premium a samoobslužný CUSTOM 100. Ostatní AI práce má vlastní počty operací a s články sdílí AI kapacitu. Po vyčerpání počká na obnovení nebo výslovné dokoupení; nic navíc se neúčtuje automaticky. Dokoupené jednotky článků nepropadají a jsou oddělené od rozšíření AI spotřeby; pro generování je potřeba aktivní tarif s AI."
         },
         {
           "q": "Odkud AI bere fakta?",
@@ -156,7 +157,7 @@
         "languageHelp": "Jazyk psaní můžete kdykoliv změnit v nastavení a články překládat do dalších jazyků.",
         "website": "Web vaší firmy",
         "websitePlaceholder": "mojefirma.cz",
-        "websiteHelp": "Po registraci si vyberete, které stránky přidáte do znalostní báze, aby AI psala o tom, co vaše firma skutečně nabízí."
+        "websiteHelp": "Zadáním webu souhlasíte, že po registraci AI zpracuje jeho veřejný obsah a připraví nastavení blogu i podklady do znalostní báze. Před použitím vše zkontrolujete a potvrdíte."
       },
       "domainStatus": {
         "unavailable": "Dostupnost se nepodařilo ověřit. Zkuste to prosím znovu.",
@@ -228,12 +229,16 @@
         },
         "pro": {
           "tagline": "Psaní s AI z vašich znalostí",
-          "features": ["{articles} AI článků měsíčně", "Znalostní báze a kontrola faktů", "Překlady a vlastní doména"]
+          "features": [
+            "{articles} jednotek článků měsíčně",
+            "Znalostní báze a kontrola faktů",
+            "Překlady a vlastní doména"
+          ]
         },
         "premium": {
           "tagline": "Růst v Googlu a viditelnost v odpovědích",
           "features": [
-            "{articles} AI článků měsíčně",
+            "{articles} jednotek článků měsíčně",
             "Viditelnost a přehled citací v OpenAI",
             "SEO autopilot se Search Console"
           ]
@@ -243,7 +248,7 @@
           "tagline": "Nástroje Premium s placenou kapacitou týmu",
           "features": [
             "Vše z Premium",
-            "50 jednotek článků měsíčně se sdíleným AI limitem",
+            "100 jednotek článků měsíčně se sdíleným AI limitem",
             "3 placená místa včetně majitele",
             "Další místa za 20 USD měsíčně, ročně o 20 % levněji"
           ]
@@ -251,7 +256,21 @@
       },
       "verify": {
         "title": "Ověřte svůj e-mail",
-        "description": "Na {email} jsme poslali šestimístný kód. Zadejte ho níže, nebo použijte odkaz v e-mailu.",
+        "description": "Ověřte adresu {email} šestimístným kódem nebo odkazem v e-mailu.",
+        "sending": "Odesílání…",
+        "sent": "E-mail odeslán.",
+        "verified": "E-mail ověřen.",
+        "verifying": "Ověřování…",
+        "linkBack": "Zpět k registraci",
+        "continueInOriginalTab": "Pokračujte v původní kartě.",
+        "enterCodeInOriginalTab": "V původní kartě zadejte kód z e-mailu.",
+        "continueHere": "Pokračovat v této kartě",
+        "spamHint": "Zkontrolujte také spam.",
+        "sendError": "E-mail se nepodařilo odeslat",
+        "sendFailed": "Zkuste to prosím znovu.",
+        "unavailable": "Ověření e-mailu je dočasně nedostupné. Zkuste to prosím později.",
+        "securityFailed": "Bezpečnostní ověření selhalo. Zkuste to znovu.",
+        "development": "Vývojový režim: e-mail nebyl odeslán.",
         "code": "Ověřovací kód",
         "notReceived": "Kód nedorazil?",
         "resend": "Poslat nový kód",
@@ -670,74 +689,42 @@
         ]
       },
       "features": {
-        "eyebrow": "DÁL V REDAKCI",
-        "title": "A k tomu všechno, co redakce potřebuje.",
-        "text": "Od překladů po analytiku. Všechno v jedné aplikaci, bez pluginů a dalších předplatných.",
+        "eyebrow": "NAD RÁMEC PSANÍ",
+        "title": "Práce, kterou by vám agentura naúčtovala. V ceně.",
+        "text": "Topiqu za vás udělá zdlouhavou část obsahového marketingu a ukáže, co udělal.",
         "items": [
           {
-            "title": "Překlady",
-            "text": "Do čtyř jazyků, automaticky nebo po kontrole."
+            "title": "Témata hned od začátku",
+            "text": "Ještě nemáte návštěvnost? Témata vychází z dat o vyhledávání ve vašem trhu. Co už máte napsané, se znovu nenabízí."
           },
           {
-            "title": "Knihovna médií",
-            "text": "Původ obrázků a práva k publikaci."
+            "title": "Drží krok s oborem",
+            "text": "Čerstvá zpráva z vašeho oboru se může stát článkem, dokud je aktuální."
           },
           {
-            "title": "Série",
-            "text": "Související články propojené do seriálu."
+            "title": "Nabízí, co máte skladem",
+            "text": "Připojte Shopify nebo feed z Heureky či Google Merchant. Články nabídnou produkty skladem, s cenou tam, kde čtenář srovnává a nakupuje."
           },
           {
-            "title": "Komentáře a reakce",
-            "text": "Diskuse přímo pod články."
+            "title": "Najde, kdo o vás už píše",
+            "text": "Weby, které vás zmiňují bez odkazu, i s připravenou žádostí. Žádné kupované ani vyměňované odkazy."
           },
           {
-            "title": "Ankety",
-            "text": "Otázky pro čtenáře uvnitř článku."
+            "title": "Publikuje tam, kde už jste",
+            "text": "Na váš WordPress nebo do Shopify, případně jako blog na vlastní doméně. Články sdílíte i na svůj LinkedIn."
           },
           {
-            "title": "Týmy a oprávnění",
-            "text": "Role s omezeným přístupem."
+            "title": "Překlady, které sedí trhu",
+            "text": "Deset jazyků. Články, které se pro cílový trh nehodí, můžou zůstat nepřeložené."
           },
           {
-            "title": "Více blogů",
-            "text": "Několik publikací pod jedním účtem."
-          },
-          {
-            "title": "Vlastní doména",
-            "text": "Publikace na vaší adrese."
-          },
-          {
-            "title": "Vizuální styl",
-            "text": "Barvy, gradienty a vlastní písma."
-          },
-          {
-            "title": "Skóre optimalizace",
-            "text": "SEO, AI viditelnost, čitelnost a důvěra."
-          },
-          {
-            "title": "Strukturovaná data",
-            "text": "Schema, llms.txt a Markdown verze článků."
-          },
-          {
-            "title": "Odpovědi a FAQ",
-            "text": "Stručná odpověď a otázky přímo v článku."
-          },
-          {
-            "title": "Nálada čtenářů",
-            "text": "Analýza sentimentu reakcí a komentářů."
-          },
-          {
-            "title": "Sdílení na LinkedIn",
-            "text": "Osobní sdílení vydaných článků."
-          },
-          {
-            "title": "Analytika a reklama",
-            "text": "Google Analytics 4 a Ad Manager."
+            "title": "Pro celý tým",
+            "text": "Role s omezeným přístupem a několik blogů pod jedním účtem."
           }
         ],
         "more": {
-          "title": "A mnohem víc",
-          "text": "Všechny novinky najdete v changelogu."
+          "title": "A k tomu všechno ostatní",
+          "text": "Série, komentáře, ankety, knihovna médií, vlastní písma a barvy. Vše v changelogu."
         }
       }
     }

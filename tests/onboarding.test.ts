@@ -1,11 +1,13 @@
 import * as vue from 'vue'
 import { resolve } from 'node:path'
+import { createHmac } from 'node:crypto'
 import { createPinia, setActivePinia } from 'pinia'
 import { createPersistedState } from 'pinia-plugin-persistedstate'
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, mock, spyOn, test } from 'bun:test'
 
 import * as plans from '../shared/utils/plans'
 import * as branding from '../shared/utils/branding'
+import { checkoutKeys } from '../server/utils/checkoutRequests'
 
 const names = [
   ...Object.keys(vue),
@@ -33,7 +35,7 @@ const storage = {
 }
 const requests: { url: string; options: any }[] = []
 const config = { authSecret: 'test-onboarding-secret', platformApiUrl: 'https://platform.example.test' }
-const fetch = mock(async (url: string, options: any) => {
+const fetch = mock(async (url: string, options: any): Promise<unknown> => {
   requests.push({ url, options })
   return { url: 'https://workspace.example.test', ok: true }
 })
@@ -93,7 +95,190 @@ afterAll(() => {
   }
 })
 
+describe('verification email feedback', () => {
+  test('verifies an emailed link with no saved email without losing the returned proof', async () => {
+    const store = createStore()
+    fetch.mockResolvedValueOnce({ email: 'owner@example.test', verifiedToken: 'verified-proof' })
+    expect(await store.verifyCode({ code: '123456', challenge: 'signed-challenge' })).toBe(true)
+    expect(store.form.email).toBe('owner@example.test')
+    expect(store.verifiedToken).toBe('verified-proof')
+    expect(store.form.password).toBe('')
+    expect(fetch.mock.calls[0]![1].body).toEqual({
+      email: undefined,
+      code: '123456',
+      challenge: 'signed-challenge',
+    })
+  })
+
+  test('binds a clicked link to the active draft email and keeps a newer challenge on expiry', async () => {
+    const store = createStore()
+    store.form.email = 'current@example.test'
+    store.challenge = 'current-challenge'
+    fetch.mockRejectedValueOnce({ data: { data: { reason: 'expired' } } })
+    expect(await store.verifyCode({ code: '123456', challenge: 'older-link' })).toBe(false)
+    expect(fetch.mock.calls[0]![1].body.email).toBe('current@example.test')
+    expect(store.form.email).toBe('current@example.test')
+    expect(store.challenge).toBe('current-challenge')
+    expect(store.verifiedToken).toBeNull()
+    expect(store.codeError).toBe('common.auth.codeExpired')
+  })
+
+  const emailStore = () => {
+    const store = createStore()
+    store.form.email = 'owner@example.test'
+    return store
+  }
+
+  test.each(['accepted', 'failed'])(
+    'keeps a completed link verification when a pending resend is %s',
+    async (outcome) => {
+      const store = emailStore()
+      store.challenge = 'previous-challenge'
+      let finish!: () => void
+      fetch.mockImplementationOnce(
+        () =>
+          new Promise((resolve, reject) => {
+            finish = () =>
+              outcome === 'accepted'
+                ? resolve({ challenge: 'new-challenge', delivery: 'ses', messageId: 'receipt' })
+                : reject(new Error('Email unavailable'))
+          }),
+      )
+      const pending = store.sendCode('security-token')
+      store.verifiedToken = 'proof-from-link-tab'
+      finish()
+      expect(await pending).toBe(false)
+      expect(store.verifiedToken).toBe('proof-from-link-tab')
+      expect(store.codeSendError).toBe('')
+      expect(store.codeSending).toBe(false)
+    },
+  )
+
+  test('confirms sending only with an SES receipt and starts the resend cooldown', async () => {
+    const store = emailStore()
+    fetch.mockResolvedValueOnce({ challenge: 'challenge', delivery: 'ses', messageId: 'receipt' })
+    expect(await store.sendCode('security-token')).toBe(true)
+    expect(store.codeDelivery).toBe('sent')
+    expect(store.challenge).toBe('challenge')
+    expect(store.resendCooldown).toBe(60)
+    expect(store.codeSendError).toBe('')
+    expect(fetch.mock.calls[0]![1]).toMatchObject({ retry: 0, timeout: 20_000 })
+    expect(await store.sendCode('another-token')).toBe(false)
+    expect(fetch).toHaveBeenCalledTimes(1)
+  })
+
+  test.each([{ challenge: 'ok' }, { challenge: 'challenge', delivery: 'ses' }])(
+    'does not claim success for an incomplete receipt: %j',
+    async (response) => {
+      const store = emailStore()
+      fetch.mockResolvedValueOnce(response)
+      expect(await store.sendCode('security-token')).toBe(false)
+      expect(store.codeDelivery).toBe('idle')
+      expect(store.challenge).toBeNull()
+      expect(store.codeSendError).toBe('landing.onboarding.verify.sendFailed')
+      expect(store.resendCooldown).toBe(0)
+    },
+  )
+
+  test('distinguishes development console delivery from a sent email', async () => {
+    const store = emailStore()
+    fetch.mockResolvedValueOnce({ challenge: 'challenge', delivery: 'development' })
+    expect(await store.sendCode('security-token')).toBe(true)
+    expect(store.codeDelivery).toBe('development')
+    expect(store.challenge).toBe('challenge')
+  })
+
+  test('keeps the previous code usable after a failed resend and allows retry', async () => {
+    const store = emailStore()
+    store.challenge = 'previous-challenge'
+    store.code = '123'
+    fetch.mockRejectedValueOnce(new Error('Network unavailable'))
+    expect(await store.sendCode('security-token')).toBe(false)
+    expect(store.codeSendError).toBe('landing.onboarding.verify.sendFailed')
+    expect(store.challenge).toBe('previous-challenge')
+    expect(store.code).toBe('123')
+    expect(store.codeSending).toBe(false)
+    fetch.mockResolvedValueOnce({ challenge: 'new-challenge', delivery: 'ses', messageId: 'receipt' })
+    expect(await store.sendCode('new-security-token')).toBe(true)
+    expect(store.codeSendError).toBe('')
+    expect(store.code).toBe('')
+  })
+
+  test('ignores a late response after changing the email and resets the cooldown', async () => {
+    const store = emailStore()
+    let finish!: (value: unknown) => void
+    fetch.mockImplementationOnce(() => new Promise((resolve) => (finish = resolve)))
+    const pending = store.sendCode('security-token')
+    expect(store.codeSending).toBe(true)
+    const signal = fetch.mock.calls[0]![1].signal as AbortSignal
+    store.form.email = 'different@example.test'
+    expect(signal.aborted).toBe(true)
+    finish({ challenge: 'old-challenge', delivery: 'ses', messageId: 'receipt' })
+    expect(await pending).toBe(false)
+    expect(store.challenge).toBeNull()
+    expect(store.codeDelivery).toBe('idle')
+    expect(store.codeSending).toBe(false)
+    expect(store.resendCooldown).toBe(0)
+    fetch.mockResolvedValueOnce({ challenge: 'current-challenge', delivery: 'ses', messageId: 'receipt' })
+    expect(await store.sendCode('new-security-token')).toBe(true)
+    store.form.email = 'corrected@example.test'
+    expect(store.resendCooldown).toBe(0)
+    expect(store.challenge).toBeNull()
+  })
+
+  test('does not submit twice or wipe completed verification', async () => {
+    const store = emailStore()
+    let finish!: (value: unknown) => void
+    fetch.mockImplementationOnce(() => new Promise((resolve) => (finish = resolve)))
+    const pending = store.sendCode('security-token')
+    expect(await store.sendCode('duplicate-token')).toBe(false)
+    finish({ challenge: 'challenge', delivery: 'ses', messageId: 'receipt' })
+    await pending
+    expect(fetch).toHaveBeenCalledTimes(1)
+    store.resendCooldown = 0
+    store.verifiedToken = 'verified'
+    expect(await store.sendCode('another-token')).toBe(false)
+    expect(store.verifiedToken).toBe('verified')
+  })
+})
+
 describe('company website onboarding', () => {
+  test('uses the same runtime AUTH_SECRET fallback for verification and checkout signing', async () => {
+    const previousSecret = process.env.AUTH_SECRET
+    const previousConfigSecret = config.authSecret
+    try {
+      process.env.AUTH_SECRET = 'legacy-runtime-signing-test'
+      config.authSecret = ''
+      const email = 'legacy-signup@example.test'
+      const result = await checkout({
+        body: {
+          siteName: 'Legacy signup',
+          domain: 'legacy-signup',
+          language: 'en',
+          username: 'Owner',
+          email,
+          password: 'test-password',
+          verifiedToken: issueVerifiedToken(email),
+        },
+      } as never)
+      expect(result.url).toBe('https://workspace.example.test')
+      expect(requests).toHaveLength(1)
+      const request = requests[0]!.options
+      expect(request.headers['X-Landing-Sig']).toBe(
+        createHmac('sha256', 'legacy-runtime-signing-test')
+          .update(`${request.headers['X-Landing-Timestamp']}.203.0.113.4`)
+          .digest('hex'),
+      )
+      expect(request.headers['Idempotency-Key']).toBe(
+        checkoutKeys('legacy-runtime-signing-test', request.body).fingerprint,
+      )
+    } finally {
+      config.authSecret = previousConfigSecret
+      if (previousSecret === undefined) delete process.env.AUTH_SECRET
+      else process.env.AUTH_SECRET = previousSecret
+    }
+  })
+
   test('keeps the website across reloads while leaving passwords out of persistence', async () => {
     const store = createStore()
     store.form.websiteUrl = 'https://firma.cz/about'
@@ -154,6 +339,7 @@ describe('company website onboarding', () => {
     await store.submit()
     const request = requests.find(({ url }) => url === '/api/checkout')!
     expect(request.options.body.websiteUrl).toBe(website.trim() || undefined)
+    expect(request.options.body.websiteImportConsentVersion).toBe(website.trim() ? 1 : undefined)
     expect(request.options.body.website).toBeUndefined()
   })
 
@@ -169,6 +355,7 @@ describe('company website onboarding', () => {
         password: 'test-password',
         verifiedToken: issueVerifiedToken(email),
         websiteUrl: ' firma.cz ',
+        websiteImportConsentVersion: 1,
         website: 'honeypot',
       },
     } as never)
@@ -176,6 +363,7 @@ describe('company website onboarding', () => {
     const request = requests[0]!
     expect(request.url).toBe('https://platform.example.test/api/onboarding/checkout')
     expect(request.options.body.websiteUrl).toBe('firma.cz')
+    expect(request.options.body.websiteImportConsentVersion).toBe(1)
     expect(request.options.body.website).toBeUndefined()
     expect(request.options.headers['X-Landing-Client-Ip']).toBe('203.0.113.4')
     expect(request.options.headers['X-Landing-Sig']).toHaveLength(64)

@@ -18,9 +18,10 @@ const totalSteps = TOTAL_STEPS
 const stepPath = (step: OnboardingStep) => localePath({ name: stepRouteName(step) })
 const currentIndex = computed(() => {
   const name = String(route.name ?? '').split('___')[0] ?? ''
+  const step = route.meta.onboardingStep ?? name.replace(/^onboarding-/, '')
   return Math.max(
     0,
-    ONBOARDING_STEPS.findIndex((step) => stepRouteName(step) === name),
+    ONBOARDING_STEPS.findIndex((item) => item === step),
   )
 })
 // Any step is open once the required steps before it are complete, so optional ones can be jumped over;
@@ -61,8 +62,14 @@ onKeyStroke('Escape', () => navigateTo(localePath('/')))
       <div class="onb-header-inner">
         <BrandLogo />
         <div class="onb-header-actions">
-          <UButton color="neutral" variant="ghost" icon="i-lucide-rotate-ccw" @click="resetOpen = true">
-            {{ locale === 'cs' ? 'Začít znovu' : 'Start over' }}
+          <UButton
+            color="neutral"
+            variant="ghost"
+            icon="mdi:restore"
+            :aria-label="locale === 'cs' ? 'Začít znovu' : 'Start over'"
+            @click="resetOpen = true"
+          >
+            <span class="tw:hidden tw:sm:inline">{{ locale === 'cs' ? 'Začít znovu' : 'Start over' }}</span>
           </UButton>
           <UButton
             :to="localePath('/')"

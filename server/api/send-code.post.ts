@@ -43,11 +43,11 @@ export default defineEventHandler(async (event) => {
   const challenge = issueChallenge(email, code)
   const name = email.split('@')[0] ?? ''
 
-  // One-click magic link: opens the verify step pre-filled and auto-submits.
-  // Carries the challenge because it isn't shared across tabs/persisted.
+  // A separate entry verifies the link before the wizard requires account details.
+  // The fragment keeps the credentials out of HTTP URLs and referrers.
   const origin = getRequestURL(event).origin
-  const verifyPath = locale === 'cs' ? '/cs/onboarding/overeni' : '/en/onboarding/verify'
-  const link = `${origin}${verifyPath}?code=${code}&token=${encodeURIComponent(challenge)}`
+  const verifyPath = locale === 'cs' ? '/cs/onboarding/overit-email' : '/en/onboarding/verify-email'
+  const link = `${origin}${verifyPath}#${new URLSearchParams({ code, token: challenge })}`
 
   const delivery = await sendVerificationCode({ to: email, code, name, locale, link, event })
 

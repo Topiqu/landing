@@ -46,7 +46,7 @@
             "articles": "{count} article units/month",
             "knowledge": "Knowledge base with up to {count} sources",
             "review": "Fact-check and editorial review",
-            "translations": "2 included translation languages, 60 translations/month",
+            "translations": "Translations into {count} languages, up to 60 translations/month; more languages for {price}/month each",
             "scheduling": "Scheduling, series and auto-publishing",
             "domain": "Custom domain, fonts and gradients",
             "integrations": "WordPress plugin, API and import",
@@ -68,7 +68,8 @@
             "indexing": "Priority indexing and sourcing",
             "emoji": "Custom emoji reactions",
             "support": "Priority 24/7 support",
-            "seats": "3 team members, including the owner"
+            "seats": "3 team members, including the owner",
+            "translations": "Translations into {count} languages, up to 250 translations/month"
           },
           "cta": "Choose Premium"
         },
@@ -103,7 +104,7 @@
         },
         {
           "q": "What counts as an AI article?",
-          "a": "Standard / High / Ultra articles use 1 / 2 / 3 article units. Pro includes 30 units/month; Premium and self-service CUSTOM include 50. Auxiliary AI work has separate operation limits and shares AI capacity with articles. At exhaustion new work pauses until renewal or an explicit purchase; there is no automatic overage. Purchased article units never expire and are separate from AI usage top-ups; an active AI plan is required to generate."
+          "a": "Standard / High / Ultra articles use 1 / 2 / 3 article units. Pro includes 50 units/month; Premium and self-service CUSTOM include 100. Auxiliary AI work has separate operation limits and shares AI capacity with articles. At exhaustion new work pauses until renewal or an explicit purchase; there is no automatic overage. Purchased article units never expire and are separate from AI usage top-ups; an active AI plan is required to generate."
         },
         {
           "q": "Where does the AI get its facts?",
@@ -156,7 +157,7 @@
         "languageHelp": "You can change the writing language at any time in settings and translate articles into other languages.",
         "website": "Your company website",
         "websitePlaceholder": "mycompany.com",
-        "websiteHelp": "After sign-up, choose which pages to add to your knowledge base so AI writes about what your company actually offers."
+        "websiteHelp": "By providing your website, you agree that AI will process its public content after sign-up to prepare your blog settings and knowledge sources. You will review and confirm everything before use."
       },
       "domainStatus": {
         "unavailable": "We could not check availability. Please try again.",
@@ -233,7 +234,7 @@
         "pro": {
           "tagline": "AI writing from your knowledge",
           "features": [
-            "{articles} AI articles a month",
+            "{articles} article units/month",
             "Knowledge base and fact-check",
             "Translations and custom domain"
           ]
@@ -241,7 +242,7 @@
         "premium": {
           "tagline": "Google growth and visibility in answers",
           "features": [
-            "{articles} AI articles a month",
+            "{articles} article units/month",
             "Visibility and citation insights for OpenAI",
             "Search Console SEO autopilot"
           ]
@@ -251,7 +252,7 @@
           "tagline": "Premium tools with paid team capacity",
           "features": [
             "Everything in Premium",
-            "50 article units/month, subject to shared AI capacity",
+            "100 article units/month, subject to shared AI capacity",
             "3 paid seats including the owner",
             "Additional seats: $20/month, 20% less annually"
           ]
@@ -259,7 +260,21 @@
       },
       "verify": {
         "title": "Verify your email",
-        "description": "We sent a 6-digit code to {email}. Enter it below or use the link in the email.",
+        "description": "Verify {email} with a 6-digit code or the link in the email.",
+        "sending": "Sending…",
+        "sent": "Email sent.",
+        "verified": "Email verified.",
+        "verifying": "Verifying…",
+        "linkBack": "Back to registration",
+        "continueInOriginalTab": "Continue in the original tab.",
+        "enterCodeInOriginalTab": "Enter the email code in the original tab.",
+        "continueHere": "Continue in this tab",
+        "spamHint": "Check your spam folder.",
+        "sendError": "Email couldn't be sent",
+        "sendFailed": "Please try again.",
+        "unavailable": "Email verification is temporarily unavailable. Please try again later.",
+        "securityFailed": "Security check failed. Please try again.",
+        "development": "Development mode: email not sent.",
         "code": "Verification code",
         "notReceived": "Didn't get the code?",
         "resend": "Send a new code",
@@ -678,74 +693,42 @@
         ]
       },
       "features": {
-        "eyebrow": "ALSO IN THE NEWSROOM",
-        "title": "And everything else a newsroom needs.",
-        "text": "From translations to analytics. All in one app, without plugins or extra subscriptions.",
+        "eyebrow": "BEYOND WRITING",
+        "title": "The work an agency would bill you for. Included.",
+        "text": "Topiqu does the slow parts of content marketing and shows you what it did.",
         "items": [
           {
-            "title": "Translations",
-            "text": "Into four languages, automatically or after review."
+            "title": "Topics from day one",
+            "text": "No traffic yet? Topics come from search data in your market. Subjects you already cover are skipped."
           },
           {
-            "title": "Media library",
-            "text": "Image provenance and publishing rights."
+            "title": "Keeps up with your field",
+            "text": "Fresh news from your niche can become an article while it still matters."
           },
           {
-            "title": "Series",
-            "text": "Related articles linked into a series."
+            "title": "Offers what you stock",
+            "text": "Connect Shopify or a Heureka or Google Merchant feed. Articles offer in-stock products, with prices where readers compare and buy."
           },
           {
-            "title": "Comments and reactions",
-            "text": "Discussion right under each article."
+            "title": "Finds who already talks about you",
+            "text": "Sites that mention you without a link, with a request ready to send. No bought or swapped links."
           },
           {
-            "title": "Polls",
-            "text": "Questions for readers inside the article."
+            "title": "Publishes where you already are",
+            "text": "Your WordPress site or Shopify store, or a blog on your own domain. Share articles on your LinkedIn."
           },
           {
-            "title": "Teams and permissions",
-            "text": "Roles with scoped access."
+            "title": "Translations that fit the market",
+            "text": "Ten languages. Articles that don't suit a target market can be held back instead of translated blindly."
           },
           {
-            "title": "Multiple blogs",
-            "text": "Several publications under one account."
-          },
-          {
-            "title": "Custom domain",
-            "text": "Your publication on your address."
-          },
-          {
-            "title": "Visual style",
-            "text": "Colours, gradients and custom fonts."
-          },
-          {
-            "title": "Optimization score",
-            "text": "SEO, AI visibility, readability and trust."
-          },
-          {
-            "title": "Structured data",
-            "text": "Schema, llms.txt and Markdown versions."
-          },
-          {
-            "title": "Answers and FAQs",
-            "text": "A short answer and questions in the article."
-          },
-          {
-            "title": "Reader sentiment",
-            "text": "Sentiment analysis of reactions and comments."
-          },
-          {
-            "title": "LinkedIn sharing",
-            "text": "Personal sharing of published articles."
-          },
-          {
-            "title": "Analytics and ads",
-            "text": "Google Analytics 4 and Ad Manager."
+            "title": "Made for the whole team",
+            "text": "Roles with scoped access and several blogs under one account."
           }
         ],
         "more": {
-          "title": "And much more",
-          "text": "Every release is in the changelog."
+          "title": "And everything else",
+          "text": "Series, comments, polls, media library, your fonts and colours. All in the changelog."
         }
       }
     }

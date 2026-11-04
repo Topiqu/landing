@@ -1,8 +1,8 @@
 import { z } from 'zod'
 import { onboardingLog } from '~~/server/utils/onboardingLog'
 import { signLandingRequest } from '~~/server/utils/landingAuth'
-import { verifyVerifiedToken } from '~~/server/utils/onboardingTokens'
 import { createCheckoutRequests, checkoutKeys } from '~~/server/utils/checkoutRequests'
+import { onboardingSecret, verifyVerifiedToken } from '~~/server/utils/onboardingTokens'
 
 const checkoutRequests = createCheckoutRequests()
 
@@ -27,6 +27,7 @@ const schema = z
     tagline: z.string().trim().max(80).optional(),
     // Not `website`: that name is the bot honeypot. The platform keeps only a valid http(s) address.
     websiteUrl: z.string().trim().max(2048).optional(),
+    websiteImportConsentVersion: z.literal(1).optional(),
     language: z.enum(CONTENT_LANGUAGES),
     username: z.string().trim().min(3).max(50),
     email: z.string().email(),
@@ -62,7 +63,7 @@ export default defineEventHandler(async (event) => {
     })
   }
 
-  const { identity, fingerprint } = checkoutKeys(config.authSecret, body)
+  const { identity, fingerprint } = checkoutKeys(onboardingSecret(), body)
   return checkoutRequests(identity, fingerprint, async () => {
     const startedAt = performance.now()
     try {

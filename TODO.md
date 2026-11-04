@@ -8,8 +8,8 @@ Measured accessibility/performance results live in [docs/production-audit.md](do
 - Implement durable checkout idempotency across replicas, including Stripe customer/session creation
   and recovery after partial completion. Landing coalescing is process-local and is not a substitute.
 - Add a documented email availability endpoint if an email preflight is desired. Checkout remains authoritative.
-- Verify how the platform accepts `websiteUrl`: the inspected sibling checkout schema does not currently
-  include this optional landing field, so confirmed knowledge import is not guaranteed by this repository.
+- Deploy the platform version accepting `websiteUrl` and `websiteImportConsentVersion`, including its
+  website-import migration, before publishing this landing version.
 
 ## Deployment operations
 

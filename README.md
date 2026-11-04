@@ -13,7 +13,7 @@ Landing page and onboarding flow for **Topiqu - Your AI Blog Platform**.
 
 - Marketing landing page - workspace preview, editorial workflow, comparison, pricing and FAQ
 - 6-step onboarding - site setup, design, plan, account, email verification, summary
-- Optional company website - included in checkout; platform support for saving `websiteUrl` must be verified
+- Optional company website - with processing confirmation, prepares blog settings and knowledge in the background; suggestions are reviewed in the app
 - Legal pages - Terms of Service, Privacy Policy
 - PWA support, SEO/OG meta, structured data (schema.org)
 - i18n - Multi-language localization
@@ -42,7 +42,7 @@ bun generate    # static marketing export only; registration still needs a serve
 bun preview     # preview production build locally
 ```
 
-Docker builds Nuxt with Node 24 and runs the standalone server with Bun 1.4.2.
+Docker builds Nuxt and runs the standalone server with Bun 1.4.3.
 Nuxt Content uses the built-in SQLite driver in both stages.
 
 Check the packaged production server with the same image used for deployment:
@@ -87,13 +87,18 @@ with the SES `messageId`, sending region and request correlation. The `/api/send
 In local development without SES credentials, the code is printed to the terminal
 as `[DEV EMAIL]` instead of being sent,
 and the response explicitly reports `delivery: "development"`.
+The verification screen distinguishes security checking, sending, confirmed acceptance and errors, and
+includes spam-folder guidance. It loads the public Turnstile key from the running server instead of relying
+on the configuration embedded in prerendered marketing pages. Runtime/container logs are available in Dokploy;
+Better Stack ingestion requires a separately configured log collector.
 
 AdSense publishes its account meta tag during server rendering. The script loads once after
 hydration and cookie consent; withdrawing consent reloads the page to stop the advertising runtime.
 Privacy policy pages exclude both AdSense and GA4, including when a visitor has already consented;
 entering a policy page after either runtime has loaded reloads the page to stop it.
-`public/ads.txt` authorizes the same publisher. Google advertising consent still requires a
-published Google CMP message for `topiqu.com` (AdSense → Privacy & messaging).
+Google advertising consent still requires a published Google CMP message for `topiqu.com`
+(AdSense → Privacy & messaging). There is deliberately no `ads.txt`: tenant blogs on `*.topiqu.com`
+inherit the apex file, and listing only this publisher would mark their own GAM sellers unauthorized.
 
 ## 🧹 Linting & Formatting
 
