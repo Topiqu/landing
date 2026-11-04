@@ -673,74 +673,42 @@
         ]
       },
       "features": {
-        "eyebrow": "DÁL V REDAKCI",
-        "title": "A k tomu všechno, co redakce potřebuje.",
-        "text": "Od překladů po analytiku. Všechno v jedné aplikaci, bez pluginů a dalších předplatných.",
+        "eyebrow": "NAD RÁMEC PSANÍ",
+        "title": "Práce, kterou by vám agentura naúčtovala. V ceně.",
+        "text": "Topiqu za vás udělá zdlouhavou část obsahového marketingu a ukáže, co udělal.",
         "items": [
           {
-            "title": "Překlady",
-            "text": "Do čtyř jazyků, automaticky nebo po kontrole."
+            "title": "Témata hned od začátku",
+            "text": "Ještě nemáte návštěvnost? Témata vychází z dat o vyhledávání ve vašem trhu. Co už máte napsané, se znovu nenabízí."
           },
           {
-            "title": "Knihovna médií",
-            "text": "Původ obrázků a práva k publikaci."
+            "title": "Drží krok s oborem",
+            "text": "Čerstvá zpráva z vašeho oboru se může stát článkem, dokud je aktuální."
           },
           {
-            "title": "Série",
-            "text": "Související články propojené do seriálu."
+            "title": "Nabízí, co máte skladem",
+            "text": "Připojte Shopify nebo feed z Heureky či Google Merchant. Články nabídnou produkty skladem, s cenou tam, kde čtenář srovnává a nakupuje."
           },
           {
-            "title": "Komentáře a reakce",
-            "text": "Diskuse přímo pod články."
+            "title": "Najde, kdo o vás už píše",
+            "text": "Weby, které vás zmiňují bez odkazu, i s připravenou žádostí. Žádné kupované ani vyměňované odkazy."
           },
           {
-            "title": "Ankety",
-            "text": "Otázky pro čtenáře uvnitř článku."
+            "title": "Publikuje tam, kde už jste",
+            "text": "Na váš WordPress nebo do Shopify, případně jako blog na vlastní doméně. Články sdílíte i na svůj LinkedIn."
           },
           {
-            "title": "Týmy a oprávnění",
-            "text": "Role s omezeným přístupem."
+            "title": "Překlady, které sedí trhu",
+            "text": "Deset jazyků. Články, které se pro cílový trh nehodí, můžou zůstat nepřeložené."
           },
           {
-            "title": "Více blogů",
-            "text": "Několik publikací pod jedním účtem."
-          },
-          {
-            "title": "Vlastní doména",
-            "text": "Publikace na vaší adrese."
-          },
-          {
-            "title": "Vizuální styl",
-            "text": "Barvy, gradienty a vlastní písma."
-          },
-          {
-            "title": "Skóre optimalizace",
-            "text": "SEO, AI viditelnost, čitelnost a důvěra."
-          },
-          {
-            "title": "Strukturovaná data",
-            "text": "Schema, llms.txt a Markdown verze článků."
-          },
-          {
-            "title": "Odpovědi a FAQ",
-            "text": "Stručná odpověď a otázky přímo v článku."
-          },
-          {
-            "title": "Nálada čtenářů",
-            "text": "Analýza sentimentu reakcí a komentářů."
-          },
-          {
-            "title": "Sdílení na LinkedIn",
-            "text": "Osobní sdílení vydaných článků."
-          },
-          {
-            "title": "Analytika a reklama",
-            "text": "Google Analytics 4 a Ad Manager."
+            "title": "Pro celý tým",
+            "text": "Role s omezeným přístupem a několik blogů pod jedním účtem."
           }
         ],
         "more": {
-          "title": "A mnohem víc",
-          "text": "Všechny novinky najdete v changelogu."
+          "title": "A k tomu všechno ostatní",
+          "text": "Série, komentáře, ankety, knihovna médií, vlastní písma a barvy. Vše v changelogu."
         }
       }
     }

@@ -681,74 +681,42 @@
         ]
       },
       "features": {
-        "eyebrow": "ALSO IN THE NEWSROOM",
-        "title": "And everything else a newsroom needs.",
-        "text": "From translations to analytics. All in one app, without plugins or extra subscriptions.",
+        "eyebrow": "BEYOND WRITING",
+        "title": "The work an agency would bill you for. Included.",
+        "text": "Topiqu does the slow parts of content marketing and shows you what it did.",
         "items": [
           {
-            "title": "Translations",
-            "text": "Into four languages, automatically or after review."
+            "title": "Topics from day one",
+            "text": "No traffic yet? Topics come from search data in your market. Subjects you already cover are skipped."
           },
           {
-            "title": "Media library",
-            "text": "Image provenance and publishing rights."
+            "title": "Keeps up with your field",
+            "text": "Fresh news from your niche can become an article while it still matters."
           },
           {
-            "title": "Series",
-            "text": "Related articles linked into a series."
+            "title": "Offers what you stock",
+            "text": "Connect Shopify or a Heureka or Google Merchant feed. Articles offer in-stock products, with prices where readers compare and buy."
           },
           {
-            "title": "Comments and reactions",
-            "text": "Discussion right under each article."
+            "title": "Finds who already talks about you",
+            "text": "Sites that mention you without a link, with a request ready to send. No bought or swapped links."
           },
           {
-            "title": "Polls",
-            "text": "Questions for readers inside the article."
+            "title": "Publishes where you already are",
+            "text": "Your WordPress site or Shopify store, or a blog on your own domain. Share articles on your LinkedIn."
           },
           {
-            "title": "Teams and permissions",
-            "text": "Roles with scoped access."
+            "title": "Translations that fit the market",
+            "text": "Ten languages. Articles that don't suit a target market can be held back instead of translated blindly."
           },
           {
-            "title": "Multiple blogs",
-            "text": "Several publications under one account."
-          },
-          {
-            "title": "Custom domain",
-            "text": "Your publication on your address."
-          },
-          {
-            "title": "Visual style",
-            "text": "Colours, gradients and custom fonts."
-          },
-          {
-            "title": "Optimization score",
-            "text": "SEO, AI visibility, readability and trust."
-          },
-          {
-            "title": "Structured data",
-            "text": "Schema, llms.txt and Markdown versions."
-          },
-          {
-            "title": "Answers and FAQs",
-            "text": "A short answer and questions in the article."
-          },
-          {
-            "title": "Reader sentiment",
-            "text": "Sentiment analysis of reactions and comments."
-          },
-          {
-            "title": "LinkedIn sharing",
-            "text": "Personal sharing of published articles."
-          },
-          {
-            "title": "Analytics and ads",
-            "text": "Google Analytics 4 and Ad Manager."
+            "title": "Made for the whole team",
+            "text": "Roles with scoped access and several blogs under one account."
           }
         ],
         "more": {
-          "title": "And much more",
-          "text": "Every release is in the changelog."
+          "title": "And everything else",
+          "text": "Series, comments, polls, media library, your fonts and colours. All in the changelog."
         }
       }
     }

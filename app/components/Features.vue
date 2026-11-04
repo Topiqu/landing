@@ -10,7 +10,7 @@
       </div>
       <ul class="features-grid">
         <li v-for="(item, index) in items" :key="item.title">
-          <NuxtLinkLocale :to="'/changelog/' + releases[index]">
+          <NuxtLinkLocale :to="releases[index] ? `/changelog/${releases[index]}` : '/changelog'">
             <span class="features-icon"><Icon :name="icons[index]!" aria-hidden="true" /></span>
             <div>
               <h3>{{ item.title }}</h3>
@@ -34,41 +34,25 @@
 
 <script setup lang="ts">
 const items = useMessageList<'title' | 'text'>('landing.design.features.items')
-// Links follow the same order as the translated feature list; both locales share release slugs.
+// Same order as `landing.design.features.items`; both locales share release slugs. A feature without a
+// release note of its own links to the changelog index.
 const releases = [
+  null,
+  null,
+  '2026-10-02-shopify-and-publication-channels',
+  null,
+  '2026-10-02-shopify-and-publication-channels',
   '2026-09-27-german-and-french',
-  '2026-09-24-media-library-and-visual-style',
-  '2026-09-20-article-allowance',
-  '2026-09-02-publication-and-editor-redesign',
-  '2026-09-20-article-allowance',
   '2026-08-26-teams-and-multiple-blogs',
-  '2026-08-26-teams-and-multiple-blogs',
-  '2026-08-26-teams-and-multiple-blogs',
-  '2026-09-24-media-library-and-visual-style',
-  '2026-09-23-optimization-and-fact-check',
-  '2026-09-27-ai-visibility',
-  '2026-09-20-article-allowance',
-  '2026-09-20-article-allowance',
-  '2026-10-02-shopify-and-publication-channels',
-  '2026-10-02-shopify-and-publication-channels',
 ]
-// Same order as `landing.design.features.items`.
 const icons = [
+  'mdi:magnify',
+  'mdi:newspaper-variant-outline',
+  'mdi:shopping-outline',
+  'mdi:link-variant',
+  'mdi:publish',
   'mdi:translate',
-  'mdi:image-multiple-outline',
-  'mdi:format-list-numbered',
-  'mdi:comment-text-multiple-outline',
-  'mdi:poll',
   'mdi:account-group-outline',
-  'mdi:view-grid-plus-outline',
-  'mdi:web',
-  'mdi:palette-outline',
-  'mdi:gauge',
-  'mdi:code-json',
-  'mdi:frequently-asked-questions',
-  'mdi:emoticon-happy-outline',
-  'mdi:linkedin',
-  'mdi:chart-box-outline',
 ]
 </script>
 
