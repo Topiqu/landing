@@ -46,7 +46,7 @@
             "articles": "{count} AI článků každý měsíc",
             "knowledge": "Znalostní báze až s {count} zdroji",
             "review": "Kontrola faktů a redakční revize",
-            "translations": "Překlady do EN, CS, DE a FR",
+            "translations": "Překlady do {count} jazyků, další za {price} měsíčně",
             "scheduling": "Plánování, série a automatická publikace",
             "domain": "Vlastní doména, písma a přechody",
             "integrations": "WordPress plugin, API a import"
@@ -60,6 +60,7 @@
           "features": {
             "everything": "Vše z Pro",
             "articles": "{count} AI článků každý měsíc",
+            "translations": "Překlady do {count} jazyků",
             "visibility": "Sledování citací v odpovědích OpenAI",
             "gsc": "Přehledy ze Search Console a SEO autopilot",
             "knowledge": "Znalostní báze až s {count} zdroji",
@@ -101,7 +102,7 @@
         },
         {
           "q": "Co se počítá jako AI článek?",
-          "a": "Každý článek, který za vás napíše AI, spotřebuje jeden článek z vašeho limitu: 30 měsíčně v Pro a 50 v Premium. Překlady, kontrola faktů, vylepšení zadání, analýza nálady ani návrhy ze Search Console články nespotřebovávají. Dokoupené články nepropadají; ceny balíčků najdete v ceníku."
+          "a": "Každý článek, který za vás napíše AI, spotřebuje jeden článek z vašeho limitu: 50 měsíčně v Pro a 100 v Premium. Překlady, kontrola faktů, vylepšení zadání, analýza nálady ani návrhy ze Search Console články nespotřebovávají. Dokoupené články nepropadají; ceny balíčků najdete v ceníku."
         },
         {
           "q": "Odkud AI bere fakta?",

@@ -19,15 +19,22 @@ export const PLAN_PRICES_USD = {
   premium: 99,
 } as const
 export const PLAN_ARTICLES = {
-  pro: 30,
-  premium: 50,
+  pro: 50,
+  premium: 100,
 } as const
 export const KNOWLEDGE_SOURCES = {
   pro: 50,
   premium: 200,
   custom: 500,
 } as const
-export const CONTENT_LANGUAGES = ['en', 'cs', 'de', 'fr'] as const
+// Mirrors the app's `LANGUAGE_OPTIONS`: the languages a site can write and translate in.
+export const CONTENT_LANGUAGES = ['en', 'cs', 'de', 'fr', 'es', 'it', 'pl', 'sk', 'nl', 'pt'] as const
+// Mirrors the app's `INCLUDED_TRANSLATION_LANGUAGES` and `EXTRA_TRANSLATION_LANGUAGE_PRICE_USD`.
+export const TRANSLATION_LANGUAGES = {
+  pro: 2,
+  premium: 5,
+} as const
+export const EXTRA_TRANSLATION_LANGUAGE_PRICE_USD = 9
 
 export type ContentLanguage = (typeof CONTENT_LANGUAGES)[number]
 export type BillingInterval = 'month' | 'year'

@@ -3,12 +3,14 @@ import type { BillingInterval } from '~~/shared/utils/plans'
 
 import {
   annualPlanPriceUsd,
+  EXTRA_TRANSLATION_LANGUAGE_PRICE_USD,
   formatUsd,
   KNOWLEDGE_SOURCES,
   PLAN_ARTICLES,
   PLAN_PRICES_USD,
   TRIAL_ARTICLES,
   TRIAL_DAYS,
+  TRANSLATION_LANGUAGES,
 } from '~~/shared/utils/plans'
 
 import PricingArticlePacks from './PricingArticlePacks.vue'
@@ -24,14 +26,21 @@ const excluded = new Set(['no_ai', 'ads'])
 const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
 const counts: Record<Plan, Record<string, number>> = {
   free: {},
-  pro: { articles: PLAN_ARTICLES.pro, knowledge: KNOWLEDGE_SOURCES.pro },
-  premium: { articles: PLAN_ARTICLES.premium, knowledge: KNOWLEDGE_SOURCES.premium },
+  pro: { articles: PLAN_ARTICLES.pro, knowledge: KNOWLEDGE_SOURCES.pro, translations: TRANSLATION_LANGUAGES.pro },
+  premium: {
+    articles: PLAN_ARTICLES.premium,
+    knowledge: KNOWLEDGE_SOURCES.premium,
+    translations: TRANSLATION_LANGUAGES.premium,
+  },
   custom: { knowledge: KNOWLEDGE_SOURCES.custom },
 }
 const features = (plan: Plan) =>
   Object.keys(tm(`landing.pricing.plans.${plan}.features`) as Record<string, unknown>).map((key) => ({
     key,
-    label: t(`landing.pricing.plans.${plan}.features.${key}`, { count: counts[plan][key] ?? 0 }),
+    label: t(`landing.pricing.plans.${plan}.features.${key}`, {
+      count: counts[plan][key] ?? 0,
+      price: formatUsd(EXTRA_TRANSLATION_LANGUAGE_PRICE_USD, locale.value),
+    }),
     excluded: excluded.has(key),
   }))
 const price = (plan: Plan) => {

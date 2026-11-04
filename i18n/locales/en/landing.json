@@ -46,7 +46,7 @@
             "articles": "{count} AI articles every month",
             "knowledge": "Knowledge base with up to {count} sources",
             "review": "Fact-check and editorial review",
-            "translations": "Translations into EN, CS, DE and FR",
+            "translations": "Translations into {count} languages, more for {price} a month each",
             "scheduling": "Scheduling, series and auto-publishing",
             "domain": "Custom domain, fonts and gradients",
             "integrations": "WordPress plugin, API and import"
@@ -60,6 +60,7 @@
           "features": {
             "everything": "Everything in Pro",
             "articles": "{count} AI articles every month",
+            "translations": "Translations into {count} languages",
             "visibility": "Citation tracking in OpenAI answers",
             "gsc": "Search Console insights and SEO autopilot",
             "knowledge": "Knowledge base with up to {count} sources",
@@ -101,7 +102,7 @@
         },
         {
           "q": "What counts as an AI article?",
-          "a": "Each article that AI writes for you uses one article from your allowance: 30 a month on Pro and 50 on Premium. Translations, fact-checks, prompt improvements, sentiment analysis and Search Console suggestions do not use articles. Purchased articles never expire; pack prices are listed above."
+          "a": "Each article that AI writes for you uses one article from your allowance: 50 a month on Pro and 100 on Premium. Translations, fact-checks, prompt improvements, sentiment analysis and Search Console suggestions do not use articles. Purchased articles never expire; pack prices are listed above."
         },
         {
           "q": "Where does the AI get its facts?",
