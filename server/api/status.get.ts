@@ -20,7 +20,9 @@ const STATE_MAP: Record<AggregateState, SystemStatus> = {
 
 export default defineCachedEventHandler(
   async (): Promise<{ status: SystemStatus }> => {
-    const { public: { statusUrl } } = useRuntimeConfig()
+    const {
+      public: { statusUrl },
+    } = useRuntimeConfig()
 
     try {
       const res = await $fetch<StatusPageResponse>(`${statusUrl}/index.json`, {

@@ -32,9 +32,7 @@
         "operationId": "listArticles",
         "summary": "List published articles",
         "description": "Returns published articles newest first. Multiple tag slugs use AND semantics.",
-        "tags": [
-          "Articles"
-        ],
+        "tags": ["Articles"],
         "parameters": [
           {
             "name": "page",
@@ -103,9 +101,7 @@
       "get": {
         "operationId": "getArticle",
         "summary": "Get a published article",
-        "tags": [
-          "Articles"
-        ],
+        "tags": ["Articles"],
         "parameters": [
           {
             "name": "id",
@@ -197,16 +193,10 @@
             "example": "how-ai-changes-content-operations"
           },
           "excerpt": {
-            "type": [
-              "string",
-              "null"
-            ]
+            "type": ["string", "null"]
           },
           "imageUrl": {
-            "type": [
-              "string",
-              "null"
-            ],
+            "type": ["string", "null"],
             "format": "uri"
           },
           "aiInvolvement": {
@@ -214,17 +204,11 @@
             "description": "Level of AI involvement declared by the publisher."
           },
           "readingTime": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "minimum": 0
           },
           "totalWords": {
-            "type": [
-              "integer",
-              "null"
-            ],
+            "type": ["integer", "null"],
             "minimum": 0
           },
           "createdAt": {
@@ -254,11 +238,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "id",
-                "name",
-                "slug"
-              ],
+              "required": ["id", "name", "slug"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -274,11 +254,7 @@
           },
           "user": {
             "type": "object",
-            "required": [
-              "id",
-              "username",
-              "avatarUrl"
-            ],
+            "required": ["id", "username", "avatarUrl"],
             "properties": {
               "id": {
                 "type": "string"
@@ -287,10 +263,7 @@
                 "type": "string"
               },
               "avatarUrl": {
-                "type": [
-                  "string",
-                  "null"
-                ]
+                "type": ["string", "null"]
               }
             }
           },
@@ -298,11 +271,7 @@
             "oneOf": [
               {
                 "type": "object",
-                "required": [
-                  "id",
-                  "name",
-                  "slug"
-                ],
+                "required": ["id", "name", "slug"],
                 "properties": {
                   "id": {
                     "type": "string"
@@ -324,14 +293,7 @@
             "type": "array",
             "items": {
               "type": "object",
-              "required": [
-                "id",
-                "language",
-                "slug",
-                "title",
-                "excerpt",
-                "translatedAt"
-              ],
+              "required": ["id", "language", "slug", "title", "excerpt", "translatedAt"],
               "properties": {
                 "id": {
                   "type": "string"
@@ -341,22 +303,13 @@
                   "example": "en"
                 },
                 "slug": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": ["string", "null"]
                 },
                 "title": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": ["string", "null"]
                 },
                 "excerpt": {
-                  "type": [
-                    "string",
-                    "null"
-                  ]
+                  "type": ["string", "null"]
                 },
                 "translatedAt": {
                   "oneOf": [
@@ -381,26 +334,14 @@
           },
           {
             "type": "object",
-            "required": [
-              "content",
-              "imageCredit",
-              "sources",
-              "allowedComments"
-            ],
+            "required": ["content", "imageCredit", "sources", "allowedComments"],
             "properties": {
               "content": {
                 "type": "string",
                 "description": "Article body as sanitized HTML."
               },
               "imageCredit": {
-                "type": [
-                  "object",
-                  "array",
-                  "string",
-                  "number",
-                  "boolean",
-                  "null"
-                ]
+                "type": ["object", "array", "string", "number", "boolean", "null"]
               },
               "sources": {
                 "type": "array",
@@ -417,13 +358,7 @@
       },
       "PaginationMeta": {
         "type": "object",
-        "required": [
-          "total",
-          "page",
-          "limit",
-          "primaryLanguage",
-          "appliedFilters"
-        ],
+        "required": ["total", "page", "limit", "primaryLanguage", "appliedFilters"],
         "properties": {
           "total": {
             "type": "integer",
@@ -443,9 +378,7 @@
           },
           "appliedFilters": {
             "type": "object",
-            "required": [
-              "tags"
-            ],
+            "required": ["tags"],
             "properties": {
               "tags": {
                 "type": "array",
@@ -459,10 +392,7 @@
       },
       "ArticleListResponse": {
         "type": "object",
-        "required": [
-          "data",
-          "meta"
-        ],
+        "required": ["data", "meta"],
         "properties": {
           "data": {
             "type": "array",
@@ -477,9 +407,7 @@
       },
       "ArticleResponse": {
         "type": "object",
-        "required": [
-          "data"
-        ],
+        "required": ["data"],
         "properties": {
           "data": {
             "$ref": "#/components/schemas/Article"
@@ -488,10 +416,7 @@
       },
       "Error": {
         "type": "object",
-        "required": [
-          "statusCode",
-          "message"
-        ],
+        "required": ["statusCode", "message"],
         "properties": {
           "statusCode": {
             "type": "integer"

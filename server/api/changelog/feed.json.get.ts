@@ -1,7 +1,10 @@
 import { queryCollection } from '@nuxt/content/server'
 
 export default defineEventHandler(async (event) => {
-  const entries = await queryCollection(event, 'changelog').where('path', 'LIKE', '/changelog/en/%').order('date', 'DESC').all()
+  const entries = await queryCollection(event, 'changelog')
+    .where('path', 'LIKE', '/changelog/en/%')
+    .order('date', 'DESC')
+    .all()
   setResponseHeader(event, 'Content-Type', 'application/feed+json; charset=utf-8')
   setResponseHeader(event, 'Cache-Control', 'public, max-age=300, s-maxage=3600')
   return {
