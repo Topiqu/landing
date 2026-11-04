@@ -9,7 +9,7 @@ sitemap:
 
 # Tvořte s Topiqu
 
-Topiqu External API je read-only REST API pro získávání obsahu publikovaného pro váš web. API v1 představuje stabilní kontrakt: kompatibilní pole a endpointy můžeme přidávat beze změny URL, zatímco breaking změny dostanou novou hlavní verzi.
+Topiqu External API je REST API pro čtení obsahu publikovaného pro váš web a se správným klíčem i pro vytváření, publikaci a generování článků. API v1 představuje stabilní kontrakt: kompatibilní pole a endpointy můžeme přidávat beze změny URL, zatímco breaking změny dostanou novou hlavní verzi.
 
 ## Základní URL
 
@@ -32,5 +32,6 @@ API vrací JSON. Data používají ISO 8601 v UTC, seznamy obsahují metadata st
 
 - Před použitím produkčního klíče si přečtěte [Autentizaci](/cs/docs/authentication).
 - Projděte si [stránkování a filtrování](/cs/docs/pagination).
+- Vytvářejte, publikujte a generujte články: [Zápis a generování](/cs/docs/writing).
 - Otevřete kompletní [interaktivní API reference](/cs/api-reference).
 - Sledujte změny API v [changelogu](/cs/changelog).

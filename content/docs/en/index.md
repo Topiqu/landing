@@ -9,7 +9,7 @@ sitemap:
 
 # Build with Topiqu
 
-The Topiqu External API is a read-only REST API for retrieving content published for your site. API v1 is designed as a stable contract: compatible fields and endpoints can be added without changing the URL, while breaking changes will ship under a new major version.
+The Topiqu External API is a REST API for reading the content published for your site and, with the right key, for creating, publishing and generating articles. API v1 is designed as a stable contract: compatible fields and endpoints can be added without changing the URL, while breaking changes will ship under a new major version.
 
 ## Base URL
 
@@ -32,5 +32,6 @@ The API returns JSON. Dates use ISO 8601 in UTC, list endpoints include paginati
 
 - Read [Authentication](/en/docs/authentication) before handling a production key.
 - Learn how [pagination and filtering](/en/docs/pagination) work.
+- Create, publish and generate articles: [Writing & generating](/en/docs/writing).
 - Open the full [interactive API reference](/en/api-reference).
 - Follow API changes in the [changelog](/en/changelog).

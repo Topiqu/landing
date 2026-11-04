@@ -72,6 +72,17 @@ useSeoMeta({
         </p>
         <span>→</span></NuxtLink
       >
+      <NuxtLink :to="localePath('/docs/writing')"
+        ><Icon name="i-lucide-pen-line" /><strong>{{ cs ? 'Zápis a generování' : 'Writing and generating' }}</strong>
+        <p>
+          {{
+            cs
+              ? 'Vytvářejte, publikujte a nechte Topiqu napsat články přes API.'
+              : 'Create, publish and have Topiqu write articles through the API.'
+          }}
+        </p>
+        <span>→</span></NuxtLink
+      >
       <NuxtLink :to="localePath('/docs/errors')"
         ><Icon name="i-lucide-shield-check" /><strong>{{
           cs ? 'Chyby a kompatibilita' : 'Errors and compatibility'
@@ -175,7 +186,7 @@ h1 {
 }
 .docs-topics {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
 }
 .docs-topics a {
