@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto'
 import { setTimeout as delay } from 'node:timers/promises'
 
 const baseUrl = process.env.PRODUCTION_TEST_URL || 'http://127.0.0.1:3000'
@@ -45,8 +46,23 @@ const checkPage = async (path: string, status = 200, marker?: string) => {
 }
 
 const imageSources = new Set<string>()
+const checkedScripts = new Set<string>()
 for (const locale of ['en', 'cs']) {
   const home = await checkPage(`/${locale}`, 200, 'id="hero-title"')
+  for (const [tag] of home.matchAll(/<(?:script|link)\b[^>]*>/g)) {
+    const source = tag.match(/\b(?:src|href)="([^"]+)"/)?.[1]
+    const integrity = tag.match(/\bintegrity="(sha384-[^"]+)"/)?.[1]
+    if (!source?.startsWith('/_nuxt/') || !source.endsWith('.js') || !integrity) continue
+    const key = `${source}:${integrity}`
+    if (checkedScripts.has(key)) continue
+    checkedScripts.add(key)
+    const response = await fetch(new URL(source, baseUrl), { signal: AbortSignal.timeout(10_000) })
+    const bytes = new Uint8Array(await response.arrayBuffer())
+    const actual = `sha384-${createHash('sha384').update(bytes).digest('base64')}`
+    if (!response.ok || actual !== integrity) {
+      failures.push(`${source}: script content does not match its declared integrity; hydration will fail`)
+    }
+  }
   const language = locale === 'cs' ? 'cs-CZ' : 'en-US'
   if (home.match(/<html\b[^>]*\blang="([^"]+)"/)?.[1] !== language) {
     failures.push(`/${locale}: incorrect HTML language`)

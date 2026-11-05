@@ -55,7 +55,9 @@ docker stop topiqu-landing-smoke
 ```
 
 The smoke test checks server rendering of all six onboarding steps in English and Czech,
-documentation, changelog and the 404 page. Set `PRODUCTION_TEST_URL` to test a different local
+documentation, changelog, the 404 page and the integrity of homepage JavaScript assets.
+Each build places assets under its own `/_nuxt/<build-id>/` directory to prevent stale CDN chunks
+from blocking hydration after deployment. Set `PRODUCTION_TEST_URL` to test a different local
 port. CI runs it against the final Docker image so development dependencies cannot mask missing
 runtime dependencies.
 

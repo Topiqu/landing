@@ -1,6 +1,11 @@
+import { randomUUID } from 'node:crypto'
+
 import { topiquIcons } from './shared/brand'
 
+const buildId = randomUUID()
+
 export default defineNuxtConfig({
+  buildId,
   compatibilityDate: '2026-05-21',
   devtools: { enabled: true },
 
@@ -351,6 +356,8 @@ export default defineNuxtConfig({
   },
 
   app: {
+    // Keep immutable CDN assets isolated when chunk names repeat between builds.
+    buildAssetsDir: `/_nuxt/${buildId}/`,
     head: {
       link: [
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png?v=20260910' },
