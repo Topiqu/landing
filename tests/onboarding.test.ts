@@ -95,6 +95,19 @@ afterAll(() => {
   }
 })
 
+describe('password validation', () => {
+  test('keeps empty and weak passwords blocked after upgrading the strength checker', () => {
+    const store = createStore()
+    expect(store.passwordStrong).toBe(false)
+    store.form.password = '12345678'
+    expect(store.passwordStrong).toBe(false)
+    store.form.password = 'Winter-coffee Forest!fiction 7382'
+    expect(store.passwordStrong).toBe(true)
+    store.form.password = ''
+    expect(store.passwordStrong).toBe(false)
+  })
+})
+
 describe('verification email feedback', () => {
   test('verifies an emailed link with no saved email without losing the returned proof', async () => {
     const store = createStore()

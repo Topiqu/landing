@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { zxcvbn } from '@zxcvbn-ts/core'
+import { ZxcvbnFactory } from '@zxcvbn-ts/core'
 
 const {
   label,
@@ -15,7 +15,8 @@ const password = defineModel<string>({ default: '', required: true })
 const visible = shallowRef(false)
 const MIN_LENGTH = 8
 
-const analysis = computed(() => (showStrength && password.value ? zxcvbn(password.value) : null))
+const passwordStrength = new ZxcvbnFactory()
+const analysis = computed(() => (showStrength && password.value ? passwordStrength.check(password.value) : null))
 const score = computed(() => analysis.value?.score ?? 0)
 
 // zxcvbn-ts runs without its language packs, so it reports suggestion keys, not sentences.

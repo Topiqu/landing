@@ -42,7 +42,7 @@ bun generate    # static marketing export only; registration still needs a serve
 bun preview     # preview production build locally
 ```
 
-Docker builds Nuxt and runs the standalone server with Bun 1.4.3.
+Docker builds Nuxt and runs the standalone server with Bun 1.4.4. Node 26.13.0 is pinned for local and CI type checking.
 Nuxt Content uses the built-in SQLite driver in both stages.
 
 Check the packaged production server with the same image used for deployment:

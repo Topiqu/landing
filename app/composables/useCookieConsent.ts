@@ -66,7 +66,7 @@ export function useCookieConsent() {
     banner.value = false
     // Nothing loads on a fresh denial, but a tab granted earlier in this
     // session still holds a live gtag instance that must be told to stop.
-    if (import.meta.client && window.dataLayer) {
+    if (import.meta.client && 'dataLayer' in window && window.dataLayer) {
       useGtag().gtag('consent', 'update', { ...DENIED })
     }
   }

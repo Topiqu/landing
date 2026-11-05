@@ -1,5 +1,5 @@
 # base
-FROM oven/bun:1.4.3-slim AS base
+FROM oven/bun:1.4.4-slim AS base
 
 WORKDIR /usr/src/app
 
@@ -15,6 +15,7 @@ ARG TARGETARCH
 WORKDIR /temp
 
 COPY package.json bun.lock ./
+COPY patches ./patches
 
 RUN --mount=type=cache,id=topiqu-landing-bun-${TARGETARCH},target=/root/.bun/install/cache \
     BUN_INSTALL_CACHE_DIR=/root/.bun/install/cache \

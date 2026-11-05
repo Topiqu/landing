@@ -27,7 +27,6 @@ useSeoMeta({
     locale.value === 'cs'
       ? 'Topiqu propojuje firemní znalosti, rešerši, tvorbu, kontrolu, publikaci a měření obsahu v jednom workflow.'
       : 'Topiqu connects company knowledge, research, writing, review, publishing, and measurement in one workflow.',
-  keywords: () => 'Topiqu, AI content operations, content platform, SEO, AEO, GEO',
   author: () => 'Topiqu',
   ogTitle: () => 'Topiqu',
   ogDescription: () =>
@@ -45,6 +44,7 @@ useSeoMeta({
 })
 
 useHead({
+  meta: [{ name: 'keywords', content: 'Topiqu, AI content operations, content platform, SEO, AEO, GEO' }],
   link: [
     { rel: 'preload', as: 'font', type: 'font/woff2', href: interfaceFont, crossorigin: 'anonymous' },
     {

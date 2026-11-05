@@ -1,13 +1,7 @@
-import { fileURLToPath } from 'node:url'
-
 import { topiquIcons } from './shared/brand'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-05-21',
-  alias: {
-    '@unhead/schema-org/vue': fileURLToPath(new URL('./app/schema-org-vue.ts', import.meta.url)),
-  },
-
   devtools: { enabled: true },
 
   runtimeConfig: {
@@ -205,13 +199,13 @@ export default defineNuxtConfig({
     locales: [
       {
         code: 'en',
-        iso: 'en-US',
+        language: 'en-US',
         name: 'EN',
         files: ['en/common.json', 'en/landing.json', 'en/legal.json', 'en/languages.json'],
       },
       {
         code: 'cs',
-        iso: 'cs-CZ',
+        language: 'cs-CZ',
         name: 'CZ',
         files: ['cs/common.json', 'cs/landing.json', 'cs/legal.json', 'cs/languages.json'],
       },
@@ -343,10 +337,7 @@ export default defineNuxtConfig({
     ],
   },
 
-  // Dynamické (island) OG obrázky nejsou na Nuxt 4.4 (unhead v2) funkční:
-  // og-image 5.x padá na "Invalid island request hash", 6.x vyžaduje unhead v3.
-  // Místo toho používáme statický og:image (viz app.vue). Až Nuxt přejde na
-  // unhead v3, lze modul znovu zapnout a vrátit defineOgImage().
+  // Static social previews do not need a runtime signing secret.
   ogImage: {
     enabled: false,
   },
@@ -361,7 +352,6 @@ export default defineNuxtConfig({
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
       link: [
         { rel: 'apple-touch-icon', href: '/apple-touch-icon.png?v=20260910' },
         { rel: 'dns-prefetch', href: 'https://www.googletagmanager.com' },

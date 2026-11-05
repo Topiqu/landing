@@ -1,13 +1,5 @@
 export type DomainStatus =
-  | 'idle'
-  | 'checking'
-  | 'available'
-  | 'taken'
-  | 'invalid'
-  | 'tooShort'
-  | 'reserved'
-  | 'empty'
-  | 'unavailable'
+  'idle' | 'checking' | 'available' | 'taken' | 'invalid' | 'tooShort' | 'reserved' | 'empty' | 'unavailable'
 export type DomainType = 'SUBDOMAIN' | 'CUSTOM'
 export type SelectedPlan = 'PRO' | 'PREMIUM' | 'CUSTOM' | null
 export type SelectedBillingInterval = 'month' | 'year'

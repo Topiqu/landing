@@ -1,6 +1,6 @@
 import slugify from 'slugify'
 import { defineStore } from 'pinia'
-import { zxcvbn } from '@zxcvbn-ts/core'
+import { ZxcvbnFactory } from '@zxcvbn-ts/core'
 
 import type { DomainStatus, OnboardingForm, OnboardingStep, StepProgress } from '~/composables/useOnboarding'
 
@@ -149,7 +149,8 @@ export const useOnboardingStore = defineStore(
       },
     )
 
-    const passwordStrong = computed(() => !!form.password && zxcvbn(form.password).score >= 3)
+    const passwordStrength = new ZxcvbnFactory()
+    const passwordStrong = computed(() => !!form.password && passwordStrength.check(form.password).score >= 3)
 
     const canAdvanceSite = computed(() => !!form.siteName.trim() && domainStatus.value === 'available')
     const canAdvanceAccount = computed(
