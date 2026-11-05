@@ -35,9 +35,7 @@ export function useCookieConsent() {
   const banner = useState('consentBannerOpen', () => false)
   const granted = computed(() => choice.value === 'granted')
   const decided = computed(() => choice.value === 'granted' || choice.value === 'denied')
-  const route = useRoute()
-  const getRouteBaseName = useRouteBaseName()
-  const trackingAllowed = computed(() => granted.value && getRouteBaseName(route) !== 'privacy')
+  const trackingAllowed = granted
   const reloadPending = useState('trackingReloadPending', () => false)
 
   function reloadWithoutTracking() {

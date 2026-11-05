@@ -14,7 +14,7 @@ Landing page and onboarding flow for **Topiqu - Your AI Blog Platform**.
 - Marketing landing page - workspace preview, editorial workflow, comparison, pricing and FAQ
 - 6-step onboarding - site setup, design, plan, account, email verification, summary
 - Optional company website - with processing confirmation, prepares blog settings and knowledge in the background; suggestions are reviewed in the app
-- Legal pages - Terms of Service, Privacy Policy
+- Legal pages - Terms of Service; the app hosts the one Privacy Policy, which the landing links and redirects to
 - PWA support, SEO/OG meta, structured data (schema.org)
 - i18n - Multi-language localization
 
@@ -94,8 +94,6 @@ Better Stack ingestion requires a separately configured log collector.
 
 AdSense publishes its account meta tag during server rendering. The script loads once after
 hydration and cookie consent; withdrawing consent reloads the page to stop the advertising runtime.
-Privacy policy pages exclude both AdSense and GA4, including when a visitor has already consented;
-entering a policy page after either runtime has loaded reloads the page to stop it.
 Google advertising consent still requires a published Google CMP message for `topiqu.com`
 (AdSense → Privacy & messaging). There is deliberately no `ads.txt`: tenant blogs on `*.topiqu.com`
 inherit the apex file, and listing only this publisher would mark their own GAM sellers unauthorized.

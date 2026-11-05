@@ -165,9 +165,14 @@ export default defineNuxtConfig({
     '/en': { prerender: true },
     '/cs': { prerender: true },
     '/en/terms-of-service': { prerender: true },
-    '/en/privacy-policy': { prerender: true },
+    // The app hosts the one privacy policy. URLs registered with OAuth providers and stores keep working.
+    '/en/privacy-policy': {
+      redirect: { to: `${process.env.PLATFORM_URL || 'https://app.topiqu.com'}/en/privacy-policy`, statusCode: 302 },
+    },
     '/cs/obchodni-podminky': { prerender: true },
-    '/cs/ochrana-soukromi': { prerender: true },
+    '/cs/ochrana-soukromi': {
+      redirect: { to: `${process.env.PLATFORM_URL || 'https://app.topiqu.com'}/cs/ochrana-soukromi`, statusCode: 302 },
+    },
     // Nuxt build assets — immutable long cache
     '/_nuxt/**': { headers: { 'cache-control': 'public, max-age=31536000, immutable' } },
     // Unhashed brand sources can change; keep their cache bounded and revalidatable.
@@ -234,10 +239,6 @@ export default defineNuxtConfig({
         cs: '/obchodni-podminky',
         en: '/terms-of-service',
       },
-      privacy: {
-        cs: '/ochrana-soukromi',
-        en: '/privacy-policy',
-      },
       'onboarding/index': { cs: '/onboarding', en: '/onboarding' },
       'onboarding/site': { cs: '/onboarding/web', en: '/onboarding/site' },
       'onboarding/design': { cs: '/onboarding/design', en: '/onboarding/design' },
@@ -292,8 +293,6 @@ export default defineNuxtConfig({
     urls: [
       '/en',
       '/cs',
-      '/en/privacy-policy',
-      '/cs/ochrana-soukromi',
       '/en/terms-of-service',
       '/cs/obchodni-podminky',
       {

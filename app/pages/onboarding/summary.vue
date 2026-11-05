@@ -59,9 +59,9 @@
           </template>
 
           <template #privacy>
-            <NuxtLinkLocale to="/privacy" target="_blank" class="summary-link">{{
+            <a :href="privacyPolicyUrl" target="_blank" rel="noopener" class="summary-link">{{
               $t('landing.onboarding.summary.privacy')
-            }}</NuxtLinkLocale>
+            }}</a>
           </template>
         </i18n-t>
       </template>
@@ -100,6 +100,7 @@ definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
 
 const { locale } = useI18n()
 const { platformUrl } = useRuntimeConfig().public
+const privacyPolicyUrl = usePrivacyPolicyUrl()
 const store = useOnboardingStore()
 const { submit, form, loading, fullDomainPreview, brandAccent, trialEndsOn, goTo } = useOnboarding()
 const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
