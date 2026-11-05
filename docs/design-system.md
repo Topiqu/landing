@@ -13,7 +13,7 @@ The reference checkout is `../app`. Its `app.config.ts`, `assets/styles/main.css
 - The `AfterPublishing` query field is a canvas driven by `useCursorCanvas`. It drifts on its own on touch devices, draws a single static frame under reduced motion and only animates while visible. It is canvas-only on purpose, so repeated keywords never appear as hidden text in the HTML.
 - Comparison prices for other tools come from their public pricing pages; update them together with the date in the table note.
 - `HeroScene` is a pure CSS 3D floor of article cards below the hero copy (no WebGL dependency). The hero's `--hero-scene-band` reserves its space; animation pauses off-screen and stops under reduced motion, and the cursor tilt is disabled on touch devices.
-- There is no testimonial or results section until there are real, consented quotes and measured data; do not add invented testimonials, customer logos or result metrics.
+- `Testimonials` presents personal-blog quotations, display names and ratings whose authors' approval and publication consent were confirmed by the site owner. Preserve the approved wording and ratings. Do not add independently verified-customer badges, review/aggregate-rating structured data, customer logos or result metrics without supporting evidence.
 - Vue SFCs in this repo order blocks as `<template>`, `<script>`, `<style>`. Older files with script first are legacy.
 - `BrandLogo` is the single logo component for the landing, footer, documentation and onboarding layouts.
 

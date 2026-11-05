@@ -688,6 +688,39 @@
           "odmrazování tepelného čerpadla"
         ]
       },
+      "testimonials": {
+        "eyebrow": "Zkušenosti blogerů",
+        "title": "Co říkají autoři malých blogů",
+        "description": "Zahrada, cestování i psaní po večerech. Přečtěte si, jak autoři osobních blogů používají Topiqu.",
+        "rating": "Hodnocení: {rating} z 5 hvězdiček",
+        "items": {
+          "personal": {
+            "name": "Petr Novotný",
+            "role": "Osobní blog po večerech",
+            "quote": "Píšu hlavně večer po práci. Často mám téma v hlavě, ale než se dostanu k psaní, už se mi do toho nechce. S Topiqu začnu od návrhu a postupně si ho upravím. Nejvíc mi pomáhá s tím rozjezdem."
+          },
+          "garden": {
+            "name": "Jana Dvořáková",
+            "role": "Malý blog o zahradě",
+            "quote": "Na zahradě pořád něco zkouším a fotím si, co se povedlo. Sepsat z toho článek mi ale moc nešlo. Teď si připravím poznámky, nechám si pomoct s textem a doplním svoje fotky. Některé věty přepíšu, aby to znělo víc jako já."
+          },
+          "travel": {
+            "name": "Martin Veselý",
+            "role": "Cestovatelský deník",
+            "quote": "Po výletě mám plný telefon fotek a pár poznámek o tom, co stálo za návštěvu. Topiqu mi pomáhá dát tomu nějaké pořadí. Zážitky i doporučení si píšu vlastní, ale s hotovou osnovou se mi ten článek dokončuje líp."
+          },
+          "crafts": {
+            "name": "Lucie Benešová",
+            "role": "Blog o domácím tvoření",
+            "quote": "Baví mě vyrábět věci a ukazovat ostatním, jak jsem je dělala. U psaní návodu se občas zamotám, protože některé kroky beru jako samozřejmost. Návrh z Topiqu mi pomůže text poskládat. Pak si ho projdu podle fotek a doplním, co chybí."
+          },
+          "beginner": {
+            "name": "Tomáš Kučera",
+            "role": "První vlastní blog",
+            "quote": "Je to můj první blog, takže se všechno učím za pochodu. Líbí se mi, že si můžu článek v klidu připravit, několikrát upravit a zveřejnit, až jsem s ním spokojený. Zatím píšu hlavně pro pár známých, ale mám radost, že už je co číst."
+          }
+        }
+      },
       "features": {
         "eyebrow": "NAD RÁMEC PSANÍ",
         "title": "Práce, kterou by vám agentura naúčtovala. V ceně.",

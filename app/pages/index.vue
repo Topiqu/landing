@@ -21,6 +21,7 @@ useSchemaOrg([
     <Connector />
     <LazyAfterPublishing hydrateOnVisible />
     <LazyFeatures hydrateOnVisible />
+    <LazyTestimonials hydrateOnVisible />
     <LazyPricing hydrateOnVisible />
     <LazyComparison hydrateOnVisible />
     <LazyFaq hydrateOnVisible />

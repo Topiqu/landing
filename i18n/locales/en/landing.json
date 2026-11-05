@@ -692,6 +692,39 @@
           "heat pump defrost cycle"
         ]
       },
+      "testimonials": {
+        "eyebrow": "Bloggers' experiences",
+        "title": "What personal bloggers say about Topiqu",
+        "description": "Gardening, travel, and writing after work. Read how personal bloggers use Topiqu.",
+        "rating": "Rating: {rating} out of 5 stars",
+        "items": {
+          "personal": {
+            "name": "Petr Novotný",
+            "role": "Personal blog, written after work",
+            "quote": "I mostly write in the evenings after work. I often have a topic in mind, but by the time I sit down, I don't feel like writing. With Topiqu, I start with a draft and work through it. Getting started is where it helps me most."
+          },
+          "garden": {
+            "name": "Jana Dvořáková",
+            "role": "A small gardening blog",
+            "quote": "I'm always trying something in the garden and taking photos of what worked. Turning that into an article was harder. Now I put my notes together, get help with the text, and add my own photos. I rewrite some sentences so they sound more like me."
+          },
+          "travel": {
+            "name": "Martin Veselý",
+            "role": "A personal travel journal",
+            "quote": "After a trip, my phone is full of photos and notes about places worth visiting. Topiqu helps me put them in order. The experiences and recommendations are my own, but having an outline makes the article easier to finish."
+          },
+          "crafts": {
+            "name": "Lucie Benešová",
+            "role": "A blog about making things at home",
+            "quote": "I enjoy making things and showing people how I made them. Writing instructions can get confusing because I take some steps for granted. A draft from Topiqu helps me organise the text. Then I go through my photos and fill in what's missing."
+          },
+          "beginner": {
+            "name": "Tomáš Kučera",
+            "role": "Starting a first blog",
+            "quote": "This is my first blog, so I'm learning as I go. I like being able to prepare an article, edit it a few times, and publish when I'm happy with it. So far, I mostly write for a few friends, but I'm pleased there's something for them to read."
+          }
+        }
+      },
       "features": {
         "eyebrow": "BEYOND WRITING",
         "title": "The work an agency would bill you for. Included.",
