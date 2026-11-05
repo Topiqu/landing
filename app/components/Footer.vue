@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { reopen } = useCookieConsent()
+const privacyPolicyUrl = usePrivacyPolicyUrl()
 const { statusUrl } = useRuntimeConfig().public
 const { data: system } = await useFetch('/api/status', { default: () => ({ status: 'operational' as const }) })
 </script>
@@ -15,7 +16,7 @@ const { data: system } = await useFetch('/api/status', { default: () => ({ statu
           <NuxtLinkLocale to="/docs">{{ $t('landing.design.nav.docs') }}</NuxtLinkLocale
           ><NuxtLinkLocale to="/changelog">Changelog</NuxtLinkLocale
           ><NuxtLinkLocale to="tos">{{ $t('common.links.terms') }}</NuxtLinkLocale
-          ><NuxtLinkLocale to="privacy">{{ $t('common.links.privacy') }}</NuxtLinkLocale
+          ><a :href="privacyPolicyUrl">{{ $t('common.links.privacy') }}</a
           ><button type="button" @click="reopen">{{ $t('common.cookies.settings') }}</button>
         </nav>
       </div>

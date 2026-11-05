@@ -28,9 +28,9 @@
             </h2>
             <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
               {{ $t('common.cookies.body') }}
-              <NuxtLinkLocale to="privacy" class="text-indigo-600 dark:text-indigo-400 underline underline-offset-2">
+              <a :href="privacyPolicyUrl" class="text-indigo-600 dark:text-indigo-400 underline underline-offset-2">
                 {{ $t('common.cookies.more') }}
-              </NuxtLinkLocale>
+              </a>
             </p>
 
             <div class="mt-4 flex flex-col sm:flex-row gap-2 sm:gap-3">
@@ -58,4 +58,5 @@
 
 <script setup lang="ts">
 const { banner, accept, reject } = useCookieConsent()
+const privacyPolicyUrl = usePrivacyPolicyUrl()
 </script>
