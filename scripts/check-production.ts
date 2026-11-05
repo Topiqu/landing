@@ -47,6 +47,24 @@ const checkPage = async (path: string, status = 200, marker?: string) => {
 const imageSources = new Set<string>()
 for (const locale of ['en', 'cs']) {
   const home = await checkPage(`/${locale}`, 200, 'id="hero-title"')
+  const language = locale === 'cs' ? 'cs-CZ' : 'en-US'
+  if (home.match(/<html\b[^>]*\blang="([^"]+)"/)?.[1] !== language) {
+    failures.push(`/${locale}: incorrect HTML language`)
+  }
+  const schemaTypes = new Set<string>()
+  for (const [, json] of home.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) {
+    try {
+      const data = JSON.parse(json!)
+      for (const node of data['@graph'] ?? [data]) {
+        for (const type of [node['@type']].flat()) schemaTypes.add(type)
+      }
+    } catch {
+      failures.push(`/${locale}: invalid structured data`)
+    }
+  }
+  if (!schemaTypes.has('WebSite') || !schemaTypes.has('Organization')) {
+    failures.push(`/${locale}: missing WebSite or Organization structured data`)
+  }
   for (const [tag] of home.matchAll(/<img\b[^>]*>/g)) {
     const src = tag.match(/\bsrc="([^"]+)"/)?.[1]
     const srcset = tag.match(/\bsrcset="([^"]+)"/)?.[1]
