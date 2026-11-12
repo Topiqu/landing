@@ -32,6 +32,8 @@ export default defineNuxtConfig({
       // Read by useCookieConsent; gtag itself stays in manual init mode.
       gtagId: process.env.GTAG_ID || '',
       adsensePublisherId: process.env.NUXT_PUBLIC_ADSENSE_PUBLISHER_ID || 'ca-pub-9731440718321055',
+      // Loaded only after cookie consent (`plugins/meta-pixel.client.ts`); empty disables it.
+      metaPixelId: process.env.NUXT_PUBLIC_META_PIXEL_ID ?? '3051588728517585',
     },
   },
 
@@ -152,6 +154,7 @@ export default defineNuxtConfig({
           'https://adservice.google.com',
           'https://fundingchoicesmessages.google.com',
           'https://ep2.adtrafficquality.google',
+          'https://connect.facebook.net',
         ],
       },
     },

@@ -19,6 +19,7 @@ Use Nuxt's native runtime environment overrides for an already-built image:
 | `SES_ACCESS_KEY_ID`, `SES_SECRET_ACCESS_KEY`    | Credentials allowed to send from the SES identity          |
 | `NUXT_EMAIL_FROM`                               | Verified SES sender                                        |
 | `NUXT_PUBLIC_GTAG_ID`                           | Optional analytics ID; loaded only after consent           |
+| `NUXT_PUBLIC_META_PIXEL_ID`                     | Meta Pixel; loaded only after consent, empty disables it   |
 | `NUXT_PUBLIC_STATUS_URL`, `NUXT_PUBLIC_CDN_URL` | Optional public service origins                            |
 
 The legacy names in `nuxt.config.ts` supply build-time defaults. Prefer `NUXT_` overrides for

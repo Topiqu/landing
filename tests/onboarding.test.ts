@@ -24,6 +24,7 @@ const names = [
   'createError',
   'getRequestIP',
   'getQuery',
+  'trackMetaEvent',
 ]
 const originalGlobals = Object.fromEntries(names.map((name) => [name, (globalThis as any)[name]]))
 const storageValues = new Map<string, string>()
@@ -35,6 +36,7 @@ const storage = {
 }
 const requests: { url: string; options: any }[] = []
 const config = { authSecret: 'test-onboarding-secret', platformApiUrl: 'https://platform.example.test' }
+const trackMetaEvent = mock((_name: string, _params?: Record<string, unknown>) => false)
 const fetch = mock(async (url: string, options: any): Promise<unknown> => {
   requests.push({ url, options })
   return { url: 'https://workspace.example.test', ok: true }
@@ -74,6 +76,7 @@ beforeAll(async () => {
     createError: (options: any) => Object.assign(new Error(options.message), options),
     getRequestIP: () => '203.0.113.4',
     getQuery: (event: any) => event.query,
+    trackMetaEvent,
   })
   ;({ useOnboardingStore } = await import('../app/stores/onboarding'))
   ;({ default: checkout } = await import('../server/api/checkout.post'))
@@ -84,6 +87,7 @@ beforeEach(() => {
   storageValues.clear()
   requests.length = 0
   fetch.mockClear()
+  trackMetaEvent.mockClear()
 })
 afterEach(() => {
   for (const store of stores.splice(0)) store.$dispose()
@@ -115,6 +119,7 @@ describe('verification email feedback', () => {
     expect(await store.verifyCode({ code: '123456', challenge: 'signed-challenge' })).toBe(true)
     expect(store.form.email).toBe('owner@example.test')
     expect(store.verifiedToken).toBe('verified-proof')
+    expect(trackMetaEvent.mock.calls).toEqual([['Lead']])
     expect(store.form.password).toBe('')
     expect(fetch.mock.calls[0]![1].body).toEqual({
       email: undefined,
@@ -133,6 +138,7 @@ describe('verification email feedback', () => {
     expect(store.form.email).toBe('current@example.test')
     expect(store.challenge).toBe('current-challenge')
     expect(store.verifiedToken).toBeNull()
+    expect(trackMetaEvent).not.toHaveBeenCalled()
     expect(store.codeError).toBe('common.auth.codeExpired')
   })
 
@@ -354,6 +360,7 @@ describe('company website onboarding', () => {
     expect(request.options.body.websiteUrl).toBe(website.trim() || undefined)
     expect(request.options.body.websiteImportConsentVersion).toBe(website.trim() ? 1 : undefined)
     expect(request.options.body.website).toBeUndefined()
+    expect(trackMetaEvent.mock.calls).toEqual([['CompleteRegistration', { content_name: 'TRIAL' }]])
   })
 
   test('forwards the website in the validated, signed platform request', async () => {
