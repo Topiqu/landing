@@ -303,6 +303,8 @@ export default defineNuxtConfig({
       '/cs',
       '/en/terms-of-service',
       '/cs/obchodni-podminky',
+      '/en/agencies',
+      '/cs/agentury',
       {
         loc: '/en/docs',
         _i18nTransform: false,
