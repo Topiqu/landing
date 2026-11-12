@@ -13,7 +13,8 @@ const { data: system } = await useFetch('/api/status', { default: () => ({ statu
           <p>{{ $t('landing.design.footerLabel') }}</p>
         </div>
         <nav :aria-label="$t('landing.design.nav.navigation')">
-          <NuxtLinkLocale to="/docs">{{ $t('landing.design.nav.docs') }}</NuxtLinkLocale
+          <NuxtLinkLocale to="agencies">{{ $t('agencies.nav') }}</NuxtLinkLocale
+          ><NuxtLinkLocale to="/docs">{{ $t('landing.design.nav.docs') }}</NuxtLinkLocale
           ><NuxtLinkLocale to="/changelog">Changelog</NuxtLinkLocale
           ><NuxtLinkLocale to="tos">{{ $t('common.links.terms') }}</NuxtLinkLocale
           ><a :href="privacyPolicyUrl">{{ $t('common.links.privacy') }}</a

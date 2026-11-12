@@ -1,0 +1,137 @@
+{
+  "agencies": {
+    "nav": "For agencies",
+    "meta": {
+      "title": "Topiqu for agencies: your clients' blogs under one account",
+      "description": "Run your clients' blogs under one account: {blog} per blog a month, shared article credits and usage per blog for your invoices. From {price} a month."
+    },
+    "hero": {
+      "kicker": "Topiqu for agencies",
+      "title": "Your clients' blogs under one account",
+      "description": "Each client gets their own blog, domain and design. You pay one subscription, all blogs share the article credits, and you download each blog's usage for your invoices.",
+      "cta": "Set up an agency",
+      "secondary": "Work out the price"
+    },
+    "units": {
+      "blog": "blog | blogs",
+      "credit": "credit | credits"
+    },
+    "samples": [
+      {
+        "name": "Northside Bakery",
+        "domain": "northsidebakery.com",
+        "section": "Craft",
+        "title": "Why sourdough needs 48 hours"
+      },
+      {
+        "name": "Harbor Physio",
+        "domain": "harborphysio.com",
+        "section": "Back care",
+        "title": "Sitting eight hours a day? Three moves for your lower back"
+      },
+      {
+        "name": "Greenleaf Garden Centre",
+        "domain": "greenleaf.topiqu.com",
+        "section": "Autumn",
+        "title": "Which bulbs you can still plant in November"
+      },
+      {
+        "name": "Miller Auto Repair",
+        "domain": "millerauto.topiqu.com",
+        "section": "Archive",
+        "title": "Winter tyres: when to switch"
+      }
+    ],
+    "shelf": {
+      "label": "Example: four client blogs, each with its own domain and design, under one agency account",
+      "blog": "Blog",
+      "articles": "{n} article this month | {n} articles this month",
+      "paused": "paused",
+      "agency": "Ridgeline Studio",
+      "agencyLabel": "agency",
+      "summary": "{blogs} blogs · {credits} credits",
+      "invoice": "a month, one invoice"
+    },
+    "pool": {
+      "title": "One credit balance for every blog",
+      "text": "You buy credits for the whole agency and the blogs draw on them as they need. You see how much each one used per month and download it for your invoices.",
+      "label": "Example: {blogs} client blogs drawing on shared credits, {used} of {total} used",
+      "period": "Agency credits this month",
+      "used": "of {total} used",
+      "limit": "{blog} has a limit of {limit} credits a month",
+      "rollover": "{n} unused credit rolls over to next month | {n} unused credits roll over to next month",
+      "ofLimit": "{used} of {limit}",
+      "paused": "not writing",
+      "csv": "Download CSV"
+    },
+    "calculator": {
+      "title": "What you'll pay",
+      "text": "You pay for blog slots and for credits that all blogs share.",
+      "label": "Price calculator",
+      "blogs": "Blogs on Pro or Premium",
+      "blogsHint": "{price} per blog",
+      "premium": "Of which Premium",
+      "premiumHint": "+{price} per blog",
+      "credits": "Credits",
+      "creditsHint": "{credits} for {price}",
+      "more": "Need more than {blogs} blogs or {credits} credits? Set them after you create the agency."
+    },
+    "invoice": {
+      "title": "Invoice",
+      "period": "monthly · USD",
+      "blogs": "Blog slot × {count}",
+      "premium": "Premium add-on × {count}",
+      "packs": "{credits}-credit pack × {count}",
+      "total": "Total",
+      "vat": "excl. VAT",
+      "perClient": "On average {price} and {credits} per client a month.",
+      "cta": "Set up an agency with this order",
+      "note": "At least {blogs} blogs and {packs} credit packs. Signing up is free; you pay once you start the subscription."
+    },
+    "plans": {
+      "title": "Pro or Premium, chosen per blog.",
+      "description": "Change it at any time. Premium is a {addOn} add-on to the blog's slot.",
+      "perBlog": "per blog a month",
+      "names": {
+        "free": "Free",
+        "pro": "Pro",
+        "premium": "Premium"
+      },
+      "features": {
+        "articles": "AI articles with fact-checking and editorial review",
+        "domain": "Custom domain, fonts and gradients",
+        "translations": "Translations into {count} languages",
+        "team": "No limit on team seats",
+        "everything": "Everything in Pro",
+        "gsc": "Search Console insights and SEO autopilot",
+        "visibility": "{count} AI visibility responses a month"
+      },
+      "free": "The blog stays online with all its content, comments and team; it just stops writing and using credits. It takes no slot. A custom domain is disconnected and the blog runs on its .topiqu.com address."
+    },
+    "faq": {
+      "title": "Common questions",
+      "items": [
+        {
+          "q": "What is a credit?",
+          "a": "A credit is an article unit. A standard-quality article costs 1 credit, higher quality 2 or 3. Unused credits roll over to the next month, up to twice the monthly amount."
+        },
+        {
+          "q": "Can I add a blog I already have on Topiqu?",
+          "a": "Yes, if you own it. If the blog has its own subscription, cancel it first so it is not paid for twice."
+        },
+        {
+          "q": "How do I bill my clients?",
+          "a": "The agency shows how many credits each blog used in the period, and you can download it as CSV. You can also give each blog a monthly limit."
+        },
+        {
+          "q": "How do I cancel?",
+          "a": "In the agency's billing, at any time. The subscription runs until the end of the paid period; after that the blogs move to the Free plan."
+        }
+      ]
+    },
+    "closing": {
+      "title": "Add your first client today.",
+      "text": "Signing up takes a few minutes. You pay only once you start the subscription."
+    }
+  }
+}
