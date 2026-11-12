@@ -348,7 +348,8 @@ export const useOnboardingStore = defineStore(
           },
         })
         // Leaving at once can cancel the pixel's request.
-        if (trackMetaEvent('CompleteRegistration', { content_name: form.selectedPlan ?? 'TRIAL' }))
+        const eventID = await metaRegistrationId(form.email)
+        if (trackMetaEvent('CompleteRegistration', { content_name: form.selectedPlan ?? 'TRIAL' }, { eventID }))
           await new Promise((resolve) => setTimeout(resolve, 300))
         if (res.url) window.location.href = res.url
       } catch (error: any) {

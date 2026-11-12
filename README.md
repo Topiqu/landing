@@ -103,7 +103,9 @@ inherit the apex file, and listing only this publisher would mark their own GAM 
 
 The Meta Pixel follows the same consent: it loads after acceptance, sends `PageView` on every route,
 `Lead` once the onboarding email is verified and `CompleteRegistration` before the checkout redirect.
-Declining removes its `_fbp`/`_fbc` cookies and reloads a page where it already ran.
+Declining removes its `_fbp`/`_fbc` cookies and reloads a page where it already ran. Checkout forwards those
+cookies and the user agent to the platform as `X-Landing-*` headers for its Conversions API, and
+`CompleteRegistration` carries the same event id (`metaRegistrationId`), so Meta counts the sign-up once.
 
 ## 🧹 Linting & Formatting
 

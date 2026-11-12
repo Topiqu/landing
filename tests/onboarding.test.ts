@@ -1,12 +1,13 @@
 import * as vue from 'vue'
 import { resolve } from 'node:path'
-import { createHmac } from 'node:crypto'
 import { createPinia, setActivePinia } from 'pinia'
+import { createHash, createHmac } from 'node:crypto'
 import { createPersistedState } from 'pinia-plugin-persistedstate'
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, mock, spyOn, test } from 'bun:test'
 
 import * as plans from '../shared/utils/plans'
 import * as branding from '../shared/utils/branding'
+import { metaRegistrationId } from '../app/utils/metaPixel'
 import { checkoutKeys } from '../server/utils/checkoutRequests'
 
 const names = [
@@ -25,6 +26,9 @@ const names = [
   'getRequestIP',
   'getQuery',
   'trackMetaEvent',
+  'metaRegistrationId',
+  'getCookie',
+  'getRequestHeader',
 ]
 const originalGlobals = Object.fromEntries(names.map((name) => [name, (globalThis as any)[name]]))
 const storageValues = new Map<string, string>()
@@ -36,7 +40,9 @@ const storage = {
 }
 const requests: { url: string; options: any }[] = []
 const config = { authSecret: 'test-onboarding-secret', platformApiUrl: 'https://platform.example.test' }
-const trackMetaEvent = mock((_name: string, _params?: Record<string, unknown>) => false)
+const trackMetaEvent = mock(
+  (_name: string, _params?: Record<string, unknown>, _options?: { eventID?: string }) => false,
+)
 const fetch = mock(async (url: string, options: any): Promise<unknown> => {
   requests.push({ url, options })
   return { url: 'https://workspace.example.test', ok: true }
@@ -77,6 +83,9 @@ beforeAll(async () => {
     getRequestIP: () => '203.0.113.4',
     getQuery: (event: any) => event.query,
     trackMetaEvent,
+    metaRegistrationId,
+    getCookie: (event: any, name: string) => event.cookies?.[name],
+    getRequestHeader: (event: any, name: string) => event.headers?.[name],
   })
   ;({ useOnboardingStore } = await import('../app/stores/onboarding'))
   ;({ default: checkout } = await import('../server/api/checkout.post'))
@@ -360,7 +369,9 @@ describe('company website onboarding', () => {
     expect(request.options.body.websiteUrl).toBe(website.trim() || undefined)
     expect(request.options.body.websiteImportConsentVersion).toBe(website.trim() ? 1 : undefined)
     expect(request.options.body.website).toBeUndefined()
-    expect(trackMetaEvent.mock.calls).toEqual([['CompleteRegistration', { content_name: 'TRIAL' }]])
+    // The platform's Conversions API derives the same id, so Meta keeps one of the two reports.
+    const eventID = `registration-${createHash('sha256').update('owner@firma.cz').digest('hex').slice(0, 40)}`
+    expect(trackMetaEvent.mock.calls).toEqual([['CompleteRegistration', { content_name: 'TRIAL' }, { eventID }]])
   })
 
   test('forwards the website in the validated, signed platform request', async () => {
@@ -378,6 +389,8 @@ describe('company website onboarding', () => {
         websiteImportConsentVersion: 1,
         website: 'honeypot',
       },
+      cookies: { _fbp: 'fb.1.1700000000000.123', _fbc: '' },
+      headers: { 'user-agent': 'Browser/1.0' },
     } as never)
     expect(result.url).toBe('https://workspace.example.test')
     const request = requests[0]!
@@ -388,6 +401,10 @@ describe('company website onboarding', () => {
     expect(request.options.headers['X-Landing-Client-Ip']).toBe('203.0.113.4')
     expect(request.options.headers['X-Landing-Sig']).toHaveLength(64)
     expect(request.options.headers['Idempotency-Key']).toHaveLength(64)
+    expect(request.options.headers['X-Landing-Fbp']).toBe('fb.1.1700000000000.123')
+    expect(request.options.headers['X-Landing-User-Agent']).toBe('Browser/1.0')
+    expect(request.options.headers).not.toHaveProperty('X-Landing-Fbc')
+    expect(request.options.body).not.toHaveProperty('meta')
     expect(request.options.retry).toBe(0)
     expect(request.options.timeout).toBe(30_000)
   })
