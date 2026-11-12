@@ -75,9 +75,7 @@
       :title="$t('landing.onboarding.summary.' + store.submitError)"
     >
       <template #actions>
-        <UButton :to="`${platformUrl}/${locale}/auth`" color="neutral" variant="outline">{{
-          $t('common.auth.login')
-        }}</UButton>
+        <UButton :to="authUrl" color="neutral" variant="outline">{{ $t('common.auth.login') }}</UButton>
       </template>
     </UAlert>
 
@@ -99,7 +97,7 @@ import { annualPlanPriceUsd, formatUsd, PLAN_PRICES_USD } from '~~/shared/utils/
 definePageMeta({ layout: 'onboarding', middleware: ['onboarding-guard'] })
 
 const { locale } = useI18n()
-const { platformUrl } = useRuntimeConfig().public
+const authUrl = usePlatformAuthUrl()
 const privacyPolicyUrl = usePrivacyPolicyUrl()
 const store = useOnboardingStore()
 const { submit, form, loading, fullDomainPreview, brandAccent, trialEndsOn, goTo } = useOnboarding()
