@@ -170,6 +170,8 @@ export default defineNuxtConfig({
     '/en': { prerender: true },
     '/cs': { prerender: true },
     '/en/terms-of-service': { prerender: true },
+    '/en/agencies': { prerender: true },
+    '/cs/agentury': { prerender: true },
     // The app hosts the one privacy policy. URLs registered with OAuth providers and stores keep working.
     '/en/privacy-policy': {
       redirect: { to: `${process.env.PLATFORM_URL || 'https://app.topiqu.com'}/en/privacy-policy`, statusCode: 302 },
@@ -211,13 +213,13 @@ export default defineNuxtConfig({
         code: 'en',
         language: 'en-US',
         name: 'EN',
-        files: ['en/common.json', 'en/landing.json', 'en/legal.json', 'en/languages.json'],
+        files: ['en/common.json', 'en/landing.json', 'en/agencies.json', 'en/legal.json', 'en/languages.json'],
       },
       {
         code: 'cs',
         language: 'cs-CZ',
         name: 'CZ',
-        files: ['cs/common.json', 'cs/landing.json', 'cs/legal.json', 'cs/languages.json'],
+        files: ['cs/common.json', 'cs/landing.json', 'cs/agencies.json', 'cs/legal.json', 'cs/languages.json'],
       },
     ],
     defaultLocale: 'en',
@@ -244,6 +246,7 @@ export default defineNuxtConfig({
         cs: '/obchodni-podminky',
         en: '/terms-of-service',
       },
+      agencies: { cs: '/agentury', en: '/agencies' },
       'onboarding/index': { cs: '/onboarding', en: '/onboarding' },
       'onboarding/site': { cs: '/onboarding/web', en: '/onboarding/site' },
       'onboarding/design': { cs: '/onboarding/design', en: '/onboarding/design' },

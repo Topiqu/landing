@@ -20,7 +20,7 @@ const restoreLanguageFocus = (event: Event) => {
   if (!languageMenuInteractedOutside) languageButton.value?.$el.focus({ preventScroll: true })
   languageMenuInteractedOutside = false
 }
-const { platformUrl } = useRuntimeConfig().public
+const authUrl = usePlatformAuthUrl()
 const theme = useThemeStore()
 const hydrated = ref(false)
 const open = ref(false)
@@ -31,6 +31,7 @@ const links = computed(() => [
   { label: t('landing.design.nav.features'), to: localePath('/') + '#specs' },
   { label: t('landing.design.nav.capabilities'), to: localePath('/') + '#features' },
   { label: t('landing.pricing.title'), to: localePath('/') + '#pricing' },
+  { label: t('agencies.nav'), to: localePath('agencies') },
   { label: t('landing.design.nav.docs'), to: localePath('/docs') },
   { label: t('landing.design.nav.changelog'), to: localePath('/changelog') },
 ])
@@ -71,7 +72,7 @@ const links = computed(() => [
         :icon="hydrated && theme.isDark ? 'mdi:weather-sunny' : 'mdi:weather-night'"
         @click="theme.toggle"
       />
-      <UButton :to="platformUrl + '/' + locale + '/auth'" color="neutral" variant="ghost" class="header-login">{{
+      <UButton :to="authUrl" color="neutral" variant="ghost" class="header-login">{{
         $t('common.auth.login')
       }}</UButton>
       <UButton :to="localePath({ name: 'onboarding-site' })" class="header-start">{{
@@ -84,9 +85,7 @@ const links = computed(() => [
           link.label
         }}</NuxtLink>
         <NuxtLink :to="localePath('/') + '#faq'" class="mobile-nav-link" @click="open = false">FAQ</NuxtLink>
-        <UButton :to="platformUrl + '/' + locale + '/auth'" color="neutral" variant="outline" block>{{
-          $t('common.auth.login')
-        }}</UButton>
+        <UButton :to="authUrl" color="neutral" variant="outline" block>{{ $t('common.auth.login') }}</UButton>
         <UButton :to="localePath({ name: 'onboarding-site' })" block @click="open = false">{{
           $t('landing.design.hero.cta')
         }}</UButton>

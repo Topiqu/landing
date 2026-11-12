@@ -38,6 +38,25 @@ export const TRANSLATION_LANGUAGES = {
 } as const
 export const EXTRA_TRANSLATION_LANGUAGE_PRICE_USD = 9
 
+// The agency subscription. Mirrors the app's shared/utils/agencyPlan.ts; the app re-validates the order it receives.
+export const AGENCY_PRICES_USD = {
+  blog: 10,
+  premium: 20,
+  pack: 30,
+} as const
+export const AGENCY_PACK_CREDITS = 50
+// Mirrors the app's shared/utils/billingCatalog.ts `PREMIUM.VISIBILITY`: monthly AI visibility responses per Premium blog.
+export const PREMIUM_VISIBILITY_RESPONSES = 300
+export const AGENCY_LIMITS = {
+  minBlogs: 3,
+  maxBlogs: 500,
+  minPacks: 4,
+  maxPacks: 400,
+} as const
+export type AgencyOrder = { blogs: number; premium: number; packs: number }
+export const agencyPriceUsd = ({ blogs, premium, packs }: AgencyOrder) =>
+  blogs * AGENCY_PRICES_USD.blog + premium * AGENCY_PRICES_USD.premium + packs * AGENCY_PRICES_USD.pack
+
 export type ContentLanguage = (typeof CONTENT_LANGUAGES)[number]
 export type BillingInterval = 'month' | 'year'
 export type PricedPlan = keyof typeof PLAN_PRICES_USD
