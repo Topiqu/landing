@@ -6,6 +6,16 @@ import { onboardingSecret, verifyVerifiedToken } from '~~/server/utils/onboardin
 
 const checkoutRequests = createCheckoutRequests()
 
+// The Meta Pixel's cookies reach only topiqu.com; the platform reports the sign-up with them.
+const metaHeaders = (event: Parameters<typeof getCookie>[0]) =>
+  Object.fromEntries(
+    [
+      ['X-Landing-Fbp', getCookie(event, '_fbp')],
+      ['X-Landing-Fbc', getCookie(event, '_fbc')],
+      ['X-Landing-User-Agent', getRequestHeader(event, 'user-agent')],
+    ].filter((header): header is [string, string] => Boolean(header[1])),
+  )
+
 const SUBDOMAIN_RE = /^[a-z0-9]([a-z0-9-]{1,61}[a-z0-9])?$/
 const CUSTOM_DOMAIN_RE = /^([a-z0-9]([a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}$/
 
@@ -79,6 +89,7 @@ export default defineEventHandler(async (event) => {
           'X-Landing-Client-Ip': clientIp,
           'X-Landing-Timestamp': timestamp,
           'X-Landing-Sig': sig,
+          ...metaHeaders(event),
           'Content-Type': 'application/json',
           'Idempotency-Key': fingerprint,
           ...(event.context?.requestId ? { 'X-Request-Id': event.context.requestId } : {}),

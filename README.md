@@ -78,7 +78,8 @@ Copy `.env.example` and fill in:
 | `NUXT_EMAIL_FROM`                | Sender address for verification emails                  |
 | `NUXT_PUBLIC_GTAG_ID`            | Google Analytics measurement ID (`G-XXXXXXXXXX`)        |
 
-AdSense uses `NUXT_PUBLIC_ADSENSE_PUBLISHER_ID` (default: `ca-pub-9731440718321055`).
+AdSense uses `NUXT_PUBLIC_ADSENSE_PUBLISHER_ID` (default: `ca-pub-9731440718321055`), the Meta Pixel
+`NUXT_PUBLIC_META_PIXEL_ID` (default: `3051588728517585`; empty disables it).
 
 For an already-built image use the native `NUXT_` runtime overrides described in
 [production operations](docs/production.md), which also documents retries, logging and release checks.
@@ -99,6 +100,12 @@ hydration and cookie consent; withdrawing consent reloads the page to stop the a
 Google advertising consent still requires a published Google CMP message for `topiqu.com`
 (AdSense → Privacy & messaging). There is deliberately no `ads.txt`: tenant blogs on `*.topiqu.com`
 inherit the apex file, and listing only this publisher would mark their own GAM sellers unauthorized.
+
+The Meta Pixel follows the same consent: it loads after acceptance, sends `PageView` on every route,
+`Lead` once the onboarding email is verified and `CompleteRegistration` before the checkout redirect.
+Declining removes its `_fbp`/`_fbc` cookies and reloads a page where it already ran. Checkout forwards those
+cookies and the user agent to the platform as `X-Landing-*` headers for its Conversions API, and
+`CompleteRegistration` carries the same event id (`metaRegistrationId`), so Meta counts the sign-up once.
 
 ## 🧹 Linting & Formatting
 

@@ -285,6 +285,7 @@ export const useOnboardingStore = defineStore(
         // Email changes clear verification synchronously, so restore the proven identity first.
         if (link) form.email = res.email
         verifiedToken.value = res.verifiedToken
+        trackMetaEvent('Lead')
         return true
       } catch (error: any) {
         const reason = error.data?.data?.reason
@@ -346,6 +347,10 @@ export const useOnboardingStore = defineStore(
             billingInterval: form.billingInterval,
           },
         })
+        // Leaving at once can cancel the pixel's request.
+        const eventID = await metaRegistrationId(form.email)
+        if (trackMetaEvent('CompleteRegistration', { content_name: form.selectedPlan ?? 'TRIAL' }, { eventID }))
+          await new Promise((resolve) => setTimeout(resolve, 300))
         if (res.url) window.location.href = res.url
       } catch (error: any) {
         const reason = error.data?.data?.reason
