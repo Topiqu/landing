@@ -5,6 +5,7 @@ import { createHash, createHmac } from 'node:crypto'
 import { createPersistedState } from 'pinia-plugin-persistedstate'
 import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, mock, spyOn, test } from 'bun:test'
 
+import * as leads from '../shared/utils/leads'
 import * as plans from '../shared/utils/plans'
 import * as branding from '../shared/utils/branding'
 import { metaRegistrationId } from '../app/utils/metaPixel'
@@ -70,7 +71,7 @@ const createStore = () => {
 }
 
 beforeAll(async () => {
-  Object.assign(globalThis, vue, branding, plans, {
+  Object.assign(globalThis, vue, branding, plans, leads, {
     useNuxtApp: () => ({ $i18n: { locale: { value: 'en' }, t: (key: string) => key } }),
     useLegacyToast: () => ({ success: mock(), error: mock() }),
     useDebounceFn: (run: any) => run,
