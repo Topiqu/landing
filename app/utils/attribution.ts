@@ -1,4 +1,5 @@
-import { ATTRIBUTION_KEYS, type Attribution } from '../../shared/utils/leads'
+// ATTRIBUTION_KEYS comes from auto-imports: a relative shared/ import breaks the production server bundle.
+import type { Attribution } from '~~/shared/utils/leads'
 
 const STORAGE_KEY = 'topiqu.attribution'
 
