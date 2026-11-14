@@ -2,7 +2,7 @@
   "landing": {
     "pricing": {
       "title": "Plans & Pricing",
-      "subtitle": "Your first eligible blog gets a {days}-day trial and {articles} article units. Additional blogs start on Free; each blog has its own subscription.",
+      "subtitle": "Up to 50 articles a month for the price of one copywriter's text. Nothing you don't use is lost: units roll over up to three times your monthly allowance.",
       "month": "/mo",
       "year": "/yr",
       "intervalLabel": "Billing frequency",
@@ -12,7 +12,7 @@
       },
       "billedYearly": "Billed {price} once a year",
       "articlePacks": {
-        "title": "Extra articles when you need them",
+        "title": "Need more? Top up articles.",
         "articles": "{count} articles",
         "unitPrice": "{price} per article",
         "unit": "articles",
@@ -25,72 +25,72 @@
         "free": {
           "badge": "Start",
           "name": "Free",
-          "desc": "Write and publish on your blog. First eligible blogs can try Premium without a card.",
+          "desc": "Your own free blog on a .topiqu.com address. Write it yourself and switch on AI whenever you like.",
           "features": {
             "editor": "Editor with media, tables and polls",
-            "subdomain": "Unlimited blogs, each with a free .topiqu.com address",
-            "optimization": "Article optimization score",
-            "library": "Media library with image rights",
+            "subdomain": "Unlimited blogs on a .topiqu.com address",
+            "optimization": "Optimization score for every article",
+            "library": "Media library with licence records",
             "community": "Comments, reactions and basic analytics",
             "no_ai": "No AI writing",
-            "seats": "1 team member, including the owner"
+            "seats": "1 team seat"
           },
           "cta": "Start for free"
         },
         "pro": {
-          "badge": "Autopilot",
+          "badge": "Full newsroom",
           "name": "Pro",
-          "desc": "AI writing grounded in your knowledge, on your own domain.",
+          "desc": "A complete newsroom that writes from your website, documents and products and publishes straight to you.",
           "features": {
-            "no_ads": "Everything in Free",
-            "articles": "{count} article units/month",
-            "knowledge": "Knowledge base with up to {count} sources",
-            "review": "Fact-check and editorial review",
-            "translations": "Translations into {count} languages, up to 60 translations/month; more languages for {price}/month each",
-            "scheduling": "Scheduling, series and auto-publishing",
-            "domain": "Custom domain, fonts and gradients",
-            "integrations": "WordPress plugin, API and import",
-            "seats": "2 team members, including the owner"
+            "everything": "Everything in Free",
+            "articles": "Up to {count} articles a month; unused ones add up to {cap}",
+            "knowledge": "Knowledge base: {count} sources, {products} products and {characters} characters",
+            "review": "Independent fact-checking and properly licensed photos",
+            "publishing": "Publishing to WordPress, Shopify, the REST API and webhooks",
+            "domain": "Custom domain with HTTPS and redirects",
+            "translations": "{count} languages, up to 60 translations a month; extra languages {price} a month each",
+            "planning": "Topic planning, industry news and autopilot",
+            "searchConsole": "Search Console and update proposals for positions 8–20",
+            "mentions": "Unlinked mentions of your brand",
+            "seats": "2 team seats"
           },
           "cta": "Choose Pro"
         },
         "premium": {
-          "badge": "Most popular",
+          "badge": "For growth in Google and AI",
           "name": "Premium",
-          "desc": "Know where you rank in Google and whether OpenAI answers cite you — and act on it.",
+          "desc": "Twice the capacity, five languages and articles that keep improving based on Google and AI data.",
           "features": {
             "everything": "Everything in Pro",
-            "articles": "{count} article units/month",
-            "visibility": "Up to 300 AI visibility responses/month",
-            "gsc": "Search Console insights and SEO autopilot",
-            "knowledge": "Knowledge base with up to {count} sources",
-            "sentiment": "Reader sentiment analysis",
-            "indexing": "Priority indexing and sourcing",
-            "emoji": "Custom emoji reactions",
-            "support": "Priority 24/7 support",
-            "seats": "3 team members, including the owner",
-            "translations": "Translations into {count} languages, up to 250 translations/month"
+            "articles": "Up to {count} articles a month; unused ones add up to {cap}",
+            "translations": "{count} languages, up to 250 translations a month",
+            "knowledge": "Knowledge base: {count} sources, {products} products and {characters} characters",
+            "autopilot": "SEO autopilot: rewrites titles with CTR under 2% and proposes expansions",
+            "visibility": "AI visibility: up to {count} answers a month",
+            "linkbuilding": "Link building: your brands' reseller sites and ready link requests",
+            "sentiment": "Reader sentiment analysis and custom emoji reactions",
+            "support": "Priority support 24/7",
+            "seats": "3 team seats"
           },
           "cta": "Choose Premium"
         },
         "custom": {
           "badge": "Enterprise",
           "name": "Custom",
-          "desc": "Shared publishing tools for teams that need more paid seats.",
+          "desc": "For teams and agencies that need more seats, more data and their own brand.",
           "features": {
             "everything": "Everything in Premium",
-            "whitelabel": "White-label, without Topiqu branding",
-            "articles": "{count} article units/month",
-            "knowledge": "Knowledge base with up to {count} sources",
-            "multisite": "3 seats included; each additional seat is $20/month",
-            "domain": "Custom domain with managed HTTPS",
-            "onboarding": "Shared team usage and billing controls",
-            "sla": "20% annual discount, including additional seats"
+            "whitelabel": "White label without Topiqu branding",
+            "articles": "Up to {count} articles a month; unused ones add up to {cap}",
+            "knowledge": "Knowledge base: {count} sources, {products} products and {characters} characters",
+            "seats": "{seats} seats included, each extra one {seatPrice} a month",
+            "billing": "Shared team usage and central billing",
+            "annual": "20% annual discount, extra seats included"
           },
           "cta": "Choose Custom"
         }
       },
-      "usagePolicy": "Prices are per blog, before tax. Standard / High / Ultra articles use 1 / 2 / 3 article units. AI work also shares a capacity limit: at exhaustion it pauses until renewal or an explicit top-up, with no automatic overage. Annual plans renew usage monthly."
+      "usagePolicy": "Prices are per blog, excluding tax. A Standard, High or Ultra article uses 1, 2 or 3 units. Unused units roll over to the following months up to three times your monthly allowance while you have an active AI plan. Nothing is charged automatically: when units run out, buy a pack or wait for next month. Annual plans also add units monthly."
     },
     "faq": {
       "badge": "Support & Help",
@@ -99,28 +99,36 @@
       "cta_button": "Contact support",
       "items": [
         {
-          "q": "How does the free trial work?",
-          "a": "Your first eligible blog gets a 14-day Premium trial and 5 article units. Free requires no card. Choosing Pro or Premium during sign-up asks for a card, with the first charge after the trial; you can cancel before then. CUSTOM is paid immediately on confirmation. Further blogs belonging to the same owner start on Free, with no additional trial. Each blog has its own subscription."
+          "q": "How does the trial work?",
+          "a": "Your first eligible blog gets 14 days of Premium and 5 articles free. If you stay on Free, you never enter a card. If you choose Pro or Premium, you add a card, but the first payment only comes after the trial and you can cancel anytime before then. Custom is charged as soon as you confirm. Further blogs of the same owner start on Free, and every blog has its own subscription."
         },
         {
-          "q": "What counts as an AI article?",
-          "a": "Standard / High / Ultra articles use 1 / 2 / 3 article units. Pro includes 50 units/month; Premium and self-service CUSTOM include 100. Auxiliary AI work has separate operation limits and shares AI capacity with articles. At exhaustion new work pauses until renewal or an explicit purchase; there is no automatic overage. Purchased article units never expire and are separate from AI usage top-ups; an active AI plan is required to generate."
+          "q": "What counts as an article?",
+          "a": "A Standard article uses 1 unit, High 2 and Ultra 3. Pro includes 50 units a month, Premium and Custom 100. Unused units roll over up to three times your monthly allowance while you have an active AI plan, and purchased packs never expire. Nothing is charged automatically: when units run out, wait for next month or buy a pack."
         },
         {
-          "q": "Where does the AI get its facts?",
-          "a": "Topiqu combines live web research with your own knowledge base — notes, PDF and Word files, web pages or a whole sitemap. Private sources shape the text but are never cited publicly; only sources you mark as public can become citations. Before publishing, a review step checks claims against the sources, and the fact-check panel lets you re-check any article."
+          "q": "Will Topiqu improve my Google rankings?",
+          "a": "Rankings also depend on your site authority, backlinks and competition. Topiqu takes care of everything that can be influenced: it writes on topics people actually search for, from exact data about your products and with complete technical SEO (schema.org, llms.txt, internal links). It tracks results in Search Console and improves articles in positions 8–20 so they reach page one."
         },
         {
-          "q": "Does AI publish content automatically?",
-          "a": "Only when you turn on automatic publishing. Otherwise every AI draft waits for you to review and edit it, and you can show an AI-content disclosure on the article."
+          "q": "How do I know the facts and specs in an article are right?",
+          "a": "Topiqu never publishes the first draft. A second, independent model compares numbers, prices, standards and claims with your feed, documents and live sources, and the sources panel shows where every piece of information comes from. What does not match gets fixed, what cannot be backed up gets cut, and disputed cases are held back with a notification to you."
         },
         {
-          "q": "How do I know whether answers cite me?",
-          "a": "On Premium, Topiqu builds questions from your Search Console queries, articles and reader comments. It regularly checks whether OpenAI answers cite you and where competitors appear. Questions without your citation become article ideas. This is a sample of selected questions, not a record of private conversations."
+          "q": "Where does Topiqu get its facts?",
+          "a": "From your knowledge base, meaning notes, PDF and Word documents, web pages or a whole sitemap, and from live research on the web. Private sources shape the text but are never cited publicly. Only sources you mark as public can be cited."
         },
         {
-          "q": "Can I publish Topiqu articles on my existing website?",
-          "a": "Yes. Use the hosted Topiqu publication, connect your domain, sync articles into WordPress with the Topiqu Sync plugin, or fetch them through the External API."
+          "q": "Does Topiqu publish automatically?",
+          "a": "Only when you switch on autopilot yourself. Otherwise every draft waits for you to review and edit it. Even autopilot publishes only what passed the editorial check, and you can label an article as AI content."
+        },
+        {
+          "q": "How do I find out whether AI answers cite me?",
+          "a": "In Premium, Topiqu builds questions from your Search Console queries, articles and comments and regularly checks whether OpenAI answers cite you and where competitors appear. Questions where you are missing become ideas for new articles."
+        },
+        {
+          "q": "Can I publish the articles on my existing website?",
+          "a": "Yes. Sync them to WordPress with the Topiqu Sync plugin, publish to Shopify, load them through the REST API, or use the Topiqu ready-made online magazine on your own domain."
         }
       ]
     },
@@ -252,7 +260,7 @@
           "tagline": "Premium tools with paid team capacity",
           "features": [
             "Everything in Premium",
-            "100 article units/month, subject to shared AI capacity",
+            "100 article units a month; unused ones roll over",
             "3 paid seats including the owner",
             "Additional seats: $20/month, 20% less annually"
           ]
@@ -349,16 +357,17 @@
         "skip": "Skip to content"
       },
       "hero": {
-        "kicker": "A newsroom that keeps working after publishing",
-        "title": "From what your company knows",
-        "accent": "to content people find.",
-        "description": "Topiqu finds topics worth covering. It combines your own sources with live research, checks the claims and publishes the article. Then it tracks the results and shows what to improve next.",
+        "kicker": "AN AI NEWSROOM FOR YOUR COMPANY BLOG",
+        "title": "Articles that know your company better than any freelance copywriter.",
+        "accent": "For the monthly price of one of their texts.",
+        "description": "Topiqu reads your website, documentation, price lists and product feed. It picks the topics your customers actually ask about, writes an expert article in your brand's voice and independently checks every claim before it goes out. Then it publishes to your WordPress, to Shopify or to your site. Nothing goes live without your approval.",
         "cta": "Start for free",
         "secondary": "See how it works",
         "scene": {
-          "verified": "Verified 3/3",
+          "verified": "Verified · 7 sources",
           "published": "Published",
-          "cited": "Cited in AI",
+          "sources": "From site, PDFs, prices",
+          "feed": "Feed connected",
           "scheduled": "Scheduled",
           "translated": "Translated"
         }
@@ -524,9 +533,9 @@
         }
       },
       "connector": {
-        "eyebrow": "FROM MATERIAL TO ARTICLE",
-        "title": "A pile of material in. A finished article out.",
-        "text": "Websites, price lists, meeting notes and your brand guide. Topiqu picks what matters and writes an article that fits your brand and search engines alike.",
+        "eyebrow": "KNOWS YOUR COMPANY",
+        "title": "Generic AI writes about the market. Topiqu writes about your business.",
+        "text": "You keep pasting the same context into an AI chat and then deleting the plans, specs and standards it made up. Connect Topiqu once. From then on it knows your company and keeps track of every change for you.",
         "label": "Illustration: material from the web, internal data and the brand comes together in Topiqu as a finished article",
         "sources": {
           "web": "Web",
@@ -568,7 +577,21 @@
           "paragraph": "Outdoor unit noise depends mostly on placement, output and defrosting. What to watch for during installation?",
           "chips": ["7 sources", "Verified claims", "Brand voice", "Schema and FAQ"]
         },
-        "output": "Article ready to publish"
+        "output": "Article ready to publish",
+        "pillars": [
+          {
+            "title": "Your know-how, not generic phrases",
+            "text": "Upload PDF catalogues, methodologies, Word documents, notes or your whole sitemap. Topiqu uses the exact plan names, product codes and standards. Internal documents are never quoted publicly."
+          },
+          {
+            "title": "Prices and products always up to date",
+            "text": "Connect a B2B price list, Google Merchant, Heureka or Shopify. Feeds are checked daily, your website weekly. Articles quote current prices and never recommend what's sold out."
+          },
+          {
+            "title": "Two editorial checks. No hallucinations.",
+            "text": "A second, independent model compares every number, quote and spec with the sources. What doesn't match gets fixed. What can't be backed up gets cut. And when it isn't sure, it holds the article and tells you."
+          }
+        ]
       },
       "closing": {
         "eyebrow": "START TODAY",
@@ -580,27 +603,27 @@
       "allFeatures": "Included in this plan",
       "after": {
         "eyebrow": "AFTER PUBLISHING",
-        "title": "The work continues after publishing.",
-        "text": "Search data feeds both the next brief and improvements to published articles.",
+        "title": "Publishing isn't the end. It's where the article starts working.",
+        "text": "Most companies publish an article and forget it. Topiqu keeps watching: every night it pulls Search Console data, tracks whether AI answers cite you and prepares concrete steps to move the article up.",
         "items": {
           "search": {
-            "title": "Search Console",
-            "text": "See clicks, impressions, CTR and positions. Topiqu flags pages with room to grow."
+            "title": "Know what every article brought you",
+            "text": "Clicks, impressions, CTR and position for each article, fresh every morning."
           },
           "ai": {
-            "title": "Visibility",
-            "text": "It regularly checks selected questions in OpenAI answers and shows which sources they cite."
+            "title": "You or your competitors in AI answers",
+            "text": "Topiqu regularly asks AI the questions your customers ask and shows who gets cited. Where you're missing, it prepares the topic that changes that."
           },
           "opportunities": {
-            "title": "Next opportunities",
-            "text": "Uncovered searches and competitor citations become ideas for a new or updated article."
+            "title": "From page two to page one",
+            "text": "Articles in positions 8–20 get a ready-made update proposal. Check the preview, confirm with one click and the article climbs."
           },
           "autopilot": {
-            "title": "Optional autopilot",
-            "text": "It can revise a title or update content using Search Console data. Changes are logged and reversible."
+            "title": "Titles people click",
+            "text": "When people see an article in Google but don't click, the SEO autopilot rewrites the title and excerpt, or adds the section they're searching for. Every change can be undone in one click."
           }
         },
-        "plan": "Search Console, citation tracking and SEO autopilot are available on Premium and Custom.",
+        "plan": "Search Console and update proposals come with Pro. The SEO autopilot and AI visibility are in Premium and Custom.",
         "dashboard": {
           "label": "Illustrative preview of post-publishing reports",
           "range": "Last 28 days",
@@ -690,76 +713,43 @@
           "heat pump defrost cycle"
         ]
       },
-      "testimonials": {
-        "eyebrow": "Bloggers' experiences",
-        "title": "What personal bloggers say about Topiqu",
-        "description": "Gardening, travel, and writing after work. Read how personal bloggers use Topiqu.",
-        "rating": "Rating: {rating} out of 5 stars",
-        "items": {
-          "personal": {
-            "name": "Petr Novotný",
-            "role": "Personal blog, written after work",
-            "quote": "I mostly write in the evenings after work. I often have a topic in mind, but by the time I sit down, I don't feel like writing. With Topiqu, I start with a draft and work through it. Getting started is where it helps me most."
-          },
-          "garden": {
-            "name": "Jana Dvořáková",
-            "role": "A small gardening blog",
-            "quote": "I'm always trying something in the garden and taking photos of what worked. Turning that into an article was harder. Now I put my notes together, get help with the text, and add my own photos. I rewrite some sentences so they sound more like me."
-          },
-          "travel": {
-            "name": "Martin Veselý",
-            "role": "A personal travel journal",
-            "quote": "After a trip, my phone is full of photos and notes about places worth visiting. Topiqu helps me put them in order. The experiences and recommendations are my own, but having an outline makes the article easier to finish."
-          },
-          "crafts": {
-            "name": "Lucie Benešová",
-            "role": "A blog about making things at home",
-            "quote": "I enjoy making things and showing people how I made them. Writing instructions can get confusing because I take some steps for granted. A draft from Topiqu helps me organise the text. Then I go through my photos and fill in what's missing."
-          },
-          "beginner": {
-            "name": "Tomáš Kučera",
-            "role": "Starting a first blog",
-            "quote": "This is my first blog, so I'm learning as I go. I like being able to prepare an article, edit it a few times, and publish when I'm happy with it. So far, I mostly write for a few friends, but I'm pleased there's something for them to read."
-          }
-        }
-      },
       "features": {
         "eyebrow": "BEYOND WRITING",
-        "title": "The work an agency would bill you for. Included.",
-        "text": "Topiqu does the slow parts of content marketing and shows you what it did.",
+        "title": "Work an agency would bill you for separately. Here it's included.",
+        "text": "Topics, research, translation and publishing. Topiqu does the slow part of content marketing for you and shows what it did.",
         "items": [
           {
-            "title": "Topics from day one",
-            "text": "No traffic yet? Topics come from search data in your market. Subjects you already cover are skipped."
+            "title": "Keeps up with your offer",
+            "text": "Raised a price, changed a plan or sold out a model? Topiqu knows before your readers notice."
           },
           {
-            "title": "Keeps up with your field",
-            "text": "Fresh news from your niche can become an article while it still matters."
+            "title": "Publishes where your site already is",
+            "text": "WordPress via Topiqu Sync, Shopify, the REST API, or a ready-made online magazine on your own domain. Approve each article yourself or switch on autopilot, which publishes on schedule but only what passed both checks."
           },
           {
-            "title": "Offers what you stock",
-            "text": "Connect Shopify or a Heureka or Google Merchant feed. Articles offer in-stock products, with prices where readers compare and buy."
+            "title": "Links your site and wins backlinks",
+            "text": "Each article links to up to 3 other articles and 2 products or pages. Topiqu finds sites that mention you without a link and, in Premium, writes the link request."
           },
           {
-            "title": "Finds who already talks about you",
-            "text": "Sites that mention you without a link, with a request ready to send. No bought or swapped links."
+            "title": "Writes about what people actually search for",
+            "text": "Topics are picked by search demand and seasonality one to three months ahead. Each one is compared with up to 200 of your articles, so nothing repeats."
           },
           {
-            "title": "Publishes where you already are",
-            "text": "Your WordPress site or Shopify store, or a blog on your own domain. Share articles on your LinkedIn."
+            "title": "Industry news while it's still hot",
+            "text": "A new regulation, a price shock or a manufacturer launch? You have an article within 72 hours."
           },
           {
-            "title": "Translations that fit the market",
-            "text": "Ten languages. Articles that don't suit a target market can be held back instead of translated blindly."
+            "title": "Ten languages, no clumsy translation",
+            "text": "Every language gets its own URLs and hreflang. Topiqu first judges whether the article makes sense in the target country, then rewrites the local details too."
           },
           {
-            "title": "Made for the whole team",
-            "text": "Roles with scoped access and several blogs under one account."
+            "title": "The whole team, each with their own rights",
+            "text": "11 permissions: a freelancer writes, a colleague approves and only the owner sees billing. Every article keeps 50 versions."
           }
         ],
         "more": {
-          "title": "And everything else",
-          "text": "Series, comments, polls, media library, your fonts and colours. All in the changelog."
+          "title": "And on top of that",
+          "text": "Photos with clean licences and credits, series, comments, polls, custom fonts and colours. All in the changelog."
         }
       },
       "lead": {
@@ -767,6 +757,30 @@
         "cta": "Try it on my website",
         "note": "{days} days of Premium and {articles} articles free. Add a card only when you decide to continue.",
         "reads": "Topiqu will then read {domain}."
+      },
+      "meta": {
+        "title": "A company blog written from your own materials, fact-checked",
+        "description": "An AI newsroom for your company blog. Topiqu writes expert articles from your website, documents, price lists and products, checks the facts and publishes straight to WordPress and Shopify."
+      },
+      "examples": {
+        "eyebrow": "EXAMPLE",
+        "title": "This is how Topiqu writes. No AI filler.",
+        "text": "A real article from our demo blog: a buying guide with a dated price, an installation budget and subsidy conditions. Open it in full and try to find a mistake.",
+        "items": [
+          {
+            "kind": "E-shop · in Czech",
+            "title": "Atmos DC 25 S in 2026: is it worth it?",
+            "text": "The boiler price is only the start. Who the Atmos DC 25 S suits, what to budget for and what to check before installation and a subsidy application.",
+            "highlights": [
+              "Price with the date it was checked",
+              "Budget including installation and storage",
+              "What the subsidy label really means"
+            ],
+            "imageAlt": "Cover image of the article about the Atmos DC 25 S boiler"
+          }
+        ],
+        "open": "Open the full article",
+        "all": "All examples on ukazky.topiqu.com"
       }
     }
   }

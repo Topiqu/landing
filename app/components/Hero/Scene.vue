@@ -48,7 +48,7 @@
 
 <script setup lang="ts">
 type Cover = 'house' | 'radiator' | 'winter' | 'defrost'
-type Status = 'verified' | 'published' | 'cited' | 'scheduled' | 'translated'
+type Status = 'verified' | 'published' | 'sources' | 'feed' | 'scheduled' | 'translated'
 interface Card {
   kind: 'cover' | 'text' | 'chart'
   cover?: Cover
@@ -58,7 +58,8 @@ interface Card {
 const statuses: Record<Status, { icon: string; tone: 'ok' | 'accent' }> = {
   verified: { icon: 'mdi:shield-check-outline', tone: 'ok' },
   published: { icon: 'mdi:check-circle-outline', tone: 'ok' },
-  cited: { icon: 'mdi:radar', tone: 'accent' },
+  sources: { icon: 'mdi:file-document-multiple-outline', tone: 'accent' },
+  feed: { icon: 'mdi:package-variant-closed', tone: 'accent' },
   scheduled: { icon: 'mdi:clock-outline', tone: 'accent' },
   translated: { icon: 'mdi:translate', tone: 'accent' },
 }
@@ -71,7 +72,7 @@ const columns: { duration: number; delay: number; cards: Card[] }[] = [
     cards: [
       { kind: 'text', status: 'scheduled' },
       { kind: 'cover', cover: 'winter' },
-      { kind: 'chart', status: 'cited' },
+      { kind: 'chart', status: 'sources' },
     ],
   },
   {
@@ -96,7 +97,7 @@ const columns: { duration: number; delay: number; cards: Card[] }[] = [
     duration: 42,
     delay: -22,
     cards: [
-      { kind: 'cover', cover: 'defrost', status: 'cited' },
+      { kind: 'cover', cover: 'defrost', status: 'feed' },
       { kind: 'text', status: 'verified' },
       { kind: 'cover', cover: 'house' },
     ],
@@ -106,7 +107,7 @@ const columns: { duration: number; delay: number; cards: Card[] }[] = [
     delay: -36,
     cards: [
       { kind: 'text', status: 'translated' },
-      { kind: 'chart', status: 'cited' },
+      { kind: 'chart', status: 'sources' },
       { kind: 'cover', cover: 'winter', status: 'published' },
     ],
   },
@@ -124,7 +125,7 @@ const columns: { duration: number; delay: number; cards: Card[] }[] = [
     delay: -28,
     cards: [
       { kind: 'text', status: 'published' },
-      { kind: 'cover', cover: 'house', status: 'cited' },
+      { kind: 'cover', cover: 'house', status: 'feed' },
       { kind: 'text', status: 'scheduled' },
     ],
   },

@@ -1,17 +1,18 @@
 <script setup lang="ts">
 const { t } = useI18n()
-const pageTitle = () => `${t('landing.design.hero.title')} ${t('landing.design.hero.accent')} | Topiqu`
+const pageTitle = () => t('landing.design.meta.title')
+const pageDescription = () => t('landing.design.meta.description')
 useSeoMeta({
   title: pageTitle,
-  description: () => t('landing.design.hero.description'),
+  description: pageDescription,
   ogTitle: pageTitle,
-  ogDescription: () => t('landing.design.hero.description'),
+  ogDescription: pageDescription,
   ogType: 'website',
 })
 useSchemaOrg([
   defineOrganization({ name: 'Topiqu', url: 'https://topiqu.com' }),
   defineWebSite({ name: 'Topiqu' }),
-  defineWebPage({ name: 'Topiqu — AI Content Operations' }),
+  defineWebPage({ name: pageTitle }),
 ])
 </script>
 <template>
@@ -19,9 +20,9 @@ useSchemaOrg([
     <Hero />
     <LazyShowcase hydrateOnVisible />
     <Connector />
+    <LazyExamples hydrateOnVisible />
     <LazyAfterPublishing hydrateOnVisible />
     <LazyFeatures hydrateOnVisible />
-    <LazyTestimonials hydrateOnVisible />
     <LazyPricing hydrateOnVisible />
     <LazyComparison hydrateOnVisible />
     <LazyFaq hydrateOnVisible />

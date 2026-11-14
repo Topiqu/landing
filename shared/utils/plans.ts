@@ -24,11 +24,29 @@ export const PLAN_ARTICLES = {
   premium: 100,
   custom: 100,
 } as const
-export const KNOWLEDGE_SOURCES = {
-  pro: 50,
-  premium: 200,
-  custom: 500,
+// Mirrors the app's ARTICLE_ROLLOVER_MONTHS: unused plan units carry over up to this many monthly allowances.
+export const ARTICLE_ROLLOVER_MONTHS = 2
+// Mirrors the app's shared/utils/knowledge.ts plan limits.
+export const KNOWLEDGE_LIMITS = {
+  pro: {
+    sources: 50,
+    products: 500,
+    characters: 1_000_000,
+  },
+  premium: {
+    sources: 200,
+    products: 3_000,
+    characters: 5_000_000,
+  },
+  custom: {
+    sources: 500,
+    products: 20_000,
+    characters: 15_000_000,
+  },
 } as const
+// Mirrors the app's CUSTOM_MIN_SEATS and CUSTOM_MEMBER_CENTS.
+export const CUSTOM_SEATS = 3
+export const CUSTOM_SEAT_PRICE_USD = 20
 // Mirrors the app's `LANGUAGE_OPTIONS`: the languages a site can write and translate in.
 export const CONTENT_LANGUAGES = ['en', 'cs', 'de', 'fr', 'es', 'it', 'pl', 'sk', 'nl', 'pt'] as const
 // Mirrors the app's `INCLUDED_TRANSLATION_LANGUAGES` and `EXTRA_TRANSLATION_LANGUAGE_PRICE_USD`.

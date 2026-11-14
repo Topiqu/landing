@@ -5,6 +5,15 @@
         <p class="eyebrow">{{ $t('landing.design.connector.eyebrow') }}</p>
         <h2>{{ $t('landing.design.connector.title') }}</h2>
         <p class="section-description">{{ $t('landing.design.connector.text') }}</p>
+        <ul class="connector-pillars">
+          <li v-for="(pillar, index) in pillars" :key="pillar.title">
+            <span class="connector-pillar-icon"><Icon :name="pillarIcons[index]!" aria-hidden="true" /></span>
+            <div>
+              <h3>{{ pillar.title }}</h3>
+              <p>{{ pillar.text }}</p>
+            </div>
+          </li>
+        </ul>
       </div>
 
       <div
@@ -181,6 +190,8 @@ interface Fragment {
 const { t, locale } = useI18n()
 const c = (key: string) => t(`landing.design.connector.${key}`)
 const chips = useMessageStrings('landing.design.connector.article.chips')
+const pillars = useMessageList<'title' | 'text'>('landing.design.connector.pillars')
+const pillarIcons = ['mdi:book-open-page-variant-outline', 'mdi:tag-outline', 'mdi:shield-check-outline']
 const swatches = ['#0d9488', '#0f172a', '#f59e0b', '#e2e8f0']
 const sheet = computed(() =>
   locale.value === 'cs'
@@ -335,6 +346,38 @@ watch([visible, animated, svg], () => {
 .connector-heading {
   grid-area: heading;
   margin-bottom: 0;
+}
+.connector-pillars {
+  display: grid;
+  gap: 20px;
+  margin: 32px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.connector-pillars li {
+  display: flex;
+  gap: 14px;
+}
+.connector-pillar-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--topiqu-control-radius);
+  background: var(--landing-tint);
+  color: var(--landing-accent);
+  font-size: 20px;
+}
+.connector-pillars h3 {
+  margin-bottom: 3px;
+  font-size: 15px;
+  font-weight: 700;
+}
+.connector-pillars p {
+  color: var(--landing-muted);
+  font-size: 13px;
+  line-height: 1.55;
 }
 .connector-frame {
   position: relative;
