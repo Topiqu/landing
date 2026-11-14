@@ -1,4 +1,8 @@
+import type { H3Event } from 'h3'
+
 import { z } from 'zod'
+import { httpUrl } from '~~/shared/utils/leads'
+import { LEAD_TAGS, queueLead } from '~~/server/utils/crm'
 import { onboardingLog } from '~~/server/utils/onboardingLog'
 import { signLandingRequest } from '~~/server/utils/landingAuth'
 import { createCheckoutRequests, checkoutKeys } from '~~/server/utils/checkoutRequests'
@@ -76,6 +80,7 @@ export default defineEventHandler(async (event) => {
   const { identity, fingerprint } = checkoutKeys(onboardingSecret(), body)
   return checkoutRequests(identity, fingerprint, async () => {
     const startedAt = performance.now()
+    let url: string
     try {
       // Vercel overwrites X-Forwarded-For with the visitor's address, so it cannot be spoofed here.
       const clientIp = getRequestIP(event, { xForwardedFor: true }) ?? ''
@@ -101,7 +106,7 @@ export default defineEventHandler(async (event) => {
         status: 200,
         durationMs: Math.round(performance.now() - startedAt),
       })
-      return { url: res.url }
+      url = res.url
     } catch (error: any) {
       const upstreamStatus = error?.statusCode ?? error?.response?.status
       const rejected = upstreamStatus >= 400 && upstreamStatus < 500
@@ -120,5 +125,24 @@ export default defineEventHandler(async (event) => {
         data: { reason: rejected ? 'checkoutRejected' : 'checkoutUnknown' },
       })
     }
+    queueRegistration(event, body)
+    return { url }
   })
 })
+
+function queueRegistration(event: H3Event, body: z.infer<typeof schema>) {
+  const site = body.domainType === 'SUBDOMAIN' ? `${body.domain}.topiqu.com` : body.domain
+  const plan = `${body.selectedPlan ?? 'FREE'}${body.selectedPlan ? ` (${body.billingInterval})` : ''}`
+  const website = httpUrl(body.websiteUrl)
+  queueLead(event, {
+    email: body.email,
+    tag: LEAD_TAGS.registered,
+    note: [`Registrace: tarif ${plan}, blog ${site}, jazyk ${body.language}`, website && `Web firmy: ${website}`]
+      .filter(Boolean)
+      .join('\n'),
+    source: 'web',
+    detail: 'Topiqu landing · registrace',
+    website,
+    confirmedWebsite: true,
+  })
+}

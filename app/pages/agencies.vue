@@ -130,6 +130,7 @@ const plans = computed(() => [
       t('agencies.plans.features.domain'),
       t('agencies.plans.features.translations', { count: TRANSLATION_LANGUAGES.pro }),
       t('agencies.plans.features.team'),
+      t('agencies.plans.features.searchConsole'),
     ],
   },
   {

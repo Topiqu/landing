@@ -8,26 +8,7 @@
           {{ $t('landing.design.hero.title') }} <span>{{ $t('landing.design.hero.accent') }}</span>
         </h1>
         <p class="hero-description">{{ $t('landing.design.hero.description') }}</p>
-        <form class="hero-signup" @submit.prevent="startOnboarding">
-          <label for="hero-email" class="hero-email-label">{{ $t('landing.onboarding.account.email') }}</label>
-          <input
-            id="hero-email"
-            v-model.trim="email"
-            name="email"
-            type="email"
-            autocomplete="email"
-            autocapitalize="off"
-            :spellcheck="false"
-            required
-            maxlength="254"
-            :placeholder="$t('landing.design.hero.emailPlaceholder')"
-            aria-describedby="hero-note"
-          />
-          <UButton type="submit" size="xl" trailingIcon="mdi:arrow-right">{{ $t('landing.design.hero.cta') }}</UButton>
-        </form>
-        <p id="hero-note" class="hero-note">
-          {{ $t('landing.design.hero.note', trial) }}
-        </p>
+        <LeadForm id="hero" source="hero" />
         <UButton
           to="#specs"
           color="neutral"
@@ -41,20 +22,3 @@
     </div>
   </section>
 </template>
-
-<script setup lang="ts">
-const localePath = useLocalePath()
-const nuxtApp = useNuxtApp()
-const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
-const email = shallowRef('')
-
-const startOnboarding = async () => {
-  // Password analysis and signup state are not needed to render the public homepage.
-  const { useOnboardingStore } = await import('~/stores/onboarding')
-  return nuxtApp.runWithContext(() => {
-    const store = useOnboardingStore()
-    store.form.email = email.value.trim()
-    return navigateTo(localePath({ name: 'onboarding-site' }))
-  })
-}
-</script>

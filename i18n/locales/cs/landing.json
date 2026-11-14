@@ -2,7 +2,7 @@
   "landing": {
     "pricing": {
       "title": "Ceník",
-      "subtitle": "První způsobilý blog dostane {days}denní zkušební verzi a {articles} jednotek článků. Další blogy začínají ve Free; každý blog má vlastní předplatné.",
+      "subtitle": "Za cenu jednoho textu od copywritera až 50 článků měsíčně. Co nevyužijete, nepropadá: jednotky se převádějí až do trojnásobku měsíční kapacity.",
       "month": "/měs.",
       "year": "/rok",
       "intervalLabel": "Frekvence platby",
@@ -12,7 +12,7 @@
       },
       "billedYearly": "Účtováno {price} jednou ročně",
       "articlePacks": {
-        "title": "Další články podle potřeby",
+        "title": "Potřebujete víc? Dokupte články.",
         "articles": "{count} článků",
         "unitPrice": "{price} za článek",
         "unit": "článků",
@@ -25,72 +25,72 @@
         "free": {
           "badge": "Start",
           "name": "Free",
-          "desc": "Pište a publikujte na svém blogu. První způsobilé blogy vyzkouší Premium bez karty.",
+          "desc": "Vlastní blog zdarma na adrese .topiqu.com. Pište sami a AI zapněte, až budete chtít.",
           "features": {
             "editor": "Editor s médii, tabulkami a anketami",
-            "subdomain": "Neomezeně blogů, každý s adresou .topiqu.com zdarma",
-            "optimization": "Skóre optimalizace článků",
-            "library": "Knihovna médií s evidencí práv",
+            "subdomain": "Neomezeně blogů na adrese .topiqu.com",
+            "optimization": "Skóre optimalizace u každého článku",
+            "library": "Knihovna médií s evidencí licencí",
             "community": "Komentáře, reakce a základní analytika",
-            "no_ai": "Bez psaní pomocí AI",
-            "seats": "1 člen týmu včetně majitele"
+            "no_ai": "Bez psaní s AI",
+            "seats": "1 místo v týmu"
           },
           "cta": "Začít zdarma"
         },
         "pro": {
-          "badge": "Autopilot",
+          "badge": "Celá redakce",
           "name": "Pro",
-          "desc": "Psaní s AI z vašich vlastních znalostí, na vlastní doméně.",
+          "desc": "Kompletní redakce, která píše z vašeho webu, dokumentů i produktů a publikuje přímo k vám.",
           "features": {
-            "no_ads": "Vše z Free",
-            "articles": "{count} jednotek článků měsíčně",
-            "knowledge": "Znalostní báze až s {count} zdroji",
-            "review": "Kontrola faktů a redakční revize",
-            "translations": "Překlady do {count} jazyků, až 60 překladů měsíčně; další jazyky za {price} měsíčně každý",
-            "scheduling": "Plánování, série a automatická publikace",
-            "domain": "Vlastní doména, písma a přechody",
-            "integrations": "WordPress plugin, API a import",
-            "seats": "2 členové týmu včetně majitele"
+            "everything": "Vše z Free",
+            "articles": "Až {count} článků měsíčně, nevyužité se sčítají až do {cap}",
+            "knowledge": "Znalostní báze: {count} zdrojů, {products} produktů a {characters} znaků",
+            "review": "Nezávislá kontrola faktů a fotky s čistými právy",
+            "publishing": "Publikace do WordPressu, Shopify, přes REST API a webhooky",
+            "domain": "Vlastní doména s HTTPS a přesměrováním",
+            "translations": "{count} jazyky, až 60 překladů měsíčně; další jazyk za {price} měsíčně",
+            "planning": "Plánování témat, zprávy z oboru a autopilot",
+            "searchConsole": "Search Console a návrhy úprav pro 8.–20. místo",
+            "mentions": "Zmínky o vás bez odkazu",
+            "seats": "2 místa v týmu"
           },
           "cta": "Vybrat Pro"
         },
         "premium": {
-          "badge": "Nejoblíbenější",
+          "badge": "Pro růst v Googlu i v AI",
           "name": "Premium",
-          "desc": "Víte, kde jste v Googlu a zda vás citují odpovědi OpenAI — a umíte s tím pracovat.",
+          "desc": "Dvojnásobná kapacita, 5 jazyků a články, které se samy zlepšují podle dat z Googlu a AI.",
           "features": {
             "everything": "Vše z Pro",
-            "articles": "{count} jednotek článků měsíčně",
-            "visibility": "Až 300 odpovědí pro AI viditelnost měsíčně",
-            "gsc": "Přehledy ze Search Console a SEO autopilot",
-            "knowledge": "Znalostní báze až s {count} zdroji",
-            "sentiment": "Analýza nálady čtenářů",
-            "indexing": "Prioritní indexace a zdrojování",
-            "emoji": "Vlastní emoji reakce",
+            "articles": "Až {count} článků měsíčně, nevyužité se sčítají až do {cap}",
+            "translations": "{count} jazyků, až 250 překladů měsíčně",
+            "knowledge": "Znalostní báze: {count} zdrojů, {products} produktů a {characters} znaků",
+            "autopilot": "SEO autopilot: přepíše titulky s CTR pod 2 % a navrhne rozšíření",
+            "visibility": "Viditelnost v AI: až {count} odpovědí měsíčně",
+            "linkbuilding": "Linkbuilding: weby prodejců vašich značek a hotové žádosti o odkaz",
+            "sentiment": "Analýza nálady čtenářů a vlastní emoji reakce",
             "support": "Prioritní podpora 24/7",
-            "seats": "3 členové týmu včetně majitele",
-            "translations": "Překlady do {count} jazyků, až 250 překladů měsíčně"
+            "seats": "3 místa v týmu"
           },
           "cta": "Vybrat Premium"
         },
         "custom": {
           "badge": "Enterprise",
           "name": "Custom",
-          "desc": "Sdílené publikační nástroje pro týmy, které potřebují více placených míst.",
+          "desc": "Pro týmy a agentury, které potřebují víc míst, víc dat a vlastní značku.",
           "features": {
             "everything": "Vše z Premium",
             "whitelabel": "White-label bez značky Topiqu",
-            "articles": "{count} jednotek článků měsíčně",
-            "knowledge": "Znalostní báze až s {count} zdroji",
-            "multisite": "3 místa v ceně; každé další za 20 USD měsíčně",
-            "domain": "Vlastní doména se spravovaným HTTPS",
-            "onboarding": "Sdílená spotřeba týmu a správa fakturace",
-            "sla": "Roční sleva 20 % včetně dalších míst"
+            "articles": "Až {count} článků měsíčně, nevyužité se sčítají až do {cap}",
+            "knowledge": "Znalostní báze: {count} zdrojů, {products} produktů a {characters} znaků",
+            "seats": "{seats} místa v ceně, každé další za {seatPrice} měsíčně",
+            "billing": "Sdílená spotřeba týmu a centrální fakturace",
+            "annual": "Roční sleva 20 % i na další místa"
           },
           "cta": "Vybrat Custom"
         }
       },
-      "usagePolicy": "Ceny jsou za blog, bez daně. Články Standard / High / Ultra spotřebují 1 / 2 / 3 jednotky článků. AI práce zároveň sdílí kapacitní limit: po vyčerpání počká na obnovení nebo výslovné dokoupení, nic navíc se neúčtuje automaticky. I u ročního tarifu se spotřeba obnovuje měsíčně."
+      "usagePolicy": "Ceny jsou za blog, bez daně. Článek Standard, High a Ultra stojí 1, 2 a 3 jednotky. Nevyužité jednotky se převádějí do dalších měsíců až do trojnásobku měsíční kapacity, dokud máte aktivní tarif s AI. Nic se neúčtuje automaticky: když jednotky dojdou, dokoupíte balíček, nebo počkáte na další měsíc. I u ročního tarifu se jednotky připisují měsíčně."
     },
     "faq": {
       "badge": "Podpora a nápověda",
@@ -100,27 +100,35 @@
       "items": [
         {
           "q": "Jak funguje zkušební verze?",
-          "a": "První způsobilý blog dostane 14denní zkušební verzi Premium a 5 jednotek článků. Free nepotřebuje kartu. Při volbě Pro nebo Premium zadáte kartu, první platba přijde až po zkušební době a do té doby lze zrušit. CUSTOM se platí rovnou po potvrzení. Další blogy stejného majitele začínají ve Free bez další zkušební doby. Každý blog má vlastní předplatné."
+          "a": "První způsobilý blog dostane 14 dní Premium a 5 článků zdarma. Když zůstanete ve Free, kartu nezadáváte vůbec. Při volbě Pro nebo Premium kartu zadáte, první platba ale přijde až po zkušební době a do té doby můžete kdykoli zrušit. Custom se platí hned po potvrzení. Další blogy stejného majitele začínají ve Free a každý blog má vlastní předplatné."
         },
         {
-          "q": "Co se počítá jako AI článek?",
-          "a": "Články Standard / High / Ultra spotřebují 1 / 2 / 3 jednotky článků. Pro zahrnuje 50 jednotek měsíčně, Premium a samoobslužný CUSTOM 100. Ostatní AI práce má vlastní počty operací a s články sdílí AI kapacitu. Po vyčerpání počká na obnovení nebo výslovné dokoupení; nic navíc se neúčtuje automaticky. Dokoupené jednotky článků nepropadají a jsou oddělené od rozšíření AI spotřeby; pro generování je potřeba aktivní tarif s AI."
+          "q": "Co se počítá jako článek?",
+          "a": "Článek Standard stojí 1 jednotku, High 2 a Ultra 3. Pro má 50 jednotek měsíčně, Premium a Custom 100. Nevyužité jednotky se převádějí až do trojnásobku měsíční kapacity, dokud máte aktivní tarif s AI, a dokoupené balíčky nepropadají nikdy. Nic se neúčtuje automaticky: když jednotky dojdou, počkáte na další měsíc, nebo si balíček dokoupíte."
         },
         {
-          "q": "Odkud AI bere fakta?",
-          "a": "Topiqu kombinuje živou rešerši na webu s vaší znalostní bází — poznámkami, soubory PDF a Word, webovými stránkami nebo celým sitemapem. Soukromé zdroje ovlivní text, ale nikdy se veřejně necitují; citovat lze jen zdroje, které označíte jako veřejné. Před publikací revize ověří tvrzení proti zdrojům a panel kontroly faktů umožní kterýkoli článek zkontrolovat znovu."
+          "q": "Zlepší Topiqu moje pozice v Googlu?",
+          "a": "Pozice v Googlu ovlivňuje i autorita webu, zpětné odkazy a konkurence. Topiqu se postará o všechno, co ovlivnit jde: píše na témata, která lidé opravdu hledají, z přesných dat o vašich produktech a s kompletním technickým SEO (schema.org, llms.txt, interní prolinkování). Výsledky sleduje v Search Console a články na 8.–20. místě cíleně vylepšuje, aby se dostaly na první stránku."
         },
         {
-          "q": "Publikuje AI obsah automaticky?",
-          "a": "Pouze pokud automatické publikování sami zapnete. Jinak každý koncept od AI počká, až ho zkontrolujete a upravíte, a u článku můžete zobrazit označení AI obsahu."
+          "q": "Jak poznám, že fakta a parametry v článku opravdu sedí?",
+          "a": "Topiqu nikdy nevydá první verzi. Druhý, nezávislý model porovná čísla, ceny, normy i tvrzení s vaším feedem, dokumenty a živými zdroji a v panelu zdrojů uvidíte, odkud každá informace pochází. Co nesedí, opraví, co nejde doložit, smaže, a sporné případy zadrží a pošle vám upozornění."
         },
         {
-          "q": "Jak zjistím, jestli mě odpovědi citují?",
-          "a": "V Premium sestaví Topiqu otázky z vašich dotazů ve Search Console, článků a komentářů. Pravidelně kontroluje, zda vás odpovědi OpenAI citují a kde se objevuje konkurence. Z otázek bez vaší citace vzniknou náměty na články. Jde o vzorek vybraných otázek, ne o záznam soukromých konverzací."
+          "q": "Odkud Topiqu bere fakta?",
+          "a": "Z vaší znalostní báze, tedy z poznámek, PDF a Word dokumentů, webových stránek nebo celé sitemapy, a z živé rešerše na webu. Soukromé zdroje ovlivní text, ale nikdy se veřejně necitují. Citovat lze jen zdroje, které označíte jako veřejné."
         },
         {
-          "q": "Mohu články z Topiqu publikovat na svém stávajícím webu?",
-          "a": "Ano. Použijte publikaci hostovanou v Topiqu, připojte vlastní doménu, synchronizujte články do WordPressu pluginem Topiqu Sync nebo je načítejte přes External API."
+          "q": "Publikuje Topiqu automaticky?",
+          "a": "Jen když si autopilota sami zapnete. Jinak každý koncept počká, až ho zkontrolujete a upravíte. I autopilot vydá jen to, co prošlo redakční kontrolou, a u článku můžete zobrazit označení AI obsahu."
+        },
+        {
+          "q": "Jak zjistím, jestli mě citují odpovědi AI?",
+          "a": "V Premium sestaví Topiqu otázky z vašich dotazů ve Search Console, článků a komentářů a pravidelně kontroluje, jestli vás odpovědi OpenAI citují a kde se objevuje konkurence. Z otázek, kde chybíte, vzniknou náměty na nové články."
+        },
+        {
+          "q": "Mohu články publikovat na svém stávajícím webu?",
+          "a": "Ano. Synchronizujte je do WordPressu pluginem Topiqu Sync, publikujte do Shopify, načítejte přes REST API, nebo použijte hotový online magazín Topiqu na vlastní doméně."
         }
       ]
     },
@@ -248,7 +256,7 @@
           "tagline": "Nástroje Premium s placenou kapacitou týmu",
           "features": [
             "Vše z Premium",
-            "100 jednotek článků měsíčně se sdíleným AI limitem",
+            "100 jednotek článků měsíčně, nevyužité se převádějí",
             "3 placená místa včetně majitele",
             "Další místa za 20 USD měsíčně, ročně o 20 % levněji"
           ]
@@ -345,18 +353,17 @@
         "skip": "Přejít na obsah"
       },
       "hero": {
-        "kicker": "Redakce, která nekončí publikací",
-        "title": "Od vašich znalostí",
-        "accent": "k obsahu, který je vidět.",
-        "description": "Topiqu zjistí, o čem má smysl psát. Z vašich podkladů a aktuálních zdrojů připraví článek, ověří jeho tvrzení a publikuje ho. Pak sleduje výsledky a ukáže, co zlepšit dál.",
+        "kicker": "AI REDAKCE PRO FIREMNÍ BLOG",
+        "title": "Články, které znají vaši firmu líp než externí copywriter.",
+        "accent": "A měsíčně stojí jako jeden jeho text.",
+        "description": "Topiqu si přečte váš web, dokumentaci, ceníky i produktový feed. Vybere témata, na která se vaši zákazníci opravdu ptají, napíše odborný článek hlasem vaší značky a před vydáním v něm nezávisle ověří každé tvrzení. Pak ho vydá na váš WordPress, do Shopify nebo na web. Bez vašeho souhlasu nevyjde nic.",
         "cta": "Začít zdarma",
-        "emailPlaceholder": "Váš e-mail",
         "secondary": "Jak to funguje",
-        "note": "{days} dní zdarma a {articles} AI článků. Bez platební karty.",
         "scene": {
-          "verified": "Ověřeno 3/3",
+          "verified": "Ověřeno ze 7 zdrojů",
           "published": "Publikováno",
-          "cited": "Citováno v AI",
+          "sources": "Z webu, PDF a ceníků",
+          "feed": "Napojeno na feed",
           "scheduled": "Naplánováno",
           "translated": "Přeloženo"
         }
@@ -522,9 +529,9 @@
         }
       },
       "connector": {
-        "eyebrow": "OD PODKLADŮ K ČLÁNKU",
-        "title": "Hromada podkladů na vstupu. Hotový článek na výstupu.",
-        "text": "Web, ceníky, poznámky z porad i brand manuál. Topiqu z nich vybere to podstatné a napíše článek, který sedí vaší značce i vyhledávačům.",
+        "eyebrow": "ZNÁ VAŠI FIRMU",
+        "title": "Obecná AI píše o trhu. Topiqu píše o vašem byznysu.",
+        "text": "Do AI chatu kopírujete kontext pořád dokola a pak po něm mažete vymyšlené tarify, parametry a normy. Topiqu napojíte jednou. Od té chvíle zná vaši firmu a změny hlídá za vás.",
         "label": "Ilustrace: podklady z webu, interních dat a značky se v Topiqu spojí v hotový článek",
         "sources": {
           "web": "Web",
@@ -566,39 +573,53 @@
           "paragraph": "Hlučnost venkovní jednotky závisí hlavně na umístění, výkonu a odmrazování. Na co si dát pozor při montáži?",
           "chips": ["7 zdrojů", "Ověřená tvrzení", "Hlas značky", "Schema a FAQ"]
         },
-        "output": "Článek připravený k vydání"
+        "output": "Článek připravený k vydání",
+        "pillars": [
+          {
+            "title": "Vaše know-how, ne obecné fráze",
+            "text": "Nahrajte PDF katalogy, metodiky, dokumenty Word, poznámky nebo celou sitemapu. Topiqu použije přesné názvy tarifů, kódy i normy. Interní dokumenty nikdy necituje ven."
+          },
+          {
+            "title": "Ceníky a produkty vždy aktuální",
+            "text": "Připojte B2B ceník, Heureku, Google Merchant nebo Shopify. Feedy kontroluje denně, web týdně. Články uvádějí platné ceny a vyprodané zboží nedoporučí."
+          },
+          {
+            "title": "Dvojí redakční kontrola. Žádné halucinace.",
+            "text": "Druhý, nezávislý model porovná každé číslo, citaci i parametr se zdroji. Co nesedí, opraví. Co nejde doložit, smaže. A když si není jistý, článek zadrží a dá vám vědět."
+          }
+        ]
       },
       "closing": {
-        "eyebrow": "ZAČNĚTE JEDNÍM TÉMATEM",
-        "title": "Znalosti už máte. Dejte jim celý proces.",
-        "text": "Vyzkoušejte Topiqu {days} dní zdarma a sledujte cestu prvního článku od podkladů po výsledek."
+        "eyebrow": "ZAČNĚTE JEŠTĚ DNES",
+        "title": "Nechte Topiqu napsat první článek z vašeho webu.",
+        "text": "Zadejte e-mail, potvrďte svůj web a Topiqu se pustí do práce."
       },
       "pricingEyebrow": "PRO JEDNOTLIVCE I REDAKCE",
       "footerLabel": "Od znalostí k výsledkům.",
       "allFeatures": "Součástí tarifu",
       "after": {
         "eyebrow": "PO PUBLIKACI",
-        "title": "Vydáním článek nekončí.",
-        "text": "Data z vyhledávání se vracejí do dalšího zadání i k už vydaným článkům.",
+        "title": "Vydáním článek nekončí. Teprve začíná pracovat.",
+        "text": "Většina firem článek vydá a zapomene na něj. Topiqu ho dál hlídá: každou noc stahuje data ze Search Console, sleduje, jestli vás citují odpovědi AI, a připraví konkrétní kroky, jak článek dostat výš.",
         "items": {
           "search": {
-            "title": "Search Console",
-            "text": "Uvidíte kliknutí, zobrazení, CTR a pozice. Topiqu upozorní na stránky s potenciálem."
+            "title": "Víte, co vám každý článek přinesl",
+            "text": "Kliknutí, zobrazení, CTR a pozice u každého článku, každé ráno čerstvé."
           },
           "ai": {
-            "title": "Viditelnost",
-            "text": "Pravidelně ověří vybrané otázky v odpovědích OpenAI a ukáže, které zdroje citují."
+            "title": "Vy, nebo konkurence v odpovědích AI",
+            "text": "Topiqu se pravidelně ptá AI na otázky vašich zákazníků a ukáže, koho cituje. Kde chybíte, připraví téma, které to změní."
           },
           "opportunities": {
-            "title": "Další příležitosti",
-            "text": "Z nepokrytých dotazů a citací konkurence vzniknou náměty na nový nebo upravený článek."
+            "title": "Z druhé stránky na první",
+            "text": "Článkům na 8.–20. místě připraví hotový návrh úpravy. Prohlédnete si náhled, potvrdíte jedním kliknutím a článek jde výš."
           },
           "autopilot": {
-            "title": "Volitelný autopilot",
-            "text": "Může upravit titulek nebo aktualizovat obsah podle dat ze Search Console. Změny eviduje a lze je vrátit."
+            "title": "Titulky, na které se kliká",
+            "text": "Když lidé článek v Googlu vidí, ale neklikají, SEO autopilot přepíše titulek a perex, nebo doplní sekci, na kterou se ptají. Každou změnu vrátíte jedním kliknutím."
           }
         },
-        "plan": "Search Console, sledování citací a SEO autopilot jsou dostupné v Premium a Custom.",
+        "plan": "Search Console a návrhy úprav máte od tarifu Pro. SEO autopilot a viditelnost v odpovědích AI jsou v Premium a Custom.",
         "dashboard": {
           "label": "Ilustrační ukázka přehledů po publikaci",
           "range": "Posledních 28 dní",
@@ -688,77 +709,74 @@
           "odmrazování tepelného čerpadla"
         ]
       },
-      "testimonials": {
-        "eyebrow": "Zkušenosti blogerů",
-        "title": "Co říkají autoři malých blogů",
-        "description": "Zahrada, cestování i psaní po večerech. Přečtěte si, jak autoři osobních blogů používají Topiqu.",
-        "rating": "Hodnocení: {rating} z 5 hvězdiček",
-        "items": {
-          "personal": {
-            "name": "Petr Novotný",
-            "role": "Osobní blog po večerech",
-            "quote": "Píšu hlavně večer po práci. Často mám téma v hlavě, ale než se dostanu k psaní, už se mi do toho nechce. S Topiqu začnu od návrhu a postupně si ho upravím. Nejvíc mi pomáhá s tím rozjezdem."
-          },
-          "garden": {
-            "name": "Jana Dvořáková",
-            "role": "Malý blog o zahradě",
-            "quote": "Na zahradě pořád něco zkouším a fotím si, co se povedlo. Sepsat z toho článek mi ale moc nešlo. Teď si připravím poznámky, nechám si pomoct s textem a doplním svoje fotky. Některé věty přepíšu, aby to znělo víc jako já."
-          },
-          "travel": {
-            "name": "Martin Veselý",
-            "role": "Cestovatelský deník",
-            "quote": "Po výletě mám plný telefon fotek a pár poznámek o tom, co stálo za návštěvu. Topiqu mi pomáhá dát tomu nějaké pořadí. Zážitky i doporučení si píšu vlastní, ale s hotovou osnovou se mi ten článek dokončuje líp."
-          },
-          "crafts": {
-            "name": "Lucie Benešová",
-            "role": "Blog o domácím tvoření",
-            "quote": "Baví mě vyrábět věci a ukazovat ostatním, jak jsem je dělala. U psaní návodu se občas zamotám, protože některé kroky beru jako samozřejmost. Návrh z Topiqu mi pomůže text poskládat. Pak si ho projdu podle fotek a doplním, co chybí."
-          },
-          "beginner": {
-            "name": "Tomáš Kučera",
-            "role": "První vlastní blog",
-            "quote": "Je to můj první blog, takže se všechno učím za pochodu. Líbí se mi, že si můžu článek v klidu připravit, několikrát upravit a zveřejnit, až jsem s ním spokojený. Zatím píšu hlavně pro pár známých, ale mám radost, že už je co číst."
-          }
-        }
-      },
       "features": {
         "eyebrow": "NAD RÁMEC PSANÍ",
-        "title": "Práce, kterou by vám agentura naúčtovala. V ceně.",
-        "text": "Topiqu za vás udělá zdlouhavou část obsahového marketingu a ukáže, co udělal.",
+        "title": "Práce, kterou by vám agentura naúčtovala zvlášť. Tady je v ceně.",
+        "text": "Témata, rešerše, překlady i publikace. Topiqu dělá zdlouhavou část obsahového marketingu za vás a ukáže, co udělal.",
         "items": [
           {
-            "title": "Témata hned od začátku",
-            "text": "Ještě nemáte návštěvnost? Témata vychází z dat o vyhledávání ve vašem trhu. Co už máte napsané, se znovu nenabízí."
+            "title": "Drží krok s vaší nabídkou",
+            "text": "Zdražili jste, změnili tarif nebo vyprodali model? Topiqu to ví dřív, než si toho všimne čtenář."
           },
           {
-            "title": "Drží krok s oborem",
-            "text": "Čerstvá zpráva z vašeho oboru se může stát článkem, dokud je aktuální."
+            "title": "Vyjde tam, kde už máte web",
+            "text": "WordPress přes Topiqu Sync, Shopify, REST API, nebo hotový online magazín na vaší doméně. Schvalujete každý článek zvlášť, nebo zapnete autopilota. Ten vydává podle plánu, ale jen to, co prošlo dvojí kontrolou."
           },
           {
-            "title": "Nabízí, co máte skladem",
-            "text": "Připojte Shopify nebo feed z Heureky či Google Merchant. Články nabídnou produkty skladem, s cenou tam, kde čtenář srovnává a nakupuje."
+            "title": "Prolinkuje web a shání odkazy",
+            "text": "Každý článek propojí až se 3 dalšími články a 2 produkty nebo stránkami. Najde weby, které vás zmiňují bez odkazu, a v Premium k nim napíše žádost o odkaz."
           },
           {
-            "title": "Najde, kdo o vás už píše",
-            "text": "Weby, které vás zmiňují bez odkazu, i s připravenou žádostí. Žádné kupované ani vyměňované odkazy."
+            "title": "Píše o tom, co lidé opravdu hledají",
+            "text": "Témata vybírá podle hledanosti a sezónnosti na 1–3 měsíce dopředu. Každé porovná až s 200 vašimi články, takže se neopakuje."
           },
           {
-            "title": "Publikuje tam, kde už jste",
-            "text": "Na váš WordPress nebo do Shopify, případně jako blog na vlastní doméně. Články sdílíte i na svůj LinkedIn."
+            "title": "Novinky z oboru, dokud jsou horké",
+            "text": "Nová regulace, cenový šok nebo novinka výrobce? Do 72 hodin z ní máte článek."
           },
           {
-            "title": "Překlady, které sedí trhu",
-            "text": "Deset jazyků. Články, které se pro cílový trh nehodí, můžou zůstat nepřeložené."
+            "title": "Deset jazyků, žádný hloupý překlad",
+            "text": "Každý jazyk má vlastní adresy a hreflang. Topiqu nejdřív posoudí, jestli článek dává smysl v cílové zemi, a pak přepíše i reálie."
           },
           {
-            "title": "Pro celý tým",
-            "text": "Role s omezeným přístupem a několik blogů pod jedním účtem."
+            "title": "Celý tým, každý se svými právy",
+            "text": "11 oprávnění: externista píše, kolega schvaluje a fakturaci vidí jen majitel. Každý článek si pamatuje 50 verzí."
           }
         ],
         "more": {
-          "title": "A k tomu všechno ostatní",
-          "text": "Série, komentáře, ankety, knihovna médií, vlastní písma a barvy. Vše v changelogu."
+          "title": "A k tomu",
+          "text": "Fotky s čistou licencí a autorem, série, komentáře, ankety, vlastní písma a barvy. Vše v changelogu."
         }
+      },
+      "lead": {
+        "placeholder": "Váš e-mail",
+        "cta": "Vyzkoušet na mém webu",
+        "note": "{days} dní Premium a {articles} článků zdarma. Kartu zadáte, až když budete chtít pokračovat.",
+        "reads": "Topiqu si pak přečte {domain}."
+      },
+      "meta": {
+        "title": "Firemní blog z vašich podkladů s kontrolou faktů",
+        "description": "AI redakce pro firemní blog. Topiqu píše odborné články z vašeho webu, dokumentů, ceníků a produktů, ověřuje fakta a publikuje přímo do WordPressu i Shopify."
+      },
+      "examples": {
+        "eyebrow": "UKÁZKA",
+        "title": "Takhle píše Topiqu. Žádná AI vata.",
+        "text": "Skutečný článek z našeho ukázkového blogu: nákupní rádce s cenou k datu ověření, rozpočtem na instalaci a podmínkami dotace. Otevřete si ho celý a zkuste v něm najít chybu.",
+        "items": [
+          {
+            "kind": "E-shop",
+            "title": "Atmos DC 25 S v roce 2026: vyplatí se?",
+            "text": "Cena kotle je jen začátek. Komu Atmos DC 25 S sedne, co zahrnout do rozpočtu a co ověřit před instalací i žádostí o dotaci.",
+            "highlights": [
+              "Cena s datem ověření",
+              "Rozpočet včetně instalace a akumulace",
+              "Co označení NZÚ pro dotaci znamená"
+            ],
+            "imageAlt": "Úvodní obrázek článku o kotli Atmos DC 25 S"
+          }
+        ],
+        "open": "Otevřít celý článek",
+        "all": "Všechny ukázky na ukazky.topiqu.com"
       }
     }
   }

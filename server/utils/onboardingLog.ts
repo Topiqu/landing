@@ -4,7 +4,7 @@ type LogFields = {
   upstreamStatus?: number
   status?: number
   durationMs?: number
-  dependency?: 'platform' | 'ses'
+  dependency?: 'platform' | 'ses' | 'crm'
   outcome?: string
   messageId?: string
   region?: string

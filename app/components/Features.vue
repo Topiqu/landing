@@ -37,20 +37,20 @@ const items = useMessageList<'title' | 'text'>('landing.design.features.items')
 // Same order as `landing.design.features.items`; both locales share release slugs. A feature without a
 // release note of its own links to the changelog index.
 const releases = [
-  null,
-  null,
+  '2026-09-26-knowledge-base',
   '2026-10-02-shopify-and-publication-channels',
   null,
-  '2026-10-02-shopify-and-publication-channels',
+  null,
+  null,
   '2026-09-27-german-and-french',
   '2026-08-26-teams-and-multiple-blogs',
 ]
 const icons = [
+  'mdi:sync',
+  'mdi:publish',
+  'mdi:link-variant',
   'mdi:magnify',
   'mdi:newspaper-variant-outline',
-  'mdi:shopping-outline',
-  'mdi:link-variant',
-  'mdi:publish',
   'mdi:translate',
   'mdi:account-group-outline',
 ]

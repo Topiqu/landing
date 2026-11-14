@@ -102,8 +102,9 @@
         "domain": "Custom domain, fonts and gradients",
         "translations": "Translations into {count} languages",
         "team": "No limit on team seats",
+        "searchConsole": "Search Console and update proposals for positions 8–20",
         "everything": "Everything in Pro",
-        "gsc": "Search Console insights and SEO autopilot",
+        "gsc": "SEO autopilot driven by Search Console data",
         "visibility": "{count} AI visibility responses a month"
       },
       "free": "The blog stays online with all its content, comments and team; it just stops writing and using credits. It takes no slot. A custom domain is disconnected and the blog runs on its .topiqu.com address."

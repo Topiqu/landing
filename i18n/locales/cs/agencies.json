@@ -102,8 +102,9 @@
         "domain": "Vlastní doména, písma a přechody",
         "translations": "Překlady do {count} jazyků",
         "team": "Tým bez omezení počtu míst",
+        "searchConsole": "Search Console a návrhy úprav pro 8.–20. místo",
         "everything": "Vše z tarifu Pro",
-        "gsc": "Přehledy ze Search Console a SEO autopilot",
+        "gsc": "SEO autopilot podle dat ze Search Console",
         "visibility": "{count} odpovědí pro AI viditelnost měsíčně"
       },
       "free": "Blog zůstane online s celým obsahem, komentáři i týmem, jen nepíše a nečerpá kredity. Místo nezabírá. Vlastní doména se odpojí a blog poběží na adrese .topiqu.com."

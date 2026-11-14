@@ -76,6 +76,8 @@ Copy `.env.example` and fill in:
 | `SES_ACCESS_KEY_ID`              | IAM access key with permission to send through SES      |
 | `SES_SECRET_ACCESS_KEY`          | IAM secret access key for SES                           |
 | `NUXT_EMAIL_FROM`                | Sender address for verification emails                  |
+| `NUXT_CRM_URL`                   | Leadgen CRM origin (landing leads and registrations)    |
+| `NUXT_CRM_API_KEY`               | Write-scoped Leadgen CRM API key                        |
 | `NUXT_PUBLIC_GTAG_ID`            | Google Analytics measurement ID (`G-XXXXXXXXXX`)        |
 
 AdSense uses `NUXT_PUBLIC_ADSENSE_PUBLISHER_ID` (default: `ca-pub-9731440718321055`), the Meta Pixel

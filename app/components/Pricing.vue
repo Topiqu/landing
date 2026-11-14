@@ -3,13 +3,15 @@ import type { BillingInterval } from '~~/shared/utils/plans'
 
 import {
   annualPlanPriceUsd,
+  ARTICLE_ROLLOVER_MONTHS,
+  CUSTOM_SEAT_PRICE_USD,
+  CUSTOM_SEATS,
   EXTRA_TRANSLATION_LANGUAGE_PRICE_USD,
   formatUsd,
-  KNOWLEDGE_SOURCES,
+  KNOWLEDGE_LIMITS,
   PLAN_ARTICLES,
   PLAN_PRICES_USD,
-  TRIAL_ARTICLES,
-  TRIAL_DAYS,
+  PREMIUM_VISIBILITY_RESPONSES,
   TRANSLATION_LANGUAGES,
 } from '~~/shared/utils/plans'
 
@@ -23,24 +25,41 @@ const billingInterval = shallowRef<BillingInterval>(route.query.billing === 'yea
 const plans = ['free', 'pro', 'premium', 'custom'] as const
 type Plan = (typeof plans)[number]
 const excluded = new Set(['no_ai'])
-const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
-const counts: Record<Plan, Record<string, number>> = {
-  free: {},
-  pro: { articles: PLAN_ARTICLES.pro, knowledge: KNOWLEDGE_SOURCES.pro, translations: TRANSLATION_LANGUAGES.pro },
-  premium: {
-    articles: PLAN_ARTICLES.premium,
-    knowledge: KNOWLEDGE_SOURCES.premium,
-    translations: TRANSLATION_LANGUAGES.premium,
-  },
-  custom: { articles: PLAN_ARTICLES.custom, knowledge: KNOWLEDGE_SOURCES.custom },
+type Params = Record<string, Record<string, number | string>>
+const allowance = (plan: Exclude<Plan, 'free'>): Params => {
+  const limits = KNOWLEDGE_LIMITS[plan]
+  return {
+    articles: { count: PLAN_ARTICLES[plan], cap: PLAN_ARTICLES[plan] * (1 + ARTICLE_ROLLOVER_MONTHS) },
+    knowledge: {
+      count: limits.sources,
+      products: new Intl.NumberFormat(locale.value).format(limits.products),
+      characters: new Intl.NumberFormat(locale.value, { notation: 'compact' }).format(limits.characters),
+    },
+  }
 }
+const params = computed<Record<Plan, Params>>(() => ({
+  free: {},
+  pro: {
+    ...allowance('pro'),
+    translations: {
+      count: TRANSLATION_LANGUAGES.pro,
+      price: formatUsd(EXTRA_TRANSLATION_LANGUAGE_PRICE_USD, locale.value),
+    },
+  },
+  premium: {
+    ...allowance('premium'),
+    translations: { count: TRANSLATION_LANGUAGES.premium },
+    visibility: { count: PREMIUM_VISIBILITY_RESPONSES },
+  },
+  custom: {
+    ...allowance('custom'),
+    seats: { seats: CUSTOM_SEATS, seatPrice: formatUsd(CUSTOM_SEAT_PRICE_USD, locale.value) },
+  },
+}))
 const features = (plan: Plan) =>
   Object.keys(tm(`landing.pricing.plans.${plan}.features`) as Record<string, unknown>).map((key) => ({
     key,
-    label: t(`landing.pricing.plans.${plan}.features.${key}`, {
-      count: counts[plan][key] ?? 0,
-      price: formatUsd(EXTRA_TRANSLATION_LANGUAGE_PRICE_USD, locale.value),
-    }),
+    label: t(`landing.pricing.plans.${plan}.features.${key}`, params.value[plan][key] ?? {}),
     excluded: excluded.has(key),
   }))
 const price = (plan: Plan) => {
@@ -62,7 +81,7 @@ const signUp = (plan: Plan) =>
         <div class="section-heading">
           <p class="eyebrow">{{ $t('landing.design.pricingEyebrow') }}</p>
           <h2>{{ $t('landing.pricing.title') }}</h2>
-          <p class="section-description">{{ $t('landing.pricing.subtitle', trial) }}</p>
+          <p class="section-description">{{ $t('landing.pricing.subtitle') }}</p>
         </div>
         <PricingIntervalToggle v-model="billingInterval" />
       </div>

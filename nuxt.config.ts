@@ -21,6 +21,9 @@ export default defineNuxtConfig({
       secretAccessKey: process.env.SES_SECRET_ACCESS_KEY || '',
     },
     turnstile: { secretKey: process.env.TURNSTILE_SECRET_KEY || '' },
+    // Leadgen CRM external API (write-scoped key); either empty disables lead sync.
+    crmUrl: '',
+    crmApiKey: '',
     public: {
       turnstile: { siteKey: process.env.TURNSTILE_SITE_KEY || '' },
       appVersion: '1.0.0 beta',

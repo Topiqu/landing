@@ -4,6 +4,8 @@ import { ZxcvbnFactory } from '@zxcvbn-ts/core'
 
 import type { DomainStatus, OnboardingForm, OnboardingStep, StepProgress } from '~/composables/useOnboarding'
 
+import { readAttribution } from '../utils/attribution'
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export const normalizeDomain = (value: string) =>
@@ -242,7 +244,14 @@ export const useOnboardingStore = defineStore(
           retry: 0,
           timeout: 20_000,
           signal: controller.signal,
-          body: { email, locale, website: form.website, turnstileToken },
+          body: {
+            email,
+            locale,
+            website: form.website,
+            turnstileToken,
+            websiteUrl: form.websiteUrl,
+            attribution: readAttribution(),
+          },
         })
         if (version !== sendVersion || verifiedToken.value) return false
         const accepted = res.delivery === 'ses' && typeof res.messageId === 'string' && !!res.messageId.trim()
