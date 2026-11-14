@@ -354,9 +354,7 @@
         "accent": "to content people find.",
         "description": "Topiqu finds topics worth covering. It combines your own sources with live research, checks the claims and publishes the article. Then it tracks the results and shows what to improve next.",
         "cta": "Start for free",
-        "emailPlaceholder": "Your email address",
         "secondary": "See how it works",
-        "note": "{days}-day trial with {articles} AI articles. No card required.",
         "scene": {
           "verified": "Verified 3/3",
           "published": "Published",
@@ -573,9 +571,9 @@
         "output": "Article ready to publish"
       },
       "closing": {
-        "eyebrow": "START WITH ONE TOPIC",
-        "title": "You have the knowledge. Give it a process.",
-        "text": "Try Topiqu free for {days} days and follow your first article from sources to results."
+        "eyebrow": "START TODAY",
+        "title": "Let Topiqu write the first article from your website.",
+        "text": "Enter your email, confirm your website and Topiqu gets to work."
       },
       "pricingEyebrow": "FOR INDIVIDUALS AND EDITORIAL TEAMS",
       "footerLabel": "From knowledge to results.",
@@ -763,6 +761,12 @@
           "title": "And everything else",
           "text": "Series, comments, polls, media library, your fonts and colours. All in the changelog."
         }
+      },
+      "lead": {
+        "placeholder": "Your email",
+        "cta": "Try it on my website",
+        "note": "{days} days of Premium and {articles} articles free. Add a card only when you decide to continue.",
+        "reads": "Topiqu will then read {domain}."
       }
     }
   }

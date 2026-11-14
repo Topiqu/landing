@@ -1,8 +1,14 @@
 import { z } from 'zod'
 import { randomInt } from 'crypto'
+import { createRateLimit } from '~~/server/utils/rateLimit'
 import { sendVerificationCode } from '~~/server/utils/email'
 import { issueChallenge } from '~~/server/utils/onboardingTokens'
 import { isDisposableEmail } from '~~/server/utils/disposableEmails'
+import { attributionSchema, LEAD_TAGS, queueLead } from '~~/server/utils/crm'
+import { crmSourceOf, formatAttribution, httpUrl } from '~~/shared/utils/leads'
+
+// A resent code is the same visit: one CRM note per address and hour.
+const syncOnce = createRateLimit({ limit: 1, windowMs: 60 * 60_000 })
 
 const schema = z.object({
   email: z.string().email(),
@@ -10,10 +16,16 @@ const schema = z.object({
   locale: z.enum(['cs', 'en']).default('en'),
   website: z.string().optional(),
   turnstileToken: z.string().optional(),
+  // The site step's address and the landing visit's campaign, only for the CRM.
+  websiteUrl: z.string().trim().max(2048).optional(),
+  attribution: attributionSchema,
 })
 
 export default defineEventHandler(async (event) => {
-  const { email, locale, website, turnstileToken } = await readValidatedBody(event, schema.parse)
+  const { email, locale, website, turnstileToken, websiteUrl, attribution } = await readValidatedBody(
+    event,
+    schema.parse,
+  )
 
   if (website && website.trim() !== '') {
     return { challenge: 'ok' }
@@ -50,6 +62,26 @@ export default defineEventHandler(async (event) => {
   const link = `${origin}${verifyPath}#${new URLSearchParams({ code, token: challenge })}`
 
   const delivery = await sendVerificationCode({ to: email, code, name, locale, link, event })
+
+  const campaign = formatAttribution(attribution)
+  const confirmed = httpUrl(websiteUrl)
+  if (syncOnce(email.toLowerCase())) {
+    queueLead(event, {
+      email,
+      tag: LEAD_TAGS.captured,
+      note: [
+        `E-mail ověřovaný v onboardingu (${locale})`,
+        confirmed && `Web: ${confirmed}`,
+        campaign && `Kampaň: ${campaign}`,
+      ]
+        .filter(Boolean)
+        .join('\n'),
+      source: crmSourceOf(attribution),
+      detail: ['Topiqu landing', 'onboarding', campaign].filter(Boolean).join(' · '),
+      website: confirmed,
+      confirmedWebsite: true,
+    })
+  }
 
   return { challenge, ...delivery }
 })

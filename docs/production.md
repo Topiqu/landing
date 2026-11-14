@@ -18,6 +18,7 @@ Use Nuxt's native runtime environment overrides for an already-built image:
 | `SES_REGION`                                    | SES identity region, normally `eu-central-1`               |
 | `SES_ACCESS_KEY_ID`, `SES_SECRET_ACCESS_KEY`    | Credentials allowed to send from the SES identity          |
 | `NUXT_EMAIL_FROM`                               | Verified SES sender                                        |
+| `NUXT_CRM_URL`, `NUXT_CRM_API_KEY`              | Leadgen CRM origin and write-scoped API key for leads      |
 | `NUXT_PUBLIC_GTAG_ID`                           | Optional analytics ID; loaded only after consent           |
 | `NUXT_PUBLIC_META_PIXEL_ID`                     | Meta Pixel; loaded only after consent, empty disables it   |
 | `NUXT_PUBLIC_STATUS_URL`, `NUXT_PUBLIC_CDN_URL` | Optional public service origins                            |
@@ -109,6 +110,14 @@ can expire. It is bounded recovery, not an unlimited exactly-once claim. Never l
 
 Deploy the matching platform release and its migrations before this landing release. Without that
 platform implementation, an explicit resubmission cannot recover a partially committed signup.
+
+## CRM leads
+
+The landing writes leads to the Leadgen CRM external API (`/api/v1`) from its server; the key never reaches the browser.
+
+- The hero and closing form (`/api/leads`) and the onboarding's `send-code` tag a lead `zachycen`; checkout tags it `registrovan` and replaces its website with the address confirmed in the site step.
+- A new lead starts in stage `new`, its source taken from the campaign (`ref` → cold, LinkedIn, referral, paid → other, otherwise web). An existing lead keeps its stage and source and gets a note; stage moves belong to CRM Rules acting on the tags.
+- The sync runs after the response (`event.waitUntil`) and never fails the request; errors are logged as `crm.failed`.
 
 ## Server logs
 

@@ -350,9 +350,7 @@
         "accent": "k obsahu, který je vidět.",
         "description": "Topiqu zjistí, o čem má smysl psát. Z vašich podkladů a aktuálních zdrojů připraví článek, ověří jeho tvrzení a publikuje ho. Pak sleduje výsledky a ukáže, co zlepšit dál.",
         "cta": "Začít zdarma",
-        "emailPlaceholder": "Váš e-mail",
         "secondary": "Jak to funguje",
-        "note": "{days} dní zdarma a {articles} AI článků. Bez platební karty.",
         "scene": {
           "verified": "Ověřeno 3/3",
           "published": "Publikováno",
@@ -569,9 +567,9 @@
         "output": "Článek připravený k vydání"
       },
       "closing": {
-        "eyebrow": "ZAČNĚTE JEDNÍM TÉMATEM",
-        "title": "Znalosti už máte. Dejte jim celý proces.",
-        "text": "Vyzkoušejte Topiqu {days} dní zdarma a sledujte cestu prvního článku od podkladů po výsledek."
+        "eyebrow": "ZAČNĚTE JEŠTĚ DNES",
+        "title": "Nechte Topiqu napsat první článek z vašeho webu.",
+        "text": "Zadejte e-mail, potvrďte svůj web a Topiqu se pustí do práce."
       },
       "pricingEyebrow": "PRO JEDNOTLIVCE I REDAKCE",
       "footerLabel": "Od znalostí k výsledkům.",
@@ -759,6 +757,12 @@
           "title": "A k tomu všechno ostatní",
           "text": "Série, komentáře, ankety, knihovna médií, vlastní písma a barvy. Vše v changelogu."
         }
+      },
+      "lead": {
+        "placeholder": "Váš e-mail",
+        "cta": "Vyzkoušet na mém webu",
+        "note": "{days} dní Premium a {articles} článků zdarma. Kartu zadáte, až když budete chtít pokračovat.",
+        "reads": "Topiqu si pak přečte {domain}."
       }
     }
   }
