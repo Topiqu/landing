@@ -165,6 +165,7 @@
         "languageHelp": "You can change the writing language at any time in settings and translate articles into other languages.",
         "website": "Your company website",
         "websitePlaceholder": "mycompany.com",
+        "websiteSuggestion": "Use {domain} from your email",
         "websiteHelp": "By providing your website, you agree that AI will process its public content after sign-up to prepare your blog settings and knowledge sources. You will review and confirm everything before use."
       },
       "domainStatus": {
@@ -756,7 +757,7 @@
         "placeholder": "Your work email",
         "cta": "Try it free",
         "note": "{days} days of Premium and {articles} articles free. No credit card.",
-        "reads": "Topiqu will then read {domain}."
+        "reads": "Topiqu then reads {domain} in one click."
       },
       "meta": {
         "title": "A company blog written from your own materials, fact-checked",

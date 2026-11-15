@@ -57,7 +57,6 @@ const domain = refDebounced(
 
 const submit = async () => {
   const address = email.value.trim()
-  const website = companyDomain(address)
   // Never awaited: the CRM must not hold up the onboarding.
   $fetch('/api/leads', {
     method: 'POST',
@@ -75,8 +74,8 @@ const submit = async () => {
   const { useOnboardingStore } = await import('~/stores/onboarding')
   return nuxtApp.runWithContext(() => {
     const store = useOnboardingStore()
+    // The site step offers the address's domain as the website; only the visitor enters it.
     store.form.email = address
-    if (website && !store.form.websiteUrl.trim()) store.form.websiteUrl = `https://${website}`
     return navigateTo(localePath({ name: 'onboarding-site' }))
   })
 }

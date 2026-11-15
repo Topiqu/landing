@@ -132,6 +132,18 @@
         maxlength="2048"
         :placeholder="$t('landing.onboarding.site.websitePlaceholder')"
       />
+      <UButton
+        v-if="suggestedWebsite"
+        type="button"
+        color="neutral"
+        variant="link"
+        size="sm"
+        icon="mdi:auto-fix"
+        class="tw:mt-1.5 tw:px-0"
+        @click="form.websiteUrl = suggestedWebsite"
+      >
+        {{ $t('landing.onboarding.site.websiteSuggestion', { domain: suggestedWebsite }) }}
+      </UButton>
     </UFormField>
 
     <OnboardingActions :disabled="!canAdvanceSite" />
@@ -159,6 +171,10 @@ if (requestedPlan === 'PRO' || requestedPlan === 'PREMIUM' || requestedPlan === 
   form.selectedPlan = requestedPlan
 const requestedInterval = String(route.query.interval ?? '')
 if (requestedInterval === 'month' || requestedInterval === 'year') form.billingInterval = requestedInterval
+
+// A work address hints at the company website, but only the visitor's own click or typing enters it:
+// a filled field is consent to read the site, and the guess can be someone else's domain.
+const suggestedWebsite = computed(() => (form.websiteUrl.trim() ? null : companyDomain(form.email)))
 
 const languageOptions = computed(() =>
   CONTENT_LANGUAGES.map((value) => ({
