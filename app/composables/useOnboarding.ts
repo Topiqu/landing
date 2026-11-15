@@ -43,10 +43,12 @@ export const useOnboarding = () => {
   const goTo = (step: OnboardingStep) => navigateTo(localePath({ name: stepRouteName(step) }))
   const complete = (step: OnboardingStep) => {
     store.markStep(step, 'done')
+    store.reportProgress(step)
     return goTo(nextStep(step))
   }
   const skip = (step: OnboardingStep) => {
     store.markStep(step, store.isStepDirty(step) ? 'done' : 'skipped')
+    store.reportProgress(step)
     return goTo(nextStep(step))
   }
 

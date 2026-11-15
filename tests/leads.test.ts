@@ -2,7 +2,7 @@ import { describe, expect, mock, test } from 'bun:test'
 
 import { createRateLimit } from '../server/utils/rateLimit'
 import { companyDomain, crmSourceOf, httpUrl } from '../shared/utils/leads'
-import { createCrmSync, LEAD_TAGS, type CrmLead } from '../server/utils/crm'
+import { createCrmSync, LEAD_TAGS, onboardingLead, type CrmLead } from '../server/utils/crm'
 
 const crm = (leads: { id: number; email: string }[], website = '') => {
   const api = mock(async (path: string, options?: { method?: string }) => {
@@ -96,6 +96,51 @@ describe('CRM sync', () => {
     const confirmed = crm([{ id: 7, email: 'jan@heatwise.cz' }], 'https://old.cz')
     await confirmed.sync(lead({ website: 'https://heatwise.cz', confirmedWebsite: true }))
     expect(confirmed.writes()[2]![1]).toEqual({ method: 'PATCH', body: { website: 'https://heatwise.cz' } })
+  })
+
+  test('the blog name and username go to a new lead and only fill gaps on a known one', async () => {
+    const fresh = crm([])
+    await fresh.sync(lead({ company: 'Heatwise', name: 'jan' }))
+    expect(fresh.writes()[0]![1]!.body).toMatchObject({ company: 'Heatwise', name: 'jan' })
+
+    const api = mock(async (path: string, options?: { method?: string }) => {
+      if (options?.method) return {}
+      return path === '/api/v1/leads'
+        ? { data: [{ id: 7, email: 'jan@heatwise.cz' }] }
+        : { data: { website: '', company: 'Heatwise s.r.o.', name: null } }
+    })
+    await createCrmSync(api as never)(lead({ company: 'Heatwise', name: 'jan' }))
+    expect(api.mock.calls.at(-1)).toEqual(['/api/v1/leads/7', { method: 'PATCH', body: { name: 'jan' } }])
+  })
+
+  test('turns the wizard entries into note lines and lead fields', () => {
+    expect(
+      onboardingLead({
+        siteName: 'Heatwise',
+        domain: 'heatwise',
+        domainType: 'SUBDOMAIN',
+        language: 'cs',
+        websiteUrl: 'heatwise.cz',
+        username: 'jan',
+        selectedPlan: null,
+      }),
+    ).toEqual({
+      lines: [
+        'Blog: Heatwise (heatwise.topiqu.com)',
+        'Jazyk: cs',
+        'Web firmy: https://heatwise.cz/',
+        'Tarif: FREE',
+        'Uživatel: jan',
+      ],
+      website: 'https://heatwise.cz/',
+      company: 'Heatwise',
+      name: 'jan',
+    })
+    // The site step is reported before a plan is chosen; a custom domain is the blog's address as is.
+    expect(onboardingLead({ domain: 'blog.heatwise.cz', domainType: 'CUSTOM' }).lines).toEqual([
+      'Blog: (blog.heatwise.cz)',
+    ])
+    expect(onboardingLead({ selectedPlan: 'CUSTOM', billingInterval: 'year' }).lines).toEqual(['Tarif: CUSTOM (year)'])
   })
 })
 

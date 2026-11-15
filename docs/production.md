@@ -115,7 +115,8 @@ platform implementation, an explicit resubmission cannot recover a partially com
 
 The landing writes leads to the Leadgen CRM external API (`/api/v1`) from its server; the key never reaches the browser.
 
-- The hero and closing form (`/api/leads`) and the onboarding's `send-code` tag a lead `zachycen`; checkout tags it `registrovan` and replaces its website with the address confirmed in the site step.
+- The hero and closing form (`/api/leads`), a finished site or plan step (`/api/leads/progress`, only once a landing form gave the address) and the onboarding's `send-code` tag a lead `zachycen`; checkout tags it `registrovan`. The three onboarding writes share `onboardingLead` (`server/utils/crm.ts`): the wizard's entries become note lines, the blog name `company` and the username `name`.
+- The website a visitor entered replaces the CRM's; the domain guessed from a work address, `company` and `name` only fill a gap.
 - A new lead starts in stage `new`, its source taken from the campaign (`ref` → cold, LinkedIn, referral, paid → other, otherwise web). An existing lead keeps its stage and source and gets a note; stage moves belong to CRM Rules acting on the tags.
 - The sync runs after the response (`event.waitUntil`) and never fails the request; errors are logged as `crm.failed`.
 
