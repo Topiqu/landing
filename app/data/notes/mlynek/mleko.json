@@ -1,0 +1,117 @@
+{
+  "cs": [
+    {
+      "quote": "začněte u toho, kolik cappuccin a latté doma skutečně připravíte",
+      "kind": "source",
+      "text": "Dohoda z porady prodeje: doporučovat podle počtu a druhu nápojů, ne podle ceny. Článek na ní stojí od první věty.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "Doporučovat podle počtu a druhu nápojů za den, ne podle ceny kávovaru. Dražší model není automaticky lepší volba."
+    },
+    {
+      "quote": "Z naší nabídky stojí Kaffeno K3 s tryskou 9 990 Kč, Kaffeno K5 Milk s nádobkou 14 490 Kč a Vellora Duo s hadičkou 18 990 Kč",
+      "kind": "source",
+      "text": "Ceny a mléčné systémy přesně podle katalogu, názvy modelů tak, jak je chce hlas značky.",
+      "file": "katalog-2026.md",
+      "excerpt": "Kaffeno K3 | 9 990 Kč | parní tryska (ruční napěnění)\nKaffeno K5 Milk | 14 490 Kč | automatický, nádobka 0,5 l\nVellora Duo | 18 990 Kč | automatický, hadička do vlastní nádoby"
+    },
+    {
+      "quote": "tedy asi 11,60 Kč na jedno použití",
+      "kind": "computed",
+      "text": "Cena čističe z katalogu rozpočítaná na jedno čištění a na měsíc.",
+      "calc": "289 Kč ÷ 25 = 11,56 Kč na čištění\n52 × 11,56 Kč ÷ 12 ≈ 50 Kč měsíčně",
+      "file": "katalog-2026.md",
+      "excerpt": "Čistič mléčného systému 500 ml | 289 Kč | přibližně 25 čištění, doporučujeme jednou týdně"
+    },
+    {
+      "quote": "Vyšší cena kupuje automatické napěnění a kapacitu pro častější provoz; pro jedno občasné cappuccino nemusíte tyto možnosti využít",
+      "kind": "voice",
+      "text": "Hlas značky zakazuje doporučovat nejdražší model jako výchozí volbu. Článek to dodrží i u kávovaru za 18 990 Kč.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Doporučování nejdražšího modelu jako výchozí volby."
+    },
+    {
+      "quote": "vycházejí přípravky a filtry asi na 245 Kč měsíčně",
+      "kind": "computed",
+      "text": "Filtr, odvápňovač a čistič mléčné cesty z katalogu, intervaly z provozního plánu e-shopu.",
+      "calc": "349 Kč ÷ 2 = 174,50 Kč (filtr)\n249 Kč ÷ 12 = 20,75 Kč (odvápnění)\n174,50 + 20,75 + 50,09 ≈ 245 Kč měsíčně",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "vodní filtr: výměna každé 2 měsíce,\nodvápnění: přibližně 2× ročně (bez filtru při tvrdé vodě každé 1–2 měsíce),\nčištění mléčného systému: jednou týdně,"
+    },
+    {
+      "quote": "V showroomu jsme u nahřátého Kaffeno K5 Milk naměřili spotřebu 0,028 kWh na cappuccino a 0,012 kWh na espresso",
+      "kind": "source",
+      "text": "Vlastní měření e-shopu ze září 2026, žádný obecný odhad z internetu.",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Espresso z nahřátého kávovaru | 0,012 kWh\nCappuccino z nahřátého kávovaru | 0,028 kWh"
+    },
+    {
+      "quote": "připočtěte asi 2,04 Kč za údržbu na šálek",
+      "kind": "computed",
+      "text": "Měsíční údržba rozpočítaná na čtyři nápoje denně, jak počítá provozní plán e-shopu.",
+      "calc": "245,34 Kč ÷ (4 × 30) ≈ 2,04 Kč na šálek",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Údržba při běžném provozu (4 nápoje denně, s filtrem)"
+    }
+  ],
+  "en": [
+    {
+      "quote": "start by considering how many cappuccinos and lattes you actually make at home",
+      "kind": "source",
+      "text": "An agreement from the sales meeting: recommend by the number and kind of drinks, not by price. The article builds on it from the first sentence.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "Recommend by the number and kind of drinks a day, not by the machine's price. A more expensive model is not automatically the better choice.",
+      "original": "Doporučovat podle počtu a druhu nápojů za den, ne podle ceny kávovaru. Dražší model není automaticky lepší volba."
+    },
+    {
+      "quote": "In our range, the Kaffeno K3 with a steam wand costs 9,990 Kč, the Kaffeno K5 Milk with a container costs 14,490 Kč, and the Vellora Duo with a tube costs 18,990 Kč",
+      "kind": "source",
+      "text": "Prices and milk systems exactly as in the catalogue, model names the way the brand voice wants them.",
+      "file": "katalog-2026.md",
+      "excerpt": "Kaffeno K3 | CZK 9,990 | steam wand (manual frothing)\nKaffeno K5 Milk | CZK 14,490 | automatic, 0.5 l jug\nVellora Duo | CZK 18,990 | automatic, tube into your own container",
+      "original": "Kaffeno K3 | 9 990 Kč | parní tryska (ruční napěnění)\nKaffeno K5 Milk | 14 490 Kč | automatický, nádobka 0,5 l\nVellora Duo | 18 990 Kč | automatický, hadička do vlastní nádoby"
+    },
+    {
+      "quote": "or about 11.60 Kč per use",
+      "kind": "computed",
+      "text": "The cleaner's catalogue price per cleaning and per month.",
+      "calc": "289 Kč ÷ 25 = 11.56 Kč per cleaning\n52 × 11.56 Kč ÷ 12 ≈ 50 Kč a month",
+      "file": "katalog-2026.md",
+      "excerpt": "Milk system cleaner 500 ml | CZK 289 | about 25 cleanings, we recommend once a week",
+      "original": "Čistič mléčného systému 500 ml | 289 Kč | přibližně 25 čištění, doporučujeme jednou týdně"
+    },
+    {
+      "quote": "The higher price gets you automatic frothing and capacity for more frequent use; you may not need these features if you only make one cappuccino occasionally",
+      "kind": "voice",
+      "text": "The brand voice rules out recommending the most expensive model by default. The article holds to that even for an 18,990 Kč machine.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Recommending the most expensive model as the default choice.",
+      "original": "Doporučování nejdražšího modelu jako výchozí volby."
+    },
+    {
+      "quote": "works out to about 245 Kč a month for products and filters",
+      "kind": "computed",
+      "text": "Filter, descaler and milk system cleaner from the catalogue; intervals from the shop's maintenance plan.",
+      "calc": "349 Kč ÷ 2 = 174.50 Kč (filter)\n249 Kč ÷ 12 = 20.75 Kč (descaling)\n174.50 + 20.75 + 50.09 ≈ 245 Kč a month",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "water filter: replace every 2 months,\ndescaling: about twice a year (without a filter, in hard water every 1–2 months),\nmilk system cleaning: once a week,",
+      "original": "vodní filtr: výměna každé 2 měsíce,\nodvápnění: přibližně 2× ročně (bez filtru při tvrdé vodě každé 1–2 měsíce),\nčištění mléčného systému: jednou týdně,"
+    },
+    {
+      "quote": "In our showroom, we measured the energy use of a preheated Kaffeno K5 Milk at 0.028 kWh per cappuccino and 0.012 kWh per espresso",
+      "kind": "source",
+      "text": "The shop's own measurements from September 2026, not a general estimate from the internet.",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Espresso from a warmed-up machine | 0.012 kWh\nCappuccino from a warmed-up machine | 0.028 kWh",
+      "original": "Espresso z nahřátého kávovaru | 0,012 kWh\nCappuccino z nahřátého kávovaru | 0,028 kWh"
+    },
+    {
+      "quote": "add about 2.04 Kč per cup for maintenance",
+      "kind": "computed",
+      "text": "Monthly maintenance spread over four drinks a day, as in the shop's maintenance plan.",
+      "calc": "245.34 Kč ÷ (4 × 30) ≈ 2.04 Kč per cup",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Maintenance in normal use (4 drinks a day, with a filter)",
+      "original": "Údržba při běžném provozu (4 nápoje denně, s filtrem)"
+    }
+  ]
+}

@@ -143,6 +143,8 @@ export default defineNuxtConfig({
           'https://fundingchoicesmessages.google.com',
           'https://pagead2.googlesyndication.com',
           'https://ep2.adtrafficquality.google',
+          // Videos inside the example articles (`/examples/[id]/[article]`).
+          'https://www.youtube-nocookie.com',
         ],
         'connect-src': ["'self'", 'https:'],
         'frame-ancestors': ["'self'"],
@@ -253,6 +255,7 @@ export default defineNuxtConfig({
         en: '/terms-of-service',
       },
       agencies: { cs: '/agentury', en: '/agencies' },
+      'examples/[id]/[article]': { cs: '/ukazky/[id]/[article]', en: '/examples/[id]/[article]' },
       'onboarding/index': { cs: '/onboarding', en: '/onboarding' },
       'onboarding/site': { cs: '/onboarding/web', en: '/onboarding/site' },
       'onboarding/design': { cs: '/onboarding/design', en: '/onboarding/design' },

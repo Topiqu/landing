@@ -1,0 +1,114 @@
+{
+  "cs": [
+    {
+      "quote": "je poměr dodaného tepla ke spotřebované elektřině při uvedených podmínkách",
+      "kind": "voice",
+      "text": "Odborný pojem vysvětlený jednou větou při prvním použití, přesně podle hlasu značky.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Bez žargonu. Odborný pojem (COP, SCOP, ekvitermní křivka) vždy vysvětlíme jednou větou, když ho poprvé použijeme."
+    },
+    {
+      "quote": "Při zjednodušeném přepočtu podle rozdílu teplot vychází při −15 °C ztráta přibližně 9,3 kW",
+      "kind": "computed",
+      "text": "Ztráta 8,5 kW je ze skutečného domu z realizací. Přepočet podle rozdílu teplot článek otevřeně nazve zjednodušeným.",
+      "calc": "8,5 kW × (20 + 15) ÷ (20 + 12) ≈ 9,3 kW",
+      "file": "realizace.md",
+      "excerpt": "Tepelná ztráta: 8,5 kW."
+    },
+    {
+      "quote": "Uvažovaný dům se ztrátou 8,5 kW při −12 °C by při stejném zjednodušeném přepočtu potřeboval při −7 °C přibližně 7,2 kW",
+      "kind": "computed",
+      "text": "Stejný přepočet pro −7 °C, kde technický list udává výkon čerpadla. Obě hodnoty výkonu jsou nad potřebou domu.",
+      "calc": "8,5 kW × (20 + 7) ÷ (20 + 12) ≈ 7,2 kW\nHW-12 při −7 °C: 9,0 kW (voda 35 °C), 8,2 kW (voda 55 °C)",
+      "file": "technicky-list-hw-12.md",
+      "excerpt": "A−7 / W35 | 9,0 kW | 2,8\nA−7 / W55 | 8,2 kW | 2,1"
+    },
+    {
+      "quote": "Pro vodu 52 °C ale tabulka neudává výkon ani teplotu, při které se záloha zapojí",
+      "kind": "restraint",
+      "text": "Technický list má výkon jen pro vodu 35 a 55 °C a bod bivalence jen jako rozpětí. Topiqu nic nedopočítal a řekne to.",
+      "file": "technicky-list-hw-12.md",
+      "excerpt": "Pod bodem bivalence (podle návrhu obvykle −5 až −10 °C) čerpadlo dotápí tímto tělesem."
+    },
+    {
+      "quote": "U dvou třetin domů postavených před rokem 1990, které jsme v roce 2026 zaměřili, stačila při této venkovní teplotě voda 50–55 °C",
+      "kind": "source",
+      "text": "Zkušenost techniků ze zaměření, kterou zákazník na webu nenajde.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "Ve dvou třetinách domů postavených před rokem 1990, které jsme letos zaměřili, stačila při −12 °C výstupní voda 50–55 °C."
+    },
+    {
+      "quote": "Pro vyčíslení úspory v korunách by bylo potřeba doplnit ceny energií a zohlednit podmínky obou období",
+      "kind": "voice",
+      "text": "Spotřeby jsou skutečné z realizace. Úsporu v korunách ale firma bez výpočtu neslibuje a článek to dodrží.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "Neslibovat konkrétní úsporu v Kč bez výpočtu. Záleží na tarifu elektřiny, ceně plynu a na tom, jak se v domě topí. Ukazovat reálné spotřeby z našich realizací."
+    },
+    {
+      "quote": "naměřila průměrné COP 2,27 pro vytápění",
+      "kind": "research",
+      "text": "Ke katalogovému COP Topiqu dohledal měření ze skutečného provozu: roční studii rodinného domu v Koreji (Energies, 2025).",
+      "url": "https://doi.org/10.3390/en19010155",
+      "excerpt": "achieving average coefficients of performance (COPs) of 2.27 for SH and 2.06 for DHW"
+    }
+  ],
+  "en": [
+    {
+      "quote": "is the ratio of heat supplied to electricity consumed under the stated conditions",
+      "kind": "voice",
+      "text": "A technical term explained in one sentence the first time it appears, exactly as the brand voice asks.",
+      "file": "hlas-znacky.md",
+      "excerpt": "No jargon. A technical term (COP, SCOP, heating curve) is always explained in one sentence the first time we use it.",
+      "original": "Bez žargonu. Odborný pojem (COP, SCOP, ekvitermní křivka) vždy vysvětlíme jednou větou, když ho poprvé použijeme."
+    },
+    {
+      "quote": "A simplified calculation based on the temperature difference gives an estimated heat loss of about 9.3 kW at −15°C",
+      "kind": "computed",
+      "text": "The 8.5 kW heat loss is from a real house in the company's installations. The article openly calls the conversion simplified.",
+      "calc": "8.5 kW × (20 + 15) ÷ (20 + 12) ≈ 9.3 kW",
+      "file": "realizace.md",
+      "excerpt": "Heat loss: 8.5 kW.",
+      "original": "Tepelná ztráta: 8,5 kW."
+    },
+    {
+      "quote": "The example home with a heat loss of 8.5 kW at −12°C would need approximately 7.2 kW at −7°C using the same simplified calculation",
+      "kind": "computed",
+      "text": "The same conversion for −7 °C, where the data sheet gives the heat pump's output. Both output figures are above the house's demand.",
+      "calc": "8.5 kW × (20 + 7) ÷ (20 + 12) ≈ 7.2 kW\nHW-12 at −7 °C: 9.0 kW (35 °C water), 8.2 kW (55 °C water)",
+      "file": "technicky-list-hw-12.md",
+      "excerpt": "A−7 / W35 | 9.0 kW | 2.8\nA−7 / W55 | 8.2 kW | 2.1",
+      "original": "A−7 / W35 | 9,0 kW | 2,8\nA−7 / W55 | 8,2 kW | 2,1"
+    },
+    {
+      "quote": "However, the table does not give the output for water at 52°C or the temperature at which the backup element switches on",
+      "kind": "restraint",
+      "text": "The data sheet gives output only for 35 and 55 °C water and the bivalent point only as a range. Topiqu did not fill the gap and says so.",
+      "file": "technicky-list-hw-12.md",
+      "excerpt": "Below the bivalent point (depending on the design, usually −5 to −10 °C) the heat pump tops up with this heater.",
+      "original": "Pod bodem bivalence (podle návrhu obvykle −5 až −10 °C) čerpadlo dotápí tímto tělesem."
+    },
+    {
+      "quote": "In two-thirds of the Czech homes built before 1990 that we surveyed in 2026, water at 50–55°C was sufficient at this outdoor temperature",
+      "kind": "source",
+      "text": "The technicians' experience from site surveys, which customers will not find on the website.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "In two thirds of the houses built before 1990 that we surveyed this year, a flow water temperature of 50–55 °C was enough at −12 °C.",
+      "original": "Ve dvou třetinách domů postavených před rokem 1990, které jsme letos zaměřili, stačila při −12 °C výstupní voda 50–55 °C."
+    },
+    {
+      "quote": "To calculate the savings in Czech koruna, local energy prices and the conditions in both periods would need to be taken into account",
+      "kind": "voice",
+      "text": "The consumption figures are real, from an installation. A saving in crowns, though, the company never promises without a calculation, and the article holds to that.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "Do not promise a specific saving in crowns without a calculation. It depends on the electricity tariff, the gas price and how the house is heated. Show actual consumption from our installations.",
+      "original": "Neslibovat konkrétní úsporu v Kč bez výpočtu. Záleží na tarifu elektřiny, ceně plynu a na tom, jak se v domě topí. Ukazovat reálné spotřeby z našich realizací."
+    },
+    {
+      "quote": "measured an average heating COP of 2.27",
+      "kind": "research",
+      "text": "Next to the catalogue COP, Topiqu found a measurement from real operation: a year-long study of a family house in South Korea (Energies, 2025).",
+      "url": "https://doi.org/10.3390/en19010155",
+      "excerpt": "achieving average coefficients of performance (COPs) of 2.27 for SH and 2.06 for DHW"
+    }
+  ]
+}

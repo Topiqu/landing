@@ -1,0 +1,92 @@
+{
+  "cs": [
+    {
+      "quote": "Od 30. 12. 2026 potřebujeme mít",
+      "kind": "research",
+      "text": "Termín posunulo o rok nařízení (EU) 2025/2650. Topiqu ho vzal přímo z předpisu EU, takže článek neopakuje zastaralé datum.",
+      "url": "https://environment.ec.europa.eu/topics/forests/deforestation/eu-deforestation-regulation-eudr_en"
+    },
+    {
+      "quote": "Bukové řezivo z Bosny a Hercegoviny naopak dovážíme a proclíváme sami",
+      "kind": "source",
+      "text": "Z interního přehledu dodavatelů. Místo obecného návodu k EUDR popisuje článek postup podle toho, odkud firma skutečně bere dřevo.",
+      "file": "dodavatele-dreva-2025.md",
+      "excerpt": "D – pila | Bosna a Hercegovina | buk, řezivo | 800 m³ | … | zatím jen název regionu; dovážíme sami"
+    },
+    {
+      "quote": "platí termín 30. 6. 2027",
+      "kind": "research",
+      "text": "Pozdější termín pro mikro a malé podniky. Článek v dalším odstavci hlídá i výjimku: firmy s výrobky, na které se už vztahovalo EUTR, mají dřívější termín.",
+      "url": "https://environment.ec.europa.eu/topics/forests/deforestation/eu-deforestation-regulation-eudr_en",
+      "excerpt": "Also applies to micro & small operators already covered by EU Timber Regulation."
+    },
+    {
+      "quote": "K 28. 10. 2026 jsme u dováženého bosenského buku měli k dispozici pouze název regionu",
+      "kind": "source",
+      "text": "Stav ze zápisu pracovní skupiny i s úkolem a termínem, žádné obecné „ověřte si u dodavatele“.",
+      "file": "eudr-pracovni-skupina-2026-10-28.md",
+      "excerpt": "Vyžádat od D geolokaci pozemků, při nedodání hledat náhradní zdroj buku | vedoucí nákupu | 30. 11. 2026"
+    },
+    {
+      "quote": "Rakouský hotelový řetězec zase od 1. 1. 2027 požaduje referenční číslo prohlášení na každé faktuře",
+      "kind": "source",
+      "text": "Požadavek odběratele z porady obchodu. Článek z něj udělal konkrétní kontrolní bod.",
+      "file": "porada-obchodu-2026-11-05.md",
+      "excerpt": "Rakouský hotelový řetězec: v nové rámcové smlouvě od 1. 1. 2027 požaduje na každé faktuře referenční číslo prohlášení o náležité péči."
+    },
+    {
+      "quote": "Obalový materiál používaný výhradně k ochraně, podpoře nebo přepravě jiného výrobku je z EUDR vyjmut",
+      "kind": "research",
+      "text": "Pracovní skupina nechala tuhle otázku otevřenou. Topiqu odpověď našel v příloze I nařízení (EU) 2023/1115 a rovnou ji dal do článku.",
+      "file": "eudr-pracovni-skupina-2026-10-28.md",
+      "excerpt": "6. Spadají pod nařízení palety a proklady, na kterých výrobky expedujeme?"
+    }
+  ],
+  "en": [
+    {
+      "quote": "From 30 December 2026, before placing a product on the market",
+      "kind": "research",
+      "text": "Regulation (EU) 2025/2650 moved the deadline by a year. Topiqu took it straight from EU law, so the article doesn't repeat an outdated date.",
+      "url": "https://environment.ec.europa.eu/topics/forests/deforestation/eu-deforestation-regulation-eudr_en"
+    },
+    {
+      "quote": "By contrast, we import and clear customs ourselves for beech lumber from Bosnia and Herzegovina",
+      "kind": "source",
+      "text": "From the internal supplier overview. Instead of a generic EUDR guide, the article follows where the company actually sources its timber.",
+      "file": "dodavatele-dreva-2025.md",
+      "excerpt": "D – sawmill | Bosnia and Herzegovina | beech, sawn timber | 800 m³ | … | so far only the name of the region; we import it ourselves",
+      "original": "D – pila | Bosna a Hercegovina | buk, řezivo | 800 m³ | … | zatím jen název regionu; dovážíme sami"
+    },
+    {
+      "quote": "the deadline is 30 June 2027",
+      "kind": "research",
+      "text": "The later deadline for micro and small enterprises. The article also keeps the exception in view: businesses whose products were already covered by the EUTR have the earlier date.",
+      "url": "https://environment.ec.europa.eu/topics/forests/deforestation/eu-deforestation-regulation-eudr_en",
+      "excerpt": "Also applies to micro & small operators already covered by EU Timber Regulation."
+    },
+    {
+      "quote": "As of 28 October 2026, for the Bosnian beech we were importing, we had only the name of the region",
+      "kind": "source",
+      "text": "The status from the working group's notes, with the task and its deadline. No generic \"check with your supplier\".",
+      "file": "eudr-pracovni-skupina-2026-10-28.md",
+      "excerpt": "Request plot geolocation from D; if not delivered, look for an alternative beech source | head of purchasing | 30 November 2026",
+      "original": "Vyžádat od D geolokaci pozemků, při nedodání hledat náhradní zdroj buku | vedoucí nákupu | 30. 11. 2026"
+    },
+    {
+      "quote": "the declaration reference number on every invoice",
+      "kind": "source",
+      "text": "A customer requirement from the sales meeting. The article turns it into a concrete checkpoint.",
+      "file": "porada-obchodu-2026-11-05.md",
+      "excerpt": "Austrian hotel chain: its new framework agreement from 1 January 2027 requires the reference number of the due diligence statement on every invoice.",
+      "original": "Rakouský hotelový řetězec: v nové rámcové smlouvě od 1. 1. 2027 požaduje na každé faktuře referenční číslo prohlášení o náležité péči."
+    },
+    {
+      "quote": "Packaging material used exclusively to protect, support or transport another product is exempt from the EUDR",
+      "kind": "research",
+      "text": "The working group left this question open. Topiqu found the answer in Annex I of Regulation (EU) 2023/1115 and put it straight into the article.",
+      "file": "eudr-pracovni-skupina-2026-10-28.md",
+      "excerpt": "6. Do the pallets and spacers we ship products on fall under the regulation?",
+      "original": "6. Spadají pod nařízení palety a proklady, na kterých výrobky expedujeme?"
+    }
+  ]
+}

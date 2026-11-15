@@ -1,0 +1,76 @@
+{
+  "cs": [
+    {
+      "quote": "Pro masivní stůl do restaurace s každodenní dezinfekcí je dobrým prvním kandidátem",
+      "kind": "voice",
+      "text": "Odpověď hned v první větě. Nákupčí s málem času ví, co z toho plyne, ještě než čte dál.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Nejdřív odpověď, pak vysvětlení. První odstavec řekne, o co jde a co z toho plyne."
+    },
+    {
+      "quote": "Náklady na čištění vypočítejte z počtu stolů, času na jejich úklid, četnosti čištění a hodinového nákladu práce",
+      "kind": "restraint",
+      "text": "Ceny práce a prostředků podklady nemají. Topiqu je nevymyslel a dal čtenáři vzorec pro jeho vlastní provoz."
+    },
+    {
+      "quote": "Předejte dodavateli názvy používaných přípravků a požadovanou dobu jejich působení",
+      "kind": "voice",
+      "text": "Kontrolní seznam tam, kde má čtenář něco udělat, jak chce hlas značky.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Kontrolní seznamy tam, kde má čtenář něco udělat."
+    },
+    {
+      "quote": "V Dubině dokončujeme povrchy olejem nebo vodou ředitelnými laky",
+      "kind": "source",
+      "text": "Povrchové úpravy z popisu výroby na webu firmy.",
+      "file": "web.md",
+      "excerpt": "Povrchy dokončujeme olejem nebo vodou ředitelnými laky."
+    },
+    {
+      "quote": "Tyto zkoušky samy o sobě nedokládají odolnost vůči každé dezinfekci",
+      "kind": "restraint",
+      "text": "Firma testuje stoly na vlhkost a teplo, ne na dezinfekci. Topiqu z testů neudělal víc, než dokládají.",
+      "file": "web.md",
+      "excerpt": "Každý stůl pro gastro provoz testujeme na odolnost vůči vlhkosti a teplu."
+    }
+  ],
+  "en": [
+    {
+      "quote": "For a solid wood restaurant table that is disinfected daily",
+      "kind": "voice",
+      "text": "The answer comes in the first sentence. A busy buyer knows what follows from it before reading on.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Answer first, explanation second. The first paragraph says what it is about and what follows from it.",
+      "original": "Nejdřív odpověď, pak vysvětlení. První odstavec řekne, o co jde a co z toho plyne."
+    },
+    {
+      "quote": "Calculate cleaning costs based on the number of tables, the time needed to clean them, how often they are cleaned, and the hourly labor cost",
+      "kind": "restraint",
+      "text": "The documents have no labour or product prices. Topiqu did not invent any and gives readers a formula for their own operation."
+    },
+    {
+      "quote": "Give the supplier the names of the products you use and their required contact times",
+      "kind": "voice",
+      "text": "A checklist where the reader has something to do, as the brand voice asks.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Checklists wherever the reader has something to do.",
+      "original": "Kontrolní seznamy tam, kde má čtenář něco udělat."
+    },
+    {
+      "quote": "At Dubina, we finish surfaces with oil or water-based lacquers",
+      "kind": "source",
+      "text": "The finishes from the production section of the company website.",
+      "file": "web.md",
+      "excerpt": "Surfaces are finished with oil or water-based lacquers.",
+      "original": "Povrchy dokončujeme olejem nebo vodou ředitelnými laky."
+    },
+    {
+      "quote": "These tests do not, on their own, demonstrate resistance to every disinfectant",
+      "kind": "restraint",
+      "text": "The company tests tables for moisture and heat, not for disinfectants. Topiqu did not make the tests say more than they show.",
+      "file": "web.md",
+      "excerpt": "We test every table for restaurant use for resistance to moisture and heat.",
+      "original": "Každý stůl pro gastro provoz testujeme na odolnost vůči vlhkosti a teplu."
+    }
+  ]
+}

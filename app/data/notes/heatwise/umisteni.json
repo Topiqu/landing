@@ -1,0 +1,106 @@
+{
+  "cs": [
+    {
+      "quote": "Akustický tlak ve volném poli vychází na 36 dB(A) ve vzdálenosti 3 m a 32 dB(A) ve vzdálenosti 5 m",
+      "kind": "source",
+      "text": "Hodnoty z technického listu HW-8 pro standardní režim.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Akustický tlak ve 3 m (volné pole) | 36 dB(A) | 32 dB(A)\nAkustický tlak v 5 m (volné pole) | 32 dB(A) | 28 dB(A)"
+    },
+    {
+      "quote": "Číslo 54 tedy nelze přímo porovnat s hladinou vypočtenou u sousedova okna",
+      "kind": "source",
+      "text": "Podle dohody z porady článek vysvětlí rozdíl mezi akustickým výkonem a tlakem dřív, než čtenář začne porovnávat nabídky.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "U dotazu na hluk vždy vysvětlit rozdíl mezi akustickým výkonem a akustickým tlakem – lidé porovnávají čísla, která nejsou srovnatelná."
+    },
+    {
+      "quote": "U HW-12 je odstup za jednotkou také 30 cm, před ventilátorem potřebuje 120 cm",
+      "kind": "source",
+      "text": "Odstupy z technického listu. Článek u každého modelu uvede jeho vlastní hodnoty.",
+      "file": "technicky-list-hw-12.md",
+      "excerpt": "Minimální odstup: 30 cm od zdi za jednotkou, 120 cm volného prostoru před ventilátorem."
+    },
+    {
+      "quote": "naplánujte odvod do vsakovacího štěrkového lože a v mrazech zajistěte vyhřívání odtoku",
+      "kind": "source",
+      "text": "Pokyn z technického listu. Článek k němu přidá praktický důsledek: led na cestě ke dveřím.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Kondenzát odvádějte do vsakovacího štěrkového lože; v mrazech zajistěte vyhřívání odtoku."
+    },
+    {
+      "quote": "U složitějšího umístění požádejte o akustické posouzení pro příslušná místa podle platných pravidel",
+      "kind": "restraint",
+      "text": "Hygienické limity hluku podklady firmy neuvádějí. Topiqu žádné číslo nevymyslel a odkáže na posouzení podle platných pravidel."
+    },
+    {
+      "quote": "Zbytečně předimenzované zařízení může často zapínat a vypínat",
+      "kind": "source",
+      "text": "Zkušenost ze servisu instalací jiných firem. Článek ji podá jako radu, bez jmenování konkurence.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "Nejčastější chyba u konkurenčních instalací, které k nám přicházejí do servisu: předimenzovaný výkon (čerpadlo často cykluje) a jednotka v koutě mezi zdmi."
+    },
+    {
+      "quote": "U nezateplených domů s tepelnou ztrátou nad 15 kW samotné čerpadlo nedoporučujeme",
+      "kind": "voice",
+      "text": "Firma napíše, kdy čerpadlo neprodá. Hranice 15 kW je z poznatků techniků ze zaměření.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "Nezateplené domy s tepelnou ztrátou nad 15 kW: čerpadlo samo o sobě nedoporučujeme."
+    }
+  ],
+  "en": [
+    {
+      "quote": "In free-field conditions, its sound pressure level is 36 dB(A) at a distance of 3 m and 32 dB(A) at 5 m",
+      "kind": "source",
+      "text": "Values from the HW-8 data sheet for standard mode.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Sound pressure at 3 m (free field) | 36 dB(A) | 32 dB(A)\nSound pressure at 5 m (free field) | 32 dB(A) | 28 dB(A)",
+      "original": "Akustický tlak ve 3 m (volné pole) | 36 dB(A) | 32 dB(A)\nAkustický tlak v 5 m (volné pole) | 32 dB(A) | 28 dB(A)"
+    },
+    {
+      "quote": "So the figure of 54 cannot be directly compared with the level calculated at your neighbor’s window",
+      "kind": "source",
+      "text": "As agreed at the meeting, the article explains sound power and sound pressure before readers start comparing quotes.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "When asked about noise, always explain the difference between sound power and sound pressure – people compare figures that are not comparable.",
+      "original": "U dotazu na hluk vždy vysvětlit rozdíl mezi akustickým výkonem a akustickým tlakem – lidé porovnávají čísla, která nejsou srovnatelná."
+    },
+    {
+      "quote": "The HW-12 also needs 30 cm behind the unit, and 120 cm in front of the fan",
+      "kind": "source",
+      "text": "Clearances from the data sheet. The article gives each model its own values.",
+      "file": "technicky-list-hw-12.md",
+      "excerpt": "Minimum clearance: 30 cm from the wall behind the unit, 120 cm of free space in front of the fan.",
+      "original": "Minimální odstup: 30 cm od zdi za jednotkou, 120 cm volného prostoru před ventilátorem."
+    },
+    {
+      "quote": "Plan to drain it into a gravel soakaway, and make sure the drain is heated in freezing conditions",
+      "kind": "source",
+      "text": "An instruction from the data sheet. The article adds the practical consequence: ice on the path to the door.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Drain the condensate into a gravel soakaway; in frost, make sure the drain is heated.",
+      "original": "Kondenzát odvádějte do vsakovacího štěrkového lože; v mrazech zajistěte vyhřívání odtoku."
+    },
+    {
+      "quote": "For a more complex location, ask for an acoustic assessment at the relevant points in accordance with applicable regulations",
+      "kind": "restraint",
+      "text": "The company documents give no legal noise limits. Topiqu did not invent a figure and points to an assessment under the applicable rules."
+    },
+    {
+      "quote": "An unnecessarily oversized unit may switch on and off frequently",
+      "kind": "source",
+      "text": "Experience from servicing other firms' installations. The article turns it into advice without naming competitors.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "The most common fault in competitors' installations that come to our service: oversized output (the heat pump often cycles) and a unit in a corner between walls.",
+      "original": "Nejčastější chyba u konkurenčních instalací, které k nám přicházejí do servisu: předimenzovaný výkon (čerpadlo často cykluje) a jednotka v koutě mezi zdmi."
+    },
+    {
+      "quote": "We do not recommend using a heat pump alone in uninsulated homes with heat loss above 15 kW",
+      "kind": "voice",
+      "text": "The company says when it will not sell a heat pump. The 15 kW threshold comes from the technicians' survey findings.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "Uninsulated houses with a heat loss above 15 kW: we do not recommend a heat pump on its own.",
+      "original": "Nezateplené domy s tepelnou ztrátou nad 15 kW: čerpadlo samo o sobě nedoporučujeme."
+    }
+  ]
+}

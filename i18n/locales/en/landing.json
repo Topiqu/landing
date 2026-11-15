@@ -575,7 +575,7 @@
           "meta": "Heatwise · 6 min read",
           "section": "How loud is a heat pump, really?",
           "paragraph": "Outdoor unit noise depends mostly on placement, output and defrosting. What to watch for during installation?",
-          "chips": ["7 sources", "Verified claims", "Brand voice", "Schema and FAQ"]
+          "chips": ["7 sources", "Verified claims", "Sounds like you", "Schema and FAQ"]
         },
         "output": "Article ready to publish",
         "pillars": [
@@ -763,25 +763,54 @@
         "description": "An AI newsroom for your company blog. Topiqu writes expert articles from your website, documents, price lists and products, checks the facts and publishes straight to WordPress and Shopify."
       },
       "examples": {
-        "eyebrow": "EXAMPLE",
-        "title": "This is how Topiqu writes. No AI filler.",
-        "text": "A real article from our demo blog: a buying guide with a dated price, an installation budget and subsidy conditions. Open it in full and try to find a mistake.",
-        "items": [
-          {
-            "kind": "E-shop · in Czech",
-            "title": "Atmos DC 25 S in 2026: is it worth it?",
-            "text": "The boiler price is only the start. Who the Atmos DC 25 S suits, what to budget for and what to check before installation and a subsidy application.",
-            "highlights": [
-              "Price with the date it was checked",
-              "Budget including installation and storage",
-              "What the subsidy label really means"
-            ],
-            "imageAlt": "Cover image of the article about the Atmos DC 25 S boiler"
-          }
-        ],
-        "open": "Open the full article",
-        "all": "All examples on ukazky.topiqu.com"
+        "eyebrow": "EXAMPLES",
+        "title": "Give it your price list and meeting notes.",
+        "accent": "Get back an article your best expert would sign.",
+        "text": "Three companies, three industries. Topiqu read their files, researched what is new and wrote articles that sound like them. The margin shows the work you would otherwise do yourself.",
+        "files": "company file | company files",
+        "articles": "finished article | finished articles",
+        "edits": "manual text edits",
+        "byline": "Written by Topiqu, no manual edits",
+        "readMore": "Read the full article with notes",
+        "start": "I want articles like this",
+        "moreTitle": "More on the blog"
       }
+    },
+    "examples": {
+      "kinds": {
+        "source": "Knows your company",
+        "computed": "Does the math",
+        "research": "Researches for you",
+        "restraint": "Never makes things up",
+        "voice": "Sounds like you",
+        "corrected": "Caught before publishing"
+      },
+      "industries": {
+        "eshop": "E-shop",
+        "services": "Services",
+        "b2b": "B2B manufacturing"
+      },
+      "demoCompany": "Demo company {company}",
+      "czechOriginal": "Czech original",
+      "notesLabel": "Topiqu's notes on the article",
+      "closeNote": "Close note",
+      "back": "Back to examples",
+      "published": "Published {date}",
+      "readingTime": "{minutes} min read",
+      "original": "Original on the company's blog",
+      "guideTitle": "What Topiqu did for you",
+      "guideText": "Highlighted sentences have a note in the margin: where Topiqu took the figure from, what it recalculated and what it researched.",
+      "readerView": "Show as a reader sees it",
+      "sourcesTitle": "Sources",
+      "filesTitle": "Company files",
+      "filesText": "Files every company has: website, price list, meeting notes. Topiqu wrote only from these and from public sources. The files are in Czech; each has an English translation.",
+      "publicTitle": "Public sources",
+      "noPublic": "The article relies on the company files only.",
+      "ctaTitle": "Want articles like this about your company?",
+      "ctaText": "Topiqu writes them from your website and files and checks every figure before publishing.",
+      "ctaButton": "Try it for free",
+      "metaTitle": "Example: {title}",
+      "moreTitle": "More from the {company} blog"
     }
   }
 }

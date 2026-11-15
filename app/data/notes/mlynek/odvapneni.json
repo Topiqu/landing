@@ -1,0 +1,119 @@
+{
+  "cs": [
+    {
+      "quote": "může vyjít na šest až dvanáct cyklů ročně",
+      "kind": "computed",
+      "text": "Interval z webu e-shopu přepočtený na rok.",
+      "calc": "12 měsíců ÷ 2 = 6 odvápnění\n12 měsíců ÷ 1 = 12 odvápnění",
+      "file": "web.md",
+      "excerpt": "S filtrem obvykle dvakrát ročně, bez filtru při tvrdé vodě každé 1–2 měsíce."
+    },
+    {
+      "quote": "Čtyři espressa a jedno zapnutí tak představují 0,068 kWh denně, přibližně 24,82 kWh ročně",
+      "kind": "computed",
+      "text": "Spotřeba z vlastního měření v showroomu.",
+      "calc": "0,020 kWh + 4 × 0,012 kWh = 0,068 kWh denně\n0,068 kWh × 365 = 24,82 kWh ročně",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Nahřátí po zapnutí a úvodní proplach | 0,020 kWh\nEspresso z nahřátého kávovaru | 0,012 kWh"
+    },
+    {
+      "quote": "Filtr v tomto příkladu sníží počet odvápnění, ale jeho nákup zvýší součet nákladů",
+      "kind": "voice",
+      "text": "E-shop filtry prodává, a přesto článek přizná, že v tomto příkladu náklady zvýší. Poctivý počet podle dohody z porady.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "Cenu šálku počítat poctivě: káva, mléko, elektřina i údržba (filtry, odvápňovač, čistič). Bez údržby to vychází nereálně levně."
+    },
+    {
+      "quote": "Rozdíl 1 245 Kč představuje při 1 460 šálcích přibližně",
+      "kind": "computed",
+      "text": "Dvanáct odvápnění proti dvěma, rozpočítáno na čtyři espressa denně po celý rok.",
+      "calc": "12 × 124,50 Kč − 2 × 124,50 Kč = 1 245 Kč\n1 245 Kč ÷ 1 460 ≈ 0,85 Kč na šálek",
+      "file": "katalog-2026.md",
+      "excerpt": "Odvápňovací prostředek 500 ml | 249 Kč | 2 odvápnění"
+    },
+    {
+      "quote": "Údaj zahrnuje oba důvody dohromady; neříká, kolik oprav způsobilo samotné vynechané odvápnění",
+      "kind": "restraint",
+      "text": "Servisní statistika spojuje vodní kámen se zanedbaným čištěním. Topiqu z ní nevyvodil víc, než říká.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "44 % oprav způsobil vodní kámen nebo zanedbané čištění."
+    },
+    {
+      "quote": "přidal by asi 0,88 Kč na šálek",
+      "kind": "computed",
+      "text": "Cena servisního úkonu z obchodních podmínek, rozpočítaná na rok espress.",
+      "calc": "1 290 Kč ÷ 1 460 ≈ 0,88 Kč",
+      "file": "obchodni-podminky-a-servis.md",
+      "excerpt": "Profesionální odvápnění a výměna těsnění | 1 290 Kč"
+    },
+    {
+      "quote": "Při zanedbaném odvápnění se naše záruka nevztahuje na poškození vodním kamenem",
+      "kind": "source",
+      "text": "Záruční podmínka z obchodních podmínek. Zákazník ji zjistí dřív, než by ho stála opravu.",
+      "file": "obchodni-podminky-a-servis.md",
+      "excerpt": "Záruka se nevztahuje na poškození vodním kamenem při zanedbaném odvápnění ani na poškození mlýnku cizím předmětem."
+    }
+  ],
+  "en": [
+    {
+      "quote": "a coffee machine may need descaling six to twelve times a year",
+      "kind": "computed",
+      "text": "The interval from the shop's website, converted to a year.",
+      "calc": "12 months ÷ 2 = 6 descaling cycles\n12 months ÷ 1 = 12 descaling cycles",
+      "file": "web.md",
+      "excerpt": "With a filter, usually twice a year; without one, in hard water every 1–2 months.",
+      "original": "S filtrem obvykle dvakrát ročně, bez filtru při tvrdé vodě každé 1–2 měsíce."
+    },
+    {
+      "quote": "Four espressos and one daily switch-on therefore use 0.068 kWh a day, or approximately 24.82 kWh a year",
+      "kind": "computed",
+      "text": "Consumption from the shop's own showroom measurements.",
+      "calc": "0.020 kWh + 4 × 0.012 kWh = 0.068 kWh a day\n0.068 kWh × 365 = 24.82 kWh a year",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Warm-up after switching on and initial rinse | 0.020 kWh\nEspresso from a warmed-up machine | 0.012 kWh",
+      "original": "Nahřátí po zapnutí a úvodní proplach | 0,020 kWh\nEspresso z nahřátého kávovaru | 0,012 kWh"
+    },
+    {
+      "quote": "In this example, the filter reduces the number of descaling cycles, but buying it increases the total cost",
+      "kind": "voice",
+      "text": "The shop sells filters, yet the article admits that here they raise the cost. Honest maths, as agreed at the sales meeting.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "Calculate the cost per cup honestly: coffee, milk, electricity and maintenance (filters, descaler, cleaner). Without maintenance the figure comes out unrealistically low.",
+      "original": "Cenu šálku počítat poctivě: káva, mléko, elektřina i údržba (filtry, odvápňovač, čistič). Bez údržby to vychází nereálně levně."
+    },
+    {
+      "quote": "The difference of 1,245 CZK works out to approximately",
+      "kind": "computed",
+      "text": "Twelve descaling cycles against two, spread over four espressos a day for a year.",
+      "calc": "12 × CZK 124.50 − 2 × CZK 124.50 = CZK 1,245\nCZK 1,245 ÷ 1,460 ≈ CZK 0.85 per cup",
+      "file": "katalog-2026.md",
+      "excerpt": "Descaler 500 ml | CZK 249 | 2 descaling cycles",
+      "original": "Odvápňovací prostředek 500 ml | 249 Kč | 2 odvápnění"
+    },
+    {
+      "quote": "This figure combines both causes; it does not show how many repairs resulted from skipping descaling alone",
+      "kind": "restraint",
+      "text": "The service statistics lump limescale together with neglected cleaning. Topiqu did not read more into them than they say.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "44 % of repairs were caused by limescale or neglected cleaning.",
+      "original": "44 % oprav způsobil vodní kámen nebo zanedbané čištění."
+    },
+    {
+      "quote": "it would add about 0.88 CZK per cup",
+      "kind": "computed",
+      "text": "The price of the service from the shop's terms, spread over a year of espressos.",
+      "calc": "CZK 1,290 ÷ 1,460 ≈ CZK 0.88",
+      "file": "obchodni-podminky-a-servis.md",
+      "excerpt": "Professional descaling and seal replacement | CZK 1,290",
+      "original": "Profesionální odvápnění a výměna těsnění | 1 290 Kč"
+    },
+    {
+      "quote": "damage caused by limescale is not covered if descaling has been neglected",
+      "kind": "source",
+      "text": "A warranty condition from the shop's terms. Customers learn it before it costs them a repair.",
+      "file": "obchodni-podminky-a-servis.md",
+      "excerpt": "The warranty does not cover limescale damage from neglected descaling or grinder damage caused by a foreign object.",
+      "original": "Záruka se nevztahuje na poškození vodním kamenem při zanedbaném odvápnění ani na poškození mlýnku cizím předmětem."
+    }
+  ]
+}

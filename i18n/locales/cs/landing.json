@@ -571,7 +571,7 @@
           "meta": "Heatwise · 6 min čtení",
           "section": "Jak hlučné čerpadlo opravdu je?",
           "paragraph": "Hlučnost venkovní jednotky závisí hlavně na umístění, výkonu a odmrazování. Na co si dát pozor při montáži?",
-          "chips": ["7 zdrojů", "Ověřená tvrzení", "Hlas značky", "Schema a FAQ"]
+          "chips": ["7 zdrojů", "Ověřená tvrzení", "Mluví jako vy", "Schema a FAQ"]
         },
         "output": "Článek připravený k vydání",
         "pillars": [
@@ -759,25 +759,54 @@
         "description": "AI redakce pro firemní blog. Topiqu píše odborné články z vašeho webu, dokumentů, ceníků a produktů, ověřuje fakta a publikuje přímo do WordPressu i Shopify."
       },
       "examples": {
-        "eyebrow": "UKÁZKA",
-        "title": "Takhle píše Topiqu. Žádná AI vata.",
-        "text": "Skutečný článek z našeho ukázkového blogu: nákupní rádce s cenou k datu ověření, rozpočtem na instalaci a podmínkami dotace. Otevřete si ho celý a zkuste v něm najít chybu.",
-        "items": [
-          {
-            "kind": "E-shop",
-            "title": "Atmos DC 25 S v roce 2026: vyplatí se?",
-            "text": "Cena kotle je jen začátek. Komu Atmos DC 25 S sedne, co zahrnout do rozpočtu a co ověřit před instalací i žádostí o dotaci.",
-            "highlights": [
-              "Cena s datem ověření",
-              "Rozpočet včetně instalace a akumulace",
-              "Co označení NZÚ pro dotaci znamená"
-            ],
-            "imageAlt": "Úvodní obrázek článku o kotli Atmos DC 25 S"
-          }
-        ],
-        "open": "Otevřít celý článek",
-        "all": "Všechny ukázky na ukazky.topiqu.com"
+        "eyebrow": "UKÁZKY",
+        "title": "Dáte mu ceník a zápis z porady.",
+        "accent": "Vrátí článek, pod který by se podepsal váš nejlepší odborník.",
+        "text": "Tři firmy, tři obory. Topiqu přečetl jejich podklady, dohledal, co je nového, a napsal články, které znějí jako ony. Na okraji vidíte práci, kterou byste jinak dělali sami.",
+        "files": "podklad firmy | podklady firmy | podkladů firmy",
+        "articles": "hotový článek | hotové články | hotových článků",
+        "edits": "ručních úprav textu",
+        "byline": "Napsal Topiqu, bez ručních úprav",
+        "readMore": "Číst celý článek s poznámkami",
+        "start": "Chci takové články",
+        "moreTitle": "Další články na blogu"
       }
+    },
+    "examples": {
+      "kinds": {
+        "source": "Zná vaši firmu",
+        "computed": "Spočítá to za zákazníka",
+        "research": "Dohledá to za vás",
+        "restraint": "Nevymýšlí si",
+        "voice": "Mluví jako vy",
+        "corrected": "Chycené před vydáním"
+      },
+      "industries": {
+        "eshop": "E-shop",
+        "services": "Služby",
+        "b2b": "Výroba B2B"
+      },
+      "demoCompany": "Ukázková firma {company}",
+      "czechOriginal": "Český originál",
+      "notesLabel": "Poznámky Topiqu k článku",
+      "closeNote": "Zavřít poznámku",
+      "back": "Zpět na ukázky",
+      "published": "Vydáno {date}",
+      "readingTime": "{minutes} min čtení",
+      "original": "Originál na blogu firmy",
+      "guideTitle": "Co Topiqu udělal za vás",
+      "guideText": "Zvýrazněné věty mají na okraji poznámku: odkud Topiqu údaj vzal, co přepočítal a co si dohledal.",
+      "readerView": "Zobrazit jako čtenář",
+      "sourcesTitle": "Zdroje",
+      "filesTitle": "Podklady firmy",
+      "filesText": "Podklady, jaké má každá firma: web, ceník, zápisy z porad. Topiqu psal jen z nich a z veřejných zdrojů.",
+      "publicTitle": "Veřejné zdroje",
+      "noPublic": "Článek vychází jen z podkladů firmy.",
+      "ctaTitle": "Chcete takové články o své firmě?",
+      "ctaText": "Topiqu je napíše z vašeho webu a podkladů a každý údaj před vydáním ověří.",
+      "ctaButton": "Vyzkoušet zdarma",
+      "metaTitle": "Ukázka: {title}",
+      "moreTitle": "Další články z blogu {company}"
     }
   }
 }
