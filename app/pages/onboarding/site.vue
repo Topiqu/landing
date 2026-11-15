@@ -132,6 +132,18 @@
         maxlength="2048"
         :placeholder="$t('landing.onboarding.site.websitePlaceholder')"
       />
+      <UButton
+        v-if="suggestedWebsite"
+        type="button"
+        color="neutral"
+        variant="link"
+        size="sm"
+        icon="mdi:auto-fix"
+        class="tw:mt-1.5 tw:px-0"
+        @click="form.websiteUrl = suggestedWebsite"
+      >
+        {{ $t('landing.onboarding.site.websiteSuggestion', { domain: suggestedWebsite }) }}
+      </UButton>
     </UFormField>
 
     <OnboardingActions :disabled="!canAdvanceSite" />
@@ -153,12 +165,23 @@ const {
   complete,
 } = useOnboarding()
 
-// Pricing CTAs pass ?plan= so the plan step opens on the plan the visitor chose.
-const requestedPlan = String(route.query.plan ?? '').toUpperCase()
-if (requestedPlan === 'PRO' || requestedPlan === 'PREMIUM' || requestedPlan === 'CUSTOM')
-  form.selectedPlan = requestedPlan
+// CTAs pass ?plan= so the plan step opens on their plan. A free CTA must say so: the draft is persisted,
+// and a paid plan left by an earlier pricing click would otherwise end in its checkout.
+const requestedPlan = planFromQuery(route.query.plan)
+if (requestedPlan !== undefined) form.selectedPlan = requestedPlan
 const requestedInterval = String(route.query.interval ?? '')
-if (requestedInterval === 'month' || requestedInterval === 'year') form.billingInterval = requestedInterval
+if (requestedPlan === null) form.billingInterval = 'month'
+else if (requestedInterval === 'month' || requestedInterval === 'year') form.billingInterval = requestedInterval
+// Applied once: Back to this URL must not undo a choice made in the plan step.
+onMounted(() => {
+  if (route.query.plan === undefined && route.query.interval === undefined) return
+  const { plan: _plan, interval: _interval, ...query } = route.query
+  navigateTo({ query }, { replace: true })
+})
+
+// A work address hints at the company website, but only the visitor's own click or typing enters it:
+// a filled field is consent to read the site, and the guess can be someone else's domain.
+const suggestedWebsite = computed(() => (form.websiteUrl.trim() ? null : companyDomain(form.email)))
 
 const languageOptions = computed(() =>
   CONTENT_LANGUAGES.map((value) => ({

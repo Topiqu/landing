@@ -71,7 +71,8 @@ const yearlyTotal = (plan: 'pro' | 'premium' | 'custom') =>
 const signUp = (plan: Plan) =>
   localePath({
     name: 'onboarding-site',
-    query: plan !== 'free' ? { plan, interval: billingInterval.value } : undefined,
+    // `free` is passed too: it clears a paid plan an earlier click left in the persisted draft.
+    query: plan === 'free' ? { plan } : { plan, interval: billingInterval.value },
   })
 </script>
 <template>

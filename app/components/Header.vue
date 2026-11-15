@@ -75,7 +75,7 @@ const links = computed(() => [
       <UButton :to="authUrl" color="neutral" variant="ghost" class="header-login">{{
         $t('common.auth.login')
       }}</UButton>
-      <UButton :to="localePath({ name: 'onboarding-site' })" class="header-start">{{
+      <UButton :to="localePath({ name: 'onboarding-site', query: { plan: 'free' } })" class="header-start">{{
         $t('landing.design.hero.cta')
       }}</UButton>
     </template>
@@ -86,7 +86,7 @@ const links = computed(() => [
         }}</NuxtLink>
         <NuxtLink :to="localePath('/') + '#faq'" class="mobile-nav-link" @click="open = false">FAQ</NuxtLink>
         <UButton :to="authUrl" color="neutral" variant="outline" block>{{ $t('common.auth.login') }}</UButton>
-        <UButton :to="localePath({ name: 'onboarding-site' })" block @click="open = false">{{
+        <UButton :to="localePath({ name: 'onboarding-site', query: { plan: 'free' } })" block @click="open = false">{{
           $t('landing.design.hero.cta')
         }}</UButton>
       </nav>

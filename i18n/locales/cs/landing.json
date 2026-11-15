@@ -77,7 +77,7 @@
         "custom": {
           "badge": "Enterprise",
           "name": "Custom",
-          "desc": "Pro týmy a agentury, které potřebují víc míst, víc dat a vlastní značku.",
+          "desc": "Pro týmy, které na jednom blogu potřebují víc míst, víc dat a vlastní značku.",
           "features": {
             "everything": "Vše z Premium",
             "whitelabel": "White-label bez značky Topiqu",
@@ -165,6 +165,7 @@
         "languageHelp": "Jazyk psaní můžete kdykoliv změnit v nastavení a články překládat do dalších jazyků.",
         "website": "Web vaší firmy",
         "websitePlaceholder": "mojefirma.cz",
+        "websiteSuggestion": "Použít {domain} z vašeho e-mailu",
         "websiteHelp": "Zadáním webu souhlasíte, že po registraci AI zpracuje jeho veřejný obsah a připraví nastavení blogu i podklady do znalostní báze. Před použitím vše zkontrolujete a potvrdíte."
       },
       "domainStatus": {
@@ -752,7 +753,7 @@
         "placeholder": "Váš pracovní e-mail",
         "cta": "Vyzkoušet zdarma",
         "note": "{days} dní Premium a {articles} článků zdarma. Bez platební karty.",
-        "reads": "Topiqu si pak přečte {domain}."
+        "reads": "Web {domain} pak Topiqu přečte na jedno kliknutí."
       },
       "meta": {
         "title": "Firemní blog z vašich podkladů s kontrolou faktů",

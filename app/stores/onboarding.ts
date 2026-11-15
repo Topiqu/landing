@@ -188,6 +188,43 @@ export const useOnboardingStore = defineStore(
 
     const trialEndsOn = computed(() => new Date(Date.now() + TRIAL_DAYS * 86_400_000))
 
+    // What the CRM learns of the wizard; never the password or the verification proof.
+    const crmEntries = () => ({
+      siteName: form.siteName.trim(),
+      domain: form.domainType === 'CUSTOM' ? normalizeDomain(form.domain) : form.domain,
+      domainType: form.domainType,
+      language: form.language,
+      websiteUrl: form.websiteUrl.trim(),
+      username: form.username.trim(),
+      selectedPlan: form.selectedPlan,
+      billingInterval: form.billingInterval,
+    })
+    type CrmEntry = keyof ReturnType<typeof crmEntries>
+    const CRM_STEP_ENTRIES: Partial<Record<OnboardingStep, CrmEntry[]>> = {
+      site: ['siteName', 'domain', 'domainType', 'language', 'websiteUrl'],
+      plan: ['selectedPlan', 'billingInterval'],
+    }
+
+    /** A finished step for the CRM, once a landing form gave the address; the account step rides on `sendCode`. */
+    const reportProgress = (step: OnboardingStep) => {
+      const keys = CRM_STEP_ENTRIES[step]
+      if (!keys || !EMAIL_RE.test(form.email)) return
+      const entries = crmEntries()
+      // Never awaited: the CRM must not hold up the wizard.
+      $fetch('/api/leads/progress', {
+        method: 'POST',
+        retry: 0,
+        body: {
+          email: form.email,
+          step,
+          locale: (useNuxtApp().$i18n as { locale: { value: string } }).locale.value,
+          attribution: readAttribution(),
+          website: form.website,
+          ...Object.fromEntries(keys.map((key) => [key, entries[key]])),
+        },
+      }).catch(() => {})
+    }
+
     watch(
       () => form.email,
       () => {
@@ -249,7 +286,7 @@ export const useOnboardingStore = defineStore(
             locale,
             website: form.website,
             turnstileToken,
-            websiteUrl: form.websiteUrl,
+            ...crmEntries(),
             attribution: readAttribution(),
           },
         })
@@ -421,6 +458,7 @@ export const useOnboardingStore = defineStore(
       setDomainType,
       retryDomainCheck,
       markStep,
+      reportProgress,
       isStepDirty,
       isStepComplete,
       sendCode,

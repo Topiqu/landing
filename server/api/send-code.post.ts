@@ -4,25 +4,24 @@ import { createRateLimit } from '~~/server/utils/rateLimit'
 import { sendVerificationCode } from '~~/server/utils/email'
 import { issueChallenge } from '~~/server/utils/onboardingTokens'
 import { isDisposableEmail } from '~~/server/utils/disposableEmails'
-import { attributionSchema, LEAD_TAGS, queueLead } from '~~/server/utils/crm'
-import { crmSourceOf, formatAttribution, httpUrl } from '~~/shared/utils/leads'
+import { crmSourceOf, formatAttribution } from '~~/shared/utils/leads'
+import { attributionSchema, LEAD_TAGS, onboardingLead, onboardingSchema, queueLead } from '~~/server/utils/crm'
 
 // A resent code is the same visit: one CRM note per address and hour.
 const syncOnce = createRateLimit({ limit: 1, windowMs: 60 * 60_000 })
 
-const schema = z.object({
+// The wizard's entries so far and the landing visit's campaign ride along, only for the CRM.
+const schema = onboardingSchema.extend({
   email: z.string().email(),
   // Interface locale of the landing: picks the email copy and the magic-link route.
   locale: z.enum(['cs', 'en']).default('en'),
   website: z.string().optional(),
   turnstileToken: z.string().optional(),
-  // The site step's address and the landing visit's campaign, only for the CRM.
-  websiteUrl: z.string().trim().max(2048).optional(),
   attribution: attributionSchema,
 })
 
 export default defineEventHandler(async (event) => {
-  const { email, locale, website, turnstileToken, websiteUrl, attribution } = await readValidatedBody(
+  const { email, locale, website, turnstileToken, attribution, ...entries } = await readValidatedBody(
     event,
     schema.parse,
   )
@@ -64,21 +63,17 @@ export default defineEventHandler(async (event) => {
   const delivery = await sendVerificationCode({ to: email, code, name, locale, link, event })
 
   const campaign = formatAttribution(attribution)
-  const confirmed = httpUrl(websiteUrl)
+  const { lines, ...fields } = onboardingLead(entries)
   if (syncOnce(email.toLowerCase())) {
     queueLead(event, {
       email,
       tag: LEAD_TAGS.captured,
-      note: [
-        `E-mail ověřovaný v onboardingu (${locale})`,
-        confirmed && `Web: ${confirmed}`,
-        campaign && `Kampaň: ${campaign}`,
-      ]
+      note: [`E-mail ověřovaný v onboardingu (${locale})`, ...lines, campaign && `Kampaň: ${campaign}`]
         .filter(Boolean)
         .join('\n'),
       source: crmSourceOf(attribution),
       detail: ['Topiqu landing', 'onboarding', campaign].filter(Boolean).join(' · '),
-      website: confirmed,
+      ...fields,
       confirmedWebsite: true,
     })
   }

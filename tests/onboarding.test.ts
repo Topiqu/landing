@@ -456,6 +456,67 @@ describe('company website onboarding', () => {
   })
 })
 
+describe('wizard entries for the CRM', () => {
+  const draft = () => {
+    const store = createStore()
+    Object.assign(store.form, {
+      siteName: ' Heatwise ',
+      domain: 'heatwise',
+      websiteUrl: 'heatwise.cz',
+      username: 'jan',
+      password: 'never-sent-to-the-crm',
+      selectedPlan: 'PRO',
+      billingInterval: 'year',
+    })
+    return store
+  }
+
+  test('reports a finished step only once the address is known, with that step alone', () => {
+    const store = draft()
+    store.reportProgress('site')
+    expect(fetch).not.toHaveBeenCalled()
+
+    store.form.email = 'jan@heatwise.cz'
+    store.reportProgress('site')
+    store.reportProgress('plan')
+    store.reportProgress('design')
+    const reports = requests.filter(({ url }) => url === '/api/leads/progress')
+    expect(reports).toHaveLength(2)
+    expect(reports[0]!.options.body).toEqual({
+      email: 'jan@heatwise.cz',
+      step: 'site',
+      locale: 'en',
+      attribution: {},
+      website: '',
+      siteName: 'Heatwise',
+      domain: 'heatwise',
+      domainType: 'SUBDOMAIN',
+      language: 'en',
+      websiteUrl: 'heatwise.cz',
+    })
+    expect(reports[1]!.options.body).toMatchObject({ step: 'plan', selectedPlan: 'PRO', billingInterval: 'year' })
+    expect(reports[1]!.options.body).not.toHaveProperty('siteName')
+  })
+
+  test('sends every entry but the password along with the verification code', async () => {
+    const store = draft()
+    store.form.email = 'jan@heatwise.cz'
+    await store.sendCode('security-token')
+    // The draft's domain check shares the request log.
+    const { body } = requests.find(({ url }) => url === '/api/send-code')!.options
+    expect(body).toMatchObject({ siteName: 'Heatwise', username: 'jan', selectedPlan: 'PRO', billingInterval: 'year' })
+    expect(JSON.stringify(body)).not.toContain('never-sent-to-the-crm')
+  })
+
+  test('a free CTA clears a paid plan left in the draft; no plan in the URL keeps it', async () => {
+    const { planFromQuery } = await import('../app/composables/useOnboarding')
+    expect(planFromQuery('free')).toBeNull()
+    expect(planFromQuery('custom')).toBe('CUSTOM')
+    expect(planFromQuery(undefined)).toBeUndefined()
+    expect(planFromQuery('enterprise')).toBeUndefined()
+  })
+})
+
 describe('domain availability', () => {
   test('logs diagnostic status without the domain or raw upstream error', async () => {
     const log = spyOn(console, 'error').mockImplementation(() => {})

@@ -1,10 +1,9 @@
 import type { H3Event } from 'h3'
 
 import { z } from 'zod'
-import { httpUrl } from '~~/shared/utils/leads'
-import { LEAD_TAGS, queueLead } from '~~/server/utils/crm'
 import { onboardingLog } from '~~/server/utils/onboardingLog'
 import { signLandingRequest } from '~~/server/utils/landingAuth'
+import { LEAD_TAGS, onboardingLead, queueLead } from '~~/server/utils/crm'
 import { createCheckoutRequests, checkoutKeys } from '~~/server/utils/checkoutRequests'
 import { onboardingSecret, verifyVerifiedToken } from '~~/server/utils/onboardingTokens'
 
@@ -131,18 +130,14 @@ export default defineEventHandler(async (event) => {
 })
 
 function queueRegistration(event: H3Event, body: z.infer<typeof schema>) {
-  const site = body.domainType === 'SUBDOMAIN' ? `${body.domain}.topiqu.com` : body.domain
-  const plan = `${body.selectedPlan ?? 'FREE'}${body.selectedPlan ? ` (${body.billingInterval})` : ''}`
-  const website = httpUrl(body.websiteUrl)
+  const { lines, ...fields } = onboardingLead({ ...body, selectedPlan: body.selectedPlan ?? null })
   queueLead(event, {
     email: body.email,
     tag: LEAD_TAGS.registered,
-    note: [`Registrace: tarif ${plan}, blog ${site}, jazyk ${body.language}`, website && `Web firmy: ${website}`]
-      .filter(Boolean)
-      .join('\n'),
+    note: ['Registrace dokončena', ...lines].join('\n'),
     source: 'web',
     detail: 'Topiqu landing · registrace',
-    website,
+    ...fields,
     confirmedWebsite: true,
   })
 }
