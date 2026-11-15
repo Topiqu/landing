@@ -117,6 +117,7 @@ The landing writes leads to the Leadgen CRM external API (`/api/v1`) from its se
 
 - The hero and closing form (`/api/leads`), a finished site or plan step (`/api/leads/progress`, only once a landing form gave the address) and the onboarding's `send-code` tag a lead `zachycen`; checkout tags it `registrovan`. The three onboarding writes share `onboardingLead` (`server/utils/crm.ts`): the wizard's entries become note lines, the blog name `company` and the username `name`.
 - The website a visitor entered replaces the CRM's; the domain guessed from a work address, `company` and `name` only fill a gap. The wizard never enters that guess itself: the site step offers it, because a filled website is consent to the import and the guess can be another company's domain.
+- CTAs that promise free pass `?plan=free` (`planFromQuery`), which clears a paid plan an earlier pricing click left in the persisted draft.
 - A new lead starts in stage `new`, its source taken from the campaign (`ref` → cold, LinkedIn, referral, paid → other, otherwise web). An existing lead keeps its stage and source and gets a note; stage moves belong to CRM Rules acting on the tags.
 - The sync runs after the response (`event.waitUntil`) and never fails the request; errors are logged as `crm.failed`.
 

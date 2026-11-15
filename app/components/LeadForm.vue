@@ -76,7 +76,7 @@ const submit = async () => {
     const store = useOnboardingStore()
     // The site step offers the address's domain as the website; only the visitor enters it.
     store.form.email = address
-    return navigateTo(localePath({ name: 'onboarding-site' }))
+    return navigateTo(localePath({ name: 'onboarding-site', query: { plan: 'free' } }))
   })
 }
 </script>

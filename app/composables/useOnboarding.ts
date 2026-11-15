@@ -32,6 +32,13 @@ export const TOTAL_STEPS = ONBOARDING_STEPS.length
 export const OPTIONAL_STEPS: readonly OnboardingStep[] = ['design', 'plan']
 export type StepProgress = 'done' | 'skipped'
 
+/** `?plan=` of a CTA: the plan to open on, `null` from a CTA that promises free, `undefined` to keep the draft. */
+export const planFromQuery = (value: unknown): SelectedPlan | undefined => {
+  const plan = String(value ?? '').toUpperCase()
+  if (plan === 'FREE') return null
+  return plan === 'PRO' || plan === 'PREMIUM' || plan === 'CUSTOM' ? plan : undefined
+}
+
 export const stepRouteName = (step: OnboardingStep) => `onboarding-${step}` as const
 export const nextStep = (step: OnboardingStep) => ONBOARDING_STEPS[ONBOARDING_STEPS.indexOf(step) + 1] ?? step
 
