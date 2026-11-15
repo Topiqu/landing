@@ -1,0 +1,113 @@
+{
+  "cs": [
+    {
+      "quote": "Ve dvou třetinách domů postavených před rokem 1990, které jsme letos zaměřili, stačila při −12 °C výstupní voda 50–55 °C",
+      "kind": "source",
+      "text": "Zkušenost techniků, která dosud zazněla jen na poradě. Topiqu ji ze zápisu přenesl do článku, kde ji poprvé uvidí zákazníci.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "Ve dvou třetinách domů postavených před rokem 1990, které jsme letos zaměřili, stačila při −12 °C výstupní voda 50–55 °C."
+    },
+    {
+      "quote": "HW-12 má akustický výkon 57 dB(A) a ve volném prostoru akustický tlak 39 dB(A) ve třech metrech",
+      "kind": "source",
+      "text": "Obě čísla z technického listu. Text drží rozdíl mezi akustickým výkonem a tlakem, který se v článcích o hluku běžně plete.",
+      "file": "technicky-list-hw-12.md",
+      "excerpt": "Akustický výkon (EN 12102) | 57 dB(A)\nAkustický tlak ve 3 m (volné pole) | 39 dB(A)"
+    },
+    {
+      "quote": "Před výměnou spotřeboval 2 150 m³ plynu ročně",
+      "kind": "source",
+      "text": "Skutečný dům z realizací firmy místo vymyšleného příkladu.",
+      "file": "realizace.md",
+      "excerpt": "Spotřeba: dříve 2 150 m³ plynu ročně, s čerpadlem 6 900 kWh elektřiny ročně."
+    },
+    {
+      "quote": "Se dvěma výměnami radiátoru po 7 800 Kč vycházejí tyto položky na 251 600 Kč včetně DPH",
+      "kind": "computed",
+      "text": "Cena sestavená z aktuálního ceníku včetně DPH, žádné orientační rozpětí. Čtenář ví, s jakou částkou počítat, ještě než zavolá.",
+      "calc": "236 000 Kč + 2 × 7 800 Kč = 251 600 Kč",
+      "file": "cenik-instalaci-2026.md",
+      "excerpt": "HW-12 | domy s tepelnou ztrátou do 11 kW, obvykle do 220 m² | 236 000 Kč\nVýměna radiátoru včetně montáže (za kus) | 7 800 Kč"
+    },
+    {
+      "quote": "Podpora NZÚ Light na čerpadlo vzduch–voda může dosáhnout až 150 000 Kč",
+      "kind": "research",
+      "text": "Výši podpory podklady firmy neuvádějí. Topiqu ji dohledal a sedí s oficiální stránkou programu.",
+      "url": "https://novazelenausporam.cz/nzu-light/",
+      "excerpt": "Tepelné čerpadlo vzduch-voda – 150 000 Kč"
+    },
+    {
+      "quote": "program pokrývá úroky a splácení může trvat až 25 let",
+      "kind": "research",
+      "text": "Novinka z března 2026 přímo z tiskové zprávy ministerstva. Článek navíc upozorní, že úvěr není dotace a do návratnosti se neodečítá.",
+      "url": "https://mzp.gov.cz/cz/pro-media-a-verejnost/aktuality/archiv-tiskovych-zprav/efektivni-udrzitelna-a-lepe-cilena-nova",
+      "excerpt": "Podpora z programu Nová zelená úsporám pak pokryje úroky za celé období splácení úvěru … na dobu splácení až 25 let"
+    },
+    {
+      "quote": "Majiteli jsme proto doporučili ponechat stávající plynový kotel",
+      "kind": "voice",
+      "text": "Firma umí říct, kdy čerpadlo nedoporučí, a Topiqu to umí taky. Pravidlo vzal z hlasu značky, případ domu z roku 1905 z realizací.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Přiznáváme limity. Když se čerpadlo nevyplatí, řekneme to a vysvětlíme proč."
+    }
+  ],
+  "en": [
+    {
+      "quote": "In two-thirds of the houses built before 1990 that we surveyed this year, a flow temperature of 50–55°C was enough at −12°C",
+      "kind": "source",
+      "text": "Technicians' experience that until now was only shared in a meeting. Topiqu brought it into the article, where customers see it for the first time.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "In two thirds of the houses built before 1990 that we surveyed this year, a flow water temperature of 50–55 °C was enough at −12 °C.",
+      "original": "Ve dvou třetinách domů postavených před rokem 1990, které jsme letos zaměřili, stačila při −12 °C výstupní voda 50–55 °C."
+    },
+    {
+      "quote": "The HW-12 has a sound power level of 57 dB(A) and, in open space, a sound pressure level of 39 dB(A) at three metres",
+      "kind": "source",
+      "text": "Both figures from the data sheet. The text keeps sound power and sound pressure apart, which articles on noise often mix up.",
+      "file": "technicky-list-hw-12.md",
+      "excerpt": "Sound power (EN 12102) | 57 dB(A)\nSound pressure at 3 m (free field) | 39 dB(A)",
+      "original": "Akustický výkon (EN 12102) | 57 dB(A)\nAkustický tlak ve 3 m (volné pole) | 39 dB(A)"
+    },
+    {
+      "quote": "Before the upgrade, it used 2,150 m³ of gas a year",
+      "kind": "source",
+      "text": "A real house from the company's installations instead of an invented example.",
+      "file": "realizace.md",
+      "excerpt": "Consumption: previously 2,150 m³ of gas a year, with the heat pump 6,900 kWh of electricity a year.",
+      "original": "Spotřeba: dříve 2 150 m³ plynu ročně, s čerpadlem 6 900 kWh elektřiny ročně."
+    },
+    {
+      "quote": "With two radiator replacements at 7,800 CZK each, the total for these items comes to 251,600 CZK including VAT",
+      "kind": "computed",
+      "text": "A total built from the current price list, VAT included, not a ballpark range. Readers know what to budget before they call.",
+      "calc": "CZK 236,000 + 2 × CZK 7,800 = CZK 251,600",
+      "file": "cenik-instalaci-2026.md",
+      "excerpt": "HW-12 | houses with a heat loss up to 11 kW, usually up to 220 m² | CZK 236,000\nRadiator replacement including installation (per unit) | CZK 7,800",
+      "original": "HW-12 | domy s tepelnou ztrátou do 11 kW, obvykle do 220 m² | 236 000 Kč\nVýměna radiátoru včetně montáže (za kus) | 7 800 Kč"
+    },
+    {
+      "quote": "In the Czech Republic, support through NZÚ Light for an air-to-water heat pump can amount to up to 150,000 CZK",
+      "kind": "research",
+      "text": "The company documents do not give the amount. Topiqu looked it up, and it matches the programme's official page.",
+      "url": "https://novazelenausporam.cz/nzu-light/",
+      "excerpt": "Air-to-water heat pump – CZK 150,000",
+      "original": "Tepelné čerpadlo vzduch-voda – 150 000 Kč"
+    },
+    {
+      "quote": "the programme covers the interest and the repayment period can be up to 25 years",
+      "kind": "research",
+      "text": "New since March 2026, straight from the ministry's press release. The article also points out that a loan is not a grant and is not deducted from the payback.",
+      "url": "https://mzp.gov.cz/cz/pro-media-a-verejnost/aktuality/archiv-tiskovych-zprav/efektivni-udrzitelna-a-lepe-cilena-nova",
+      "excerpt": "Support from the New Green Savings programme will then cover the interest for the whole repayment period of the loan … for a repayment period of up to 25 years",
+      "original": "Podpora z programu Nová zelená úsporám pak pokryje úroky za celé období splácení úvěru … na dobu splácení až 25 let"
+    },
+    {
+      "quote": "We therefore recommended that the owner keep the existing gas boiler",
+      "kind": "voice",
+      "text": "The company says when it would not recommend a heat pump, and so does Topiqu. The rule comes from the brand voice, the 1905 house from its installations.",
+      "file": "hlas-znacky.md",
+      "excerpt": "We admit limits. When a heat pump does not pay off, we say so and explain why.",
+      "original": "Přiznáváme limity. Když se čerpadlo nevyplatí, řekneme to a vysvětlíme proč."
+    }
+  ]
+}

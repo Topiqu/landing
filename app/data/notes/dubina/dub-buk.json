@@ -1,0 +1,76 @@
+{
+  "cs": [
+    {
+      "quote": "Pro restaurační stoly se hodí dub i buk",
+      "kind": "voice",
+      "text": "Odpověď hned v první větě. Nákupčí nemusí číst celý článek, aby věděl, co z toho plyne.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Nejdřív odpověď, pak vysvětlení. První odstavec řekne, o co jde a co z toho plyne."
+    },
+    {
+      "quote": "Vlastnosti konkrétní desky ovlivňuje také řez dřeva, vysušení a provedení spár",
+      "kind": "source",
+      "text": "Firma suší řezivo ve vlastních sušárnách. Článek proto mezi vlastnosti desky řadí i vysušení, nejen dřevinu.",
+      "file": "web.md",
+      "excerpt": "Řezivo sušíme ve vlastních sušárnách na 8–10 % vlhkosti."
+    },
+    {
+      "quote": "Vhodnost konkrétního laku pro víno, kávu, mastnotu nebo čisticí prostředky ověřte na vzorku a v dokumentaci výrobce",
+      "kind": "restraint",
+      "text": "Údaje o odolnosti laků podklady nemají. Topiqu je nevymyslel a poslal čtenáře ke zkoušce na vzorku."
+    },
+    {
+      "quote": "Vzorek finálního povrchu na zvolené dřevině, včetně hrany a odstínu",
+      "kind": "voice",
+      "text": "Článek končí kontrolním seznamem pro objednávku, jak chce hlas značky.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Kontrolní seznamy tam, kde má čtenář něco udělat."
+    },
+    {
+      "quote": "Doklady FSC nebo PEFC vztahující se ke konkrétní desce",
+      "kind": "source",
+      "text": "Firma má PEFC Chain of Custody od roku 2019. Místo ekologických frází, kterým se hlas značky vyhýbá, článek radí chtít doklad.",
+      "file": "web.md",
+      "excerpt": "PEFC Chain of Custody od roku 2019."
+    }
+  ],
+  "en": [
+    {
+      "quote": "Both oak and beech are suitable for restaurant tables",
+      "kind": "voice",
+      "text": "The answer comes in the first sentence. A buyer does not have to read the whole article to know what follows from it.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Answer first, explanation second. The first paragraph says what it is about and what follows from it.",
+      "original": "Nejdřív odpověď, pak vysvětlení. První odstavec řekne, o co jde a co z toho plyne."
+    },
+    {
+      "quote": "The cut of the wood, drying, and the construction of the joints also affect the properties of a specific tabletop",
+      "kind": "source",
+      "text": "The company dries its timber in its own kilns. That is why the article counts drying among a tabletop's properties, not just the species.",
+      "file": "web.md",
+      "excerpt": "We dry the timber in our own kilns to 8–10 % moisture.",
+      "original": "Řezivo sušíme ve vlastních sušárnách na 8–10 % vlhkosti."
+    },
+    {
+      "quote": "Check the sample and the manufacturer’s documentation to confirm that a particular varnish is suitable for wine, coffee, grease, or cleaning products",
+      "kind": "restraint",
+      "text": "The documents have no data on lacquer resistance. Topiqu did not invent any and sends readers to a test on a sample."
+    },
+    {
+      "quote": "A sample of the final finish on the selected wood species, including the edge and color",
+      "kind": "voice",
+      "text": "The article ends with a checklist for the order, as the brand voice asks.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Checklists wherever the reader has something to do.",
+      "original": "Kontrolní seznamy tam, kde má čtenář něco udělat."
+    },
+    {
+      "quote": "FSC or PEFC documentation relating to the specific tabletop",
+      "kind": "source",
+      "text": "The company has held PEFC Chain of Custody since 2019. Instead of the green phrases the brand voice avoids, the article tells buyers to ask for the documents.",
+      "file": "web.md",
+      "excerpt": "PEFC Chain of Custody since 2019.",
+      "original": "PEFC Chain of Custody od roku 2019."
+    }
+  ]
+}

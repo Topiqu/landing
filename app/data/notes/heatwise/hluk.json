@@ -1,0 +1,113 @@
+{
+  "cs": [
+    {
+      "quote": "Hluk tepelného čerpadla u sousedů závisí na umístění jednotky i vzdálenosti okna",
+      "kind": "source",
+      "text": "Hlavní myšlenka článku je zkušenost firmy z webu: o hluku rozhoduje víc umístění než typ čerpadla.",
+      "file": "web.md",
+      "excerpt": "Hlučnost ve skutečnosti závisí víc na umístění než na typu čerpadla: kout mezi dvěma zdmi zvuk odráží a zesiluje."
+    },
+    {
+      "quote": "Stejná jednotka však neznamená, že čísla lze postavit vedle sebe jako dvě měření u sousedova okna",
+      "kind": "source",
+      "text": "Hluk je nejčastější dotaz zákazníků (31 % poptávek). Podle dohody z porady článek nejdřív vysvětlí, proč se čísla nedají porovnat.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "U dotazu na hluk vždy vysvětlit rozdíl mezi akustickým výkonem a akustickým tlakem – lidé porovnávají čísla, která nejsou srovnatelná."
+    },
+    {
+      "quote": "V nočním režimu klesá u HW-8 přepočtený tlak v 5 m na 28 dB(A), u HW-12 na 31 dB(A)",
+      "kind": "source",
+      "text": "Noční režim z technických listů obou modelů.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Akustický tlak v 5 m (volné pole) | 32 dB(A) | 28 dB(A)"
+    },
+    {
+      "quote": "Jde o orientační vliv umístění, nikoli o univerzální přirážku pro každou zahradu",
+      "kind": "restraint",
+      "text": "Technický list udává přirážky pro jednotky Heatwise. Článek je nevydává za obecné pravidlo.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Umístění u jedné zdi zvyšuje hladinu přibližně o 3 dB, v koutě mezi dvěma zdmi až o 6 dB."
+    },
+    {
+      "quote": "Pokud pro ni na pozemku nenajdete jiné vhodné místo, pro daný dům se nehodí",
+      "kind": "voice",
+      "text": "Firma radši řekne, že se jednotka k domu nehodí, než aby ji dala do kouta. Pokyn je z technického listu, postoj z hlasu značky.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Přiznáváme limity. Když se čerpadlo nevyplatí, řekneme to a vysvětlíme proč."
+    },
+    {
+      "quote": "Katalogových 32 dB(A) ve volném prostoru dává po připočtení vlivu jedné zdi orientačně 35 dB(A); v koutě až 38 dB(A)",
+      "kind": "computed",
+      "text": "Hodnota pro 5 m z technického listu HW-8 a přirážky za umístění ze stejného listu.",
+      "calc": "32 dB(A) + 3 dB = 35 dB(A) u zdi\n32 dB(A) + 6 dB = 38 dB(A) v koutě",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Akustický tlak v 5 m (volné pole) | 32 dB(A) | 28 dB(A)"
+    },
+    {
+      "quote": "Kvůli chladivu R290 nesmí být v okruhu 1 m například sklepní okénko, vpusť ani prohlubeň, kde by se mohl plyn hromadit",
+      "kind": "source",
+      "text": "Bezpečnostní pokyn z technického listu. Umístění tak neřeší jen hluk.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Kvůli hořlavému chladivu R290 dodržte bezpečnostní zónu podle montážního návodu: v okruhu 1 m od jednotky nesmí být sklepní okénko, vpusť ani jiná prohlubeň, kde by se mohl hromadit plyn."
+    }
+  ],
+  "en": [
+    {
+      "quote": "How much noise a heat pump makes at a neighbor’s home depends on the unit’s location and the distance to the window",
+      "kind": "source",
+      "text": "The article's main point is the company's own experience from its website: placement matters more than the type of heat pump.",
+      "file": "web.md",
+      "excerpt": "How loud it is depends more on where it stands than on the type of heat pump: a corner between two walls reflects and amplifies the sound.",
+      "original": "Hlučnost ve skutečnosti závisí víc na umístění než na typu čerpadla: kout mezi dvěma zdmi zvuk odráží a zesiluje."
+    },
+    {
+      "quote": "But using the same unit does not mean you can compare the figures as if they were two measurements taken at a neighbor’s window",
+      "kind": "source",
+      "text": "Noise is the most frequent customer question (31% of enquiries). As agreed at the meeting, the article first explains why the figures cannot be compared.",
+      "file": "porada-2026-10-14.md",
+      "excerpt": "When asked about noise, always explain the difference between sound power and sound pressure – people compare figures that are not comparable.",
+      "original": "U dotazu na hluk vždy vysvětlit rozdíl mezi akustickým výkonem a akustickým tlakem – lidé porovnávají čísla, která nejsou srovnatelná."
+    },
+    {
+      "quote": "In night mode, the calculated sound pressure at 5 m falls to 28 dB(A) for the HW-8 and 31 dB(A) for the HW-12",
+      "kind": "source",
+      "text": "Night mode from the data sheets of both models.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Sound pressure at 5 m (free field) | 32 dB(A) | 28 dB(A)",
+      "original": "Akustický tlak v 5 m (volné pole) | 32 dB(A) | 28 dB(A)"
+    },
+    {
+      "quote": "These figures are an estimate of the effect of placement, not a universal adjustment for every garden",
+      "kind": "restraint",
+      "text": "The data sheet gives these adjustments for Heatwise units. The article does not pass them off as a general rule.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Placing it against one wall raises the level by about 3 dB, in a corner between two walls by up to 6 dB.",
+      "original": "Umístění u jedné zdi zvyšuje hladinu přibližně o 3 dB, v koutě mezi dvěma zdmi až o 6 dB."
+    },
+    {
+      "quote": "If there is no other suitable location for it on the property, it is not suitable for that home",
+      "kind": "voice",
+      "text": "The company would rather say a unit does not suit the house than squeeze it into a corner. The instruction is from the data sheet, the stance from the brand voice.",
+      "file": "hlas-znacky.md",
+      "excerpt": "We admit limits. When a heat pump does not pay off, we say so and explain why.",
+      "original": "Přiznáváme limity. Když se čerpadlo nevyplatí, řekneme to a vysvětlíme proč."
+    },
+    {
+      "quote": "The catalog figure of 32 dB(A) in an open space gives an estimated 35 dB(A) after allowing for the effect of one wall, and up to 38 dB(A) in a corner",
+      "kind": "computed",
+      "text": "The 5 m value from the HW-8 data sheet plus the placement adjustments from the same sheet.",
+      "calc": "32 dB(A) + 3 dB = 35 dB(A) by a wall\n32 dB(A) + 6 dB = 38 dB(A) in a corner",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Sound pressure at 5 m (free field) | 32 dB(A) | 28 dB(A)",
+      "original": "Akustický tlak v 5 m (volné pole) | 32 dB(A) | 28 dB(A)"
+    },
+    {
+      "quote": "Because the refrigerant is R290, there must be no basement window, drain, or depression within a 1 m radius where gas could accumulate",
+      "kind": "source",
+      "text": "A safety instruction from the data sheet. Placement is about more than noise.",
+      "file": "technicky-list-hw-8.md",
+      "excerpt": "Because R290 is a flammable refrigerant, observe the safety zone given in the installation manual: within 1 m of the unit there must be no cellar window, drain or other hollow where gas could collect.",
+      "original": "Kvůli hořlavému chladivu R290 dodržte bezpečnostní zónu podle montážního návodu: v okruhu 1 m od jednotky nesmí být sklepní okénko, vpusť ani jiná prohlubeň, kde by se mohl hromadit plyn."
+    }
+  ]
+}

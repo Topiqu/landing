@@ -131,9 +131,10 @@
 }
 .hero-copy .hero-description {
   margin: 28px auto 0;
-  max-width: 660px;
-  font-size: 17px;
-  line-height: 1.8;
+  max-width: 600px;
+  font-size: 19px;
+  line-height: 1.65;
+  text-wrap: balance;
   color: var(--landing-muted);
 }
 .hero-copy .lead-form {

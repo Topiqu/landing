@@ -1,0 +1,117 @@
+{
+  "cs": [
+    {
+      "quote": "tedy části, ve které se mletá káva stlačí a prolije vodou",
+      "kind": "voice",
+      "text": "Odborný pojem vysvětlený hned při prvním použití, jak chce hlas značky.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Baristické pojmy (lungo, extrakce, hrubost mletí) vysvětlíme, když je poprvé použijeme."
+    },
+    {
+      "quote": "Ochucená káva také patří mezi příčiny potíží s mlýnkem, které při servisu vídáme",
+      "kind": "source",
+      "text": "Ze servisní statistiky e-shopu: 12 % oprav byl poškozený mlýnek. Na webu ani v katalogu to není.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "12 % poškozený mlýnek: kamínek v kávě, ochucená nebo velmi olejnatá zrna."
+    },
+    {
+      "quote": "Cukr, sirup nebo jinou příchuť přidejte až do hotového nápoje v šálku",
+      "kind": "voice",
+      "text": "Místo pouhého zákazu praktická rada: čtenář ví, co udělat doma.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Prakticky. Čtenář má po přečtení vědět, co si koupit nebo co udělat doma."
+    },
+    {
+      "quote": "Mlýnek Espresso je středně tmavě pražená směs 70 % arabiky a 30 % robusty",
+      "kind": "source",
+      "text": "Složení a pražení přesně podle katalogu e-shopu.",
+      "file": "katalog-2026.md",
+      "excerpt": "Mlýnek Espresso | 70 % arabica, 30 % robusta (Brazílie, Indie) | středně tmavé | 489 Kč"
+    },
+    {
+      "quote": "Při dávce 8 g vyjde samotná káva na espresso přibližně na 3,91 Kč s Mlýnek Espresso, 4,79 Kč s Mlýnek Crema a 6,79 Kč s Etiopií Sidamo",
+      "kind": "computed",
+      "text": "Ceny kilogramu z katalogu, dávka z měření v showroomu.",
+      "calc": "489 Kč × 0,008 = 3,91 Kč\n599 Kč × 0,008 = 4,79 Kč\n849 Kč × 0,008 = 6,79 Kč",
+      "file": "katalog-2026.md",
+      "excerpt": "Mlýnek Espresso | … | 489 Kč\nMlýnek Crema | … | 599 Kč\nEtiopie Sidamo | … | 849 Kč"
+    },
+    {
+      "quote": "Celkem je to 2 581,80 Kč ročně, tedy přibližně",
+      "kind": "computed",
+      "text": "Roční údržba z katalogových cen rozpočítaná na čtyři nápoje denně.",
+      "calc": "6 × 349 Kč + 249 Kč + 12 × 19,90 Kč = 2 581,80 Kč\n2 581,80 Kč ÷ 1 460 ≈ 1,77 Kč na nápoj",
+      "file": "katalog-2026.md",
+      "excerpt": "Čisticí tablety na spařovací jednotku, 10 ks | 199 Kč | 1 tableta měsíčně (pevná jednotka)"
+    },
+    {
+      "quote": "Celková rozpočítaná údržba pak činí asi 2,18 Kč na nápoj",
+      "kind": "computed",
+      "text": "K údržbě přibyl týdenní čistič mléčné cesty z katalogu.",
+      "calc": "289 Kč ÷ 25 × 52 = 601,12 Kč ročně\n(2 581,80 Kč + 601,12 Kč) ÷ 1 460 ≈ 2,18 Kč",
+      "file": "katalog-2026.md",
+      "excerpt": "Čistič mléčného systému 500 ml | 289 Kč | přibližně 25 čištění, doporučujeme jednou týdně"
+    }
+  ],
+  "en": [
+    {
+      "quote": "the part where ground coffee is compressed and water passes through it",
+      "kind": "voice",
+      "text": "A technical term explained the first time it appears, as the brand voice asks.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Barista terms (lungo, extraction, grind size) are explained the first time we use them.",
+      "original": "Baristické pojmy (lungo, extrakce, hrubost mletí) vysvětlíme, když je poprvé použijeme."
+    },
+    {
+      "quote": "Flavoured coffee can also cause grinder problems",
+      "kind": "source",
+      "text": "From the shop's service statistics: 12% of repairs were damaged grinders. It is not on the website or in the catalogue.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "12 % a damaged grinder: a stone in the coffee, flavoured or very oily beans.",
+      "original": "12 % poškozený mlýnek: kamínek v kávě, ochucená nebo velmi olejnatá zrna."
+    },
+    {
+      "quote": "Add sugar, syrup or another flavouring to the finished drink in your cup",
+      "kind": "voice",
+      "text": "Practical advice instead of a bare warning: readers know what to do at home.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Practically. After reading, the reader should know what to buy or what to do at home.",
+      "original": "Prakticky. Čtenář má po přečtení vědět, co si koupit nebo co udělat doma."
+    },
+    {
+      "quote": "try a medium-dark blend of 70% Arabica and 30% Robusta",
+      "kind": "source",
+      "text": "Blend and roast from the shop's catalogue. The English edition gives the prices in pounds.",
+      "file": "katalog-2026.md",
+      "excerpt": "Mlýnek Espresso | 70 % arabica, 30 % robusta (Brazil, India) | medium-dark | CZK 489",
+      "original": "Mlýnek Espresso | 70 % arabica, 30 % robusta (Brazílie, Indie) | středně tmavé | 489 Kč"
+    },
+    {
+      "quote": "With an 8 g dose, the coffee alone costs approximately £0.13 for the blend, £0.16 for the pure Arabica and £0.23 for the Ethiopian Sidamo",
+      "kind": "computed",
+      "text": "Catalogue prices per kilogram and the measured dose, converted into pounds.",
+      "calc": "CZK 489 × 0.008 = CZK 3.91 ≈ £0.13\nCZK 599 × 0.008 = CZK 4.79 ≈ £0.16\nCZK 849 × 0.008 = CZK 6.79 ≈ £0.23",
+      "file": "katalog-2026.md",
+      "excerpt": "Mlýnek Espresso | … | CZK 489\nMlýnek Crema | … | CZK 599\nEthiopia Sidamo | … | CZK 849",
+      "original": "Mlýnek Espresso | … | 489 Kč\nMlýnek Crema | … | 599 Kč\nEtiopie Sidamo | … | 849 Kč"
+    },
+    {
+      "quote": "That comes to approximately £87.78 a year, or about",
+      "kind": "computed",
+      "text": "A year of maintenance at catalogue prices, spread over four drinks a day.",
+      "calc": "6 × CZK 349 + CZK 249 + 12 × CZK 19.90 = CZK 2,581.80 ≈ £87.78\n£87.78 ÷ 1,460 ≈ £0.06 per drink",
+      "file": "katalog-2026.md",
+      "excerpt": "Brewing unit cleaning tablets, 10 pcs | CZK 199 | 1 tablet a month (fixed unit)",
+      "original": "Čisticí tablety na spařovací jednotku, 10 ks | 199 Kč | 1 tableta měsíčně (pevná jednotka)"
+    },
+    {
+      "quote": "Total apportioned maintenance then comes to about £0.07 per drink",
+      "kind": "computed",
+      "text": "Weekly milk system cleaning added, at the catalogue price.",
+      "calc": "CZK 289 ÷ 25 × 52 = CZK 601.12 ≈ £20.43\n(£87.78 + £20.43) ÷ 1,460 ≈ £0.07",
+      "file": "katalog-2026.md",
+      "excerpt": "Milk system cleaner 500 ml | CZK 289 | about 25 cleanings, we recommend once a week",
+      "original": "Čistič mléčného systému 500 ml | 289 Kč | přibližně 25 čištění, doporučujeme jednou týdně"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "cs": [
+    {
+      "quote": "Údržba tedy vychází na 2 343 Kč ročně",
+      "kind": "computed",
+      "text": "Šest filtrů a odvápňovač na dvě odvápnění, ceny z katalogu.",
+      "calc": "6 × 349 Kč + 249 Kč = 2 343 Kč",
+      "file": "katalog-2026.md",
+      "excerpt": "Vodní filtr Kaffeno / Vellora | 349 Kč | 2 měsíce nebo 50 l vody\nOdvápňovací prostředek 500 ml | 249 Kč | 2 odvápnění"
+    },
+    {
+      "quote": "vyjde hranice na 1,67 šálku týdně",
+      "kind": "computed",
+      "text": "Cenu 9 990 Kč i roční servis přepočítal na 83,50 Kč týdně. Zákazník tak místo ceny stroje vidí, kdy se mu vyplatí.",
+      "calc": "(9 990 Kč ÷ 5 + 2 343 Kč) ÷ 52 ≈ 83,50 Kč týdně\n83,50 Kč ÷ 50 Kč = 1,67 šálku",
+      "file": "katalog-2026.md"
+    },
+    {
+      "quote": "Částka 50 Kč je pouze zvolený rozdíl pro výpočet, nikoli cena kávy v kavárně",
+      "kind": "restraint",
+      "text": "Cenu kávy v kavárně podklady neměly, tak ji nehádal. Čtenář si dosadí tu svou a výpočet platí pro každou kavárnu."
+    },
+    {
+      "quote": "Naměřená spotřeba nahřátého kávovaru je 0,012 kWh na espresso a 0,028 kWh na cappuccino",
+      "kind": "source",
+      "text": "Vlastní měření e-shopu, žádný obecný odhad z internetu.",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Espresso z nahřátého kávovaru | 0,012 kWh\nCappuccino z nahřátého kávovaru | 0,028 kWh"
+    },
+    {
+      "quote": "při dávce 8 g vyjde samotná káva přibližně na 3,91 Kč",
+      "kind": "computed",
+      "text": "Cena kilogramu z katalogu, dávka z měření v showroomu.",
+      "calc": "489 Kč × 0,008 kg = 3,91 Kč",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Espresso | 8 g | 40 ml"
+    },
+    {
+      "quote": "Ochucená a velmi olejnatá zrna do automatu nedoporučujeme kvůli mlýnku",
+      "kind": "source",
+      "text": "Rada ze servisní statistiky e-shopu, ne z webu. Tohle konkurence nenapíše, protože ta čísla nemá.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "12 % poškozený mlýnek: kamínek v kávě, ochucená nebo velmi olejnatá zrna."
+    }
+  ],
+  "en": [
+    {
+      "quote": "That brings maintenance to 2,343 CZK a year",
+      "kind": "computed",
+      "text": "Six filters and a descaler for two treatments, at catalogue prices.",
+      "calc": "6 × CZK 349 + CZK 249 = CZK 2,343",
+      "file": "katalog-2026.md",
+      "excerpt": "Kaffeno / Vellora water filter | CZK 349 | 2 months or 50 l of water\nDescaler 500 ml | CZK 249 | 2 descaling cycles",
+      "original": "Vodní filtr Kaffeno / Vellora | 349 Kč | 2 měsíce nebo 50 l vody\nOdvápňovací prostředek 500 ml | 249 Kč | 2 odvápnění"
+    },
+    {
+      "quote": "the break-even point is 1.67 cups a week",
+      "kind": "computed",
+      "text": "It turned the CZK 9,990 price and a year of servicing into CZK 83.50 a week. Instead of a price tag, the customer sees when the machine pays off.",
+      "calc": "(CZK 9,990 ÷ 5 + CZK 2,343) ÷ 52 ≈ CZK 83.50 a week\nCZK 83.50 ÷ CZK 50 = 1.67 cups",
+      "file": "katalog-2026.md"
+    },
+    {
+      "quote": "The 50 CZK is just a figure chosen for the calculation, not the price of a café coffee",
+      "kind": "restraint",
+      "text": "The documents had no café price, so it didn't guess one. Readers plug in their own, and the calculation works for any café."
+    },
+    {
+      "quote": "Measured energy use for a preheated machine is 0.012 kWh per espresso and 0.028 kWh per cappuccino",
+      "kind": "source",
+      "text": "The shop's own measurements, not a general estimate from the internet.",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Espresso from a warmed-up machine | 0.012 kWh\nCappuccino from a warmed-up machine | 0.028 kWh",
+      "original": "Espresso z nahřátého kávovaru | 0,012 kWh\nCappuccino z nahřátého kávovaru | 0,028 kWh"
+    },
+    {
+      "quote": "at a dose of 8 g, the coffee itself comes to about 3.91 CZK",
+      "kind": "computed",
+      "text": "Price per kilogram from the catalogue, dose from the showroom measurements.",
+      "calc": "CZK 489 × 0.008 kg = CZK 3.91",
+      "file": "mereni-a-davkovani.md",
+      "excerpt": "Espresso | 8 g | 40 ml",
+      "original": "Espresso | 8 g | 40 ml"
+    },
+    {
+      "quote": "We don’t recommend flavoured or very oily beans for automatic machines because of the grinder",
+      "kind": "source",
+      "text": "Advice from the shop's service statistics, not its website. Competitors can't write this, because they don't have the numbers.",
+      "file": "porada-2026-10-21.md",
+      "excerpt": "12 % a damaged grinder: a stone in the coffee, flavoured or very oily beans.",
+      "original": "12 % poškozený mlýnek: kamínek v kávě, ochucená nebo velmi olejnatá zrna."
+    }
+  ]
+}

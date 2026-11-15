@@ -1,0 +1,56 @@
+{
+  "mlynek": {
+    "cena-salku": {
+      "cs": "Kdy se domácí kávovar vyplatí oproti kavárně",
+      "en": "When Does a Home Coffee Machine Pay Off Compared with a Café?"
+    },
+    "mleko": {
+      "cs": "Jak vybrat automatický kávovar podle mléčného systému",
+      "en": "How to Choose an Automatic Coffee Machine Based on Its Milk System"
+    },
+    "zrnka": {
+      "cs": "Jakou zrnkovou kávu vybrat do automatického kávovaru?",
+      "en": "Which Coffee Beans Should You Choose for an Automatic Coffee Machine?"
+    },
+    "odvapneni": {
+      "cs": "Odvápnění kávovaru: kolik stojí a co ušetří?",
+      "en": "Descaling a Coffee Machine: What Does It Cost, and What Can You Save?"
+    }
+  },
+  "heatwise": {
+    "stary-dum": {
+      "cs": "Tepelné čerpadlo do starého domu: kdy se vyplatí?",
+      "en": "Heat Pump for an Old House: When Does It Pay Off?"
+    },
+    "mrazy": {
+      "cs": "Tepelné čerpadlo v mrazu: kdy při −15 °C dotápí?",
+      "en": "Heat Pumps in Freezing Weather: When Do They Need Backup Heat at −15°C?"
+    },
+    "hluk": {
+      "cs": "Jak odhadnout hluk tepelného čerpadla u sousedů?",
+      "en": "How Can You Estimate Heat Pump Noise at Your Neighbors’ Home?"
+    },
+    "umisteni": {
+      "cs": "Kam umístit tepelné čerpadlo, aby nerušilo sousedy?",
+      "en": "Where should you place a heat pump so it won’t disturb your neighbors?"
+    }
+  },
+  "dubina": {
+    "eudr": {
+      "cs": "EUDR a nábytek: co musí výrobce před první dodávkou?",
+      "en": "EUDR and Furniture: What Must a Manufacturer Do Before the First Delivery?"
+    },
+    "pefc-fsc": {
+      "cs": "PEFC vs. FSC: co zaručí při nákupu nábytku?",
+      "en": "PEFC vs. FSC: What Do They Guarantee When Buying Furniture?"
+    },
+    "pece": {
+      "cs": "Masivní stůl do restaurace: olej, nebo lak při dezinfekci?",
+      "en": "Solid Wood Restaurant Table: Oil or Lacquer for Disinfection?"
+    },
+    "dub-buk": {
+      "cs": "Dub, nebo buk: které dřevo pro restaurační stoly?",
+      "en": "Oak or Beech: Which Wood for Restaurant Tables?"
+    }
+  }
+}

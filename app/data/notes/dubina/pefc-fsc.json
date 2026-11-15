@@ -1,0 +1,111 @@
+{
+  "cs": [
+    {
+      "quote": "FSC za modul držitelům certifikátu neúčtuje další poplatek",
+      "kind": "research",
+      "text": "Ověřeno na stránce FSC: modul dostanou držitelé certifikátu bez poplatku. Náklady na posouzení řeší certifikační orgán.",
+      "url": "https://my.fsc.org/my-en/fsc-regulatory-module",
+      "excerpt": "FSC is providing this add-on module to FSC certificate holders on a complementary basis (no additional charge by FSC)."
+    },
+    {
+      "quote": "V Dubina nábytek máme certifikaci PEFC Chain of Custody od roku 2019",
+      "kind": "source",
+      "text": "Certifikace a rok z webu firmy. Článek z ní nedělá ozdobu, ale nabídne odběratelům deklaraci ke konkrétnímu výrobku.",
+      "file": "web.md",
+      "excerpt": "PEFC Chain of Custody od roku 2019."
+    },
+    {
+      "quote": "Náležitá péče je postup, při kterém odpovědný subjekt shromažďuje údaje o původu, hodnotí riziko a podle potřeby je snižuje",
+      "kind": "voice",
+      "text": "Právní pojem vysvětlený jednou větou při prvním použití, jak chce hlas značky.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Právní pojmy (provozovatel, obchodník, prohlášení o náležité péči) vysvětlíme jednou větou, když je poprvé použijeme."
+    },
+    {
+      "quote": "se nařízení o odlesňování začne pro velké a střední podniky používat 30. 12. 2026",
+      "kind": "research",
+      "text": "Přesné datum z oficiální stránky Evropské komise, žádné „od příštího roku“. Firma chce každé tvrzení o nařízení podložit zdrojem.",
+      "url": "https://green-forum.ec.europa.eu/nature-and-biodiversity/deforestation-regulation-implementation_en",
+      "excerpt": "The EU Deforestation Regulation (EUDR) requires that, from 30 December 2026, products placed on, sold within, or exported from the EU are free from deforestation."
+    },
+    {
+      "quote": "Certifikace PEFC ani FSC automaticky nezajišťuje soulad s EUDR.",
+      "kind": "research",
+      "text": "Odpověď na otázku odběratelů z porady obchodu, jestli jim nestačí PEFC certifikát. Podložená zdrojem.",
+      "file": "porada-obchodu-2026-11-05.md",
+      "url": "https://www.soilassociation.org/news-events-and-resources/latest-news-and-insight/certification-and-eudr-compliance/",
+      "excerpt": "certification is not an automatic guarantee of EUDR compliance"
+    },
+    {
+      "quote": "takový subjekt další prohlášení sám nepodává",
+      "kind": "research",
+      "text": "Otevřená otázka č. 1 z pracovní skupiny EUDR. Topiqu odpověď dohledal ve výkladu upraveného nařízení.",
+      "file": "eudr-pracovni-skupina-2026-10-28.md",
+      "url": "https://www.stibbe.com/publications-and-insights/the-amended-eudr-what-has-changed-and-what-has-remained",
+      "excerpt": "Downstream operators are not required to submit due diligence declarations;"
+    },
+    {
+      "quote": "Přibližně 15 % objemu našeho nakupovaného dřeva v roce 2025 tvořilo bukové řezivo z Bosny a Hercegoviny, které dovážíme a proclíváme sami",
+      "kind": "source",
+      "text": "Z interního přehledu nákupu: 15,1 %. Článek číslo zaokrouhlil a dodavatele nejmenuje, jak chce hlas značky.",
+      "file": "dodavatele-dreva-2025.md",
+      "excerpt": "D – pila | Bosna a Hercegovina | buk, řezivo | 800 m³ | 15,1 % | … | zatím jen název regionu; dovážíme sami"
+    }
+  ],
+  "en": [
+    {
+      "quote": "FSC does not charge certificate holders an additional fee for the module",
+      "kind": "research",
+      "text": "Checked on FSC's own page: certificate holders get the module at no charge. Assessment costs are a matter for the certification body.",
+      "url": "https://my.fsc.org/my-en/fsc-regulatory-module",
+      "excerpt": "FSC is providing this add-on module to FSC certificate holders on a complementary basis (no additional charge by FSC)."
+    },
+    {
+      "quote": "Dubina nábytek, a Czech company, has held PEFC Chain of Custody certification since 2019",
+      "kind": "source",
+      "text": "The certification and the year from the company website. The article does not use it as decoration; it offers customers the claim for a specific product.",
+      "file": "web.md",
+      "excerpt": "PEFC Chain of Custody since 2019.",
+      "original": "PEFC Chain of Custody od roku 2019."
+    },
+    {
+      "quote": "Due diligence is a process in which the responsible party gathers information about origin, assesses risk, and reduces it where necessary",
+      "kind": "voice",
+      "text": "A legal term explained in one sentence the first time it appears, as the brand voice asks.",
+      "file": "hlas-znacky.md",
+      "excerpt": "Legal terms (operator, trader, due diligence statement) are explained in one sentence the first time we use them.",
+      "original": "Právní pojmy (provozovatel, obchodník, prohlášení o náležité péči) vysvětlíme jednou větou, když je poprvé použijeme."
+    },
+    {
+      "quote": "the EU Deforestation Regulation will apply to large and medium-sized companies from 30 December 2026",
+      "kind": "research",
+      "text": "The exact date from the European Commission's official page, not \"from next year\". The company wants every claim about the regulation backed by a source.",
+      "url": "https://green-forum.ec.europa.eu/nature-and-biodiversity/deforestation-regulation-implementation_en",
+      "excerpt": "The EU Deforestation Regulation (EUDR) requires that, from 30 December 2026, products placed on, sold within, or exported from the EU are free from deforestation."
+    },
+    {
+      "quote": "PEFC or FSC certification does not automatically ensure compliance with the EUDR.",
+      "kind": "research",
+      "text": "The answer to customers who asked at the sales meeting whether the PEFC certificate is enough for them. Backed by a source.",
+      "file": "porada-obchodu-2026-11-05.md",
+      "url": "https://www.soilassociation.org/news-events-and-resources/latest-news-and-insight/certification-and-eudr-compliance/",
+      "excerpt": "certification is not an automatic guarantee of EUDR compliance"
+    },
+    {
+      "quote": "such an operator does not submit a further statement itself",
+      "kind": "research",
+      "text": "Open question no. 1 from the EUDR working group. Topiqu found the answer in an analysis of the amended regulation.",
+      "file": "eudr-pracovni-skupina-2026-10-28.md",
+      "url": "https://www.stibbe.com/publications-and-insights/the-amended-eudr-what-has-changed-and-what-has-remained",
+      "excerpt": "Downstream operators are not required to submit due diligence declarations;"
+    },
+    {
+      "quote": "around 15% of the volume of wood we purchased in 2025 was beech sawn timber from Bosnia and Herzegovina, which we import and clear through customs ourselves",
+      "kind": "source",
+      "text": "From the internal purchasing overview: 15.1%. The article rounds it and does not name the supplier, as the brand voice asks.",
+      "file": "dodavatele-dreva-2025.md",
+      "excerpt": "D – sawmill | Bosnia and Herzegovina | beech, sawn timber | 800 m³ | 15.1 % | … | so far only the name of the region; we import it ourselves",
+      "original": "D – pila | Bosna a Hercegovina | buk, řezivo | 800 m³ | 15,1 % | … | zatím jen název regionu; dovážíme sami"
+    }
+  ]
+}
