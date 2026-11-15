@@ -33,6 +33,13 @@ describe('examples', () => {
           }
         })
 
+  test('every link in a snapshot leaves for an absolute URL, never a blog path the landing would 404 on', () => {
+    for (const example of EXAMPLES)
+      for (const article of example.articles)
+        for (const locale of ['cs', 'en'] as const)
+          expect(snapshot(example.id, article)[locale].content.match(/href="\/[^"]*"/g) ?? []).toEqual([])
+  })
+
   test('every company has notes in both languages and the homepage notes exist', () => {
     for (const example of EXAMPLES)
       for (const locale of ['cs', 'en'] as const) {

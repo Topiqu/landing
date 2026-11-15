@@ -4,7 +4,7 @@
 import { join } from 'node:path'
 import { copyFile, mkdir, readdir, readFile, writeFile } from 'node:fs/promises'
 
-import { EXAMPLES, type Example } from '../shared/examples'
+import { EXAMPLES, type Example, type ExampleLocale } from '../shared/examples'
 
 const root = process.argv[2]
 if (!root) throw new Error('Pass the directory with the exported demo blogs')
@@ -27,12 +27,25 @@ type Exported = {
 // Titles for the "more articles" lists, so a page does not load every article just to name it.
 const titles: Record<string, Record<string, { cs: string; en: string }>> = {}
 
-const syncArticle = async (example: Example, slug: string) => {
-  const { article, translations } = JSON.parse(
-    await readFile(join(root, example.id, 'export', `${slug}.json`), 'utf8'),
-  ) as Exported
-  const en = translations.translations.find((translation) => translation.language === 'en')
+const readExport = async (example: Example, slug: string) => {
+  const exported = JSON.parse(await readFile(join(root, example.id, 'export', `${slug}.json`), 'utf8')) as Exported
+  const en = exported.translations.translations.find((translation) => translation.language === 'en')
   if (!en) throw new Error(`${example.id}/${slug}: no English translation`)
+  return { ...exported, en }
+}
+
+type BlogUrls = Map<string, Record<ExampleLocale, string>>
+
+// The body keeps the `/cs/clanky/<slug>` a link was written with; the blog resolves it when it renders, to the
+// reader's language, and unwraps a link to an unpublished article. On the landing that path would be a 404.
+const resolveLinks = (html: string, urls: BlogUrls, locale: ExampleLocale) =>
+  html.replace(/<a href="\/cs\/clanky\/([^"#?]+)">([\s\S]*?)<\/a>/g, (_, slug: string, text: string) => {
+    const url = urls.get(slug)?.[locale]
+    return url ? `<a href="${url}">${text}</a>` : text
+  })
+
+const syncArticle = async (example: Example, slug: string, urls: BlogUrls) => {
+  const { article, en } = await readExport(example, slug)
   const credit = article.imageCredit?.credit
   const shared = {
     publishedAt: article.publishedAt,
@@ -50,15 +63,15 @@ const syncArticle = async (example: Example, slug: string) => {
       ...shared,
       title: article.title,
       excerpt: article.excerpt,
-      content: article.content,
-      url: `https://${example.domain}/cs/clanky/${article.slug}`,
+      content: resolveLinks(article.content, urls, 'cs'),
+      url: urls.get(article.slug)!.cs,
     },
     en: {
       ...shared,
       title: en.title,
       excerpt: en.excerpt,
-      content: en.content,
-      url: `https://${example.domain}/en/articles/${en.slug}`,
+      content: resolveLinks(en.content, urls, 'en'),
+      url: urls.get(article.slug)!.en,
     },
   }
   titles[example.id]![slug] = { cs: article.title, en: en.title }
@@ -68,7 +81,15 @@ const syncArticle = async (example: Example, slug: string) => {
 for (const example of EXAMPLES) {
   titles[example.id] = {}
   await mkdir(join('app/data/examples', example.id), { recursive: true })
-  for (const slug of example.articles) await syncArticle(example, slug)
+  const urls: BlogUrls = new Map()
+  for (const slug of example.articles) {
+    const { article, en } = await readExport(example, slug)
+    urls.set(article.slug, {
+      cs: `https://${example.domain}/cs/clanky/${article.slug}`,
+      en: `https://${example.domain}/en/articles/${en.slug}`,
+    })
+  }
+  for (const slug of example.articles) await syncArticle(example, slug, urls)
 
   for (const [from, to] of [
     [join(root, example.id), join('public/examples', example.id)],

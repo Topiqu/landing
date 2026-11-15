@@ -1,92 +1,104 @@
 {
   "cs": [
     {
-      "quote": "Od 30. 12. 2026 potřebujeme mít",
+      "quote": "je pro přechod na EUDR důležité, kdy byl konkrétní výrobek poprvé uveden na trh EU",
       "kind": "research",
-      "text": "Termín posunulo o rok nařízení (EU) 2025/2650. Topiqu ho vzal přímo z předpisu EU, takže článek neopakuje zastaralé datum.",
-      "url": "https://environment.ec.europa.eu/topics/forests/deforestation/eu-deforestation-regulation-eudr_en"
+      "text": "Přechod ze starých pravidel pro dřevo na EUDR popisují pokyny Komise z 20. 7. 2026. Topiqu je dohledal v Úředním věstníku EU: u dřeva vytěženého od 29. 6. 2023 rozhoduje první uvedení na trh, ne datum výroby.",
+      "url": "https://eur-lex.europa.eu/eli/C/2026/3896/oj",
+      "excerpt": "V případě dřeva a dřevařských výrobků vyprodukovaných od 29. června 2023 do 30. prosince 2026 a: — uvedených na trh před 30. prosincem 2026 musí tyto produkty a z nich odvozené výrobky splňovat pravidla nařízení EU o dřevu; … — uvedených na trh od 30. prosince 2026 musí tyto produkty a z nich odvozené výrobky splňovat pravidla nařízení EUDR."
     },
     {
-      "quote": "Bukové řezivo z Bosny a Hercegoviny naopak dovážíme a proclíváme sami",
+      "quote": "K 31. 10. 2026 jsme měli na skladě hotové výrobky přibližně za 14 milionů Kč",
       "kind": "source",
-      "text": "Z interního přehledu dodavatelů. Místo obecného návodu k EUDR popisuje článek postup podle toho, odkud firma skutečně bere dřevo.",
-      "file": "dodavatele-dreva-2025.md",
-      "excerpt": "D – pila | Bosna a Hercegovina | buk, řezivo | 800 m³ | … | zatím jen název regionu; dovážíme sami"
+      "text": "Stav skladu z interního přehledu sortimentu. Článek počítá se skutečnými zásobami firmy, ne s vymyšleným příkladem.",
+      "file": "sortiment-a-celni-kody.md",
+      "excerpt": "K 31. 10. 2026 máme na skladě hotové výrobky v hodnotě 14,2 mil. Kč, vyrobené převážně v roce 2026 z řeziva nakoupeného v letech 2025 a 2026."
     },
     {
-      "quote": "platí termín 30. 6. 2027",
+      "quote": "Upozorňuje však na výjimku pro malé provozovatele, na které se již vztahovala dřívější pravidla pro dřevo",
       "kind": "research",
-      "text": "Pozdější termín pro mikro a malé podniky. Článek v dalším odstavci hlídá i výjimku: firmy s výrobky, na které se už vztahovalo EUTR, mají dřívější termín.",
-      "url": "https://environment.ec.europa.eu/topics/forests/deforestation/eu-deforestation-regulation-eudr_en",
-      "excerpt": "Also applies to micro & small operators already covered by EU Timber Regulation."
+      "text": "Odklad na 30. 6. 2027 se netýká výrobků z přílohy nařízení EU o dřevu. Topiqu výjimku našel v pokynech Komise, takže článek malým výrobcům nábytku odklad automaticky neslibuje.",
+      "url": "https://eur-lex.europa.eu/eli/C/2026/3896/oj",
+      "excerpt": "V případě hospodářských subjektů, které byly do 31. prosince 2024 založeny jako mikropodniky nebo jako malé podniky (…), se povinnosti … použijí od 30. června 2027 s výjimkou případů, kdy se jedná o produkty uvedené v příloze nařízení (EU) č. 995/2010"
     },
     {
-      "quote": "K 28. 10. 2026 jsme u dováženého bosenského buku měli k dispozici pouze název regionu",
-      "kind": "source",
-      "text": "Stav ze zápisu pracovní skupiny i s úkolem a termínem, žádné obecné „ověřte si u dodavatele“.",
+      "quote": "Na 11. 1. 2027 plánujeme expedici 120 židlí a 30 stolů pro hotelového odběratele",
+      "kind": "corrected",
+      "text": "Expedice je ze zápisu pracovní skupiny. První verze ji jen zmínila; kontrola před vydáním chtěla vědět, která pravidla pro ni platí, a článek ji teď zařazuje do tabulky.",
       "file": "eudr-pracovni-skupina-2026-10-28.md",
-      "excerpt": "Vyžádat od D geolokaci pozemků, při nedodání hledat náhradní zdroj buku | vedoucí nákupu | 30. 11. 2026"
+      "excerpt": "První expedice v roce 2027 je naplánovaná na 11. 1. 2027: 120 židlí a 30 stolů pro rakouský hotelový řetězec."
     },
     {
-      "quote": "Rakouský hotelový řetězec zase od 1. 1. 2027 požaduje referenční číslo prohlášení na každé faktuře",
+      "quote": "Hotel, který už nábytek používá, má jinou situaci než výrobce s hotovými židlemi čekajícími na první dodání",
+      "kind": "corrected",
+      "text": "Revize sem doplnila, že se EUDR nevztahuje na použitý dřevěný nábytek. Zdroj ale mluvil jen o „většině položek se dřevem“ a nábytek nejmenoval. Kontrola revize rozdíl zachytila a věta se do článku nedostala."
+    },
+    {
+      "quote": "Tento požadavek je součástí jeho smluvních podmínek",
       "kind": "source",
-      "text": "Požadavek odběratele z porady obchodu. Článek z něj udělal konkrétní kontrolní bod.",
+      "text": "Požadavek z porady obchodu. Článek ho podává jako podmínku jednoho odběratele, ne jako povinnost, kterou ukládá nařízení.",
       "file": "porada-obchodu-2026-11-05.md",
       "excerpt": "Rakouský hotelový řetězec: v nové rámcové smlouvě od 1. 1. 2027 požaduje na každé faktuře referenční číslo prohlášení o náležité péči."
     },
     {
-      "quote": "Obalový materiál používaný výhradně k ochraně, podpoře nebo přepravě jiného výrobku je z EUDR vyjmut",
-      "kind": "research",
-      "text": "Pracovní skupina nechala tuhle otázku otevřenou. Topiqu odpověď našel v příloze I nařízení (EU) 2023/1115 a rovnou ji dal do článku.",
-      "file": "eudr-pracovni-skupina-2026-10-28.md",
-      "excerpt": "6. Spadají pod nařízení palety a proklady, na kterých výrobky expedujeme?"
+      "quote": "Na náš certifikát PEFC se odběratelé ptají v souvislosti s dokumentací k EUDR",
+      "kind": "source",
+      "text": "Dotaz odběratelů z porady obchodu. Článek na něj rovnou odpovídá: certifikát pomůže doložit původ dřeva, ale datum prvního uvedení na trh neurčí.",
+      "file": "porada-obchodu-2026-11-05.md",
+      "excerpt": "Dva čeští odběratelé se ptají, jestli jim nestačí náš PEFC certifikát."
     }
   ],
   "en": [
     {
-      "quote": "From 30 December 2026, before placing a product on the market",
+      "quote": "the key factor in transitioning to the EUDR is when the specific product was first placed on the EU market",
       "kind": "research",
-      "text": "Regulation (EU) 2025/2650 moved the deadline by a year. Topiqu took it straight from EU law, so the article doesn't repeat an outdated date.",
-      "url": "https://environment.ec.europa.eu/topics/forests/deforestation/eu-deforestation-regulation-eudr_en"
+      "text": "The Commission's guidance of 20 July 2026 sets out the switch from the old timber rules to the EUDR. Topiqu found it in the EU Official Journal: for timber harvested from 29 June 2023, what counts is the first placing on the market, not the production date.",
+      "url": "https://eur-lex.europa.eu/eli/C/2026/3896/oj",
+      "excerpt": "For timber and timber products produced from 29 June 2023 until 30 December 2026 and: — placed on the market before 30 December 2026, such products and their derived products must comply with the rules of the EUTR; … — placed on the market from 30 December 2026, such products and their derived products must comply with the rules of the EUDR."
     },
     {
-      "quote": "By contrast, we import and clear customs ourselves for beech lumber from Bosnia and Herzegovina",
+      "quote": "As of 31 October 2026, our Czech company had finished goods in stock worth approximately CZK 14 million",
       "kind": "source",
-      "text": "From the internal supplier overview. Instead of a generic EUDR guide, the article follows where the company actually sources its timber.",
-      "file": "dodavatele-dreva-2025.md",
-      "excerpt": "D – sawmill | Bosnia and Herzegovina | beech, sawn timber | 800 m³ | … | so far only the name of the region; we import it ourselves",
-      "original": "D – pila | Bosna a Hercegovina | buk, řezivo | 800 m³ | … | zatím jen název regionu; dovážíme sami"
+      "text": "The stock figure from the internal product overview. The article works with the company's actual inventory, not an invented example.",
+      "file": "sortiment-a-celni-kody.md",
+      "excerpt": "As of 31 October 2026 we hold finished products worth CZK 14.2 million in stock, made mostly in 2026 from timber bought in 2025 and 2026.",
+      "original": "K 31. 10. 2026 máme na skladě hotové výrobky v hodnotě 14,2 mil. Kč, vyrobené převážně v roce 2026 z řeziva nakoupeného v letech 2025 a 2026."
     },
     {
-      "quote": "the deadline is 30 June 2027",
+      "quote": "However, it notes an exception for small operators that were already covered by the earlier timber rules",
       "kind": "research",
-      "text": "The later deadline for micro and small enterprises. The article also keeps the exception in view: businesses whose products were already covered by the EUTR have the earlier date.",
-      "url": "https://environment.ec.europa.eu/topics/forests/deforestation/eu-deforestation-regulation-eudr_en",
-      "excerpt": "Also applies to micro & small operators already covered by EU Timber Regulation."
+      "text": "The extension to 30 June 2027 does not cover products listed in the EU Timber Regulation. Topiqu found this exception in the Commission's guidance, so the article does not promise small furniture makers the extension by default.",
+      "url": "https://eur-lex.europa.eu/eli/C/2026/3896/oj",
+      "excerpt": "For operators that were established as micro-undertakings or small undertakings by 31 December 2024 (…) the obligations … apply from 30 June 2027, except as regards the products covered in the Annex of the Regulation (EU) No 995/2010"
     },
     {
-      "quote": "As of 28 October 2026, for the Bosnian beech we were importing, we had only the name of the region",
-      "kind": "source",
-      "text": "The status from the working group's notes, with the task and its deadline. No generic \"check with your supplier\".",
+      "quote": "We plan to dispatch 120 chairs and 30 tables to a hotel customer on 11 January 2027",
+      "kind": "corrected",
+      "text": "The shipment comes from the working group's notes. The first draft only mentioned it; the pre-publication check asked which rules apply to it, and the article now places it in the table.",
       "file": "eudr-pracovni-skupina-2026-10-28.md",
-      "excerpt": "Request plot geolocation from D; if not delivered, look for an alternative beech source | head of purchasing | 30 November 2026",
-      "original": "Vyžádat od D geolokaci pozemků, při nedodání hledat náhradní zdroj buku | vedoucí nákupu | 30. 11. 2026"
+      "excerpt": "The first shipment of 2027 is scheduled for 11 January 2027: 120 chairs and 30 tables for an Austrian hotel chain.",
+      "original": "První expedice v roce 2027 je naplánovaná na 11. 1. 2027: 120 židlí a 30 stolů pro rakouský hotelový řetězec."
     },
     {
-      "quote": "the declaration reference number on every invoice",
+      "quote": "A hotel already using the furniture is in a different situation from a manufacturer whose finished chairs are waiting for their first delivery",
+      "kind": "corrected",
+      "text": "The revision added here that used wooden furniture falls outside the EUDR. The source only spoke of \"most wood-related entries\" and never named furniture. The revision check caught the difference, and the sentence never reached the article."
+    },
+    {
+      "quote": "This requirement forms part of that customer's contractual terms",
       "kind": "source",
-      "text": "A customer requirement from the sales meeting. The article turns it into a concrete checkpoint.",
+      "text": "A requirement from the sales meeting. The article presents it as one customer's condition, not as a duty the regulation imposes.",
       "file": "porada-obchodu-2026-11-05.md",
       "excerpt": "Austrian hotel chain: its new framework agreement from 1 January 2027 requires the reference number of the due diligence statement on every invoice.",
       "original": "Rakouský hotelový řetězec: v nové rámcové smlouvě od 1. 1. 2027 požaduje na každé faktuře referenční číslo prohlášení o náležité péči."
     },
     {
-      "quote": "Packaging material used exclusively to protect, support or transport another product is exempt from the EUDR",
-      "kind": "research",
-      "text": "The working group left this question open. Topiqu found the answer in Annex I of Regulation (EU) 2023/1115 and put it straight into the article.",
-      "file": "eudr-pracovni-skupina-2026-10-28.md",
-      "excerpt": "6. Do the pallets and spacers we ship products on fall under the regulation?",
-      "original": "6. Spadají pod nařízení palety a proklady, na kterých výrobky expedujeme?"
+      "quote": "Customers ask about our PEFC certificate in connection with EUDR documentation",
+      "kind": "source",
+      "text": "A question customers raised at the sales meeting. The article answers it head-on: the certificate helps document the timber's origin, but it does not set the date of first placing on the market.",
+      "file": "porada-obchodu-2026-11-05.md",
+      "excerpt": "Two Czech customers ask whether our PEFC certificate is enough for them.",
+      "original": "Dva čeští odběratelé se ptají, jestli jim nestačí náš PEFC certifikát."
     }
   ]
 }

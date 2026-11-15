@@ -83,7 +83,7 @@ export const EXAMPLES: Example[] = [
     industry: 'b2b',
     brand: '#15803d',
     articles: ['eudr', 'pefc-fsc', 'pece', 'dub-buk'],
-    featured: [0, 1, 5],
+    featured: [0, 4, 5],
     files: [
       { name: 'web.md', cs: 'Web výrobce', en: 'The manufacturer website' },
       { name: 'sortiment-a-celni-kody.md', cs: 'Sortiment a celní kódy', en: 'Products and customs codes' },
