@@ -77,7 +77,7 @@
         "custom": {
           "badge": "Enterprise",
           "name": "Custom",
-          "desc": "Pro týmy a agentury, které potřebují víc míst, víc dat a vlastní značku.",
+          "desc": "Pro týmy, které na jednom blogu potřebují víc míst, víc dat a vlastní značku.",
           "features": {
             "everything": "Vše z Premium",
             "whitelabel": "White-label bez značky Topiqu",
