@@ -354,9 +354,9 @@
       },
       "hero": {
         "kicker": "AI REDAKCE PRO FIREMNÍ BLOG",
-        "title": "Články, které znají vaši firmu líp než externí copywriter.",
-        "accent": "A měsíčně stojí jako jeden jeho text.",
-        "description": "Topiqu si přečte váš web, dokumentaci, ceníky i produktový feed. Vybere témata, na která se vaši zákazníci opravdu ptají, napíše odborný článek hlasem vaší značky a před vydáním v něm nezávisle ověří každé tvrzení. Pak ho vydá na váš WordPress, do Shopify nebo na web. Bez vašeho souhlasu nevyjde nic.",
+        "title": "Články, které znají vaši firmu.",
+        "accent": "Každý údaj v nich je ověřený.",
+        "description": "Topiqu čerpá z vašeho webu, ceníků, PDF i produktového feedu, píše o tom, na co se zákazníci ptají, a hotové články vydává na WordPress nebo Shopify.",
         "cta": "Začít zdarma",
         "secondary": "Jak to funguje",
         "scene": {
@@ -749,9 +749,9 @@
         }
       },
       "lead": {
-        "placeholder": "Váš e-mail",
-        "cta": "Vyzkoušet na mém webu",
-        "note": "{days} dní Premium a {articles} článků zdarma. Kartu zadáte, až když budete chtít pokračovat.",
+        "placeholder": "Váš pracovní e-mail",
+        "cta": "Vyzkoušet zdarma",
+        "note": "{days} dní Premium a {articles} článků zdarma. Bez platební karty.",
         "reads": "Topiqu si pak přečte {domain}."
       },
       "meta": {

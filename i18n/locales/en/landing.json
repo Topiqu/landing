@@ -358,9 +358,9 @@
       },
       "hero": {
         "kicker": "AN AI NEWSROOM FOR YOUR COMPANY BLOG",
-        "title": "Articles that know your company better than any freelance copywriter.",
-        "accent": "For the monthly price of one of their texts.",
-        "description": "Topiqu reads your website, documentation, price lists and product feed. It picks the topics your customers actually ask about, writes an expert article in your brand's voice and independently checks every claim before it goes out. Then it publishes to your WordPress, to Shopify or to your site. Nothing goes live without your approval.",
+        "title": "Articles that know your company.",
+        "accent": "With every fact checked.",
+        "description": "Topiqu draws on your website, price lists, PDFs and product feed, writes about what your customers ask, and publishes finished articles to WordPress or Shopify.",
         "cta": "Start for free",
         "secondary": "See how it works",
         "scene": {
@@ -753,9 +753,9 @@
         }
       },
       "lead": {
-        "placeholder": "Your email",
-        "cta": "Try it on my website",
-        "note": "{days} days of Premium and {articles} articles free. Add a card only when you decide to continue.",
+        "placeholder": "Your work email",
+        "cta": "Try it free",
+        "note": "{days} days of Premium and {articles} articles free. No credit card.",
         "reads": "Topiqu will then read {domain}."
       },
       "meta": {
