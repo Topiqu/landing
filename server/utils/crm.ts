@@ -30,22 +30,23 @@ export type CrmLead = {
   name?: string
 }
 
-// The wizard's non-secret entries. Unvalidated beyond length: they only become CRM text.
+// The wizard's non-secret entries, only for the CRM: a bad one is dropped, never a reason to refuse the request.
+const entry = <T extends z.ZodType>(schema: T) => schema.optional().catch(undefined)
 export const onboardingSchema = z.object({
-  siteName: z.string().trim().max(255).optional(),
-  domain: z.string().trim().toLowerCase().max(253).optional(),
-  domainType: z.enum(['SUBDOMAIN', 'CUSTOM']).optional(),
-  language: z.enum(CONTENT_LANGUAGES).optional(),
+  siteName: entry(z.string().trim().max(255)),
+  domain: entry(z.string().trim().toLowerCase().max(253)),
+  domainType: entry(z.enum(['SUBDOMAIN', 'CUSTOM'])),
+  language: entry(z.enum(CONTENT_LANGUAGES)),
   // Not `website`: that name is the bot honeypot.
-  websiteUrl: z.string().trim().max(2048).optional(),
-  username: z.string().trim().max(50).optional(),
-  selectedPlan: z.enum(['PRO', 'PREMIUM', 'CUSTOM']).nullable().optional(),
-  billingInterval: z.enum(['month', 'year']).optional(),
+  websiteUrl: entry(z.string().trim().max(2048)),
+  username: entry(z.string().trim().max(50)),
+  selectedPlan: entry(z.enum(['PRO', 'PREMIUM', 'CUSTOM']).nullable()),
+  billingInterval: entry(z.enum(['month', 'year'])),
 })
 export type OnboardingEntries = z.infer<typeof onboardingSchema>
 
 /** The wizard's entries as note lines and lead fields; a plan left out was not chosen yet. */
-export function onboardingLead(entries: OnboardingEntries) {
+export function onboardingLead(entries: Partial<OnboardingEntries>) {
   const blog = entries.domain && (entries.domainType === 'CUSTOM' ? entries.domain : `${entries.domain}.topiqu.com`)
   const website = httpUrl(entries.websiteUrl)
   const plan =

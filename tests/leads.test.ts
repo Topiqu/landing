@@ -2,7 +2,7 @@ import { describe, expect, mock, test } from 'bun:test'
 
 import { createRateLimit } from '../server/utils/rateLimit'
 import { companyDomain, crmSourceOf, httpUrl } from '../shared/utils/leads'
-import { createCrmSync, LEAD_TAGS, onboardingLead, type CrmLead } from '../server/utils/crm'
+import { createCrmSync, LEAD_TAGS, onboardingLead, onboardingSchema, type CrmLead } from '../server/utils/crm'
 
 const crm = (leads: { id: number; email: string }[], website = '') => {
   const api = mock(async (path: string, options?: { method?: string }) => {
@@ -111,6 +111,13 @@ describe('CRM sync', () => {
     })
     await createCrmSync(api as never)(lead({ company: 'Heatwise', name: 'jan' }))
     expect(api.mock.calls.at(-1)).toEqual(['/api/v1/leads/7', { method: 'PATCH', body: { name: 'jan' } }])
+  })
+
+  test('drops a bad CRM-only entry instead of refusing the request it rides on', () => {
+    const parsed = onboardingSchema.parse({ siteName: 'Heatwise', username: 'x'.repeat(51), language: 'xx' })
+    expect(parsed).toMatchObject({ siteName: 'Heatwise' })
+    expect(parsed.username).toBeUndefined()
+    expect(parsed.language).toBeUndefined()
   })
 
   test('turns the wizard entries into note lines and lead fields', () => {
