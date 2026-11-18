@@ -13,6 +13,7 @@ Landing page and onboarding flow for **Topiqu - Your AI Blog Platform**.
 
 - Marketing landing page - workspace preview, editorial workflow, comparison, pricing and FAQ
 - 6-step onboarding - site setup, design, plan, account, email verification, summary
+- Successful registration clears the saved wizard draft before leaving for the app. Interrupted requests retain it for retry; passwords and verification proof are never persisted.
 - Optional company website - with processing confirmation, prepares blog settings and knowledge in the background; suggestions are reviewed in the app
 - Legal pages - Terms of Service; the app hosts the one Privacy Policy, which the landing links and redirects to
 - PWA support, SEO/OG meta, structured data (schema.org)
