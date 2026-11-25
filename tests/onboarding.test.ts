@@ -375,6 +375,65 @@ describe('company website onboarding', () => {
     expect(trackMetaEvent.mock.calls).toEqual([['CompleteRegistration', { content_name: 'TRIAL' }, { eventID }]])
   })
 
+  test.each([false, true])(
+    'clears a completed registration before leaving, even if tracking fails: %s',
+    async (trackingFails) => {
+      const store = createStore()
+      Object.assign(store.form, {
+        siteName: 'Finished blog',
+        domain: 'finished-blog',
+        username: 'Owner',
+        email: 'owner@example.test',
+        password: 'Winter-coffee Forest!fiction 7382',
+        passwordConfirm: 'Winter-coffee Forest!fiction 7382',
+        selectedPlan: 'PRO',
+        acceptTos: true,
+      })
+      store.verifiedToken = 'proof'
+      store.markStep('site', 'done')
+      if (trackingFails)
+        trackMetaEvent.mockImplementationOnce(() => {
+          throw new Error('Pixel unavailable')
+        })
+      await vue.nextTick()
+      await store.submit()
+      await vue.nextTick()
+
+      expect(window.location.href).toBe('https://workspace.example.test')
+      expect(store.form.siteName).toBe('')
+      expect(store.form.password).toBe('')
+      expect(store.verifiedToken).toBeNull()
+      const restored = createStore()
+      expect(restored.form.email).toBe('')
+      expect(restored.form.domain).toBe('')
+      expect(restored.form.selectedPlan).toBeNull()
+      expect(restored.progress).toEqual({})
+    },
+  )
+
+  test('retains the draft and proof after an uncertain checkout failure so the same registration can resume', async () => {
+    const store = createStore()
+    Object.assign(store.form, {
+      siteName: 'Pending blog',
+      domain: 'pending-blog',
+      username: 'Owner',
+      email: 'owner@example.test',
+      password: 'Winter-coffee Forest!fiction 7382',
+      passwordConfirm: 'Winter-coffee Forest!fiction 7382',
+      acceptTos: true,
+    })
+    store.verifiedToken = 'proof'
+    await vue.nextTick()
+    fetch.mockRejectedValueOnce({ data: { data: { reason: 'checkoutUnknown' } } })
+    await store.submit()
+    expect(store.submitError).toBe('checkoutUnknown')
+    expect(store.form.siteName).toBe('Pending blog')
+    expect(store.verifiedToken).toBe('proof')
+    expect(createStore().form.domain).toBe('pending-blog')
+    await store.submit()
+    expect(store.form.siteName).toBe('')
+  })
+
   test('forwards the website in the validated, signed platform request', async () => {
     const email = 'owner@firma.cz'
     const result = await checkout({

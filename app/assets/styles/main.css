@@ -558,14 +558,14 @@
 }
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 16px;
   align-items: stretch;
 }
 .pricing-plan {
   border: 1px solid var(--landing-line);
   border-radius: var(--topiqu-surface-radius);
-  padding: 28px 24px;
+  padding: 28px 20px;
   background: var(--landing-surface);
 }
 .plan-featured {
@@ -733,6 +733,10 @@
   .integration-grid,
   .faq-grid {
     gap: 48px;
+  }
+  /* Five plans no longer fit one row here: three, then two. */
+  .pricing-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
   .pricing-plan {
     padding: 24px 18px;

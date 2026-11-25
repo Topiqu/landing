@@ -103,7 +103,7 @@ const store = useOnboardingStore()
 const { submit, form, loading, fullDomainPreview, brandAccent, trialEndsOn, goTo } = useOnboarding()
 const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
 const planValue = computed(() => {
-  const plan = form.selectedPlan?.toLowerCase() as 'pro' | 'premium' | 'custom' | undefined
+  const plan = form.selectedPlan?.toLowerCase() as 'starter' | 'pro' | 'premium' | 'custom' | undefined
   const name = $t(`landing.pricing.plans.${plan ?? 'free'}.name`)
   if (!plan) return name
   const monthlyPrice = PLAN_PRICES_USD[plan]

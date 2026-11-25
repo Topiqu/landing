@@ -1,7 +1,7 @@
 export type DomainStatus =
   'idle' | 'checking' | 'available' | 'taken' | 'invalid' | 'tooShort' | 'reserved' | 'empty' | 'unavailable'
 export type DomainType = 'SUBDOMAIN' | 'CUSTOM'
-export type SelectedPlan = 'PRO' | 'PREMIUM' | 'CUSTOM' | null
+export type SelectedPlan = 'STARTER' | 'PRO' | 'PREMIUM' | 'CUSTOM' | null
 export type SelectedBillingInterval = 'month' | 'year'
 
 export interface OnboardingForm {
@@ -36,7 +36,7 @@ export type StepProgress = 'done' | 'skipped'
 export const planFromQuery = (value: unknown): SelectedPlan | undefined => {
   const plan = String(value ?? '').toUpperCase()
   if (plan === 'FREE') return null
-  return plan === 'PRO' || plan === 'PREMIUM' || plan === 'CUSTOM' ? plan : undefined
+  return plan === 'STARTER' || plan === 'PRO' || plan === 'PREMIUM' || plan === 'CUSTOM' ? plan : undefined
 }
 
 export const stepRouteName = (step: OnboardingStep) => `onboarding-${step}` as const

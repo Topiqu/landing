@@ -46,7 +46,7 @@ const schema = z
     email: z.string().email(),
     password: z.string().min(8).max(124),
     verifiedToken: z.string().min(1),
-    selectedPlan: z.enum(['PRO', 'PREMIUM', 'CUSTOM']).nullable().optional(),
+    selectedPlan: z.enum(['STARTER', 'PRO', 'PREMIUM', 'CUSTOM']).nullable().optional(),
     billingInterval: z.enum(['month', 'year']).default('month'),
   })
   .refine(

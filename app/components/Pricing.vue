@@ -22,7 +22,7 @@ const { t, tm, locale } = useI18n()
 const localePath = useLocalePath()
 const route = useRoute()
 const billingInterval = shallowRef<BillingInterval>(route.query.billing === 'year' ? 'year' : 'month')
-const plans = ['free', 'pro', 'premium', 'custom'] as const
+const plans = ['free', 'starter', 'pro', 'premium', 'custom'] as const
 type Plan = (typeof plans)[number]
 const excluded = new Set(['no_ai'])
 type Params = Record<string, Record<string, number | string>>
@@ -39,6 +39,10 @@ const allowance = (plan: Exclude<Plan, 'free'>): Params => {
 }
 const params = computed<Record<Plan, Params>>(() => ({
   free: {},
+  starter: {
+    ...allowance('starter'),
+    translations: { price: formatUsd(EXTRA_TRANSLATION_LANGUAGE_PRICE_USD, locale.value) },
+  },
   pro: {
     ...allowance('pro'),
     translations: {
@@ -66,8 +70,7 @@ const price = (plan: Plan) => {
   const amount = PLAN_PRICES_USD[plan]
   return formatUsd(billingInterval.value === 'year' ? annualPlanPriceUsd(amount) / 12 : amount, locale.value)
 }
-const yearlyTotal = (plan: 'pro' | 'premium' | 'custom') =>
-  formatUsd(annualPlanPriceUsd(PLAN_PRICES_USD[plan]), locale.value)
+const yearlyTotal = (plan: Exclude<Plan, 'free'>) => formatUsd(annualPlanPriceUsd(PLAN_PRICES_USD[plan]), locale.value)
 const signUp = (plan: Plan) =>
   localePath({
     name: 'onboarding-site',

@@ -393,11 +393,19 @@ export const useOnboardingStore = defineStore(
             billingInterval: form.billingInterval,
           },
         })
-        // Leaving at once can cancel the pixel's request.
-        const eventID = await metaRegistrationId(form.email)
-        if (trackMetaEvent('CompleteRegistration', { content_name: form.selectedPlan ?? 'TRIAL' }, { eventID }))
-          await new Promise((resolve) => setTimeout(resolve, 300))
-        if (res.url) window.location.href = res.url
+        if (!res.url) throw new Error('Missing registration handoff')
+        try {
+          // Leaving at once can cancel the pixel's request.
+          const eventID = await metaRegistrationId(form.email)
+          if (trackMetaEvent('CompleteRegistration', { content_name: form.selectedPlan ?? 'TRIAL' }, { eventID }))
+            await new Promise((resolve) => setTimeout(resolve, 300))
+        } catch {
+          // Optional tracking must not strand an account that was already created.
+        }
+        reset()
+        // Flush persisted state before navigation can unload this tab.
+        await nextTick()
+        window.location.href = res.url
       } catch (error: any) {
         const reason = error.data?.data?.reason
         submitError.value =

@@ -37,17 +37,33 @@
           },
           "cta": "Začít zdarma"
         },
+        "starter": {
+          "badge": "První články s AI",
+          "name": "Starter",
+          "desc": "Články s AI z vašeho webu a dokumentů na vlastní doméně, s menší měsíční kapacitou.",
+          "features": {
+            "everything": "Vše z Free",
+            "articles": "Až {count} článků měsíčně, nevyužité se sčítají až do {cap}",
+            "knowledge": "Znalostní báze: {count} zdrojů a {characters} znaků",
+            "review": "Nezávislá kontrola faktů a fotky s čistými právy",
+            "publishing": "Publikace do WordPressu, přes REST API a webhooky",
+            "domain": "Vlastní doména s HTTPS a přesměrováním",
+            "translations": "Jazyky překladů za {price} měsíčně za každý",
+            "planning": "Plánování témat a naplánované články",
+            "emoji": "Vlastní emoji reakce",
+            "seats": "1 místo v týmu"
+          },
+          "cta": "Vybrat Starter"
+        },
         "pro": {
           "badge": "Celá redakce",
           "name": "Pro",
           "desc": "Kompletní redakce, která píše z vašeho webu, dokumentů i produktů a publikuje přímo k vám.",
           "features": {
-            "everything": "Vše z Free",
+            "everything": "Vše ze Starter",
             "articles": "Až {count} článků měsíčně, nevyužité se sčítají až do {cap}",
             "knowledge": "Znalostní báze: {count} zdrojů, {products} produktů a {characters} znaků",
-            "review": "Nezávislá kontrola faktů a fotky s čistými právy",
-            "publishing": "Publikace do WordPressu, Shopify, přes REST API a webhooky",
-            "domain": "Vlastní doména s HTTPS a přesměrováním",
+            "publishing": "Publikace do Shopify",
             "translations": "{count} jazyky, až 60 překladů měsíčně; další jazyk za {price} měsíčně",
             "planning": "Plánování témat, zprávy z oboru a autopilot",
             "searchConsole": "Search Console a návrhy úprav pro 8.–20. místo",
@@ -68,7 +84,7 @@
             "autopilot": "SEO autopilot: přepíše titulky s CTR pod 2 % a navrhne rozšíření",
             "visibility": "Viditelnost v AI: až {count} odpovědí měsíčně",
             "linkbuilding": "Linkbuilding: weby prodejců vašich značek a hotové žádosti o odkaz",
-            "sentiment": "Analýza nálady čtenářů a vlastní emoji reakce",
+            "sentiment": "Analýza nálady čtenářů",
             "support": "Prioritní podpora 24/7",
             "seats": "3 místa v týmu"
           },
@@ -100,11 +116,11 @@
       "items": [
         {
           "q": "Jak funguje zkušební verze?",
-          "a": "První způsobilý blog dostane 14 dní Premium a 5 článků zdarma. Když zůstanete ve Free, kartu nezadáváte vůbec. Při volbě Pro nebo Premium kartu zadáte, první platba ale přijde až po zkušební době a do té doby můžete kdykoli zrušit. Custom se platí hned po potvrzení. Další blogy stejného majitele začínají ve Free a každý blog má vlastní předplatné."
+          "a": "První způsobilý blog dostane 14 dní Premium a 5 článků zdarma. Když zůstanete ve Free, kartu nezadáváte vůbec. Při volbě Starter, Pro nebo Premium kartu zadáte, první platba ale přijde až po zkušební době a do té doby můžete kdykoli zrušit. Custom se platí hned po potvrzení. Další blogy stejného majitele začínají ve Free a každý blog má vlastní předplatné."
         },
         {
           "q": "Co se počítá jako článek?",
-          "a": "Článek Standard stojí 1 jednotku, High 2 a Ultra 3. Pro má 50 jednotek měsíčně, Premium a Custom 100. Nevyužité jednotky se převádějí až do trojnásobku měsíční kapacity, dokud máte aktivní tarif s AI, a dokoupené balíčky nepropadají nikdy. Nic se neúčtuje automaticky: když jednotky dojdou, počkáte na další měsíc, nebo si balíček dokoupíte."
+          "a": "Článek Standard stojí 1 jednotku, High 2 a Ultra 3. Starter má 15 jednotek měsíčně, Pro 50, Premium a Custom 100. Nevyužité jednotky se převádějí až do trojnásobku měsíční kapacity, dokud máte aktivní tarif s AI, a dokoupené balíčky nepropadají nikdy. Nic se neúčtuje automaticky: když jednotky dojdou, počkáte na další měsíc, nebo si balíček dokoupíte."
         },
         {
           "q": "Zlepší Topiqu moje pozice v Googlu?",
@@ -154,7 +170,7 @@
         "subdomainTitle": "Subdoména Topiqu",
         "subdomainText": "Adresa zdarma na topiqu.com",
         "customTitle": "Vlastní doména",
-        "customText": "Součást tarifů Pro, Premium a Custom",
+        "customText": "Součást všech placených tarifů",
         "subdomain": "Subdoména",
         "subdomainPlaceholder": "firemni-magazin",
         "customDomain": "Doména",
@@ -188,7 +204,7 @@
         "customColor": "Vlastní barva",
         "hex": "Kód barvy (HEX)",
         "gradient": "Přechod v záhlaví",
-        "gradientHelp": "Pozadí titulní části, ukazatel čtení a obrázek pro sdílení. Součást tarifů Pro a Premium.",
+        "gradientHelp": "Pozadí titulní části, ukazatel čtení a obrázek pro sdílení. Součást všech placených tarifů.",
         "gradients": {
           "none": "Bez přechodu",
           "soft": "Jemný",
@@ -236,13 +252,17 @@
           "tagline": "Ruční psaní a publikace",
           "features": ["Editor, knihovna médií a ankety", "Adresa .topiqu.com zdarma", "Skóre optimalizace a analytika"]
         },
-        "pro": {
-          "tagline": "Psaní s AI z vašich znalostí",
+        "starter": {
+          "tagline": "První články s AI na vlastní doméně",
           "features": [
             "{articles} jednotek článků měsíčně",
             "Znalostní báze a kontrola faktů",
-            "Překlady a vlastní doména"
+            "Vlastní doména a plánování"
           ]
+        },
+        "pro": {
+          "tagline": "Více článků, překlady a Search Console",
+          "features": ["{articles} jednotek článků měsíčně", "Produktový feed a Shopify", "Překlady a Search Console"]
         },
         "premium": {
           "tagline": "Růst v Googlu a viditelnost v odpovědích",

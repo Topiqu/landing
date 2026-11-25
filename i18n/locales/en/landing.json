@@ -37,17 +37,33 @@
           },
           "cta": "Start for free"
         },
+        "starter": {
+          "badge": "First AI articles",
+          "name": "Starter",
+          "desc": "AI articles from your website and documents on your own domain, with a smaller monthly allowance.",
+          "features": {
+            "everything": "Everything in Free",
+            "articles": "Up to {count} articles a month; unused ones add up to {cap}",
+            "knowledge": "Knowledge base: {count} sources and {characters} characters",
+            "review": "Independent fact-checking and properly licensed photos",
+            "publishing": "Publishing to WordPress, the REST API and webhooks",
+            "domain": "Custom domain with HTTPS and redirects",
+            "translations": "Translation languages for {price} a month each",
+            "planning": "Topic planning and scheduled articles",
+            "emoji": "Custom emoji reactions",
+            "seats": "1 team seat"
+          },
+          "cta": "Choose Starter"
+        },
         "pro": {
           "badge": "Full newsroom",
           "name": "Pro",
           "desc": "A complete newsroom that writes from your website, documents and products and publishes straight to you.",
           "features": {
-            "everything": "Everything in Free",
+            "everything": "Everything in Starter",
             "articles": "Up to {count} articles a month; unused ones add up to {cap}",
             "knowledge": "Knowledge base: {count} sources, {products} products and {characters} characters",
-            "review": "Independent fact-checking and properly licensed photos",
-            "publishing": "Publishing to WordPress, Shopify, the REST API and webhooks",
-            "domain": "Custom domain with HTTPS and redirects",
+            "publishing": "Publishing to Shopify",
             "translations": "{count} languages, up to 60 translations a month; extra languages {price} a month each",
             "planning": "Topic planning, industry news and autopilot",
             "searchConsole": "Search Console and update proposals for positions 8–20",
@@ -68,7 +84,7 @@
             "autopilot": "SEO autopilot: rewrites titles with CTR under 2% and proposes expansions",
             "visibility": "AI visibility: up to {count} answers a month",
             "linkbuilding": "Link building: your brands' reseller sites and ready link requests",
-            "sentiment": "Reader sentiment analysis and custom emoji reactions",
+            "sentiment": "Reader sentiment analysis",
             "support": "Priority support 24/7",
             "seats": "3 team seats"
           },
@@ -100,11 +116,11 @@
       "items": [
         {
           "q": "How does the trial work?",
-          "a": "Your first eligible blog gets 14 days of Premium and 5 articles free. If you stay on Free, you never enter a card. If you choose Pro or Premium, you add a card, but the first payment only comes after the trial and you can cancel anytime before then. Custom is charged as soon as you confirm. Further blogs of the same owner start on Free, and every blog has its own subscription."
+          "a": "Your first eligible blog gets 14 days of Premium and 5 articles free. If you stay on Free, you never enter a card. If you choose Starter, Pro or Premium, you add a card, but the first payment only comes after the trial and you can cancel anytime before then. Custom is charged as soon as you confirm. Further blogs of the same owner start on Free, and every blog has its own subscription."
         },
         {
           "q": "What counts as an article?",
-          "a": "A Standard article uses 1 unit, High 2 and Ultra 3. Pro includes 50 units a month, Premium and Custom 100. Unused units roll over up to three times your monthly allowance while you have an active AI plan, and purchased packs never expire. Nothing is charged automatically: when units run out, wait for next month or buy a pack."
+          "a": "A Standard article uses 1 unit, High 2 and Ultra 3. Starter includes 15 units a month, Pro 50, Premium and Custom 100. Unused units roll over up to three times your monthly allowance while you have an active AI plan, and purchased packs never expire. Nothing is charged automatically: when units run out, wait for next month or buy a pack."
         },
         {
           "q": "Will Topiqu improve my Google rankings?",
@@ -154,7 +170,7 @@
         "subdomainTitle": "Topiqu subdomain",
         "subdomainText": "Free address under topiqu.com",
         "customTitle": "Your own domain",
-        "customText": "Included in Pro, Premium and Custom",
+        "customText": "Included in every paid plan",
         "subdomain": "Subdomain",
         "subdomainPlaceholder": "my-journal",
         "customDomain": "Domain",
@@ -188,7 +204,7 @@
         "customColor": "Custom colour",
         "hex": "Colour code (HEX)",
         "gradient": "Header gradient",
-        "gradientHelp": "Behind the homepage hero, in the reading bar and on the share image. Included in Pro and Premium.",
+        "gradientHelp": "Behind the homepage hero, in the reading bar and on the share image. Included in every paid plan.",
         "gradients": {
           "none": "No gradient",
           "soft": "Soft",
@@ -240,13 +256,17 @@
             "Optimization score and analytics"
           ]
         },
-        "pro": {
-          "tagline": "AI writing from your knowledge",
+        "starter": {
+          "tagline": "First AI articles on your own domain",
           "features": [
             "{articles} article units/month",
             "Knowledge base and fact-check",
-            "Translations and custom domain"
+            "Custom domain and scheduling"
           ]
+        },
+        "pro": {
+          "tagline": "More articles, translations and Search Console",
+          "features": ["{articles} article units/month", "Product feed and Shopify", "Translations and Search Console"]
         },
         "premium": {
           "tagline": "Google growth and visibility in answers",

@@ -15,11 +15,13 @@ export const ARTICLE_PACKS_USD = [
 // single-line object with commas, which silently drops it from Nuxt auto-imports.
 export const PLAN_PRICES_USD = {
   free: 0,
+  starter: 19,
   pro: 49,
   premium: 99,
   custom: 199,
 } as const
 export const PLAN_ARTICLES = {
+  starter: 15,
   pro: 50,
   premium: 100,
   custom: 100,
@@ -28,6 +30,11 @@ export const PLAN_ARTICLES = {
 export const ARTICLE_ROLLOVER_MONTHS = 2
 // Mirrors the app's shared/utils/knowledge.ts plan limits.
 export const KNOWLEDGE_LIMITS = {
+  starter: {
+    sources: 10,
+    products: 0,
+    characters: 250_000,
+  },
   pro: {
     sources: 50,
     products: 500,
