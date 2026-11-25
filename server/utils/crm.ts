@@ -40,7 +40,7 @@ export const onboardingSchema = z.object({
   // Not `website`: that name is the bot honeypot.
   websiteUrl: entry(z.string().trim().max(2048)),
   username: entry(z.string().trim().max(50)),
-  selectedPlan: entry(z.enum(['PRO', 'PREMIUM', 'CUSTOM']).nullable()),
+  selectedPlan: entry(z.enum(['STARTER', 'PRO', 'PREMIUM', 'CUSTOM']).nullable()),
   billingInterval: entry(z.enum(['month', 'year'])),
 })
 export type OnboardingEntries = z.infer<typeof onboardingSchema>

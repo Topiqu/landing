@@ -20,6 +20,7 @@ const plans = computed(() =>
   (
     [
       { id: null, key: 'free', icon: 'mdi:feather', articles: 0 },
+      { id: 'STARTER', key: 'starter', icon: 'mdi:sprout-outline', articles: PLAN_ARTICLES.starter },
       { id: 'PRO', key: 'pro', icon: 'mdi:rocket-launch-outline', articles: PLAN_ARTICLES.pro },
       { id: 'PREMIUM', key: 'premium', icon: 'mdi:crown-outline', articles: PLAN_ARTICLES.premium },
       { id: 'CUSTOM', key: 'custom', icon: 'mdi:account-group-outline', articles: PLAN_ARTICLES.custom },
@@ -104,6 +105,10 @@ const note = computed(() =>
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
+}
+/* Five plans in two columns: the free one takes the first row instead of leaving an orphan. */
+.plan-card[data-plan='free'] {
+  grid-column: 1 / -1;
 }
 .plan-card {
   position: relative;
