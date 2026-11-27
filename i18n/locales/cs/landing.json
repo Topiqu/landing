@@ -11,6 +11,7 @@
         "year": "Ročně"
       },
       "billedYearly": "Účtováno {price} jednou ročně",
+      "popular": "Nejoblíbenější",
       "showAllFeatures": "Zobrazit všech {count} funkcí",
       "showFewerFeatures": "Zobrazit méně",
       "articlePacks": {
