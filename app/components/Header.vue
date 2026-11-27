@@ -35,12 +35,24 @@ const links = computed(() => [
   { label: t('landing.design.nav.docs'), to: localePath('/docs') },
   { label: t('landing.design.nav.changelog'), to: localePath('/changelog') },
 ])
+// The changelog stays in the menu and the footer; the desktop bar has no room for a sixth item.
+const desktopLinks = computed(() => links.value.filter((link) => link.to !== localePath('/changelog')))
+// Nuxt UI shows the desktop bar from `lg`, where the links collide with the actions, and splits the bar into
+// equal halves, which squeezes the links further. Use the menu until `xl` and let the links take the free space.
+const headerUi = {
+  left: 'tw:xl:flex-none',
+  right: 'tw:xl:flex-none',
+  center: 'tw:lg:hidden tw:xl:flex',
+  toggle: 'tw:lg:inline-flex tw:xl:hidden',
+  content: 'tw:lg:flex tw:xl:hidden',
+  overlay: 'tw:lg:block tw:xl:hidden',
+}
 </script>
 <template>
-  <UHeader v-model:open="open" title="Topiqu" :to="localePath('/')" class="landing-header">
+  <UHeader v-model:open="open" title="Topiqu" :to="localePath('/')" class="landing-header" :ui="headerUi">
     <template #left><BrandLogo /></template>
     <nav class="desktop-nav" :aria-label="t('landing.design.nav.navigation')">
-      <NuxtLink v-for="link in links" :key="link.to" :to="link.to">{{ link.label }}</NuxtLink>
+      <NuxtLink v-for="link in desktopLinks" :key="link.to" :to="link.to">{{ link.label }}</NuxtLink>
     </nav>
     <template #right>
       <UDropdownMenu
@@ -111,6 +123,7 @@ const links = computed(() => [
   text-decoration: none;
   font-size: 14px;
   font-weight: 600;
+  white-space: nowrap;
 }
 .desktop-nav a:hover,
 .mobile-nav-link:hover {
@@ -124,8 +137,12 @@ const links = computed(() => [
 .mobile-nav-link {
   font-size: 18px;
 }
+@media (max-width: 1279px) {
+  .desktop-nav {
+    display: none;
+  }
+}
 @media (max-width: 1023px) {
-  .desktop-nav,
   .header-login {
     display: none;
   }

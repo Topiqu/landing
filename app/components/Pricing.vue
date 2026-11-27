@@ -25,6 +25,8 @@ const billingInterval = shallowRef<BillingInterval>(route.query.billing === 'yea
 const plans = ['free', 'starter', 'pro', 'premium', 'custom'] as const
 type Plan = (typeof plans)[number]
 const excluded = new Set(['no_ai'])
+// Starter is the first plan that publishes to the customer's own site, which many visitors don't expect.
+const highlighted = new Set(['starter.publishing'])
 type Params = Record<string, Record<string, number | string>>
 const allowance = (plan: Exclude<Plan, 'free'>): Params => {
   const limits = KNOWLEDGE_LIMITS[plan]
@@ -65,6 +67,7 @@ const features = (plan: Plan) =>
     key,
     label: t(`landing.pricing.plans.${plan}.features.${key}`, params.value[plan][key] ?? {}),
     excluded: excluded.has(key),
+    highlighted: highlighted.has(`${plan}.${key}`),
   }))
 const price = (plan: Plan) => {
   const amount = PLAN_PRICES_USD[plan]
@@ -117,7 +120,11 @@ const signUp = (plan: Plan) =>
             >{{ $t('landing.pricing.plans.' + plan + '.cta') }}</UButton
           >
           <ul :aria-label="$t('landing.design.allFeatures')">
-            <li v-for="feature in features(plan)" :key="feature.key" :class="{ 'feature-excluded': feature.excluded }">
+            <li
+              v-for="feature in features(plan)"
+              :key="feature.key"
+              :class="{ 'feature-excluded': feature.excluded, 'feature-highlighted': feature.highlighted }"
+            >
               <Icon :name="feature.excluded ? 'mdi:minus' : 'mdi:check'" /><span>{{ feature.label }}</span>
             </li>
           </ul>

@@ -9,6 +9,8 @@ sitemap:
 
 # Tvořte s Topiqu
 
+API je napojení, přes které si váš web, e-shop nebo aplikace bere hotové články z Topiqu sám. Články se pak zobrazují ve vašem designu a na vašich adresách a blog Topiqu nepotřebujete. Napojení jednou nastaví váš vývojář nebo agentura podle této dokumentace, po dohodě za příplatek i my. Na WordPressu a Shopify API řešit nemusíte: stačí plugin Topiqu Sync, nebo aplikace v Shopify. API je k dispozici od tarifu Starter.
+
 Topiqu External API je REST API pro čtení obsahu publikovaného pro váš web a se správným klíčem i pro vytváření, publikaci a generování článků. API v1 představuje stabilní kontrakt: kompatibilní pole a endpointy můžeme přidávat beze změny URL, zatímco breaking změny dostanou novou hlavní verzi.
 
 ## Základní URL

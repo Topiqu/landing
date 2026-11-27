@@ -632,6 +632,10 @@
 .pricing-plan li.feature-excluded > .iconify {
   color: var(--landing-muted);
 }
+.pricing-plan li.feature-highlighted {
+  color: var(--landing-ink);
+  font-weight: 600;
+}
 .faq-section {
   background: var(--landing-surface);
 }
