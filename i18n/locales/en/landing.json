@@ -11,6 +11,7 @@
         "year": "Yearly"
       },
       "billedYearly": "Billed {price} once a year",
+      "popular": "Most popular",
       "showAllFeatures": "Show all {count} features",
       "showFewerFeatures": "Show fewer",
       "articlePacks": {

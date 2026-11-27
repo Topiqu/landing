@@ -112,6 +112,7 @@ const signUp = (plan: Plan) =>
           class="pricing-plan"
           :class="{ 'plan-featured': plan === 'premium' }"
         >
+          <span v-if="plan === 'pro'" class="plan-popular">{{ $t('landing.pricing.popular') }}</span>
           <p class="plan-badge">{{ $t('landing.pricing.plans.' + plan + '.badge') }}</p>
           <h3>{{ $t('landing.pricing.plans.' + plan + '.name') }}</h3>
           <p class="plan-description">{{ $t('landing.pricing.plans.' + plan + '.desc') }}</p>
@@ -192,6 +193,21 @@ const signUp = (plan: Plan) =>
 }
 .pricing-header .section-heading {
   margin-bottom: 0;
+}
+.pricing-plan {
+  position: relative;
+}
+/* Out of flow, so the card keeps its seven subgrid rows and stays aligned with its neighbours. */
+.plan-popular {
+  position: absolute;
+  top: -11px;
+  right: 16px;
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--landing-accent);
+  color: var(--landing-surface);
+  font-size: 11px;
+  font-weight: 750;
 }
 .plan-billing-note {
   min-height: 18px;
