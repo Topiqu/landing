@@ -40,13 +40,13 @@
         "starter": {
           "badge": "První články s AI",
           "name": "Starter",
-          "desc": "Články s AI z vašeho webu a dokumentů na vlastní doméně, s menší měsíční kapacitou.",
+          "desc": "Články s AI z vašich podkladů rovnou na váš web, s menší měsíční kapacitou.",
           "features": {
             "everything": "Vše z Free",
             "articles": "Až {count} článků měsíčně, nevyužité se sčítají až do {cap}",
+            "publishing": "Publikace na váš web přes API nebo WordPress",
             "knowledge": "Znalostní báze: {count} zdrojů a {characters} znaků",
             "review": "Nezávislá kontrola faktů a fotky s čistými právy",
-            "publishing": "Publikace do WordPressu, přes REST API a webhooky",
             "domain": "Vlastní doména s HTTPS a přesměrováním",
             "translations": "Jazyky překladů za {price} měsíčně za každý",
             "planning": "Plánování témat a naplánované články",
@@ -123,6 +123,14 @@
           "a": "Článek Standard stojí 1 jednotku, High 2 a Ultra 3. Starter má 15 jednotek měsíčně, Pro 50, Premium a Custom 100. Nevyužité jednotky se převádějí až do trojnásobku měsíční kapacity, dokud máte aktivní tarif s AI, a dokoupené balíčky nepropadají nikdy. Nic se neúčtuje automaticky: když jednotky dojdou, počkáte na další měsíc, nebo si balíček dokoupíte."
         },
         {
+          "q": "Musím používat blog Topiqu?",
+          "a": "Ne. Články můžou vycházet přímo na vašem stávajícím webu, ať běží na čemkoli. Web na míru, vlastní CMS nebo aplikace si je načte přes API, tedy napojení, přes které si váš web bere hotové články z Topiqu sám, ve vašem designu a na vašich adresách. Do WordPressu je synchronizuje plugin Topiqu Sync a do Shopify je publikujete přímo. Online magazín Topiqu na vlastní doméně je jen jedna z možností pro ty, kdo nechtějí nic napojovat."
+        },
+        {
+          "q": "Potřebuji kvůli napojení vývojáře?",
+          "a": "U WordPressu a Shopify ne: stačí plugin Topiqu Sync, nebo aplikace v Shopify. Web na míru nebo aplikaci napojí váš vývojář či agentura jednou, podle naší dokumentace API. Po dohodě napojení za příplatek nastavíme i my. Pak už články chodí samy a vy rozhodujete jen o tom, co vyjde. Váš systém může přes API i zadávat nová témata k napsání. API a WordPress máte od tarifu Starter, Shopify od Pro."
+        },
+        {
           "q": "Zlepší Topiqu moje pozice v Googlu?",
           "a": "Pozice v Googlu ovlivňuje i autorita webu, zpětné odkazy a konkurence. Topiqu se postará o všechno, co ovlivnit jde: píše na témata, která lidé opravdu hledají, z přesných dat o vašich produktech a s kompletním technickým SEO (schema.org, llms.txt, interní prolinkování). Výsledky sleduje v Search Console a články na 8.–20. místě cíleně vylepšuje, aby se dostaly na první stránku."
         },
@@ -141,10 +149,6 @@
         {
           "q": "Jak zjistím, jestli mě citují odpovědi AI?",
           "a": "V Premium sestaví Topiqu otázky z vašich dotazů ve Search Console, článků a komentářů a pravidelně kontroluje, jestli vás odpovědi OpenAI citují a kde se objevuje konkurence. Z otázek, kde chybíte, vzniknou náměty na nové články."
-        },
-        {
-          "q": "Mohu články publikovat na svém stávajícím webu?",
-          "a": "Ano. Synchronizujte je do WordPressu pluginem Topiqu Sync, publikujte do Shopify, načítejte přes REST API, nebo použijte hotový online magazín Topiqu na vlastní doméně."
         }
       ]
     },
@@ -366,7 +370,7 @@
       "nav": {
         "features": "Jak to funguje",
         "capabilities": "Proč Topiqu",
-        "docs": "Dokumentace",
+        "docs": "Dokumentace a API",
         "changelog": "Novinky",
         "theme": "Přepnout světlý a tmavý režim",
         "menu": "Otevřít navigaci",
@@ -741,7 +745,7 @@
           },
           {
             "title": "Vyjde tam, kde už máte web",
-            "text": "WordPress přes Topiqu Sync, Shopify, REST API, nebo hotový online magazín na vaší doméně. Schvalujete každý článek zvlášť, nebo zapnete autopilota. Ten vydává podle plánu, ale jen to, co prošlo dvojí kontrolou."
+            "text": "Váš web na míru nebo aplikace přes API, WordPress přes Topiqu Sync, Shopify, nebo hotový online magazín na vaší doméně. Schvalujete každý článek zvlášť, nebo zapnete autopilota. Ten vydává podle plánu, ale jen to, co prošlo dvojí kontrolou."
           },
           {
             "title": "Prolinkuje web a shání odkazy",

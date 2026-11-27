@@ -40,13 +40,13 @@
         "starter": {
           "badge": "First AI articles",
           "name": "Starter",
-          "desc": "AI articles from your website and documents on your own domain, with a smaller monthly allowance.",
+          "desc": "AI articles from your own materials, straight to your website, with a smaller monthly allowance.",
           "features": {
             "everything": "Everything in Free",
             "articles": "Up to {count} articles a month; unused ones add up to {cap}",
+            "publishing": "Publishing to your website via API or WordPress",
             "knowledge": "Knowledge base: {count} sources and {characters} characters",
             "review": "Independent fact-checking and properly licensed photos",
-            "publishing": "Publishing to WordPress, the REST API and webhooks",
             "domain": "Custom domain with HTTPS and redirects",
             "translations": "Translation languages for {price} a month each",
             "planning": "Topic planning and scheduled articles",
@@ -123,6 +123,14 @@
           "a": "A Standard article uses 1 unit, High 2 and Ultra 3. Starter includes 15 units a month, Pro 50, Premium and Custom 100. Unused units roll over up to three times your monthly allowance while you have an active AI plan, and purchased packs never expire. Nothing is charged automatically: when units run out, wait for next month or buy a pack."
         },
         {
+          "q": "Do I have to use a Topiqu blog?",
+          "a": "No. Articles can appear right on your existing website, whatever it runs on. A custom site, your own CMS or an app loads them through the API: a connection your site uses to fetch finished articles from Topiqu on its own, in your design and at your URLs. The Topiqu Sync plugin syncs them to WordPress, and you publish to Shopify directly. The Topiqu online magazine on your own domain is just one option, for when you don't want to connect anything."
+        },
+        {
+          "q": "Do I need a developer to connect it?",
+          "a": "Not for WordPress or Shopify: the Topiqu Sync plugin or the Shopify app is enough. A custom site or app is connected once by your developer or agency, following our API documentation. By arrangement, we can also set it up for you for an extra fee. After that, articles arrive on their own and you only decide what gets published. Your system can also use the API to submit new topics for Topiqu to write. The API and WordPress come with Starter, Shopify with Pro."
+        },
+        {
           "q": "Will Topiqu improve my Google rankings?",
           "a": "Rankings also depend on your site authority, backlinks and competition. Topiqu takes care of everything that can be influenced: it writes on topics people actually search for, from exact data about your products and with complete technical SEO (schema.org, llms.txt, internal links). It tracks results in Search Console and improves articles in positions 8–20 so they reach page one."
         },
@@ -141,10 +149,6 @@
         {
           "q": "How do I find out whether AI answers cite me?",
           "a": "In Premium, Topiqu builds questions from your Search Console queries, articles and comments and regularly checks whether OpenAI answers cite you and where competitors appear. Questions where you are missing become ideas for new articles."
-        },
-        {
-          "q": "Can I publish the articles on my existing website?",
-          "a": "Yes. Sync them to WordPress with the Topiqu Sync plugin, publish to Shopify, load them through the REST API, or use the Topiqu ready-made online magazine on your own domain."
         }
       ]
     },
@@ -370,7 +374,7 @@
       "nav": {
         "features": "How it works",
         "capabilities": "Why Topiqu",
-        "docs": "Documentation",
+        "docs": "Docs & API",
         "changelog": "What's new",
         "theme": "Toggle light and dark mode",
         "menu": "Open navigation",
@@ -745,7 +749,7 @@
           },
           {
             "title": "Publishes where your site already is",
-            "text": "WordPress via Topiqu Sync, Shopify, the REST API, or a ready-made online magazine on your own domain. Approve each article yourself or switch on autopilot, which publishes on schedule but only what passed both checks."
+            "text": "Your custom site or app via the API, WordPress via Topiqu Sync, Shopify, or a ready-made online magazine on your own domain. Approve each article yourself or switch on autopilot, which publishes on schedule but only what passed both checks."
           },
           {
             "title": "Links your site and wins backlinks",
