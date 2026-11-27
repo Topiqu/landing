@@ -558,14 +558,19 @@
 }
 .pricing-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
   align-items: stretch;
 }
 .pricing-plan {
+  /* Each part of a card shares a row with the same part of its neighbours: prices and buttons line up whatever the length of the text above them. */
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 7;
+  row-gap: 0;
   border: 1px solid var(--landing-line);
   border-radius: var(--topiqu-surface-radius);
-  padding: 28px 20px;
+  padding: 28px 22px;
   background: var(--landing-surface);
 }
 .plan-featured {
@@ -586,7 +591,6 @@
   margin-bottom: 10px;
 }
 .landing-page .plan-description {
-  min-height: 64px;
   color: var(--landing-muted);
   font-size: 12px;
   line-height: 1.75;
@@ -623,6 +627,26 @@
   font-size: 12px;
   line-height: 1.7;
   color: var(--landing-muted);
+}
+/* `display: flex` above would win over the attribute's own `display: none`. */
+.pricing-plan li[hidden] {
+  display: none;
+}
+.plan-features-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 18px;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--landing-accent);
+  font-size: 12px;
+  font-weight: 650;
+  cursor: pointer;
+}
+.plan-features-toggle:hover {
+  text-decoration: underline;
 }
 .pricing-plan li > .iconify {
   flex-shrink: 0;
@@ -738,9 +762,9 @@
   .faq-grid {
     gap: 48px;
   }
-  /* Five plans no longer fit one row here: three, then two. */
+  /* Four plans no longer fit one row here: two by two. */
   .pricing-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .pricing-plan {
     padding: 24px 18px;

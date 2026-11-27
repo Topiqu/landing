@@ -18,13 +18,11 @@ export const PLAN_PRICES_USD = {
   starter: 19,
   pro: 49,
   premium: 99,
-  custom: 199,
 } as const
 export const PLAN_ARTICLES = {
   starter: 15,
   pro: 50,
   premium: 100,
-  custom: 100,
 } as const
 // Mirrors the app's ARTICLE_ROLLOVER_MONTHS: unused plan units carry over up to this many monthly allowances.
 export const ARTICLE_ROLLOVER_MONTHS = 2
@@ -45,15 +43,15 @@ export const KNOWLEDGE_LIMITS = {
     products: 3_000,
     characters: 5_000_000,
   },
-  custom: {
-    sources: 500,
-    products: 20_000,
-    characters: 15_000_000,
-  },
 } as const
-// Mirrors the app's CUSTOM_MIN_SEATS and CUSTOM_MEMBER_CENTS.
-export const CUSTOM_SEATS = 3
-export const CUSTOM_SEAT_PRICE_USD = 20
+// Mirrors the app's team seat limits per plan and CUSTOM_MEMBER_CENTS, the price of each extra seat.
+export const TEAM_SEATS = {
+  free: 1,
+  starter: 1,
+  pro: 2,
+  premium: 3,
+} as const
+export const EXTRA_SEAT_PRICE_USD = 20
 // Mirrors the app's `LANGUAGE_OPTIONS`: the languages a site can write and translate in.
 export const CONTENT_LANGUAGES = ['en', 'cs', 'de', 'fr', 'es', 'it', 'pl', 'sk', 'nl', 'pt'] as const
 // Mirrors the app's `INCLUDED_TRANSLATION_LANGUAGES` and `EXTRA_TRANSLATION_LANGUAGE_PRICE_USD`.

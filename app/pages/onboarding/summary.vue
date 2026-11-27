@@ -103,7 +103,7 @@ const store = useOnboardingStore()
 const { submit, form, loading, fullDomainPreview, brandAccent, trialEndsOn, goTo } = useOnboarding()
 const trial = { days: TRIAL_DAYS, articles: TRIAL_ARTICLES }
 const planValue = computed(() => {
-  const plan = form.selectedPlan?.toLowerCase() as 'starter' | 'pro' | 'premium' | 'custom' | undefined
+  const plan = form.selectedPlan?.toLowerCase() as 'starter' | 'pro' | 'premium' | undefined
   const name = $t(`landing.pricing.plans.${plan ?? 'free'}.name`)
   if (!plan) return name
   const monthlyPrice = PLAN_PRICES_USD[plan]
@@ -169,11 +169,9 @@ const rows = computed(() => [
 ])
 
 const paidNote = computed(() =>
-  form.selectedPlan === 'CUSTOM'
-    ? $t('landing.onboarding.plan.customNote')
-    : $t('landing.onboarding.plan.paidNote', {
-        date: new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(trialEndsOn.value),
-      }),
+  $t('landing.onboarding.plan.paidNote', {
+    date: new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(trialEndsOn.value),
+  }),
 )
 </script>
 <style scoped>

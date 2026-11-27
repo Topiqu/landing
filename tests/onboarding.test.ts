@@ -570,7 +570,9 @@ describe('wizard entries for the CRM', () => {
   test('a free CTA clears a paid plan left in the draft; no plan in the URL keeps it', async () => {
     const { planFromQuery } = await import('../app/composables/useOnboarding')
     expect(planFromQuery('free')).toBeNull()
-    expect(planFromQuery('custom')).toBe('CUSTOM')
+    expect(planFromQuery('premium')).toBe('PREMIUM')
+    // Custom is arranged with us, so an old `?plan=custom` link keeps the draft instead of selecting it.
+    expect(planFromQuery('custom')).toBeUndefined()
     expect(planFromQuery(undefined)).toBeUndefined()
     expect(planFromQuery('enterprise')).toBeUndefined()
   })

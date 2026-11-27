@@ -11,6 +11,8 @@
         "year": "Yearly"
       },
       "billedYearly": "Billed {price} once a year",
+      "showAllFeatures": "Show all {count} features",
+      "showFewerFeatures": "Show fewer",
       "articlePacks": {
         "title": "Need more? Top up articles.",
         "articles": "{count} articles",
@@ -51,7 +53,7 @@
             "translations": "Translation languages for {price} a month each",
             "planning": "Topic planning and scheduled articles",
             "emoji": "Custom emoji reactions",
-            "seats": "1 team seat"
+            "seats": "1 team seat, each extra one {price} a month"
           },
           "cta": "Choose Starter"
         },
@@ -68,7 +70,7 @@
             "planning": "Topic planning, industry news and autopilot",
             "searchConsole": "Search Console and update proposals for positions 8–20",
             "mentions": "Unlinked mentions of your brand",
-            "seats": "2 team seats"
+            "seats": "2 team seats, each extra one {price} a month"
           },
           "cta": "Choose Pro"
         },
@@ -86,25 +88,16 @@
             "linkbuilding": "Link building: your brands' reseller sites and ready link requests",
             "sentiment": "Reader sentiment analysis",
             "support": "Priority support 24/7",
-            "seats": "3 team seats"
+            "seats": "3 team seats, each extra one {price} a month"
           },
           "cta": "Choose Premium"
-        },
-        "custom": {
-          "badge": "Enterprise",
-          "name": "Custom",
-          "desc": "For teams that need more seats, more data and their own brand on one blog.",
-          "features": {
-            "everything": "Everything in Premium",
-            "whitelabel": "White label without Topiqu branding",
-            "articles": "Up to {count} articles a month; unused ones add up to {cap}",
-            "knowledge": "Knowledge base: {count} sources, {products} products and {characters} characters",
-            "seats": "{seats} seats included, each extra one {seatPrice} a month",
-            "billing": "Shared team usage and central billing",
-            "annual": "20% annual discount, extra seats included"
-          },
-          "cta": "Choose Custom"
         }
+      },
+      "custom": {
+        "badge": "By arrangement",
+        "name": "Custom",
+        "text": "More articles, languages or team seats, a contract and invoicing to fit, help with integration and migration. We put the plan together with you.",
+        "cta": "Arrange Custom"
       },
       "usagePolicy": "Prices are per blog, excluding tax. A Standard, High or Ultra article uses 1, 2 or 3 units. Unused units roll over to the following months up to three times your monthly allowance while you have an active AI plan. Nothing is charged automatically: when units run out, buy a pack or wait for next month. Annual plans also add units monthly."
     },
@@ -116,11 +109,11 @@
       "items": [
         {
           "q": "How does the trial work?",
-          "a": "Your first eligible blog gets 14 days of Premium and 5 articles free. If you stay on Free, you never enter a card. If you choose Starter, Pro or Premium, you add a card, but the first payment only comes after the trial and you can cancel anytime before then. Custom is charged as soon as you confirm. Further blogs of the same owner start on Free, and every blog has its own subscription."
+          "a": "Your first eligible blog gets 14 days of Premium and 5 articles free. If you stay on Free, you never enter a card. If you choose Starter, Pro or Premium, you add a card, but the first payment only comes after the trial and you can cancel anytime before then. Further blogs of the same owner start on Free, and every blog has its own subscription."
         },
         {
           "q": "What counts as an article?",
-          "a": "A Standard article uses 1 unit, High 2 and Ultra 3. Starter includes 15 units a month, Pro 50, Premium and Custom 100. Unused units roll over up to three times your monthly allowance while you have an active AI plan, and purchased packs never expire. Nothing is charged automatically: when units run out, wait for next month or buy a pack."
+          "a": "A Standard article uses 1 unit, High 2 and Ultra 3. Starter includes 15 units a month, Pro 50, Premium 100. Unused units roll over up to three times your monthly allowance while you have an active AI plan, and purchased packs never expire. Nothing is charged automatically: when units run out, wait for next month or buy a pack."
         },
         {
           "q": "Do I have to use a Topiqu blog?",
@@ -278,16 +271,6 @@
             "{articles} article units/month",
             "Visibility and citation insights for OpenAI",
             "Search Console SEO autopilot"
-          ]
-        },
-        "customNote": "CUSTOM is charged when you confirm checkout. Minimum 3 seats including the owner: $199/month or $1,910.40/year, before tax. There is no deferred trial charge for CUSTOM.",
-        "custom": {
-          "tagline": "Premium tools with paid team capacity",
-          "features": [
-            "Everything in Premium",
-            "100 article units a month; unused ones roll over",
-            "3 paid seats including the owner",
-            "Additional seats: $20/month, 20% less annually"
           ]
         }
       },
@@ -648,7 +631,7 @@
             "text": "When people see an article in Google but don't click, the SEO autopilot rewrites the title and excerpt, or adds the section they're searching for. Every change can be undone in one click."
           }
         },
-        "plan": "Search Console and update proposals come with Pro. The SEO autopilot and AI visibility are in Premium and Custom.",
+        "plan": "Search Console and update proposals come with Pro. The SEO autopilot and AI visibility are in Premium.",
         "dashboard": {
           "label": "Illustrative preview of post-publishing reports",
           "range": "Last 28 days",

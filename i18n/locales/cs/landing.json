@@ -11,6 +11,8 @@
         "year": "Ročně"
       },
       "billedYearly": "Účtováno {price} jednou ročně",
+      "showAllFeatures": "Zobrazit všech {count} funkcí",
+      "showFewerFeatures": "Zobrazit méně",
       "articlePacks": {
         "title": "Potřebujete víc? Dokupte články.",
         "articles": "{count} článků",
@@ -51,7 +53,7 @@
             "translations": "Jazyky překladů za {price} měsíčně za každý",
             "planning": "Plánování témat a naplánované články",
             "emoji": "Vlastní emoji reakce",
-            "seats": "1 místo v týmu"
+            "seats": "1 místo v týmu, další za {price} měsíčně"
           },
           "cta": "Vybrat Starter"
         },
@@ -68,7 +70,7 @@
             "planning": "Plánování témat, zprávy z oboru a autopilot",
             "searchConsole": "Search Console a návrhy úprav pro 8.–20. místo",
             "mentions": "Zmínky o vás bez odkazu",
-            "seats": "2 místa v týmu"
+            "seats": "2 místa v týmu, další za {price} měsíčně"
           },
           "cta": "Vybrat Pro"
         },
@@ -86,25 +88,16 @@
             "linkbuilding": "Linkbuilding: weby prodejců vašich značek a hotové žádosti o odkaz",
             "sentiment": "Analýza nálady čtenářů",
             "support": "Prioritní podpora 24/7",
-            "seats": "3 místa v týmu"
+            "seats": "3 místa v týmu, další za {price} měsíčně"
           },
           "cta": "Vybrat Premium"
-        },
-        "custom": {
-          "badge": "Enterprise",
-          "name": "Custom",
-          "desc": "Pro týmy, které na jednom blogu potřebují víc míst, víc dat a vlastní značku.",
-          "features": {
-            "everything": "Vše z Premium",
-            "whitelabel": "White-label bez značky Topiqu",
-            "articles": "Až {count} článků měsíčně, nevyužité se sčítají až do {cap}",
-            "knowledge": "Znalostní báze: {count} zdrojů, {products} produktů a {characters} znaků",
-            "seats": "{seats} místa v ceně, každé další za {seatPrice} měsíčně",
-            "billing": "Sdílená spotřeba týmu a centrální fakturace",
-            "annual": "Roční sleva 20 % i na další místa"
-          },
-          "cta": "Vybrat Custom"
         }
+      },
+      "custom": {
+        "badge": "Na objednávku",
+        "name": "Custom",
+        "text": "Víc článků, jazyků nebo míst v týmu, smlouva a fakturace na míru, pomoc s napojením a migrací. Tarif sestavíme po domluvě.",
+        "cta": "Domluvit Custom"
       },
       "usagePolicy": "Ceny jsou za blog, bez daně. Článek Standard, High a Ultra stojí 1, 2 a 3 jednotky. Nevyužité jednotky se převádějí do dalších měsíců až do trojnásobku měsíční kapacity, dokud máte aktivní tarif s AI. Nic se neúčtuje automaticky: když jednotky dojdou, dokoupíte balíček, nebo počkáte na další měsíc. I u ročního tarifu se jednotky připisují měsíčně."
     },
@@ -116,11 +109,11 @@
       "items": [
         {
           "q": "Jak funguje zkušební verze?",
-          "a": "První způsobilý blog dostane 14 dní Premium a 5 článků zdarma. Když zůstanete ve Free, kartu nezadáváte vůbec. Při volbě Starter, Pro nebo Premium kartu zadáte, první platba ale přijde až po zkušební době a do té doby můžete kdykoli zrušit. Custom se platí hned po potvrzení. Další blogy stejného majitele začínají ve Free a každý blog má vlastní předplatné."
+          "a": "První způsobilý blog dostane 14 dní Premium a 5 článků zdarma. Když zůstanete ve Free, kartu nezadáváte vůbec. Při volbě Starter, Pro nebo Premium kartu zadáte, první platba ale přijde až po zkušební době a do té doby můžete kdykoli zrušit. Další blogy stejného majitele začínají ve Free a každý blog má vlastní předplatné."
         },
         {
           "q": "Co se počítá jako článek?",
-          "a": "Článek Standard stojí 1 jednotku, High 2 a Ultra 3. Starter má 15 jednotek měsíčně, Pro 50, Premium a Custom 100. Nevyužité jednotky se převádějí až do trojnásobku měsíční kapacity, dokud máte aktivní tarif s AI, a dokoupené balíčky nepropadají nikdy. Nic se neúčtuje automaticky: když jednotky dojdou, počkáte na další měsíc, nebo si balíček dokoupíte."
+          "a": "Článek Standard stojí 1 jednotku, High 2 a Ultra 3. Starter má 15 jednotek měsíčně, Pro 50, Premium 100. Nevyužité jednotky se převádějí až do trojnásobku měsíční kapacity, dokud máte aktivní tarif s AI, a dokoupené balíčky nepropadají nikdy. Nic se neúčtuje automaticky: když jednotky dojdou, počkáte na další měsíc, nebo si balíček dokoupíte."
         },
         {
           "q": "Musím používat blog Topiqu?",
@@ -274,16 +267,6 @@
             "{articles} jednotek článků měsíčně",
             "Viditelnost a přehled citací v OpenAI",
             "SEO autopilot se Search Console"
-          ]
-        },
-        "customNote": "CUSTOM se účtuje při potvrzení objednávky. Minimum jsou 3 místa včetně majitele: 199 USD měsíčně nebo 1 910,40 USD ročně, bez daně. CUSTOM nemá odloženou platbu po zkušební době.",
-        "custom": {
-          "tagline": "Nástroje Premium s placenou kapacitou týmu",
-          "features": [
-            "Vše z Premium",
-            "100 jednotek článků měsíčně, nevyužité se převádějí",
-            "3 placená místa včetně majitele",
-            "Další místa za 20 USD měsíčně, ročně o 20 % levněji"
           ]
         }
       },
@@ -644,7 +627,7 @@
             "text": "Když lidé článek v Googlu vidí, ale neklikají, SEO autopilot přepíše titulek a perex, nebo doplní sekci, na kterou se ptají. Každou změnu vrátíte jedním kliknutím."
           }
         },
-        "plan": "Search Console a návrhy úprav máte od tarifu Pro. SEO autopilot a viditelnost v odpovědích AI jsou v Premium a Custom.",
+        "plan": "Search Console a návrhy úprav máte od tarifu Pro. SEO autopilot a viditelnost v odpovědích AI jsou v Premium.",
         "dashboard": {
           "label": "Ilustrační ukázka přehledů po publikaci",
           "range": "Posledních 28 dní",

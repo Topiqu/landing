@@ -5,6 +5,7 @@ import { ZxcvbnFactory } from '@zxcvbn-ts/core'
 import type { DomainStatus, OnboardingForm, OnboardingStep, StepProgress } from '~/composables/useOnboarding'
 
 import { readAttribution } from '../utils/attribution'
+import { isSelectedPlan } from '../composables/useOnboarding'
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
@@ -495,6 +496,10 @@ export const useOnboardingStore = defineStore(
         'userEditedDomain',
         'progress',
       ],
+      // A draft saved while Custom could be bought here would otherwise fail at checkout.
+      afterHydrate: ({ store }) => {
+        if (store.form.selectedPlan !== null && !isSelectedPlan(store.form.selectedPlan)) store.form.selectedPlan = null
+      },
     },
   },
 )
