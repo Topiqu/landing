@@ -147,7 +147,9 @@ describe('CRM sync', () => {
     expect(onboardingLead({ domain: 'blog.heatwise.cz', domainType: 'CUSTOM' }).lines).toEqual([
       'Blog: (blog.heatwise.cz)',
     ])
-    expect(onboardingLead({ selectedPlan: 'CUSTOM', billingInterval: 'year' }).lines).toEqual(['Tarif: CUSTOM (year)'])
+    expect(onboardingLead({ selectedPlan: 'PREMIUM', billingInterval: 'year' }).lines).toEqual([
+      'Tarif: PREMIUM (year)',
+    ])
   })
 })
 

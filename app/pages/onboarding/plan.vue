@@ -23,7 +23,6 @@ const plans = computed(() =>
       { id: 'STARTER', key: 'starter', icon: 'mdi:sprout-outline', articles: PLAN_ARTICLES.starter },
       { id: 'PRO', key: 'pro', icon: 'mdi:rocket-launch-outline', articles: PLAN_ARTICLES.pro },
       { id: 'PREMIUM', key: 'premium', icon: 'mdi:crown-outline', articles: PLAN_ARTICLES.premium },
-      { id: 'CUSTOM', key: 'custom', icon: 'mdi:account-group-outline', articles: PLAN_ARTICLES.custom },
     ] as const
   ).map((plan) => ({
     ...plan,
@@ -41,13 +40,11 @@ const plans = computed(() =>
 )
 
 const note = computed(() =>
-  form.selectedPlan === 'CUSTOM'
-    ? $t('landing.onboarding.plan.customNote')
-    : form.selectedPlan
-      ? $t('landing.onboarding.plan.paidNote', {
-          date: new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(trialEndsOn.value),
-        })
-      : $t('landing.onboarding.plan.freeNote', { days: TRIAL_DAYS }),
+  form.selectedPlan
+    ? $t('landing.onboarding.plan.paidNote', {
+        date: new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' }).format(trialEndsOn.value),
+      })
+    : $t('landing.onboarding.plan.freeNote', { days: TRIAL_DAYS }),
 )
 </script>
 <template>
