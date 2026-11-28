@@ -104,7 +104,16 @@
         "summary": "Get an article",
         "description": "Published articles for any key. A key with the WRITE scope also reads drafts and gets `status`, `editVersion` and `releaseAt`.",
         "tags": ["Articles"],
-        "parameters": [{ "name": "id", "in": "path", "required": true, "schema": { "type": "string" } }],
+        "parameters": [
+          { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } },
+          {
+            "name": "format",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string", "enum": ["stored", "html", "markdown", "wordpress"], "default": "stored" },
+            "description": "Format of `content`. `stored`: the body as saved, with Topiqu block markup (polls, quizzes, calls to action and product cards keep their data in attributes). `html`: ready for any website: inline styles, polls and quizzes as their question with a link to answer on the blog, absolute links, current product prices. `markdown`: the same as Markdown. `wordpress`: what the Topiqu Sync plugin stores. All but `stored` include the summary, key takeaways, FAQ, sources and cover credit in the body."
+          }
+        ],
         "responses": {
           "200": {
             "description": "The published article.",
@@ -129,7 +138,7 @@
           }
         ],
         "summary": "Update an article",
-        "description": "Needs the WRITE scope; changing `status` or `releaseAt` also PUBLISH. Send `expectedVersion` (the `editVersion` you read) to get a 409 instead of overwriting a newer edit; without it the update is last-write-wins.",
+        "description": "Needs the WRITE scope; changing `status` or `releaseAt`, or editing a published article, also PUBLISH. Send `expectedVersion` (the `editVersion` you read) to get a 409 instead of overwriting a newer edit; without it the update is last-write-wins.",
         "tags": ["Articles"],
         "parameters": [
           { "name": "id", "in": "path", "required": true, "schema": { "type": "string" } },
@@ -245,6 +254,7 @@
           "totalWords",
           "createdAt",
           "updatedAt",
+          "contentUpdatedAt",
           "publishedAt",
           "language",
           "tags",
@@ -262,7 +272,15 @@
           "readingTime": { "type": ["integer", "null"], "minimum": 0 },
           "totalWords": { "type": ["integer", "null"], "minimum": 0 },
           "createdAt": { "type": "string", "format": "date-time" },
-          "updatedAt": { "type": "string", "format": "date-time" },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Moves on any change to the row, including view counts."
+          },
+          "contentUpdatedAt": {
+            "oneOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }],
+            "description": "Last change to the published text readers see; null until the first one after publication."
+          },
           "publishedAt": { "oneOf": [{ "type": "string", "format": "date-time" }, { "type": "null" }] },
           "language": { "type": "string", "example": "cs" },
           "tags": {
@@ -314,9 +332,35 @@
           { "$ref": "#/components/schemas/ArticleSummary" },
           {
             "type": "object",
-            "required": ["content", "imageCredit", "sources", "allowedComments"],
+            "required": [
+              "content",
+              "imageCredit",
+              "sources",
+              "allowedComments",
+              "answer",
+              "keyTakeaways",
+              "faq",
+              "revision"
+            ],
             "properties": {
-              "content": { "type": "string", "description": "Article body as sanitized HTML." },
+              "content": { "type": "string", "description": "Article body in the requested `format`." },
+              "answer": {
+                "type": ["string", "null"],
+                "description": "Direct answer to the article question, shown above the body."
+              },
+              "keyTakeaways": { "type": "array", "items": { "type": "string" } },
+              "faq": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["question", "answer"],
+                  "properties": { "question": { "type": "string" }, "answer": { "type": "string" } }
+                }
+              },
+              "revision": {
+                "type": "string",
+                "description": "Hash of everything in this response except `updatedAt`. Compare it to skip unchanged articles when syncing; it changes with the text, cover, tags, linked articles and product prices."
+              },
               "imageCredit": { "type": ["object", "array", "string", "number", "boolean", "null"] },
               "sources": { "type": "array", "items": { "type": "string" } },
               "allowedComments": { "type": "boolean" }
