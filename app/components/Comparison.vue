@@ -140,44 +140,52 @@ const tools = [
   { name: 'Contentbase', logo: '/brand/products/contentbase.svg', own: false },
   { name: 'Writesonic', logo: '/brand/products/writesonic.svg', own: false },
   { name: 'Arvow', logo: '/brand/products/arvow.webp', own: false },
+  { name: 'Koala AI', logo: '/brand/products/koala.webp', own: false },
 ]
 
 // A tick only where public documentation or pricing describes the feature; a cross where we could not find it
-// (October 2026). Columns follow `tools`: Topiqu, Jasper, Contentbase, Writesonic, Arvow.
+// (November 2026). Columns follow `tools`: Topiqu, Jasper, Contentbase, Writesonic, Arvow, Koala AI.
 const featureGroups = [
   {
     key: 'writing',
     features: [
-      { key: 'knowledge', support: [true, true, false, true, true] },
-      { key: 'research', support: [true, true, true, true, true] },
-      { key: 'review', support: [true, false, false, true, false] },
-      { key: 'imageRights', support: [true, false, false, false, false] },
+      { key: 'knowledge', support: [true, true, true, true, true, true] },
+      { key: 'research', support: [true, true, true, true, true, true] },
+      { key: 'review', support: [true, false, false, true, false, false] },
+      { key: 'imageRights', support: [true, false, false, false, false, false] },
+      { key: 'productCards', support: [true, false, false, false, false, false] },
+      { key: 'interactive', support: [true, false, false, false, false, false] },
+      { key: 'internalLinks', support: [true, false, true, true, true, true] },
     ],
   },
   {
     key: 'publishing',
     features: [
-      { key: 'hosted', support: [true, false, true, false, false] },
-      { key: 'wordpress', support: [true, true, true, true, true] },
-      { key: 'scheduling', support: [true, false, true, false, true] },
-      { key: 'hreflang', support: [true, false, false, false, false] },
-      { key: 'api', support: [true, true, false, true, true] },
+      { key: 'hosted', support: [true, false, true, false, false, false] },
+      { key: 'wordpress', support: [true, false, true, true, true, true] },
+      { key: 'scheduling', support: [true, false, true, false, true, true] },
+      { key: 'hreflang', support: [true, false, true, false, false, false] },
+      { key: 'api', support: [true, true, false, true, true, true] },
+      { key: 'llms', support: [true, false, true, false, false, false] },
+      { key: 'indexing', support: [true, false, true, false, false, false] },
     ],
   },
   {
     key: 'after',
     features: [
-      { key: 'searchConsole', support: [true, true, true, true, true] },
-      { key: 'aiCitations', support: [true, true, false, true, true] },
-      { key: 'aiTraffic', support: [true, false, false, true, false] },
-      { key: 'autopilot', support: [true, false, true, false, false] },
+      { key: 'searchConsole', support: [true, true, true, true, true, true] },
+      { key: 'aiCitations', support: [true, true, false, true, true, true] },
+      { key: 'aiTraffic', support: [true, false, false, true, false, false] },
+      { key: 'autopilot', support: [true, false, true, false, false, false] },
+      { key: 'backlinks', support: [true, false, false, true, true, true] },
     ],
   },
   {
     key: 'plans',
     features: [
-      { key: 'free', support: [true, false, false, false, false] },
-      { key: 'affordable', support: [true, false, false, false, true] },
+      { key: 'free', support: [true, false, false, false, false, false] },
+      { key: 'affordable', support: [true, false, false, false, false, true] },
+      { key: 'rollover', support: [true, false, false, false, false, true] },
     ],
   },
 ] as const
@@ -195,17 +203,33 @@ const labels: Record<'cs' | 'en', Record<GroupKey, string> & Record<FeatureKey, 
     research: ['Živá rešerše na webu', 'Aktuální zdroje ke každému tématu.'],
     review: ['Kontrola tvrzení před vydáním', 'Sporná místa se vrátí k opravě.'],
     imageRights: ['Původ obrázků a práva k publikaci', 'U každého obrázku víte, odkud je a jestli ho smíte použít.'],
+    productCards: [
+      'Produkty z e-shopu s aktuální cenou',
+      'Karty ze Shopify, Heureky nebo Google Merchant, cena a sklad vždy aktuální.',
+    ],
+    interactive: [
+      'Články, které čtenáře zapojí',
+      'Interaktivní prvky v článcích: ankety a kvízy, ve kterých čtenáři hlasují a odpovídají přímo na stránce.',
+    ],
+    internalLinks: ['Automatické interní odkazy', 'Odkazy na vaše další články a stránky přímo v textu.'],
     hosted: ['Hostovaný blog na vlastní doméně', 'Bez šablony a vlastního hostingu.'],
     wordpress: ['Publikace do WordPressu', 'Články jako běžné příspěvky.'],
     scheduling: ['Plánované automatické vydávání', 'Rytmus vydávání nastavíte jednou.'],
     hreflang: ['Propojené jazykové verze článku', 'Vlastní URL a hreflang pro každý překlad.'],
     api: ['Vlastní web přes API', 'Články do webu na míru, aplikace či jiného systému.'],
+    llms: ['Připravené pro ChatGPT a AI vyhledávače', 'Web a články ve formátu, který AI nástroje snadno přečtou.'],
+    indexing: [
+      'Rychleji ve výsledcích vyhledávání',
+      'Nový i upravený článek vyhledávačům hned oznámíme, nečeká, až ho samy najdou.',
+    ],
     searchConsole: ['Data ze Search Console', 'Kliknutí, zobrazení a pozice.'],
     aiCitations: ['Sledování citací v odpovědích AI', 'Kdo je citován u vašich otázek.'],
     aiTraffic: ['Návštěvy z AI a AI crawlerů', 'Provoz, který Google Analytics nevidí.'],
     autopilot: ['Automatické úpravy vydaných článků', 'Podle dat, s možností změnu vrátit.'],
-    free: ['Tarif zdarma bez časového limitu', 'Ruční editor a publikace; AI od tarifu Pro.'],
+    backlinks: ['Hledání zpětných odkazů', 'Zmínky bez odkazu, příležitosti a návrhy oslovení.'],
+    free: ['Tarif zdarma bez časového limitu', 'Ruční editor a publikace; AI od tarifu Starter.'],
     affordable: ['Tarif s AI do 50 $ měsíčně', 'Při měsíční platbě.'],
+    rollover: ['Nevyčerpané články se převádějí', 'Co nevyužijete, s koncem měsíce nepropadne.'],
   },
   en: {
     writing: 'Writing',
@@ -219,17 +243,33 @@ const labels: Record<'cs' | 'en', Record<GroupKey, string> & Record<FeatureKey, 
       'Image provenance and publishing rights',
       'Know where every image comes from and whether you may use it.',
     ],
+    productCards: [
+      'Your products with live prices',
+      'Cards from Shopify, Heureka or Google Merchant with current price and stock.',
+    ],
+    interactive: [
+      'Articles that get readers involved',
+      'Interactive elements in articles: polls and quizzes readers answer right on the page.',
+    ],
+    internalLinks: ['Automatic internal links', 'Links to your other articles and pages, right in the text.'],
     hosted: ['Hosted blog on your own domain', 'No theme or hosting to manage.'],
     wordpress: ['Publishing to WordPress', 'Articles arrive as regular posts.'],
     scheduling: ['Scheduled automatic publishing', 'Set your publishing rhythm once.'],
     hreflang: ['Linked language versions', 'Own URL and hreflang for every translation.'],
     api: ['Your own site via API', 'Articles in a custom site, app or other system.'],
+    llms: ['Ready for ChatGPT and AI search', 'Your site and articles in a format AI tools read easily.'],
+    indexing: [
+      'Faster into search results',
+      'New and updated articles are announced to search engines right away, not left for them to find.',
+    ],
     searchConsole: ['Search Console data', 'Clicks, impressions and positions.'],
     aiCitations: ['AI answer citation tracking', 'Who gets cited for your questions.'],
     aiTraffic: ['AI referrals and AI crawler visits', 'Traffic Google Analytics does not show.'],
     autopilot: ['Automatic updates to published articles', 'Data-driven and reversible.'],
-    free: ['Free plan with no time limit', 'Manual editor and publishing; AI from Pro.'],
+    backlinks: ['Backlink prospecting', 'Unlinked mentions, opportunities and outreach drafts.'],
+    free: ['Free plan with no time limit', 'Manual editor and publishing; AI from Starter.'],
     affordable: ['AI plan under $50 a month', 'With monthly billing.'],
+    rollover: ['Unused articles roll over', 'What you do not use does not expire at month end.'],
   },
 }
 
@@ -248,18 +288,20 @@ const groups = computed(() => {
 const prices = computed(() =>
   isCs.value
     ? [
-        { amount: usd(PLAN_PRICES_USD.pro), detail: `${PLAN_ARTICLES.pro} AI článků` },
+        { amount: usd(PLAN_PRICES_USD.starter), detail: `${PLAN_ARTICLES.starter} AI článků` },
         { amount: usd(69), detail: 'za uživatele' },
         { amount: usd(99), detail: '30 článků' },
         { amount: usd(99), detail: '15 článků' },
-        { amount: usd(39), detail: 'akce, běžně 69 $' },
+        { amount: usd(69), detail: '1 000 kreditů' },
+        { amount: usd(25), detail: '45 000 slov' },
       ]
     : [
-        { amount: usd(PLAN_PRICES_USD.pro), detail: `${PLAN_ARTICLES.pro} AI articles` },
+        { amount: usd(PLAN_PRICES_USD.starter), detail: `${PLAN_ARTICLES.starter} AI articles` },
         { amount: usd(69), detail: 'per seat' },
         { amount: usd(99), detail: '30 articles' },
         { amount: usd(99), detail: '15 articles' },
-        { amount: usd(39), detail: 'offer, usually $69' },
+        { amount: usd(69), detail: '1,000 credits' },
+        { amount: usd(25), detail: '45,000 words' },
       ],
 )
 
@@ -277,7 +319,7 @@ const copy = computed(() =>
         priceHint: 'Měsíčně v USD, při měsíční platbě.',
         legendYes: 'popsáno ve veřejné dokumentaci nebo ceníku',
         legendNo: 've veřejné dokumentaci jsme nenašli',
-        legendDate: 'Stav k říjnu 2026. Pokud je údaj nepřesný, napište nám.',
+        legendDate: 'Stav k listopadu 2026. Pokud je údaj nepřesný, napište nám.',
         sources: 'Zdroje',
         pagesLabel: 'Oblasti srovnání',
         previous: 'Předchozí oblast',
@@ -295,7 +337,7 @@ const copy = computed(() =>
         priceHint: 'Per month in USD, billed monthly.',
         legendYes: 'described in public documentation or pricing',
         legendNo: 'not found in public documentation',
-        legendDate: 'As of October 2026. If anything is inaccurate, let us know.',
+        legendDate: 'As of November 2026. If anything is inaccurate, let us know.',
         sources: 'Sources',
         pagesLabel: 'Comparison areas',
         previous: 'Previous area',
@@ -316,26 +358,43 @@ const onKeydown = (event: KeyboardEvent) => {
 
 const sources = [
   { label: 'Jasper · pricing', url: 'https://www.jasper.ai/pricing' },
-  { label: 'Jasper · Knowledge Base', url: 'https://help.jasper.ai/hc/en-us/articles/55085018624411-Knowledge-Base' },
-  { label: 'Jasper · Research Agent', url: 'https://help.jasper.ai/hc/en-us/articles/48810861467803-Research-Agent' },
-  { label: 'Jasper · integrations', url: 'https://www.jasper.ai/integrations' },
-  { label: 'Jasper · API', url: 'https://help.jasper.ai/hc/en-us/articles/18618701173659-Jasper-s-API' },
-  {
-    label: 'Jasper · Search Console',
-    url: 'https://help.jasper.ai/hc/en-us/articles/55091361235355-Integrations-Google-Search-Console',
-  },
-  { label: 'Jasper · GEO Hub', url: 'https://help.jasper.ai/hc/en-us/articles/55317942235803-GEO-Hub' },
+  { label: 'Jasper · Knowledge Base', url: 'https://help.jasper.ai/hc/en-us/articles/18618707176347-Knowledge-Base' },
+  { label: 'Jasper · Chat web search', url: 'https://help.jasper.ai/hc/en-us/articles/18618705811355-Jasper-Chat' },
+  { label: 'Jasper · API', url: 'https://help.jasper.ai/hc/en-us/articles/55319342040987' },
+  { label: 'Jasper · Search Console', url: 'https://help.jasper.ai/hc/en-us/articles/53942168370203' },
+  { label: 'Jasper · GEO Hub', url: 'https://help.jasper.ai/hc/en-us/articles/51579082265883-GEO-Hub' },
   { label: 'Contentbase · pricing & FAQ', url: 'https://contentbase.ai/pricing' },
   { label: 'Contentbase · docs', url: 'https://contentbase.ai/docs/' },
   { label: 'Contentbase · Go', url: 'https://contentbase.ai/docs/features/contentbase-go/' },
+  { label: 'Contentbase · article generation', url: 'https://contentbase.ai/docs/features/article-generation/' },
+  { label: 'Contentbase · localization', url: 'https://contentbase.ai/docs/features/localization/' },
+  { label: 'Contentbase · auto-indexing', url: 'https://contentbase.ai/docs/features/auto-indexing/' },
+  { label: 'Contentbase · internal linking', url: 'https://contentbase.ai/docs/features/internal-linking/' },
   { label: 'Writesonic · pricing', url: 'https://writesonic.com/pricing' },
-  { label: 'Writesonic · docs & API', url: 'https://docs.writesonic.com/' },
-  {
-    label: 'Writesonic · Article Writer 6.0',
-    url: 'https://cxotoday.com/media-coverage/writesonic-unveils-ai-article-writer-6-0-write-factually-accurate-articles-with-real-time-data-that-drive-traffic/',
-  },
+  { label: 'Writesonic · docs', url: 'https://docs.writesonic.com/' },
+  { label: 'Writesonic · AI Article Writer', url: 'https://writesonic.com/ai-article-writer' },
+  { label: 'Writesonic · AI traffic', url: 'https://docs.writesonic.com/docs/ai-traffic-analytics.md' },
+  { label: 'Writesonic · Action Center', url: 'https://docs.writesonic.com/docs/action-center-actionables.md' },
   { label: 'Arvow · pricing', url: 'https://arvow.com/pricing' },
   { label: 'Arvow · changelog', url: 'https://arvow.featurebase.app/en/changelog' },
+  { label: 'Arvow · API', url: 'https://api.arvow.com/api/docs' },
+  { label: 'Arvow · AI SEO Writer', url: 'https://arvow.com/ai-seo-writer' },
+  {
+    label: 'Arvow · AI mentions',
+    url: 'https://arvow.featurebase.app/help/articles/9262681-find-ai-mention-opportunities',
+  },
+  { label: 'Koala AI · pricing', url: 'https://koala.sh/pricing' },
+  { label: 'Koala AI · Brand DNA', url: 'https://koala.sh/brand-dna' },
+  {
+    label: 'Koala AI · real-time data',
+    url: 'https://support.koala.sh/en/article/real-time-data-in-koalawriter-1o7f7ym/',
+  },
+  { label: 'Koala AI · API', url: 'https://koala.sh/pages/api-docs/koalawriter-v2' },
+  { label: 'Koala AI · MCP', url: 'https://koala.sh/mcp' },
+  {
+    label: 'Koala AI · internal linking',
+    url: 'https://support.koala.sh/en/article/how-to-enable-internal-linking-in-koalawriter-1etjh7o/',
+  },
 ]
 </script>
 
@@ -419,7 +478,7 @@ const sources = [
 }
 .comparison-table {
   width: 100%;
-  min-width: 860px;
+  min-width: 940px;
   border-collapse: separate;
   border-spacing: 0;
   table-layout: fixed;
